@@ -7,6 +7,7 @@ interface SectionProps {
   background?: 'white' | 'cinza' | 'verde';
   className?: string;
   containerClassName?: string;
+  style?: React.CSSProperties;
 }
 
 /**
@@ -18,7 +19,7 @@ interface SectionProps {
  * - verde: fundo Verde Eucalipto com texto branco
  */
 const Section = React.forwardRef<HTMLElement, SectionProps>(
-  ({ children, id, background = 'white', className, containerClassName }, ref) => {
+  ({ children, id, background = 'white', className, containerClassName, style }, ref) => {
     const backgrounds = {
       white: 'bg-background text-foreground',
       cinza: 'bg-cinza-nuvem text-foreground',
@@ -29,6 +30,7 @@ const Section = React.forwardRef<HTMLElement, SectionProps>(
       <section
         id={id}
         ref={ref}
+        style={style}
         className={cn(
           'section-spacing',
           backgrounds[background],
