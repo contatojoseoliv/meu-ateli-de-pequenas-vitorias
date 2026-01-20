@@ -27,6 +27,16 @@ const Hero = () => {
     // Overlay mais leve para deixar a imagem mais “viva/nítida”, sem perder legibilidade.
     backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.56) 0%, hsl(0 0% 96% / 0.44) 55%, hsl(156 15% 42% / 0.12) 100%), url(${heroBg})`
   }}>
+      {/* Preload do background (como a imagem é usada via CSS, forçamos o download cedo) */}
+      <img
+        src={heroBg}
+        alt=""
+        aria-hidden="true"
+        className="sr-only"
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
+      />
       <div className="container-main">
         <div className="min-h-[42vh] md:min-h-[70vh] flex items-center justify-center">
           {/* Conteúdo (texto) */}
