@@ -14,11 +14,7 @@ const Problema = () => {
 
 **Sua mente NUNCA está onde seu corpo está.**
 
-Estudos de Harvard (2010) comprovam: passamos 47% do tempo mentalmente divagando — pensando no passado ou futuro, nunca no agora.
-
-E quanto MAIS a mente divaga, maior a ansiedade.
-
-Porque quando você não está presente, seu cérebro interpreta como perigo constante.
+A Neurociência mostra que passamos cerca de 47% do tempo pensando no passado ou no futuro — e isso faz o cérebro ficar em alerta constante.
 
 **E aí a ansiedade nunca para.**`,
     recap: "VILÃO 1: Nunca presente → Cérebro interpreta perigo → Ansiedade ↑"
