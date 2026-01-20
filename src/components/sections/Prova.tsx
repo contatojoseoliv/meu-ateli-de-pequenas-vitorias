@@ -6,19 +6,25 @@ import { Check, Quote } from "lucide-react";
  * Dados, estudos e validação brasileira
  */
 const Prova = () => {
-  const estatisticas = [
-    { valor: "89,5%", label: "se sentiram mais calmas" },
-    { valor: "82%", label: "se sentiram mais felizes" },
-    { valor: "74,7%", label: "se sentiram mais úteis" },
-  ];
-
-  const checkpoints = [
-    { texto: "Neurologicamente, criar com as mãos **força presença** (reduz ansiedade)" },
-    { texto: "Biologicamente, **libera dopamina** (gera alívio)" },
-    { texto: "Cientificamente, **89,5% das pessoas sentem calma**" },
-    { texto: "No Brasil, **funciona com mulheres como você**" },
-  ];
-
+  const estatisticas = [{
+    valor: "89,5%",
+    label: "se sentiram mais calmas"
+  }, {
+    valor: "82%",
+    label: "se sentiram mais felizes"
+  }, {
+    valor: "74,7%",
+    label: "se sentiram mais úteis"
+  }];
+  const checkpoints = [{
+    texto: "Neurologicamente, criar com as mãos **força presença** (reduz ansiedade)"
+  }, {
+    texto: "Biologicamente, **libera dopamina** (gera alívio)"
+  }, {
+    texto: "Cientificamente, **89,5% das pessoas sentem calma**"
+  }, {
+    texto: "No Brasil, **funciona com mulheres como você**"
+  }];
   const formatBold = (text: string) => {
     const parts = text.split(/(\*\*.*?\*\*)/g);
     return parts.map((part, i) => {
@@ -28,9 +34,7 @@ const Prova = () => {
       return part;
     });
   };
-
-  return (
-    <Section id="prova" background="cinza">
+  return <Section id="prova" background="cinza">
       {/* Título */}
       <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
         <h2 className="font-serif text-3xl md:text-h2 text-grafite-suave">
@@ -39,31 +43,12 @@ const Prova = () => {
       </div>
 
       {/* Primeira Prova - Lógica */}
-      <div className="bg-white rounded-2xl p-8 md:p-10 shadow-suave max-w-4xl mx-auto mb-12 animate-fade-in">
-        <h3 className="font-serif text-xl md:text-2xl text-grafite-suave mb-6">
-          Primeiro, a matemática simples:
-        </h3>
-        <div className="text-body text-grafite-suave/90 space-y-4">
-          <p>
-            Estudos de Harvard comprovam: <strong className="text-verde-eucalipto">47% do tempo</strong> estamos divagando mentalmente.
-          </p>
-          <p>
-            Quanto mais divaga, maior a ansiedade.
-          </p>
-          <p className="font-semibold">
-            MAS: Quando você cria com as mãos, biologicamente não consegue divagar.
-          </p>
-          <p>
-            Suas mãos ocupadas = mente forçada ao agora = ansiedade diminui.
-          </p>
-          <p className="text-verde-eucalipto font-bold text-lg mt-6">
-            É matemática neurológica.
-          </p>
-        </div>
-      </div>
+      
 
       {/* Segunda Prova - Científica */}
-      <div className="bg-white rounded-2xl p-8 md:p-10 shadow-suave max-w-4xl mx-auto mb-12 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+      <div className="bg-white rounded-2xl p-8 md:p-10 shadow-suave max-w-4xl mx-auto mb-12 animate-fade-in" style={{
+      animationDelay: '0.1s'
+    }}>
         <h3 className="font-serif text-xl md:text-2xl text-grafite-suave mb-6">
           Segundo, a ciência específica:
         </h3>
@@ -81,21 +66,16 @@ const Prova = () => {
 
         {/* Gráfico de barras */}
         <div className="space-y-4 mb-8">
-          {estatisticas.map((stat, index) => (
-            <div key={index} className="flex items-center gap-4">
+          {estatisticas.map((stat, index) => <div key={index} className="flex items-center gap-4">
               <span className="font-bold text-verde-eucalipto w-16 text-right">{stat.valor}</span>
               <div className="flex-1 h-8 bg-cinza-nuvem rounded-full overflow-hidden">
-                <div 
-                  className="h-full rounded-full"
-                  style={{
-                    width: stat.valor,
-                    background: `linear-gradient(90deg, hsl(156 15% 42%) 0%, hsl(35 52% 50%) 100%)`
-                  }}
-                />
+                <div className="h-full rounded-full" style={{
+              width: stat.valor,
+              background: `linear-gradient(90deg, hsl(156 15% 42%) 0%, hsl(35 52% 50%) 100%)`
+            }} />
               </div>
               <span className="text-sm text-grafite-suave/80 w-40">{stat.label}</span>
-            </div>
-          ))}
+            </div>)}
         </div>
 
         <div className="text-body text-grafite-suave/90 space-y-4">
@@ -118,7 +98,9 @@ const Prova = () => {
       </div>
 
       {/* Terceira Prova - Validação Brasileira */}
-      <div className="bg-white rounded-2xl p-8 md:p-10 shadow-suave max-w-4xl mx-auto mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+      <div className="bg-white rounded-2xl p-8 md:p-10 shadow-suave max-w-4xl mx-auto mb-12 animate-fade-in" style={{
+      animationDelay: '0.2s'
+    }}>
         <h3 className="font-serif text-xl md:text-2xl text-grafite-suave mb-6">
           Terceiro, a validação brasileira:
         </h3>
@@ -156,21 +138,19 @@ const Prova = () => {
       </div>
 
       {/* Resumo Final */}
-      <div className="bg-verde-eucalipto-10 border-2 border-verde-eucalipto rounded-xl p-8 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '0.3s' }}>
+      <div className="bg-verde-eucalipto-10 border-2 border-verde-eucalipto rounded-xl p-8 max-w-4xl mx-auto animate-fade-in" style={{
+      animationDelay: '0.3s'
+    }}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          {checkpoints.map((item, index) => (
-            <div key={index} className="flex items-start gap-3">
+          {checkpoints.map((item, index) => <div key={index} className="flex items-start gap-3">
               <Check className="w-5 h-5 text-verde-eucalipto mt-0.5 flex-shrink-0" />
               <span className="text-grafite-suave">{formatBold(item.texto)}</span>
-            </div>
-          ))}
+            </div>)}
         </div>
         <p className="text-center font-bold text-grafite-suave text-lg">
           Isto não é promessa vazia. É ciência. É dados. <span className="text-verde-eucalipto">É realidade.</span>
         </p>
       </div>
-    </Section>
-  );
+    </Section>;
 };
-
 export { Prova };
