@@ -111,9 +111,9 @@ Pesquisas mostram: quanto mais tempo em telas, maior a desconexão corpo-mente �
       </div>
 
       {/* Resultado Final */}
-      <div className="bg-rosa-argila/15 rounded-xl p-8 text-center max-w-3xl mx-auto animate-fade-in">
-        <p className="text-lg text-grafite-suave mb-2">
-          Sua mente nunca desliga. Seu corpo nunca relaxa. Você nunca sente calma de verdade.
+      <div className="text-center max-w-3xl mx-auto animate-fade-in">
+        <p className="text-lg text-grafite-suave mb-3">
+          <span className="font-semibold text-rosa-argila">Por causa disso:</span> Sua mente nunca desliga. Seu corpo nunca relaxa. Você nunca sente calma de verdade.
         </p>
         <p className="font-bold text-verde-eucalipto text-xl">
           Mas existe uma forma de quebrar os três — de uma vez.
