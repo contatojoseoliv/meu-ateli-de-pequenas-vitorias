@@ -195,31 +195,35 @@ Você é "aquela que fez. Que terminou. Que É CAPAZ."`
         </p>
       </div>
 
-      {/* Naming do Método */}
-      <div className="bg-white/8 rounded-2xl p-10 md:p-12 max-w-4xl mx-auto mb-20 animate-fade-in">
-        <h3 className="font-serif text-2xl md:text-3xl text-white text-center mb-8">
-          Por Isso Criamos O Método <span className="text-ocre-dourado">Primeira Vitória©</span>
-        </h3>
-        <p className="text-white/90 text-lg text-center mb-8">
-          Um sistema de 7 dias que usa amigurumi — criação manual simples, bonita, alcançável — como veículo para:
-        </p>
-        <div className="space-y-4 max-w-xl mx-auto">
-          <div className="flex items-center gap-3">
-            <Check className="w-6 h-6 text-ocre-dourado flex-shrink-0" />
-            <span className="text-white"><strong>Gerar Flow State</strong> (sua mente para)</span>
+      {/* Naming do Método (separado em faixa full-width) */}
+      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-rosa-argila/10 border-y border-white/10 mb-20 animate-fade-in">
+        <div className="max-w-4xl mx-auto px-6 md:px-8 py-12 md:py-14">
+          <h3 className="font-serif text-2xl md:text-3xl text-white text-center mb-7">
+            Por Isso Criamos O Método <span className="text-ocre-dourado">Primeira Vitória©</span>
+          </h3>
+          <p className="text-white/90 text-lg text-center mb-7">
+            Um sistema de 7 dias que usa amigurumi — criação manual simples, bonita, alcançável — como veículo para:
+          </p>
+
+          <div className="space-y-4 max-w-xl mx-auto">
+            <div className="flex items-center gap-3">
+              <Check className="w-6 h-6 text-ocre-dourado flex-shrink-0" />
+              <span className="text-white"><strong>Gerar Flow State</strong> (sua mente para)</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Check className="w-6 h-6 text-ocre-dourado flex-shrink-0" />
+              <span className="text-white"><strong>Criar descarga emocional</strong> (finalização = alívio)</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Check className="w-6 h-6 text-ocre-dourado flex-shrink-0" />
+              <span className="text-white"><strong>Reconectar corpo-mente</strong> (sai das telas, usa mãos)</span>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
-            <Check className="w-6 h-6 text-ocre-dourado flex-shrink-0" />
-            <span className="text-white"><strong>Criar descarga emocional</strong> (finalização = alívio)</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <Check className="w-6 h-6 text-ocre-dourado flex-shrink-0" />
-            <span className="text-white"><strong>Reconectar corpo-mente</strong> (sai das telas, usa mãos)</span>
-          </div>
+
+          <p className="text-white/90 text-lg text-center mt-7 font-semibold">
+            Não para ensinar técnica. Mas para quebrar a Tríade — de uma vez.
+          </p>
         </div>
-        <p className="text-white/90 text-lg text-center mt-8 font-semibold">
-          Não para ensinar técnica. Mas para quebrar a Tríade — de uma vez.
-        </p>
       </div>
 
       {/* 4 Pilares */}
