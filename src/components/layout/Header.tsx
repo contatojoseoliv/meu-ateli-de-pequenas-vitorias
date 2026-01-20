@@ -60,7 +60,7 @@ const Header: React.FC = () => {
           <img
             src={logo}
             alt="Meu Ateliê de Pequenas Vitórias"
-            className="h-9 md:h-12 w-[150px] sm:w-[200px] md:w-[320px] object-left border-none object-cover border-0"
+            className="h-10 md:h-12 w-[170px] sm:w-[220px] md:w-[320px] object-left border-none object-cover border-0"
             loading="eager"
             decoding="async"
           />
@@ -73,21 +73,21 @@ const Header: React.FC = () => {
             size="sm"
             onClick={() => (window.location.href = "/login")}
             aria-label="Acessar área de alunas"
-            className="px-2 py-2 text-[10px] sm:text-xs md:text-sm gap-1.5 whitespace-nowrap"
+            className="px-2 py-2 text-[11px] sm:text-xs md:text-sm gap-1.5 whitespace-nowrap"
           >
             <span>Já Sou Aluna</span>
             <LogIn className="h-4 w-4" aria-hidden="true" />
           </Button>
 
+          {/* CTA removido no mobile para caber logo + login */}
           <Button
             variant="primary"
             size="sm"
             onClick={handleQueroFazerParte}
             aria-label="Quero fazer parte"
-            className="px-2.5 py-2 text-[10px] sm:text-xs md:text-sm whitespace-nowrap"
+            className="hidden md:inline-flex px-3 py-2 text-xs md:text-sm whitespace-nowrap"
           >
-            <span className="inline sm:hidden">Quero</span>
-            <span className="hidden sm:inline">Quero Fazer Parte</span>
+            Quero Fazer Parte
           </Button>
         </div>
       </div>
