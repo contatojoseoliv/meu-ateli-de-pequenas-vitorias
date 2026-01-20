@@ -10,7 +10,7 @@ const Problema = () => {
     icon: Brain,
     numero: "1",
     titulo: "Você Nunca Está Presente",
-    texto: `Você trabalha pensando nos problemas de casa. Almoça checando o celular. Tenta relaxar lembrando do que ainda precisa fazer.
+    texto: `Você quase nunca está no agora. A mente fica no passado ou no futuro, mantendo o cérebro em estado constante de alerta.
 
 **Sua mente NUNCA está onde seu corpo está.**
 
