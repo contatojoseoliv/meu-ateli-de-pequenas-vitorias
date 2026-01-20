@@ -43,7 +43,7 @@ const Lead = () => {
         </div>
 
         <div className="order-last md:order-none">
-          <div className="mx-auto w-full max-w-[320px] rounded-2xl border border-border bg-background/40 p-4 shadow-sm md:max-w-[420px]">
+          <div className="mx-auto w-full max-w-[320px] rounded-2xl border-2 border-border bg-background/60 p-3 shadow-md backdrop-blur-md transition-transform duration-300 hover:-translate-y-1 hover:rotate-0 hover:shadow-lg md:max-w-[420px] md:rotate-2 md:p-4">
             <img
               src={heroAmigurumi}
               alt="Amigurumi feito à mão"
