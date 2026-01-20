@@ -32,7 +32,7 @@ const Hero = () => {
             {/* Nome do produto + selo */}
             <div className="inline-flex items-center gap-3 mb-4 px-3 py-2 rounded-full bg-white/70 border border-verde-eucalipto/15">
               <img src={seloImage} alt="Selo Primeira Vitória em Amigurumi" className="h-7 w-7 md:h-8 md:w-8 object-contain" loading="eager" decoding="async" />
-              <span className="font-sans font-semibold text-grafite-suave text-sm md:text-base">15 Minutos por Dia</span>
+              <span className="font-sans font-semibold text-grafite-suave text-sm md:text-base">Primeira Vitória em Amigurumi</span>
             </div>
 
             {/* Headline */}
