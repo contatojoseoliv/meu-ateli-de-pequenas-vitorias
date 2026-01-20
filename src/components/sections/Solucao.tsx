@@ -149,14 +149,14 @@ Você é "aquela que fez. Que terminou. Que É CAPAZ."`
     });
   };
   return <Section id="solucao" background="verde">
-      <div className="text-center max-w-4xl mx-auto mb-20 animate-fade-in">
-        <h2 className="font-serif text-3xl md:text-[42px] text-white mb-8 leading-tight">
+      <div className="solucao-intro text-center max-w-4xl mx-auto mb-16 animate-fade-in">
+        <h2 className="font-serif text-3xl md:text-[42px] text-white mb-6 leading-tight">
           A Descoberta Que Muda Tudo
         </h2>
         
         <p className="text-xl text-ocre-dourado font-semibold mt-6 md:text-h4">Quando você cria Amigurumi com as mãos   
 — algo tangível, bonito, que você vê surgir —</p>
-        <p className="text-xl text-ocre-dourado font-bold mt-4 md:text-lead">
+        <p className="text-lg md:text-xl text-ocre-dourado font-bold mt-2 md:text-lead">
           Três coisas acontecem no seu cérebro:
         </p>
       </div>

@@ -163,6 +163,20 @@
   .section-spacing {
     @apply py-[60px] md:py-[80px] lg:py-[100px];
   }
+
+  /* Solução - Intro: menos respiro e hierarquia mais clara */
+  .solucao-intro p {
+    @apply text-lg md:text-xl;
+  }
+
+  .solucao-intro p:first-of-type {
+    @apply mt-3;
+  }
+
+  .solucao-intro p + p {
+    @apply mt-2;
+  }
+
 }
 
 @keyframes fade-in {
