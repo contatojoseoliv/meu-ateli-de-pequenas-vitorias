@@ -39,12 +39,12 @@ const Hero = () => {
             </div>
 
             {/* Headline */}
-            <h1 className="font-serif font-bold tracking-tight text-[30px] leading-[1.1] md:text-[40px] lg:text-[44px] text-grafite-suave drop-shadow-sm mb-4">
-              <span className="block">Desligue Sua Mente Acelerada</span>
-              <span className="block">
+            <h1 className="font-serif font-bold tracking-tight text-[28px] sm:text-[30px] leading-[1.1] md:text-[40px] lg:text-[44px] text-grafite-suave drop-shadow-sm mb-4">
+              <span className="block whitespace-nowrap">Desligue Sua Mente Acelerada</span>
+              <span className="block whitespace-nowrap">
                 em <span className={highlights.accent}>15 Minutos por Dia</span>
               </span>
-              <span className="block">
+              <span className="block whitespace-nowrap">
                 Criando <span className={highlights.accent}>Amigurumi</span> com Suas Mãos
               </span>
             </h1>
