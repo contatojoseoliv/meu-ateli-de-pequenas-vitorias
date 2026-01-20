@@ -69,7 +69,7 @@ Pesquisas mostram: quanto mais tempo em telas, maior a desconexão corpo-mente �
   };
   return <Section id="problema" background="white">
       {/* Título */}
-      <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+      <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
         <h2 className="font-serif md:text-h2 text-grafite-suave mb-6 text-2xl">
           Por Que Você Está Ansiosa
           <span className="text-rosa-argila block">(E Não É Culpa Sua)</span>
