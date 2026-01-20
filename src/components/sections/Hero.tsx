@@ -28,56 +28,58 @@ const Hero = () => {
     backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.56) 0%, hsl(0 0% 96% / 0.44) 55%, hsl(156 15% 42% / 0.12) 100%), url(${heroBg})`
   }}>
       <div className="container-main">
-        <div className="min-h-[44vh] md:min-h-[70vh] flex items-center justify-center">
+        <div className="min-h-[42vh] md:min-h-[70vh] flex items-center justify-center">
           {/* Conteúdo (texto) */}
           <div className="animate-fade-in text-center w-full max-w-[720px]">
-            <div className="relative px-5 py-4 md:px-8 md:py-8 -mt-10 sm:mt-0">
-            {/* Nome do produto + selo */}
-            <div className="inline-flex items-center gap-3 mb-4 px-3 py-2 rounded-full bg-white/70 border border-verde-eucalipto/15">
-              <img src={seloImage} alt="Selo Primeira Vitória em Amigurumi" className="h-7 w-7 md:h-8 md:w-8 object-contain" loading="eager" decoding="async" />
-              <span className="font-sans font-semibold text-grafite-suave text-sm md:text-base">Primeira Vitória em Amigurumi</span>
-            </div>
+            <div className="relative px-5 py-4 md:px-8 md:py-8 -mt-12 sm:mt-0">
+              <div className="flex flex-col items-center gap-4 sm:gap-5">
+                {/* Nome do produto + selo */}
+                <div className="inline-flex items-center gap-3 px-3 py-2 rounded-full bg-white/70 border border-verde-eucalipto/15">
+                  <img src={seloImage} alt="Selo Primeira Vitória em Amigurumi" className="h-7 w-7 md:h-8 md:w-8 object-contain" loading="eager" decoding="async" />
+                  <span className="font-sans font-semibold text-grafite-suave text-sm md:text-base">Primeira Vitória em Amigurumi</span>
+                </div>
 
-            {/* Headline */}
-            <h1 className="font-serif font-bold tracking-tight text-[28px] sm:text-[30px] leading-[1.1] md:text-[40px] lg:text-[44px] text-grafite-suave drop-shadow-sm mb-5">
-              <span className="block whitespace-nowrap">Desligue Sua Mente Acelerada</span>
-              <span className="block whitespace-nowrap">
-                em <span className={highlights.accent}>15 Minutos por Dia</span>
-              </span>
-              <span className="block whitespace-nowrap">
-                Criando <span className={highlights.accent}>Amigurumi</span> com Suas Mãos
-              </span>
-            </h1>
-
-            {/* Subheadline */}
-            <p className="text-base md:text-body text-grafite-suave/90 italic drop-shadow-sm mb-4 max-w-[40ch] mx-auto">
-              Mesmo que você nunca tenha feito nada manual na vida ou já tenha tentado antes e desistido.
-            </p>
-
-            {/* CTA */}
-            <div className="flex justify-center">
-              <motion.div
-                initial={{ y: 6, scale: 0.99, opacity: 0 }}
-                animate={{ y: 0, scale: 1, opacity: 1 }}
-                transition={{ delay: 0.15, duration: 0.5, ease: "easeOut" }}
-                whileHover={{ y: -1, scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
-              >
-                <Button variant="primary" size="lg">
-                  Quero começar agora
-                </Button>
-              </motion.div>
-            </div>
-
-            {/* Ícones abaixo do botão */}
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-2.5">
-              {infoBadges.map(item => <div key={item.label} className="inline-flex items-center gap-2 rounded-full bg-white/80 border border-verde-eucalipto/15 px-3 py-2">
-                  <item.icon className="h-4 w-4 text-verde-eucalipto" aria-hidden="true" strokeWidth={1.8} />
-                  <span className="font-sans font-semibold text-grafite-suave text-xs md:text-sm">
-                    {item.label}
+                {/* Headline */}
+                <h1 className="font-serif font-bold tracking-tight text-[28px] sm:text-[30px] leading-[1.1] md:text-[40px] lg:text-[44px] text-grafite-suave drop-shadow-sm">
+                  <span className="block whitespace-nowrap">Desligue Sua Mente Acelerada</span>
+                  <span className="block whitespace-nowrap">
+                    em <span className={highlights.accent}>15 Minutos por Dia</span>
                   </span>
-                </div>)}
-            </div>
+                  <span className="block whitespace-nowrap">
+                    Criando <span className={highlights.accent}>Amigurumi</span> com Suas Mãos
+                  </span>
+                </h1>
+
+                {/* Subheadline */}
+                <p className="text-base md:text-body text-grafite-suave/90 italic drop-shadow-sm max-w-[40ch] mx-auto">
+                  Mesmo que você nunca tenha feito nada manual na vida ou já tenha tentado antes e desistido.
+                </p>
+
+                {/* CTA */}
+                <div className="flex justify-center">
+                  <motion.div
+                    initial={{ y: 6, scale: 0.99, opacity: 0 }}
+                    animate={{ y: 0, scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.15, duration: 0.5, ease: "easeOut" }}
+                    whileHover={{ y: -1, scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                  >
+                    <Button variant="primary" size="lg">
+                      Quero começar agora
+                    </Button>
+                  </motion.div>
+                </div>
+
+                {/* Ícones abaixo do botão */}
+                <div className="flex flex-wrap items-center justify-center gap-2.5">
+                  {infoBadges.map(item => <div key={item.label} className="inline-flex items-center gap-2 rounded-full bg-white/80 border border-verde-eucalipto/15 px-3 py-2">
+                      <item.icon className="h-4 w-4 text-verde-eucalipto" aria-hidden="true" strokeWidth={1.8} />
+                      <span className="font-sans font-semibold text-grafite-suave text-xs md:text-sm">
+                        {item.label}
+                      </span>
+                    </div>)}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -87,7 +89,7 @@ const Hero = () => {
       <motion.a
         href="#lead"
         aria-label="Role para ver a próxima seção"
-        className="inline-flex absolute bottom-2 md:bottom-5 left-1/2 -translate-x-1/2 items-center justify-center rounded-full bg-background/20 backdrop-blur-sm border border-verde-eucalipto/15 text-verde-eucalipto shadow-suave h-9 w-9 md:h-10 md:w-10"
+        className="inline-flex absolute bottom-3 md:bottom-5 left-1/2 -translate-x-1/2 items-center justify-center rounded-full bg-background/20 backdrop-blur-sm border border-verde-eucalipto/15 text-verde-eucalipto shadow-suave h-9 w-9 md:h-10 md:w-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.4 }}
