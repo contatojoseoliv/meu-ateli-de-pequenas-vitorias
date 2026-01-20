@@ -1,5 +1,6 @@
 import { Button } from "@/components/shared/Button";
-import { Clock, Leaf, Users } from "lucide-react";
+import { ChevronDown, Clock, Leaf, Users } from "lucide-react";
+import { motion } from "framer-motion";
 import seloImage from "@/assets/selo-primeira-vitoria.png";
 import heroBg from "@/assets/hero-bg.png";
 
@@ -22,7 +23,7 @@ const Hero = () => {
     icon: Users,
     label: "Suporte Imediato"
   }] as const;
-  return <section id="hero" className="min-h-screen pt-16 pb-12 md:pt-20 md:pb-16 bg-cover bg-no-repeat bg-[position:50%_15%] md:bg-center" style={{
+  return <section id="hero" className="relative min-h-screen pt-16 pb-12 md:pt-20 md:pb-16 bg-cover bg-no-repeat bg-[position:50%_15%] md:bg-center" style={{
     backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.68) 0%, hsl(0 0% 96% / 0.58) 55%, hsl(156 15% 42% / 0.14) 100%), url(${heroBg})`
   }}>
       <div className="container-main">
@@ -56,9 +57,17 @@ const Hero = () => {
 
             {/* CTA */}
             <div className="flex justify-center">
-              <Button variant="primary" size="lg">
-                Quero começar agora
-              </Button>
+              <motion.div
+                initial={{ y: 6, scale: 0.99, opacity: 0 }}
+                animate={{ y: 0, scale: 1, opacity: 1 }}
+                transition={{ delay: 0.15, duration: 0.5, ease: "easeOut" }}
+                whileHover={{ y: -1, scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+              >
+                <Button variant="primary" size="lg">
+                  Quero começar agora
+                </Button>
+              </motion.div>
             </div>
 
             {/* Ícones abaixo do botão */}
@@ -74,6 +83,24 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* Indicador de rolagem (discreto) */}
+      <motion.a
+        href="#lead"
+        aria-label="Role para ver a próxima seção"
+        className="hidden sm:inline-flex absolute bottom-5 left-1/2 -translate-x-1/2 items-center justify-center rounded-full bg-white/70 border border-verde-eucalipto/15 text-verde-eucalipto shadow-suave h-10 w-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6, duration: 0.4 }}
+      >
+        <motion.span
+          aria-hidden
+          animate={{ y: [0, 4, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronDown className="h-5 w-5" />
+        </motion.span>
+      </motion.a>
     </section>;
 };
 export { Hero };
