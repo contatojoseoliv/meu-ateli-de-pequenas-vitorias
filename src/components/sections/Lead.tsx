@@ -5,8 +5,7 @@ import { Section } from "@/components/shared/Section";
  * Texto centralizado, conexão emocional profunda
  */
 const Lead = () => {
-  return (
-    <Section id="lead" background="cinza">
+  return <Section id="lead" background="cinza">
       <div className="max-w-3xl mx-auto text-center">
         <div className="space-y-6 text-lg md:text-lead text-grafite-suave leading-relaxed animate-fade-in">
           <p>
@@ -25,17 +24,11 @@ const Lead = () => {
             Tudo que você faz tem destinatário. O trabalho é para o chefe. A casa é para a família. O tempo é para todo mundo menos você.
           </p>
           
-          <p>
-            E quando alguém pergunta: <em className="text-rosa-argila">"E você? O que VOCÊ fez hoje que era seu?"</em>
-          </p>
           
-          <p className="font-bold text-verde-eucalipto">
-            Você não tem resposta.
-          </p>
           
-          <p>
-            Porque não existe resposta.
-          </p>
+          
+          
+          
           
           <p>
             E quando você não tem nada só seu — nenhum espaço, nenhum momento, nenhuma identidade fora dos papéis que cumpre —
@@ -56,8 +49,6 @@ const Lead = () => {
           </p>
         </div>
       </div>
-    </Section>
-  );
+    </Section>;
 };
-
 export { Lead };

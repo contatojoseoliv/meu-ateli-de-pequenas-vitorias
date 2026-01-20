@@ -35,7 +35,7 @@ const Header: React.FC = () => {
   return <header className={cn("fixed top-0 left-0 right-0 z-50", "h-20 flex items-center", "transition-all duration-300", "relative",
   // linha separadora (menu x hero)
   "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-rosa-argila/40", isScrolled ? "bg-background/95 backdrop-blur-sm shadow-header" : "bg-transparent")}>
-      <div className="container-main flex items-center justify-between w-full gap-4">
+      <div className="container-main w-full gap-4 flex items-center justify-between">
         {/* Logo */}
         <a href="/" aria-label="Página inicial - Meu Ateliê de Pequenas Vitórias" className="flex items-center shrink-0">
           {/*
