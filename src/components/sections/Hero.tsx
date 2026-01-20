@@ -31,18 +31,17 @@ const Hero = () => {
           {/* Coluna Texto */}
           <div className="order-2 lg:order-1 animate-fade-in">
             {/* Headline */}
-            <h1 className="font-serif text-3xl md:text-4xl lg:text-h1 text-grafite-suave mb-6 leading-tight">
+            <h1 className="font-serif text-3xl md:text-4xl text-grafite-suave mb-6 leading-tight px-0 lg:text-3xl text-center">
               Como Desligar Sua Mente Acelerada Em{" "}
-              <span className="text-verde-eucalipto">15 Minutos Por Dia</span>
+              <span className="text-verde-eucalipto">
+15 Minutos Por Dia</span>
               {" "}— Criando{" "}
               <span className="text-verde-eucalipto">Amigurumi</span>
               {" "}Com Suas Mãos
             </h1>
 
             {/* Sub-headline */}
-            <p className="text-lg md:text-lead text-grafite-suave/80 italic mb-8">
-              Mesmo que você nunca tenha feito nada manual na vida — ou já tenha tentado antes e desistido.
-            </p>
+            <p className="text-lg text-grafite-suave/80 italic mb-8 md:text-body">Mesmo que você nunca tenha feito nada manual na vida ou já tenha tentado antes e desistido.</p>
 
             {/* Bullets */}
             
