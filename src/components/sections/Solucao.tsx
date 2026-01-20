@@ -20,7 +20,7 @@ const Solucao = () => {
  *→ Isso quebra o VILÃO 1 (Nunca Estar Presente)*`
   }, {
     numero: "2",
-    titulo: "Você Finaliza Algo (Descarga Emocional)",
+    titulo: "Você Descarrega Emocionalmente",
     texto: `Do início ao fim. Com suas próprias mãos.
 
 E quando você **termina** — seu cérebro libera dopamina.
