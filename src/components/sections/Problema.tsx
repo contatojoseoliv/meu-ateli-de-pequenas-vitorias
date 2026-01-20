@@ -29,31 +29,22 @@ const Problema = () => {
     return text.split("\n\n").map((paragraph, i) => {
       // suporta **negrito** e [[green]]destaque[[/green]] dentro do texto
       const greenParts = paragraph.split(/(\[\[green\]\].*?\[\[\/green\]\])/g);
-
-      return (
-        <p key={i} className="mb-3 last:mb-0">
+      return <p key={i} className="mb-3 last:mb-0">
           {greenParts.map((gp, j) => {
-            const isGreen = gp.startsWith("[[green]]") && gp.endsWith("[[/green]]");
-            const greenContent = isGreen ? gp.slice("[[green]]".length, -"[[/green]]".length) : gp;
-
-            const boldParts = greenContent.split(/(\*\*.*?\*\*)/g);
-            const inner = boldParts.map((part, k) => {
-              const isBold = part.startsWith("**") && part.endsWith("**");
-              const content = isBold ? part.slice(2, -2) : part;
-              return isBold ? <strong key={k}>{content}</strong> : <span key={k}>{content}</span>;
-            });
-
-            return isGreen ? (
-              <span key={j} className="text-verde-eucalipto font-semibold">
+          const isGreen = gp.startsWith("[[green]]") && gp.endsWith("[[/green]]");
+          const greenContent = isGreen ? gp.slice("[[green]]".length, -"[[/green]]".length) : gp;
+          const boldParts = greenContent.split(/(\*\*.*?\*\*)/g);
+          const inner = boldParts.map((part, k) => {
+            const isBold = part.startsWith("**") && part.endsWith("**");
+            const content = isBold ? part.slice(2, -2) : part;
+            return isBold ? <strong key={k}>{content}</strong> : <span key={k}>{content}</span>;
+          });
+          return isGreen ? <span key={j} className="text-verde-eucalipto font-semibold">
                 {inner}
                 <br />
-              </span>
-            ) : (
-              <span key={j}>{inner}</span>
-            );
-          })}
-        </p>
-      );
+              </span> : <span key={j}>{inner}</span>;
+        })}
+        </p>;
     });
   };
   return <Section id="problema" background="white">
@@ -91,7 +82,7 @@ const Problema = () => {
 
       {/* Resultado Final */}
       <div className="text-center max-w-3xl mx-auto animate-fade-in">
-        <p className="text-lg text-grafite-suave mb-3">Resultado: sua mente nunca desliga. Seu corpo nunca relaxa. Você nunca sente calma de verdade.<span className="font-semibold text-rosa-argila">Por causa disso:</span> Sua mente nunca desliga. Seu corpo nunca relaxa. Você nunca sente calma de verdade.
+        <p className="text-grafite-suave mb-3 text-sm">Resultado: sua mente nunca desliga. Seu corpo nunca relaxa. Você nunca sente calma de verdade.<span className="font-semibold text-rosa-argila">Por causa disso:</span> Sua mente nunca desliga. Seu corpo nunca relaxa. Você nunca sente calma de verdade.
         </p>
         <p className="font-bold text-verde-eucalipto text-xl">
           Mas existe uma forma de quebrar os três — de uma vez.
