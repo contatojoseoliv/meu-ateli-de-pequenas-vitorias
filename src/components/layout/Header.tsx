@@ -46,7 +46,7 @@ const Header: React.FC = () => {
           : "bg-transparent"
       )}
     >
-      <div className="container-main w-full gap-3 flex items-center justify-between">
+      <div className="container-main w-full gap-2 flex items-center justify-between">
         {/* Logo */}
         <a
           href="/"
@@ -60,34 +60,34 @@ const Header: React.FC = () => {
           <img
             src={logo}
             alt="Meu Ateliê de Pequenas Vitórias"
-            className="h-10 md:h-12 w-[220px] md:w-[320px] object-left border-none object-cover border-0"
+            className="h-9 md:h-12 w-[150px] sm:w-[200px] md:w-[320px] object-left border-none object-cover border-0"
             loading="eager"
             decoding="async"
           />
         </a>
 
         {/* Ações */}
-        <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 shrink-0">
+        <div className="flex items-center gap-1 sm:gap-2 md:gap-3 shrink-0">
           <Button
             variant="ghost"
             size="sm"
             onClick={() => (window.location.href = "/login")}
             aria-label="Acessar área de alunas"
-            className="px-2 py-2 text-[11px] sm:text-xs md:text-sm gap-1.5"
+            className="px-2 py-2 text-[10px] sm:text-xs md:text-sm gap-1.5 whitespace-nowrap"
           >
             <span>Já Sou Aluna</span>
             <LogIn className="h-4 w-4" aria-hidden="true" />
           </Button>
 
-          {/* CTA escondido no mobile para caber no topo */}
           <Button
             variant="primary"
             size="sm"
             onClick={handleQueroFazerParte}
             aria-label="Quero fazer parte"
-            className="hidden md:inline-flex px-3 py-2 text-[11px] sm:text-xs md:text-sm"
+            className="px-2.5 py-2 text-[10px] sm:text-xs md:text-sm whitespace-nowrap"
           >
-            Quero Fazer Parte
+            <span className="inline sm:hidden">Quero</span>
+            <span className="hidden sm:inline">Quero Fazer Parte</span>
           </Button>
         </div>
       </div>
