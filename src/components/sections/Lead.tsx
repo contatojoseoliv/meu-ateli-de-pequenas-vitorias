@@ -39,7 +39,8 @@ const Lead = () => {
             </p>
 
             <p className="font-bold text-rosa-argila text-base md:text-lg">
-              Você desaparece. Mas não precisa ser assim.
+              <span className="block">Você desaparece.</span>
+              <span className="block">Mas não precisa ser assim.</span>
             </p>
 
             <div className="my-5 border-t border-dashed border-verde-eucalipto/30" />
