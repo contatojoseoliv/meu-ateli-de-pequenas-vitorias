@@ -58,7 +58,7 @@ const Problema = () => {
   };
   return <Section id="problema" background="white">
       {/* Título */}
-      <div className="text-center max-w-3xl mx-auto mb-6 md:mb-10 animate-fade-in">
+      <div className="text-center max-w-2xl mx-auto mb-6 md:mb-10 animate-fade-in">
         <h2 className="font-serif md:text-h2 text-grafite-suave mb-6 text-2xl">
           Por Que Você Está Ansiosa
           <span className="text-rosa-argila block">(E Não É Culpa Sua)</span>
@@ -69,18 +69,18 @@ const Problema = () => {
       </div>
 
       {/* 3 Cards */}
-      <div className="mx-auto max-w-3xl space-y-3 md:space-y-4 mb-10 md:mb-12">
-        {viloes.map((vilao, index) => <div key={index} className="bg-rosa-argila-10 rounded-2xl p-4 md:p-5 shadow-suave hover-lift animate-fade-in" style={{
+      <div className="mx-auto max-w-2xl space-y-3 md:space-y-3 mb-10 md:mb-12">
+        {viloes.map((vilao, index) => <div key={index} className="bg-rosa-argila-10 rounded-2xl p-4 md:p-4 shadow-suave hover-lift animate-fade-in" style={{
         animationDelay: `${index * 0.12}s`
       }}>
             <div className="mb-3 md:mb-4">
-              <vilao.icon className="w-8 h-8 md:w-9 md:h-9 text-verde-eucalipto mb-2" strokeWidth={1.5} />
-              <h3 className="font-serif text-lg md:text-xl text-grafite-suave leading-tight">
+              <vilao.icon className="w-8 h-8 md:w-8 md:h-8 text-verde-eucalipto mb-2" strokeWidth={1.5} />
+              <h3 className="font-serif text-base md:text-lg text-grafite-suave leading-tight">
                 {vilao.numero}. {vilao.titulo}
               </h3>
             </div>
 
-            <div className="text-sm md:text-base text-grafite-suave/90 leading-snug md:leading-relaxed">
+            <div className="text-sm md:text-sm text-grafite-suave/90 leading-snug md:leading-relaxed">
               {formatText(vilao.texto)}
             </div>
           </div>)}
