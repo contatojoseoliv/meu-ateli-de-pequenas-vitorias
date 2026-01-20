@@ -22,15 +22,7 @@ const Problema = () => {
     icon: Smartphone,
     numero: "3",
     titulo: "Você Está Desconectada Do Corpo",
-    texto: `Você passa — em média — 9 horas por dia olhando para telas.
-
-Seus olhos trabalham. Seu cérebro trabalha.
-
-**Seu corpo? Esquecido.**
-
-E quando você está 100% mental, 0% corporal, você perde a conexão com quem você é.
-
-Pesquisas mostram: quanto mais tempo em telas, maior a desconexão corpo-mente — e maior a ansiedade.`,
+    texto: `Muitas horas em telas mantêm você só na mente. O corpo fica esquecido, e isso aumenta a ansiedade. [[green]]Quanto mais tempo em telas, maior a desconexão corpo-mente e maior a ansiedade.[[/green]]`,
     recap: "VILÃO 3: Desconectada do corpo → 100% mental → Ansiedade ↑"
   }];
   const formatText = (text: string) => {
