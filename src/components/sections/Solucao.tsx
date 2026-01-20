@@ -96,12 +96,9 @@ Estudos brasileiros (ESF): grupos de crochê reduziram ansiedade/depressão em 7
 
       {/* 3 Mecanismos */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-        {mecanismos.map((mec, index) => (
-          <div
-            key={index}
-            className="bg-white/10 border border-white/20 rounded-xl p-7 animate-fade-in"
-            style={{ animationDelay: `${index * 0.15}s` }}
-          >
+        {mecanismos.map((mec, index) => <div key={index} className="bg-white/10 border border-white/20 rounded-xl p-7 animate-fade-in" style={{
+        animationDelay: `${index * 0.15}s`
+      }}>
             <div className="flex items-start gap-4 mb-5">
               <span className="font-serif text-6xl text-ocre-dourado/50 leading-none flex-shrink-0">
                 {mec.numero}
@@ -114,8 +111,7 @@ Estudos brasileiros (ESF): grupos de crochê reduziram ansiedade/depressão em 7
             <div className="text-white/80 text-body leading-relaxed">
               {formatText(mec.texto)}
             </div>
-          </div>
-        ))}
+          </div>)}
       </div>
 
       {/* Box de Transição */}
@@ -132,26 +128,7 @@ Estudos brasileiros (ESF): grupos de crochê reduziram ansiedade/depressão em 7
       <Mapa7Dias />
 
       {/* Fechamento Emocional */}
-      <div className="bg-ocre-dourado/15 rounded-xl p-10 md:p-12 text-center max-w-3xl mx-auto animate-fade-in">
-        <p className="font-serif text-xl md:text-2xl text-white italic leading-relaxed mb-6">
-          E quando você segura seu primeiro amigurumi completo — feito por VOCÊ, do início ao fim —
-        </p>
-        <p className="text-white/90 text-lg mb-4">
-          Algo muda.
-        </p>
-        <p className="text-white/90 text-lg mb-6">
-          Não só a habilidade. <strong className="text-white">A sensação.</strong>
-        </p>
-        <p className="text-white/80 mb-6">
-          Você acabou de ter uma experiência que sua mente não pode negar:
-        </p>
-        <p className="text-rosa-argila italic text-lg mb-6">
-          "Eu comecei. Eu fiz. EU TERMINEI."
-        </p>
-        <p className="text-white text-xl font-semibold">
-          E pela primeira vez em muito tempo... você sente <span className="text-ocre-dourado">calma. Orgulho. Alívio.</span>
-        </p>
-      </div>
+      
     </Section>;
 };
 export { Solucao };
