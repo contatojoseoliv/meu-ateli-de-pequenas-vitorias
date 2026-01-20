@@ -36,7 +36,7 @@ const Header: React.FC = () => {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50",
-        "h-16 md:h-20 flex items-center",
+        "h-14 md:h-20 flex items-center",
         "transition-all duration-300",
         "relative",
         // linha separadora (menu x hero)
@@ -60,7 +60,7 @@ const Header: React.FC = () => {
           <img
             src={logo}
             alt="Meu Ateliê de Pequenas Vitórias"
-            className="h-9 md:h-12 w-[150px] sm:w-[200px] md:w-[320px] object-left border-none object-cover border-0"
+            className="h-8 sm:h-9 md:h-12 w-[140px] sm:w-[200px] md:w-[320px] object-left border-none object-cover border-0"
             loading="eager"
             decoding="async"
           />
@@ -73,18 +73,19 @@ const Header: React.FC = () => {
             size="sm"
             onClick={() => (window.location.href = "/login")}
             aria-label="Acessar área de alunas"
-            className="px-2.5 py-2 text-[11px] sm:text-xs md:text-sm gap-1.5"
+            className="px-2 py-2 text-[11px] sm:text-xs md:text-sm gap-1.5"
           >
             <span>Já Sou Aluna</span>
             <LogIn className="h-4 w-4" aria-hidden="true" />
           </Button>
 
+          {/* CTA escondido no mobile para caber no topo */}
           <Button
             variant="primary"
             size="sm"
             onClick={handleQueroFazerParte}
             aria-label="Quero fazer parte"
-            className="px-3 py-2 text-[11px] sm:text-xs md:text-sm"
+            className="hidden md:inline-flex px-3 py-2 text-[11px] sm:text-xs md:text-sm"
           >
             Quero Fazer Parte
           </Button>
