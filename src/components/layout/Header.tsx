@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/shared/Button";
 import { LogIn } from "lucide-react";
-import logo from "@/assets/logo-meu-atelie.png";
+import logo from "@/assets/logo-meu-atelie-menu.png";
 
 /**
  * Header fixo seguindo o Manual da Marca
@@ -47,11 +47,19 @@ const Header: React.FC = () => {
     >
       <div className="container-main flex items-center justify-between w-full gap-4">
         {/* Logo */}
-        <a href="/" aria-label="Página inicial - Meu Ateliê de Pequenas Vitórias" className="flex items-center">
+        <a
+          href="/"
+          aria-label="Página inicial - Meu Ateliê de Pequenas Vitórias"
+          className="flex items-center shrink-0"
+        >
+          {/*
+            Observação: este PNG tem bastante “respiro” lateral.
+            Por isso usamos largura controlada + object-left para o logotipo ficar visualmente maior.
+          */}
           <img
             src={logo}
             alt="Meu Ateliê de Pequenas Vitórias"
-            className="h-9 md:h-10 w-auto"
+            className="h-10 md:h-12 w-[220px] md:w-[320px] object-contain object-left"
             loading="eager"
             decoding="async"
           />
@@ -64,10 +72,10 @@ const Header: React.FC = () => {
             size="sm"
             onClick={() => (window.location.href = "/login")}
             aria-label="Acessar área de alunas"
-            className="gap-2"
+            className="px-3 py-2 text-xs md:text-sm gap-1.5"
           >
+            <span>Já sou aluna</span>
             <LogIn className="h-4 w-4" aria-hidden="true" />
-            Já sou aluna
           </Button>
 
           <Button
@@ -75,6 +83,7 @@ const Header: React.FC = () => {
             size="sm"
             onClick={handleQueroFazerParte}
             aria-label="Quero fazer parte"
+            className="px-4 py-2 text-xs md:text-sm"
           >
             Quero Fazer Parte
           </Button>
@@ -85,3 +94,4 @@ const Header: React.FC = () => {
 };
 
 export { Header };
+
