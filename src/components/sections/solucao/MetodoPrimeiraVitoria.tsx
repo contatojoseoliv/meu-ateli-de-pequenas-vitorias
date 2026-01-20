@@ -1,18 +1,11 @@
-import {
-  Check,
-  Heart,
-  Sparkles,
-  Target,
-  TrendingUp,
-} from "lucide-react";
-
-import type { ElementType } from "react";
+import { Check, Heart, Sparkles, Target, TrendingUp } from "lucide-react";
 
 type Pilar = {
   numero: string;
   titulo: string;
   texto: string;
-  icon: ElementType;
+  // Lucide components can be tricky to type across tooling; keep it flexible.
+  icon: any;
 };
 
 const pilares: Pilar[] = [
@@ -56,7 +49,7 @@ const MetodoPrimeiraVitoria = () => {
             Por Isso Criamos o
           </p>
           <h3 className="font-serif text-2xl md:text-4xl text-white mt-2 leading-tight">
-            <span className="text-ocre-dourado">Primeira Vitória em Amigurumi©</span>
+            <span className="text-white">Primeira Vitória em Amigurumi©</span>
           </h3>
         </header>
 
@@ -83,7 +76,7 @@ const MetodoPrimeiraVitoria = () => {
                 <div className="flex items-start gap-3">
                   <div className="w-9 h-9 rounded-full bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0">
                     <Check
-                      className="w-5 h-5 text-ocre-dourado"
+                      className="w-5 h-5 text-white"
                       aria-hidden={true}
                     />
                   </div>
@@ -127,7 +120,7 @@ const MetodoPrimeiraVitoria = () => {
                     </div>
 
                     <div>
-                      <p className="text-xs uppercase tracking-wider font-bold text-ocre-dourado mb-1">
+                      <p className="text-xs uppercase tracking-wider font-bold text-white/75 mb-1">
                         PILAR {pilar.numero}
                       </p>
                       <h4 className="font-serif text-xl text-white leading-snug">

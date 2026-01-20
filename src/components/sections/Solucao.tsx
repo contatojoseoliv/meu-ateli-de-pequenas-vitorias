@@ -1,5 +1,6 @@
 import { Section } from "@/components/shared/Section";
 import { MetodoPrimeiraVitoria } from "@/components/sections/solucao/MetodoPrimeiraVitoria";
+import { Mapa7Dias } from "@/components/sections/solucao/Mapa7Dias";
 
 /**
  * Seção Solução - Método Primeira Vitória
@@ -46,22 +47,6 @@ E isso — biologicamente — **reduz cortisol** (hormônio do estresse) em até
 Estudos brasileiros (ESF): grupos de crochê reduziram ansiedade/depressão em 73% das participantes.
 
 *→ Isso quebra o VILÃO 3 (Desconexão Corpo-Mente)*`
-  }];
-  const timeline = [{
-    dia: "DIA 1",
-    titulo: "Preparação",
-    oque: "Materiais certos (menos de R$ 35) + primeiros pontos em câmera lenta + mindset",
-    resultado: "Você sai sabendo que é possível. E já sabe fazer pontos básicos."
-  }, {
-    dia: "DIAS 2-6",
-    titulo: "Criação guiada",
-    oque: "1 vídeo curto por dia (10-15min). Uma etapa de cada vez. Nunca sobrecarga.",
-    resultado: "Pequenas vitórias diárias. Dopamina constante. Confiança crescendo."
-  }, {
-    dia: "DIA 7",
-    titulo: "Finalização",
-    oque: "Costura invisível + acabamentos + celebração",
-    resultado: "Amigurumi completo nas mãos. Prova física. Identidade mudada."
   }];
   const formatText = (text: string) => {
     return text.split('\n\n').map((paragraph, i) => {
@@ -143,41 +128,8 @@ Estudos brasileiros (ESF): grupos de crochê reduziram ansiedade/depressão em 7
       {/* Método + Pilares (sessão única, full-width) */}
       <MetodoPrimeiraVitoria />
 
-      {/* Timeline 7 Dias */}
-      <div className="max-w-2xl mx-auto mb-20">
-        <h3 className="font-serif text-2xl text-white text-center mb-12">
-          Mapa de 7 Dias
-        </h3>
-        <div className="relative">
-          {/* Linha vertical */}
-          <div className="absolute left-6 top-0 bottom-0 w-0.5 border-l-2 border-dashed border-white/40" />
-          
-          {timeline.map((item, index) => <div key={index} className="relative pl-16 pb-12 last:pb-0 animate-fade-in" style={{
-          animationDelay: `${index * 0.15}s`
-        }}>
-              {/* Círculo */}
-              <div className="absolute left-0 w-12 h-12 rounded-full bg-ocre-dourado border-3 border-white flex items-center justify-center">
-                <span className="text-white font-bold text-sm">{index + 1}</span>
-              </div>
-              
-              {/* Card */}
-              <div className="bg-white/12 rounded-lg p-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-ocre-dourado font-bold">🗓️ {item.dia}</span>
-                  <span className="text-white font-semibold">— {item.titulo}</span>
-                </div>
-                <div className="mb-3">
-                  <span className="text-white/70 text-sm font-medium">O que você faz:</span>
-                  <p className="text-white/90">{item.oque}</p>
-                </div>
-                <div>
-                  <span className="text-white/70 text-sm font-medium">Resultado:</span>
-                  <p className="text-white font-medium">{item.resultado}</p>
-                </div>
-              </div>
-            </div>)}
-        </div>
-      </div>
+      {/* Mapa de 7 Dias (visual) */}
+      <Mapa7Dias />
 
       {/* Fechamento Emocional */}
       <div className="bg-ocre-dourado/15 rounded-xl p-10 md:p-12 text-center max-w-3xl mx-auto animate-fade-in">
