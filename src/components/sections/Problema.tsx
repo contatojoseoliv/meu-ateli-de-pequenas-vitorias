@@ -80,7 +80,7 @@ Pesquisas mostram: quanto mais tempo em telas, maior a desconex√£o corpo-mente ‚
       </div>
 
       {/* 3 Cards */}
-      <div className="flex gap-6 overflow-x-auto pb-2 -mx-2 px-2 mb-16 md:mx-0 md:px-0 md:overflow-visible md:grid md:grid-cols-3 md:gap-8">
+      <div className="flex flex-nowrap gap-6 overflow-x-auto pb-2 -mx-2 px-2 mb-16 md:mx-0 md:px-0 md:overflow-visible md:gap-8">
         {viloes.map((vilao, index) => <div key={index} className="min-w-[280px] flex-shrink-0 bg-rosa-argila-10 rounded-2xl p-8 md:min-w-0 md:p-10 shadow-suave hover-lift animate-fade-in" style={{
         animationDelay: `${index * 0.15}s`
       }}>
