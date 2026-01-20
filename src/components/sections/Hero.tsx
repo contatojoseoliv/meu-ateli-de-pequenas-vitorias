@@ -22,17 +22,16 @@ const Hero = () => {
     icon: Users,
     label: "Suporte Imediato"
   }] as const;
-  return <section id="hero" className="min-h-screen pt-16 pb-12 md:pt-20 md:pb-16" style={{
-    backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.55) 0%, hsl(0 0% 96% / 0.45) 55%, hsl(156 15% 42% / 0.10) 100%), url(${heroBg})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat"
+  return <section id="hero" className="min-h-screen pt-16 pb-12 md:pt-20 md:pb-16 bg-cover bg-no-repeat bg-[position:50%_15%] md:bg-center" style={{
+    backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.68) 0%, hsl(0 0% 96% / 0.58) 55%, hsl(156 15% 42% / 0.14) 100%), url(${heroBg})`
   }}>
       <div className="container-main">
-        <div className="min-h-[70vh] flex items-center justify-center">
+        <div className="min-h-[62vh] md:min-h-[70vh] flex items-center justify-center">
           {/* Conteúdo (texto) */}
           <div className="animate-fade-in text-center w-full max-w-[720px]">
-            <div className="rounded-2xl border border-white/40 bg-background/35 backdrop-blur-[2px] shadow-suave px-5 py-6 md:px-8 md:py-8">
+            <div className="relative px-5 py-6 md:px-8 md:py-8">
+              {/* Overlay local suave (sem “quadrado”) para legibilidade */}
+              <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-background/55 via-background/30 to-background/0" />
             {/* Nome do produto + selo */}
             <div className="inline-flex items-center gap-3 mb-4 px-3 py-2 rounded-full bg-white/70 border border-verde-eucalipto/15">
               <img src={seloImage} alt="Selo Primeira Vitória em Amigurumi" className="h-7 w-7 md:h-8 md:w-8 object-contain" loading="eager" decoding="async" />
@@ -51,7 +50,7 @@ const Hero = () => {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-base md:text-body text-grafite-suave/90 italic mb-5 max-w-[40ch] mx-auto">
+            <p className="text-base md:text-body text-grafite-suave/90 italic drop-shadow-sm mb-5 max-w-[40ch] mx-auto">
               Mesmo que você nunca tenha feito nada manual na vida ou já tenha tentado antes e desistido.
             </p>
 
