@@ -47,7 +47,7 @@ const Hero = () => {
             </div>
 
             {/* Headline */}
-            <h1 className="font-serif text-[34px] leading-[1.15] md:text-4xl lg:text-5xl text-grafite-suave mb-5">
+            <h1 className="font-serif font-bold tracking-tight text-[32px] leading-[1.12] md:text-[40px] lg:text-[44px] text-grafite-suave drop-shadow-sm mb-5">
               <span className="block">Desligue Sua Mente Acelerada</span>
               <span className="block">
                 em <span className={highlights.accent}>15 Minutos por Dia</span>
