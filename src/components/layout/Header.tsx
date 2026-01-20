@@ -14,84 +14,49 @@ import logo from "@/assets/logo-meu-atelie-menu.png";
  */
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = React.useState(false);
-
   React.useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
   const handleQueroFazerParte = () => {
     const el = document.getElementById("oferta");
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      el.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
       return;
     }
     window.location.hash = "#oferta";
   };
-
-  return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50",
-        "h-20 flex items-center",
-        "transition-all duration-300",
-        "relative",
-        // linha separadora (menu x hero)
-        "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-rosa-argila/40",
-        isScrolled ? "bg-background/95 backdrop-blur-sm shadow-header" : "bg-transparent",
-      )}
-    >
+  return <header className={cn("fixed top-0 left-0 right-0 z-50", "h-20 flex items-center", "transition-all duration-300", "relative",
+  // linha separadora (menu x hero)
+  "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-rosa-argila/40", isScrolled ? "bg-background/95 backdrop-blur-sm shadow-header" : "bg-transparent")}>
       <div className="container-main flex items-center justify-between w-full gap-4">
         {/* Logo */}
-        <a
-          href="/"
-          aria-label="Página inicial - Meu Ateliê de Pequenas Vitórias"
-          className="flex items-center shrink-0"
-        >
+        <a href="/" aria-label="Página inicial - Meu Ateliê de Pequenas Vitórias" className="flex items-center shrink-0">
           {/*
             Observação: este PNG tem bastante “respiro” lateral.
             Por isso usamos largura controlada + object-left para o logotipo ficar visualmente maior.
-          */}
-          <img
-            src={logo}
-            alt="Meu Ateliê de Pequenas Vitórias"
-            className="h-10 md:h-12 w-[220px] md:w-[320px] object-contain object-left"
-            loading="eager"
-            decoding="async"
-          />
+           */}
+          <img src={logo} alt="Meu Ateliê de Pequenas Vitórias" className="h-10 md:h-12 w-[220px] md:w-[320px] object-left border-none object-cover border-0" loading="eager" decoding="async" />
         </a>
 
         {/* Ações */}
         <div className="flex items-center gap-2 md:gap-3">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => (window.location.href = "/login")}
-            aria-label="Acessar área de alunas"
-            className="px-3 py-2 text-xs md:text-sm gap-1.5"
-          >
-            <span>Já sou aluna</span>
+          <Button variant="ghost" size="sm" onClick={() => window.location.href = "/login"} aria-label="Acessar área de alunas" className="px-3 py-2 text-xs md:text-sm gap-1.5">
+            <span>Já Sou Aluna</span>
             <LogIn className="h-4 w-4" aria-hidden="true" />
           </Button>
 
-          <Button
-            variant="primary"
-            size="sm"
-            onClick={handleQueroFazerParte}
-            aria-label="Quero fazer parte"
-            className="px-4 py-2 text-xs md:text-sm"
-          >
+          <Button variant="primary" size="sm" onClick={handleQueroFazerParte} aria-label="Quero fazer parte" className="px-4 py-2 text-xs md:text-sm">
             Quero Fazer Parte
           </Button>
         </div>
       </div>
-    </header>
-  );
+    </header>;
 };
-
 export { Header };
-
