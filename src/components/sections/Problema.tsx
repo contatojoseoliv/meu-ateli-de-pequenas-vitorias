@@ -85,10 +85,7 @@ Pesquisas mostram: quanto mais tempo em telas, maior a desconexÃ£o corpo-mente â
         animationDelay: `${index * 0.15}s`
       }}>
             <div className="mb-5">
-              <vilao.icon
-                className="w-10 h-10 text-verde-eucalipto mb-3"
-                strokeWidth={1.5}
-              />
+              <vilao.icon className="w-10 h-10 text-verde-eucalipto mb-3" strokeWidth={1.5} />
               <h3 className="font-serif text-xl md:text-2xl text-grafite-suave leading-tight">
                 {vilao.numero}. {vilao.titulo}
               </h3>
@@ -101,14 +98,7 @@ Pesquisas mostram: quanto mais tempo em telas, maior a desconexÃ£o corpo-mente â
       </div>
 
       {/* Recap Visual */}
-      <div className="bg-verde-eucalipto-10 border-l-4 border-verde-eucalipto rounded-r-xl p-8 mb-12 animate-fade-in">
-        <div className="space-y-3 font-medium text-grafite-suave">
-          {viloes.map((vilao, index) => <p key={index} className="flex items-start gap-2">
-              <span className="text-verde-eucalipto">â†’</span>
-              {vilao.recap}
-            </p>)}
-        </div>
-      </div>
+      
 
       {/* Resultado Final */}
       <div className="text-center max-w-3xl mx-auto animate-fade-in">
