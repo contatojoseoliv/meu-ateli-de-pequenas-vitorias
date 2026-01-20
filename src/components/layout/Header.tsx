@@ -60,7 +60,7 @@ const Header: React.FC = () => {
           <img
             src={logo}
             alt="Meu Ateliê de Pequenas Vitórias"
-            className="h-8 sm:h-9 md:h-12 w-[140px] sm:w-[200px] md:w-[320px] object-left border-none object-cover border-0"
+            className="h-9 sm:h-10 md:h-12 w-[160px] sm:w-[220px] md:w-[320px] object-left border-none object-cover border-0"
             loading="eager"
             decoding="async"
           />
