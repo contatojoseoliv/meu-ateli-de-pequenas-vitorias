@@ -1,7 +1,7 @@
 import { Button } from "@/components/shared/Button";
 import { Clock, Leaf, Users } from "lucide-react";
-import heroImage from "@/assets/hero-amigurumi.png";
 import seloImage from "@/assets/selo-primeira-vitoria.png";
+import heroBg from "@/assets/hero-bg.png";
 
 /**
  * Seção Hero - Landing Page Principal
@@ -23,12 +23,16 @@ const Hero = () => {
     label: "Suporte Imediato"
   }] as const;
   return <section id="hero" className="min-h-screen pt-16 pb-12 md:pt-20 md:pb-16" style={{
-    background: "linear-gradient(135deg, hsl(156 15% 42% / 0.15) 0%, hsl(0 0% 96%) 100%)"
+    backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.86) 0%, hsl(0 0% 96% / 0.92) 55%, hsl(156 15% 42% / 0.18) 100%), url(${heroBg})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat"
   }}>
       <div className="container-main">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center min-h-[70vh]">
-          {/* Coluna Texto (primeiro no mobile) */}
-          <div className="order-1 lg:order-1 animate-fade-in text-center lg:text-left">
+        <div className="min-h-[70vh] flex items-center justify-center">
+          {/* Conteúdo (texto) */}
+          <div className="animate-fade-in text-center lg:text-left w-full max-w-[720px]">
+            <div className="rounded-2xl border border-border/50 bg-background/70 backdrop-blur-sm shadow-suave px-5 py-6 md:px-8 md:py-8">
             {/* Nome do produto + selo */}
             <div className="inline-flex items-center gap-3 mb-4 px-3 py-2 rounded-full bg-white/70 border border-verde-eucalipto/15">
               <img src={seloImage} alt="Selo Primeira Vitória em Amigurumi" className="h-7 w-7 md:h-8 md:w-8 object-contain" loading="eager" decoding="async" />
@@ -67,16 +71,6 @@ const Hero = () => {
                   </span>
                 </div>)}
             </div>
-          </div>
-
-          {/* Coluna Imagem (abaixo no mobile) */}
-          <div className="order-2 lg:order-2 animate-fade-in" style={{
-          animationDelay: "0.2s"
-        }}>
-            <div className="relative w-full aspect-[6/7] max-w-[520px] mx-auto rounded-2xl overflow-hidden bg-white" style={{
-            boxShadow: "0 20px 60px hsl(156 15% 42% / 0.2)"
-          }}>
-              <img src={heroImage} alt="Mãos femininas segurando amigurumi em tons pastéis" className="h-full w-full object-cover" loading="eager" decoding="async" />
             </div>
           </div>
         </div>
