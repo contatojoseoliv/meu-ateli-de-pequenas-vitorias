@@ -21,7 +21,7 @@ A Neurociência mostra que passamos cerca de 47% do tempo pensando no passado ou
   }, {
     icon: Package,
     numero: "2",
-    titulo: "Você Acumula Sem Descarregar",
+    titulo: "Você Acumula Tensão Sem Descarregar",
     texto: `Todo dia você acumula estresse. Tensão. Frustração.
 
 **Mas quando você descarga? Nunca.**
