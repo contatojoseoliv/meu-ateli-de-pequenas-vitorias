@@ -69,7 +69,7 @@ Pesquisas mostram: quanto mais tempo em telas, maior a desconexão corpo-mente �
   };
   return <Section id="problema" background="white">
       {/* Título */}
-      <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
+      <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12 animate-fade-in">
         <h2 className="font-serif md:text-h2 text-grafite-suave mb-6 text-2xl">
           Por Que Você Está Ansiosa
           <span className="text-rosa-argila block">(E Não É Culpa Sua)</span>
@@ -80,9 +80,9 @@ Pesquisas mostram: quanto mais tempo em telas, maior a desconexão corpo-mente �
       </div>
 
       {/* 3 Cards */}
-      <div className="flex flex-nowrap gap-6 overflow-x-auto pb-2 -mx-2 px-2 mb-16 md:mx-0 md:px-0 md:overflow-visible md:gap-8">
-        {viloes.map((vilao, index) => <div key={index} className="min-w-[280px] flex-shrink-0 bg-rosa-argila-10 rounded-2xl p-8 md:min-w-0 md:p-10 shadow-suave hover-lift animate-fade-in" style={{
-        animationDelay: `${index * 0.15}s`
+      <div className="mx-auto max-w-3xl space-y-4 md:space-y-6 mb-12 md:mb-16">
+        {viloes.map((vilao, index) => <div key={index} className="bg-rosa-argila-10 rounded-2xl p-5 md:p-7 shadow-suave hover-lift animate-fade-in" style={{
+        animationDelay: `${index * 0.12}s`
       }}>
             <div className="mb-5">
               <vilao.icon className="w-10 h-10 text-verde-eucalipto mb-3" strokeWidth={1.5} />
