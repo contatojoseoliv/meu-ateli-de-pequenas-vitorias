@@ -5,13 +5,12 @@ import { Section } from "@/components/shared/Section";
  * Texto centralizado, conexão emocional profunda
  */
 const Lead = () => {
-  return (
-    <Section id="lead" background="cinza">
+  return <Section id="lead" background="cinza">
       <div className="max-w-2xl mx-auto text-center">
         <div className="space-y-4 text-base md:text-lead text-grafite-suave leading-relaxed animate-fade-in">
           <p>
             Você acorda ansiosa. Passa o dia acelerada. {" "}
-            <strong className="text-verde-eucalipto">Dorme ansiosa.</strong>
+            <strong className="text-verde-eucalipto">Dorme inquieta.</strong>
           </p>
 
           <p className="font-bold text-verde-eucalipto">E no meio disso tudo?</p>
@@ -39,7 +38,6 @@ const Lead = () => {
           </p>
         </div>
       </div>
-    </Section>
-  );
+    </Section>;
 };
 export { Lead };
