@@ -59,9 +59,9 @@ const Hero = () => {
 
             {/* Subheadline */}
             <p className="text-base md:text-body text-grafite-suave/80 italic mb-7 max-w-[40ch] mx-auto lg:mx-0">
-              “Mesmo que você nunca tenha feito nada manual na vida
-              <br className="hidden md:block" />
-              ou já tenha tentado antes e desistido.”
+              Mesmo que você nunca tenha feito nada manual na vida
+              <br className="hidden md:block" />{" "}
+              ou já tenha tentado antes e desistido.
             </p>
 
             {/* CTA */}
