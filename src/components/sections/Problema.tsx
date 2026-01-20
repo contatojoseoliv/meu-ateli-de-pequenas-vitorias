@@ -24,15 +24,19 @@ A Neurociência mostra que passamos cerca de 47% do tempo pensando no passado ou
     titulo: "Você Acumula Tensão Sem Descarregar",
     texto: `Todo dia você acumula estresse. Tensão. Frustração.
 
-**Mas quando você descarga? Nunca.**
+**Mas quando você descarrega?**
 
-Trabalho nunca termina. Casa amanhã está suja de novo. Obrigações são infinitas.
+Nunca.
 
-A neurociência comprova: finalizar algo libera dopamina — química mensurável de alívio.
+Você não tem nada que seja só seu.
+Nada que exista só para você.
+Nada que você termine e possa olhar e dizer: "Isso aqui, eu fiz."
 
-Sem finalizações, sem dopamina. Sem alívio.
+Trabalho? É para a empresa.
+Casa? É para a família.
+Obrigações? Infinitas.
 
-**Só acúmulo. E o estresse nunca sai.**`,
+**A tensão se acumula, dia após dia, sem nunca ter por onde sair.**`,
     recap: "VILÃO 2: Acumula sem descarregar → Sem dopamina → Estresse ↑"
   }, {
     icon: Smartphone,
