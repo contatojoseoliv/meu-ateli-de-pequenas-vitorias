@@ -1,6 +1,7 @@
-import { Section } from "@/components/shared/Section";
 import { Button } from "@/components/shared/Button";
-import { Clock, Leaf, Users, Calendar, Check } from "lucide-react";
+import { Clock, Leaf, Users } from "lucide-react";
+import heroImage from "@/assets/hero-amigurumi.png";
+import seloImage from "@/assets/selo-primeira-vitoria.png";
 
 /**
  * Seção Hero - Landing Page Principal
@@ -8,88 +9,110 @@ import { Clock, Leaf, Users, Calendar, Check } from "lucide-react";
  * Altura: 100vh
  */
 const Hero = () => {
-  const bullets = ["Sua mente nunca para — acorda ansiosa, dorme ansiosa", "Não tem nada que seja só seu — tudo é para os outros", "Vive nas telas mas nunca relaxou de verdade", "Acha que \"não leva jeito\" ou já tentou e travou sozinha", "Quer algo só seu que acalme de verdade — e prove que você consegue"];
-  const cards = [{
-    icon: Clock,
-    label: "15 min/dia"
-  }, {
-    icon: Leaf,
-    label: "Do Zero"
-  }, {
-    icon: Users,
-    label: "Suporte"
-  }, {
-    icon: Calendar,
-    label: "7 dias"
-  }];
-  return <section id="hero" className="min-h-screen pt-24 pb-16 md:pt-32 md:pb-24" style={{
-    background: "linear-gradient(135deg, hsl(156 15% 42% / 0.15) 0%, hsl(0 0% 96%) 100%)"
-  }}>
+  const highlights = {
+    accent: "text-verde-eucalipto",
+  };
+
+  const infoBadges = [
+    { icon: Clock, label: "15min/dia" },
+    { icon: Leaf, label: "Do Zero" },
+    { icon: Users, label: "Suporte Imediato" },
+  ] as const;
+
+  return (
+    <section
+      id="hero"
+      className="min-h-screen pt-20 pb-14 md:pt-24 md:pb-20"
+      style={{
+        background:
+          "linear-gradient(135deg, hsl(156 15% 42% / 0.15) 0%, hsl(0 0% 96%) 100%)",
+      }}
+    >
       <div className="container-main">
-        {/* Grid Principal */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[70vh]">
-          {/* Coluna Texto */}
-          <div className="order-2 lg:order-1 animate-fade-in">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center min-h-[70vh]">
+          {/* Coluna Texto (primeiro no mobile) */}
+          <div className="order-1 lg:order-1 animate-fade-in text-center lg:text-left">
+            {/* Nome do produto + selo */}
+            <div className="inline-flex items-center gap-3 mb-4 px-3 py-2 rounded-full bg-white/70 border border-verde-eucalipto/15">
+              <img
+                src={seloImage}
+                alt="Selo Primeira Vitória em Amigurumi"
+                className="h-7 w-7 md:h-8 md:w-8 object-contain"
+                loading="eager"
+                decoding="async"
+              />
+              <span className="font-sans font-semibold text-grafite-suave text-sm md:text-base">
+                Primeira Vitória em Amigurumi
+              </span>
+            </div>
+
             {/* Headline */}
-            <h1 className="font-serif text-3xl md:text-4xl text-grafite-suave mb-6 leading-tight px-0 lg:text-3xl text-center">
-              Como Desligar Sua Mente Acelerada Em{" "}
-              <span className="text-verde-eucalipto">
-15 Minutos Por Dia</span>
-              {" "}— Criando{" "}
-              <span className="text-verde-eucalipto">Amigurumi</span>
-              {" "}Com Suas Mãos
+            <h1 className="font-serif text-[34px] leading-[1.15] md:text-4xl lg:text-5xl text-grafite-suave mb-5">
+              <span className="block">Desligue Sua Mente Acelerada</span>
+              <span className="block">
+                em <span className={highlights.accent}>15 Minutos por Dia</span>
+              </span>
+              <span className="block">
+                Criando <span className={highlights.accent}>Amigurumi</span> com Suas Mãos
+              </span>
             </h1>
 
-            {/* Sub-headline */}
-            <p className="text-lg text-grafite-suave/80 italic mb-8 md:text-body">Mesmo que você nunca tenha feito nada manual na vida ou já tenha tentado antes e desistido.</p>
-
-            {/* Bullets */}
-            
-
-            {/* Linha final */}
-            <div className="border-t border-rosa-argila/40 pt-4 mb-8">
-              
-            </div>
+            {/* Subheadline */}
+            <p className="text-base md:text-body text-grafite-suave/80 italic mb-7 max-w-[40ch] mx-auto lg:mx-0">
+              “Mesmo que você nunca tenha feito nada manual na vida
+              <br className="hidden md:block" />
+              ou já tenha tentado antes e desistido.”
+            </p>
 
             {/* CTA */}
-            <Button variant="primary" size="lg">
-              Quero Começar Agora
-            </Button>
+            <div className="flex justify-center lg:justify-start">
+              <Button variant="primary" size="lg">
+                Quero começar agora
+              </Button>
+            </div>
+
+            {/* Ícones abaixo do botão */}
+            <div className="mt-5 flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+              {infoBadges.map((item) => (
+                <div
+                  key={item.label}
+                  className="inline-flex items-center gap-2 rounded-full bg-white/80 border border-verde-eucalipto/15 px-3 py-2"
+                >
+                  <item.icon
+                    className="h-4 w-4 text-verde-eucalipto"
+                    aria-hidden="true"
+                    strokeWidth={1.8}
+                  />
+                  <span className="font-sans font-semibold text-grafite-suave text-xs md:text-sm">
+                    {item.label}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Coluna Imagem */}
-          <div className="order-1 lg:order-2 animate-fade-in" style={{
-          animationDelay: '0.2s'
-        }}>
-            <div className="relative w-full aspect-[6/7] max-w-[500px] mx-auto rounded-2xl bg-gradient-to-br from-rosa-argila-10 to-verde-eucalipto-10 flex items-center justify-center" style={{
-            boxShadow: "0 20px 60px hsl(156 15% 42% / 0.2)"
-          }}>
-              {/* Placeholder para imagem */}
-              <div className="text-center p-8">
-                <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-verde-eucalipto-10 flex items-center justify-center">
-                  <Leaf className="w-12 h-12 text-verde-eucalipto" />
-                </div>
-                <p className="text-muted-foreground text-small">
-                  Imagem: Mãos femininas segurando amigurumi kawaii em tons pastéis
-                </p>
-                <p className="text-muted-foreground text-xs mt-2">600x700px</p>
-              </div>
+          {/* Coluna Imagem (abaixo no mobile) */}
+          <div
+            className="order-2 lg:order-2 animate-fade-in"
+            style={{ animationDelay: "0.2s" }}
+          >
+            <div
+              className="relative w-full aspect-[6/7] max-w-[520px] mx-auto rounded-2xl overflow-hidden bg-white"
+              style={{ boxShadow: "0 20px 60px hsl(156 15% 42% / 0.2)" }}
+            >
+              <img
+                src={heroImage}
+                alt="Mãos femininas segurando amigurumi em tons pastéis"
+                className="h-full w-full object-cover"
+                loading="eager"
+                decoding="async"
+              />
             </div>
           </div>
         </div>
-
-        {/* 4 Cards Inferiores */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 md:mt-16 animate-fade-in" style={{
-        animationDelay: '0.4s'
-      }}>
-          {cards.map((card, index) => <div key={index} className="bg-white border border-verde-eucalipto/20 rounded-xl p-5 text-center hover-lift">
-              <card.icon className="w-8 h-8 mx-auto mb-3 text-verde-eucalipto" strokeWidth={1.5} />
-              <span className="font-sans font-semibold text-grafite-suave text-sm md:text-base">
-                {card.label}
-              </span>
-            </div>)}
-        </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export { Hero };
