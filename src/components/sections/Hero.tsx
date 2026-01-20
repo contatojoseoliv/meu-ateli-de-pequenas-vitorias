@@ -23,7 +23,7 @@ const Hero = () => {
     label: "Suporte Imediato"
   }] as const;
   return <section id="hero" className="min-h-screen pt-16 pb-12 md:pt-20 md:pb-16" style={{
-    backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.86) 0%, hsl(0 0% 96% / 0.92) 55%, hsl(156 15% 42% / 0.18) 100%), url(${heroBg})`,
+    backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.55) 0%, hsl(0 0% 96% / 0.45) 55%, hsl(156 15% 42% / 0.10) 100%), url(${heroBg})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat"
@@ -31,8 +31,8 @@ const Hero = () => {
       <div className="container-main">
         <div className="min-h-[70vh] flex items-center justify-center">
           {/* Conteúdo (texto) */}
-          <div className="animate-fade-in text-center lg:text-left w-full max-w-[720px]">
-            <div className="rounded-2xl border border-border/50 bg-background/70 backdrop-blur-sm shadow-suave px-5 py-6 md:px-8 md:py-8">
+          <div className="animate-fade-in text-center w-full max-w-[720px]">
+            <div className="rounded-2xl border border-white/40 bg-background/35 backdrop-blur-[2px] shadow-suave px-5 py-6 md:px-8 md:py-8">
             {/* Nome do produto + selo */}
             <div className="inline-flex items-center gap-3 mb-4 px-3 py-2 rounded-full bg-white/70 border border-verde-eucalipto/15">
               <img src={seloImage} alt="Selo Primeira Vitória em Amigurumi" className="h-7 w-7 md:h-8 md:w-8 object-contain" loading="eager" decoding="async" />
@@ -51,19 +51,19 @@ const Hero = () => {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-base md:text-body text-grafite-suave/80 italic mb-5 max-w-[40ch] mx-auto lg:mx-0">
+            <p className="text-base md:text-body text-grafite-suave/90 italic mb-5 max-w-[40ch] mx-auto">
               Mesmo que você nunca tenha feito nada manual na vida ou já tenha tentado antes e desistido.
             </p>
 
             {/* CTA */}
-            <div className="flex justify-center lg:justify-start">
+            <div className="flex justify-center">
               <Button variant="primary" size="lg">
                 Quero começar agora
               </Button>
             </div>
 
             {/* Ícones abaixo do botão */}
-            <div className="mt-5 flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5">
               {infoBadges.map(item => <div key={item.label} className="inline-flex items-center gap-2 rounded-full bg-white/80 border border-verde-eucalipto/15 px-3 py-2">
                   <item.icon className="h-4 w-4 text-verde-eucalipto" aria-hidden="true" strokeWidth={1.8} />
                   <span className="font-sans font-semibold text-grafite-suave text-xs md:text-sm">
