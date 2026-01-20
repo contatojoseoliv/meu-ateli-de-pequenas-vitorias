@@ -22,7 +22,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="min-h-screen pt-20 pb-14 md:pt-24 md:pb-20"
+      className="min-h-screen pt-16 pb-12 md:pt-20 md:pb-16"
       style={{
         background:
           "linear-gradient(135deg, hsl(156 15% 42% / 0.15) 0%, hsl(0 0% 96%) 100%)",
@@ -58,7 +58,7 @@ const Hero = () => {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-base md:text-body text-grafite-suave/80 italic mb-7 max-w-[40ch] mx-auto lg:mx-0">
+            <p className="text-base md:text-body text-grafite-suave/80 italic mb-5 max-w-[40ch] mx-auto lg:mx-0">
               Mesmo que você nunca tenha feito nada manual na vida ou já tenha tentado antes e desistido.
             </p>
 
