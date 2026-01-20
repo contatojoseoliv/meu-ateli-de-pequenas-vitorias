@@ -74,7 +74,7 @@ Pesquisas mostram: quanto mais tempo em telas, maior a desconexão corpo-mente �
           Por Que Você Está Ansiosa
           <span className="text-rosa-argila block">(E Não É Culpa Sua)</span>
         </h2>
-        <p className="text-grafite-suave text-small">
+        <p className="text-grafite-suave text-body">
           Você vive de três formas que <strong>GARANTEM</strong> que sua mente nunca vai parar:
         </p>
       </div>
@@ -102,8 +102,7 @@ Pesquisas mostram: quanto mais tempo em telas, maior a desconexão corpo-mente �
 
       {/* Resultado Final */}
       <div className="text-center max-w-3xl mx-auto animate-fade-in">
-        <p className="text-lg text-grafite-suave mb-3">
-          <span className="font-semibold text-rosa-argila">Por causa disso:</span> Sua mente nunca desliga. Seu corpo nunca relaxa. Você nunca sente calma de verdade.
+        <p className="text-lg text-grafite-suave mb-3">Por causa disso Sua mente nunca desliga. Seu corpo nunca relaxa. Você nunca sente calma de verdade.<span className="font-semibold text-rosa-argila">Por causa disso:</span> Sua mente nunca desliga. Seu corpo nunca relaxa. Você nunca sente calma de verdade.
         </p>
         <p className="font-bold text-verde-eucalipto text-xl">
           Mas existe uma forma de quebrar os três — de uma vez.
