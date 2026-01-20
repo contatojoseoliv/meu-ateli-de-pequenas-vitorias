@@ -1,5 +1,5 @@
 import { Section } from "@/components/shared/Section";
-import { Check, Sparkles, Target, Heart, TrendingUp } from "lucide-react";
+import { MetodoPrimeiraVitoria } from "@/components/sections/solucao/MetodoPrimeiraVitoria";
 
 /**
  * Seção Solução - Método Primeira Vitória
@@ -46,61 +46,6 @@ E isso — biologicamente — **reduz cortisol** (hormônio do estresse) em até
 Estudos brasileiros (ESF): grupos de crochê reduziram ansiedade/depressão em 73% das participantes.
 
 *→ Isso quebra o VILÃO 3 (Desconexão Corpo-Mente)*`
-  }];
-  const pilares = [{
-    numero: "1",
-    titulo: "Pequeno e alcançável",
-    texto: `Não é projeto de 3 meses que você abandona na metade.
-
-É **7 dias, 15 minutos por dia**. Algo que você TERMINA.
-
-E quando você termina = dopamina (química de realização).
-
-**Seu cérebro registra:** *"Eu comecei. Eu fiz. EU TERMINEI."*
-
-E isso reprograma a crença de "eu não consigo".`
-  }, {
-    numero: "2",
-    titulo: "Guiado passo a passo",
-    texto: `Você nunca fica perdida.
-
-Cada vídeo mostra exatamente o que fazer:
-
-• Câmera lenta nos pontos críticos
-• Ângulos múltiplos (cima + lateral + close)
-• Narração calma e pausada
-
-**Você sempre sabe qual é o próximo passo.**
-
-E quando você sabe o próximo passo, você não trava. Você continua.`
-  }, {
-    numero: "3",
-    titulo: "Emocionalmente seguro",
-    texto: `Erro não é falha aqui. **É parte do processo.**
-
-Todo mundo erra no anel mágico. Todo mundo erra na costura. TODO MUNDO.
-
-E quando você erra? Você tem suporte. Grupo ativo. Gente que já passou por isso.
-
-**E aí erro vira aprendizado.** Não desistência.
-
-Sem autocrítica brutal. Sem interpretar dificuldade como prova de incapacidade.`
-  }, {
-    numero: "4",
-    titulo: "Progressivo",
-    texto: `Cada dia é uma conquista pequena e tangível.
-
-**Vitória 1. Vitória 2. Vitória 3.**
-
-A cada pequena vitória, sua confiança cresce.
-
-E depois de 7 vitórias consecutivas — uma por dia, todas registradas —
-
-**Sua identidade muda.**
-
-Você não é mais "aquela que nunca consegue".
-
-Você é "aquela que fez. Que terminou. Que É CAPAZ."`
   }];
   const timeline = [{
     dia: "DIA 1",
@@ -195,50 +140,8 @@ Você é "aquela que fez. Que terminou. Que É CAPAZ."`
         </p>
       </div>
 
-      {/* Naming do Método (separado em faixa full-width) */}
-      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-rosa-argila/10 border-y border-white/10 mb-20 animate-fade-in">
-        <div className="max-w-4xl mx-auto px-6 md:px-8 py-12 md:py-14">
-          <h3 className="font-serif text-2xl md:text-3xl text-white text-center mb-7">
-            Por Isso Criamos O Método <span className="text-ocre-dourado">Primeira Vitória©</span>
-          </h3>
-          <p className="text-white/90 text-lg text-center mb-7">
-            Um sistema de 7 dias que usa amigurumi — criação manual simples, bonita, alcançável — como veículo para:
-          </p>
-
-          <div className="space-y-4 max-w-xl mx-auto">
-            <div className="flex items-center gap-3">
-              <Check className="w-6 h-6 text-ocre-dourado flex-shrink-0" />
-              <span className="text-white"><strong>Gerar Flow State</strong> (sua mente para)</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <Check className="w-6 h-6 text-ocre-dourado flex-shrink-0" />
-              <span className="text-white"><strong>Criar descarga emocional</strong> (finalização = alívio)</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <Check className="w-6 h-6 text-ocre-dourado flex-shrink-0" />
-              <span className="text-white"><strong>Reconectar corpo-mente</strong> (sai das telas, usa mãos)</span>
-            </div>
-          </div>
-
-          <p className="text-white/90 text-lg text-center mt-7 font-semibold">
-            Não para ensinar técnica. Mas para quebrar a Tríade — de uma vez.
-          </p>
-        </div>
-      </div>
-
-      {/* 4 Pilares */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
-        {pilares.map((pilar, index) => <div key={index} className="bg-white/8 rounded-xl p-8 animate-fade-in" style={{
-        animationDelay: `${index * 0.1}s`
-      }}>
-            <span className="text-xs uppercase tracking-wider font-bold text-ocre-dourado mb-4 block">
-              PILAR {pilar.numero} — {pilar.titulo}
-            </span>
-            <div className="text-white/80 text-body leading-relaxed">
-              {formatText(pilar.texto)}
-            </div>
-          </div>)}
-      </div>
+      {/* Método + Pilares (sessão única, full-width) */}
+      <MetodoPrimeiraVitoria />
 
       {/* Timeline 7 Dias */}
       <div className="max-w-2xl mx-auto mb-20">
