@@ -149,7 +149,7 @@ Você é "aquela que fez. Que terminou. Que É CAPAZ."`
     });
   };
   return <Section id="solucao" background="verde">
-      <div className="solucao-intro text-center max-w-4xl mx-auto mb-16 animate-fade-in">
+      <div className="solucao-intro text-center max-w-4xl mx-auto mb-12 animate-fade-in">
         <h2 className="font-serif text-3xl md:text-[42px] text-white mb-6 leading-tight">
           A Descoberta Que Muda Tudo
         </h2>
@@ -166,19 +166,26 @@ Você é "aquela que fez. Que terminou. Que É CAPAZ."`
 
       {/* 3 Mecanismos */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-        {mecanismos.map((mec, index) => <div key={index} className="bg-white/10 border border-white/20 rounded-xl p-8 animate-fade-in" style={{
-        animationDelay: `${index * 0.15}s`
-      }}>
-            <span className="font-serif text-7xl text-ocre-dourado/50 block mb-4">
-              {mec.numero}
-            </span>
-            <h3 className="font-serif text-xl text-white mb-6">
-              {mec.titulo}
-            </h3>
+        {mecanismos.map((mec, index) => (
+          <div
+            key={index}
+            className="bg-white/10 border border-white/20 rounded-xl p-7 animate-fade-in"
+            style={{ animationDelay: `${index * 0.15}s` }}
+          >
+            <div className="flex items-start gap-4 mb-5">
+              <span className="font-serif text-6xl text-ocre-dourado/50 leading-none flex-shrink-0">
+                {mec.numero}
+              </span>
+              <h3 className="font-serif text-xl text-white leading-snug pt-1">
+                {mec.titulo}
+              </h3>
+            </div>
+
             <div className="text-white/80 text-body leading-relaxed">
               {formatText(mec.texto)}
             </div>
-          </div>)}
+          </div>
+        ))}
       </div>
 
       {/* Box de Transição */}
