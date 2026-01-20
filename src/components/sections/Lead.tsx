@@ -11,7 +11,7 @@ const Lead = () => {
     <Section id="lead" background="cinza">
       <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
         <div className="max-w-2xl text-center md:text-left">
-          <div className="animate-fade-in space-y-5 text-base leading-relaxed text-grafite-suave md:text-lead">
+          <div className="animate-fade-in space-y-4 text-sm leading-relaxed text-grafite-suave md:space-y-5 md:text-base">
             <header className="space-y-3">
               <h2 className="font-serif text-3xl md:text-4xl tracking-tight text-foreground">
                 Eu Vejo Você
@@ -26,13 +26,9 @@ const Lead = () => {
               <em className="text-verde-eucalipto font-semibold not-italic">Dorme inquieta</em>.
             </p>
 
-            <p className="font-semibold text-verde-eucalipto">E no meio disso tudo?</p>
+            <p>E no meio disso tudo?</p>
 
-            <p className="font-semibold text-foreground">
-              <span className="inline-block rounded-lg bg-background/70 px-3 py-2 shadow-sm">
-                Você não tem nada que seja só seu.
-              </span>
-            </p>
+            <p className="font-semibold text-verde-eucalipto">Você não tem nada que seja só seu.</p>
 
             <p>
               Tudo que você faz tem destinatário. O trabalho é para o chefe. A casa é para a família. O tempo é para todo mundo — menos você.
@@ -42,26 +38,24 @@ const Lead = () => {
               E quando você não tem nada só seu — nenhum espaço, nenhum momento, nenhuma identidade fora dos papéis que cumpre —
             </p>
 
-            <p className="font-bold text-rosa-argila text-lg md:text-xl">
+            <p className="font-bold text-rosa-argila text-base md:text-lg">
               Você desaparece. Mas não precisa ser assim.
             </p>
 
             <div className="my-5 border-t border-dashed border-verde-eucalipto/30" />
 
-            <p className="font-semibold text-foreground">
-              <span className="inline-block rounded-lg bg-background/70 px-3 py-2 shadow-sm">
-                Isso é construído, todos os dias, pelo jeito que você vive...
-              </span>
+            <p className="font-semibold text-verde-eucalipto">
+              Isso é construído, todos os dias, pelo jeito que você vive...
             </p>
 
             <div className="pt-2">
               <a
                 href="#problema"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-background/60 px-4 py-2 text-sm font-medium text-foreground shadow-sm ring-1 ring-border transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="inline-flex items-center gap-2 text-foreground/80"
                 aria-label="Continue lendo"
               >
                 Continue lendo
-                <ChevronDown className="h-4 w-4 animate-pulse" />
+                <ChevronDown className="h-4 w-4" />
               </a>
             </div>
           </div>
