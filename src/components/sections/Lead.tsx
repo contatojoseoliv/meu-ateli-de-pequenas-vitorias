@@ -17,7 +17,7 @@ const Lead = () => {
 
           <p>Você não tem nada que seja só seu.</p>
 
-          <p>Tudo que você faz tem destinatário: O trabalho é para o chefe. A casa é para a família. O tempo é para todo mundo menos você.</p>
+          <p>Tudo que você faz tem destinatário. O trabalho é para o chefe. A casa é para a família. O tempo é para todo mundo menos você.</p>
 
           <p>
             E quando você não tem nada só seu — nenhum espaço, nenhum momento, nenhuma
