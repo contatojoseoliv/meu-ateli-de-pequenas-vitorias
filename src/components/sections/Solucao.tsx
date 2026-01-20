@@ -172,8 +172,7 @@ Você é "aquela que fez. Que terminou. Que É CAPAZ."`
   };
 
   return (
-    <Section id="solucao" background="verde" className="py-24 md:py-32">
-      {/* Título Principal */}
+    <Section id="solucao" background="verde">
       <div className="text-center max-w-4xl mx-auto mb-20 animate-fade-in">
         <h2 className="font-serif text-3xl md:text-[42px] text-white mb-8 leading-tight">
           A Descoberta Que Muda Tudo
