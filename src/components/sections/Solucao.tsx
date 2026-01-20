@@ -8,7 +8,7 @@ import { Check, Sparkles, Target, Heart, TrendingUp } from "lucide-react";
 const Solucao = () => {
   const mecanismos = [{
     numero: "1",
-    titulo: "Você Entra Em Flow State (Presença Forçada)",
+    titulo: "Você Entra Em Estado De Atenção Plena",
     texto: `Quando suas mãos estão criando — contando pontos, seguindo um padrão, sentindo a textura do fio —
 
  Sua mente não CONSEGUE estar no futuro. Ela é **forçada** para o aqui e agora.
