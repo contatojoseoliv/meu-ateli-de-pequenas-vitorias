@@ -80,9 +80,9 @@ Pesquisas mostram: quanto mais tempo em telas, maior a desconexÃ£o corpo-mente â
         {viloes.map((vilao, index) => <div key={index} className="bg-rosa-argila-10 rounded-2xl p-8 md:p-10 shadow-suave hover-lift animate-fade-in" style={{
         animationDelay: `${index * 0.15}s`
       }}>
-            <div className="flex items-start gap-4 mb-6">
+            <div className="mb-5">
               <vilao.icon
-                className="w-14 h-14 shrink-0 text-verde-eucalipto"
+                className="w-10 h-10 text-verde-eucalipto mb-3"
                 strokeWidth={1.5}
               />
               <h3 className="font-serif text-xl md:text-2xl text-grafite-suave leading-tight">
