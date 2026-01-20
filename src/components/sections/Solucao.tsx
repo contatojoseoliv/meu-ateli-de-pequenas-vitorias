@@ -11,13 +11,13 @@ const Solucao = () => {
     titulo: "Você Entra Em Flow State (Presença Forçada)",
     texto: `Quando suas mãos estão criando — contando pontos, seguindo um padrão, sentindo a textura do fio —
 
-Sua mente não CONSEGUE estar no futuro. Ela é **forçada** para o agora.
+ Sua mente não CONSEGUE estar no futuro. Ela é **forçada** para o aqui e agora.
 
-E aí a ansiedade — aquela que vem de viver sempre "no depois" — **diminui**.
+ E aí a ansiedade — aquela que vem de viver sempre "no depois" — **diminui**.
 
-**Flow State é o oposto neurológico da ansiedade.**
+ **Atenção Plena é o oposto neurológico da ansiedade.**
 
-*→ Isso quebra o VILÃO 1 (Nunca Estar Presente)*`
+ *→ Isso quebra o VILÃO 1 (Nunca Estar Presente)*`
   }, {
     numero: "2",
     titulo: "Você Finaliza Algo (Descarga Emocional)",
