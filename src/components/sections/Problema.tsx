@@ -74,7 +74,7 @@ Pesquisas mostram: quanto mais tempo em telas, maior a desconexão corpo-mente �
           Por Que Você Está Ansiosa
           <span className="text-rosa-argila block">(E Não É Culpa Sua)</span>
         </h2>
-        <p className="text-grafite-suave text-small">Você vive de três formas que GARANTEM que sua mente nunca vai parar:<br />
+        <p className="text-grafite-suave text-small">
           Você vive de três formas que <strong>GARANTEM</strong> que sua mente nunca vai parar:
         </p>
       </div>
