@@ -23,14 +23,15 @@ const Hero = () => {
     icon: Users,
     label: "Suporte Imediato"
   }] as const;
-  return <section id="hero" className="relative min-h-screen pt-14 pb-10 md:pt-20 md:pb-16 bg-cover bg-no-repeat bg-[position:50%_6%] md:bg-center" style={{
-    backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.68) 0%, hsl(0 0% 96% / 0.58) 55%, hsl(156 15% 42% / 0.14) 100%), url(${heroBg})`
+  return <section id="hero" className="relative min-h-screen pt-12 pb-8 md:pt-20 md:pb-16 bg-cover bg-no-repeat bg-[position:50%_4%] md:bg-center" style={{
+    // Overlay mais leve para deixar a imagem mais “viva/nítida”, sem perder legibilidade.
+    backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.56) 0%, hsl(0 0% 96% / 0.44) 55%, hsl(156 15% 42% / 0.12) 100%), url(${heroBg})`
   }}>
       <div className="container-main">
-        <div className="min-h-[52vh] md:min-h-[70vh] flex items-center justify-center">
+        <div className="min-h-[48vh] md:min-h-[70vh] flex items-center justify-center">
           {/* Conteúdo (texto) */}
           <div className="animate-fade-in text-center w-full max-w-[720px]">
-            <div className="relative px-5 py-5 md:px-8 md:py-8 -mt-6 sm:mt-0">
+            <div className="relative px-5 py-5 md:px-8 md:py-8 -mt-8 sm:mt-0">
             {/* Nome do produto + selo */}
             <div className="inline-flex items-center gap-3 mb-4 px-3 py-2 rounded-full bg-white/70 border border-verde-eucalipto/15">
               <img src={seloImage} alt="Selo Primeira Vitória em Amigurumi" className="h-7 w-7 md:h-8 md:w-8 object-contain" loading="eager" decoding="async" />
@@ -49,7 +50,7 @@ const Hero = () => {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-base md:text-body text-grafite-suave/90 italic drop-shadow-sm mb-4 max-w-[40ch] mx-auto">
+            <p className="text-base md:text-body text-grafite-suave/90 italic drop-shadow-sm mb-3 max-w-[40ch] mx-auto">
               Mesmo que você nunca tenha feito nada manual na vida ou já tenha tentado antes e desistido.
             </p>
 
@@ -69,7 +70,7 @@ const Hero = () => {
             </div>
 
             {/* Ícones abaixo do botão */}
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-2.5">
+            <div className="mt-3 flex flex-wrap items-center justify-center gap-2.5">
               {infoBadges.map(item => <div key={item.label} className="inline-flex items-center gap-2 rounded-full bg-white/80 border border-verde-eucalipto/15 px-3 py-2">
                   <item.icon className="h-4 w-4 text-verde-eucalipto" aria-hidden="true" strokeWidth={1.8} />
                   <span className="font-sans font-semibold text-grafite-suave text-xs md:text-sm">
@@ -86,7 +87,7 @@ const Hero = () => {
       <motion.a
         href="#lead"
         aria-label="Role para ver a próxima seção"
-        className="hidden sm:inline-flex absolute bottom-5 left-1/2 -translate-x-1/2 items-center justify-center rounded-full bg-background/20 backdrop-blur-sm border border-verde-eucalipto/15 text-verde-eucalipto shadow-suave h-10 w-10"
+        className="inline-flex absolute bottom-3 md:bottom-5 left-1/2 -translate-x-1/2 items-center justify-center rounded-full bg-background/20 backdrop-blur-sm border border-verde-eucalipto/15 text-verde-eucalipto shadow-suave h-9 w-9 md:h-10 md:w-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.4 }}
