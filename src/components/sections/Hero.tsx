@@ -2,7 +2,6 @@ import { Button } from "@/components/shared/Button";
 import { ChevronDown, Clock, Leaf, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import seloImage from "@/assets/selo-primeira-vitoria.png";
-import heroBg from "@/assets/hero-bg.png";
 
 /**
  * Seção Hero - Landing Page Principal
@@ -10,6 +9,7 @@ import heroBg from "@/assets/hero-bg.png";
  * Altura: 100vh
  */
 const Hero = () => {
+  const heroBgUrl = "/images/hero-bg.png";
   const highlights = {
     accent: "text-verde-eucalipto"
   };
@@ -25,11 +25,11 @@ const Hero = () => {
   }] as const;
   return <section id="hero" className="relative min-h-screen pt-9 pb-6 md:pt-20 md:pb-16 bg-cover bg-no-repeat bg-[position:50%_4%] md:bg-center" style={{
     // Overlay mais leve para deixar a imagem mais “viva/nítida”, sem perder legibilidade.
-    backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.56) 0%, hsl(0 0% 96% / 0.44) 55%, hsl(156 15% 42% / 0.12) 100%), url(${heroBg})`
+    backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.56) 0%, hsl(0 0% 96% / 0.44) 55%, hsl(156 15% 42% / 0.12) 100%), url(${heroBgUrl})`
   }}>
       {/* Preload do background (como a imagem é usada via CSS, forçamos o download cedo) */}
       <img
-        src={heroBg}
+        src={heroBgUrl}
         alt=""
         aria-hidden="true"
         className="sr-only"
