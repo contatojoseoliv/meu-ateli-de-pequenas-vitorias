@@ -45,12 +45,12 @@ const Prova = () => {
       {/* Primeira Prova - Lógica */}
       
 
-      {/* Segunda Prova - Científica */}
+      {/* Primeira Prova - Científica */}
       <div className="bg-white rounded-2xl p-8 md:p-10 shadow-suave max-w-4xl mx-auto mb-12 animate-fade-in" style={{
       animationDelay: '0.1s'
     }}>
         <h3 className="font-serif text-xl md:text-2xl text-grafite-suave mb-6">
-          Segundo, a ciência específica:
+          Primeiro, a ciência específica:
         </h3>
         <div className="text-body text-grafite-suave/90 space-y-4 mb-8">
           <p>
@@ -97,23 +97,49 @@ const Prova = () => {
         </div>
       </div>
 
-      {/* Terceira Prova - Validação Brasileira */}
+      {/* Segunda Prova - Validação Brasileira */}
       <div className="bg-white rounded-2xl p-8 md:p-10 shadow-suave max-w-4xl mx-auto mb-12 animate-fade-in" style={{
       animationDelay: '0.2s'
     }}>
         <h3 className="font-serif text-xl md:text-2xl text-grafite-suave mb-6">
-          Terceiro, a validação brasileira:
+          Segundo, a validação brasileira:
         </h3>
         <div className="text-body text-grafite-suave/90 space-y-4 mb-8">
-          <p>
+          <p className="text-sm text-muted-foreground">
             Aqui no Brasil, unidades de saúde da Estratégia Saúde da Família (ESF) implementaram grupos de crochê para mulheres em sofrimento emocional.
           </p>
           <p className="font-bold text-grafite-suave text-lg">
             O que aconteceu?
           </p>
-          <p>
-            Melhora significativa da autoestima. Redução de sintomas de ansiedade e depressão. Empoderamento.
-          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="rounded-xl border border-verde-eucalipto/20 bg-verde-eucalipto-10 p-4">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-suave">
+                  <Check className="h-4 w-4 text-verde-eucalipto" />
+                </span>
+                <p className="font-semibold text-grafite-suave">Autoestima</p>
+              </div>
+              <p className="mt-2 text-sm text-grafite-suave/80">Melhora significativa</p>
+            </div>
+            <div className="rounded-xl border border-rosa-argila/20 bg-rosa-argila-10 p-4">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-suave">
+                  <Check className="h-4 w-4 text-rosa-argila" />
+                </span>
+                <p className="font-semibold text-grafite-suave">Ansiedade</p>
+              </div>
+              <p className="mt-2 text-sm text-grafite-suave/80">Redução de sintomas</p>
+            </div>
+            <div className="rounded-xl border border-verde-eucalipto/20 bg-white p-4">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-verde-eucalipto-10 shadow-suave">
+                  <Check className="h-4 w-4 text-verde-eucalipto" />
+                </span>
+                <p className="font-semibold text-grafite-suave">Empoderamento</p>
+              </div>
+              <p className="mt-2 text-sm text-grafite-suave/80">Mais presença e voz</p>
+            </div>
+          </div>
         </div>
 
         {/* Depoimento */}
@@ -141,15 +167,14 @@ const Prova = () => {
       <div className="bg-verde-eucalipto-10 border-2 border-verde-eucalipto rounded-xl p-8 max-w-4xl mx-auto animate-fade-in" style={{
       animationDelay: '0.3s'
     }}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {checkpoints.map((item, index) => <div key={index} className="flex items-start gap-3">
-              <Check className="w-5 h-5 text-verde-eucalipto mt-0.5 flex-shrink-0" />
+              <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-suave flex-shrink-0">
+                <Check className="h-3.5 w-3.5 text-verde-eucalipto" />
+              </span>
               <span className="text-grafite-suave">{formatBold(item.texto)}</span>
             </div>)}
         </div>
-        <p className="text-center font-bold text-grafite-suave text-lg">
-          Isto não é promessa vazia. É ciência. É dados. <span className="text-verde-eucalipto">É realidade.</span>
-        </p>
       </div>
     </Section>;
 };
