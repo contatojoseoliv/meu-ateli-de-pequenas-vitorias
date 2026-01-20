@@ -180,7 +180,7 @@ Você é "aquela que fez. Que terminou. Que É CAPAZ."`
         <p className="text-lg md:text-xl text-white/90 leading-relaxed">
           A ciência descobriu algo há décadas — mas quase ninguém está usando.
         </p>
-        <p className="text-xl md:text-2xl text-white font-semibold mt-6">
+        <p className="text-xl md:text-2xl text-ocre-dourado font-semibold mt-6">
           Quando você cria amigurumi com as mãos — algo tangível, bonito, que você vê surgir —
         </p>
         <p className="text-xl md:text-2xl text-ocre-dourado font-bold mt-4">
