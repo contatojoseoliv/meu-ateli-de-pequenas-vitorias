@@ -23,15 +23,15 @@ const Hero = () => {
     icon: Users,
     label: "Suporte Imediato"
   }] as const;
-  return <section id="hero" className="relative min-h-screen pt-12 pb-8 md:pt-20 md:pb-16 bg-cover bg-no-repeat bg-[position:50%_4%] md:bg-center" style={{
+  return <section id="hero" className="relative min-h-screen pt-10 pb-6 md:pt-20 md:pb-16 bg-cover bg-no-repeat bg-[position:50%_4%] md:bg-center" style={{
     // Overlay mais leve para deixar a imagem mais “viva/nítida”, sem perder legibilidade.
     backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.56) 0%, hsl(0 0% 96% / 0.44) 55%, hsl(156 15% 42% / 0.12) 100%), url(${heroBg})`
   }}>
       <div className="container-main">
-        <div className="min-h-[48vh] md:min-h-[70vh] flex items-center justify-center">
+        <div className="min-h-[46vh] md:min-h-[70vh] flex items-center justify-center">
           {/* Conteúdo (texto) */}
           <div className="animate-fade-in text-center w-full max-w-[720px]">
-            <div className="relative px-5 py-5 md:px-8 md:py-8 -mt-8 sm:mt-0">
+            <div className="relative px-5 py-4 md:px-8 md:py-8 -mt-9 sm:mt-0">
             {/* Nome do produto + selo */}
             <div className="inline-flex items-center gap-3 mb-4 px-3 py-2 rounded-full bg-white/70 border border-verde-eucalipto/15">
               <img src={seloImage} alt="Selo Primeira Vitória em Amigurumi" className="h-7 w-7 md:h-8 md:w-8 object-contain" loading="eager" decoding="async" />
@@ -87,7 +87,7 @@ const Hero = () => {
       <motion.a
         href="#lead"
         aria-label="Role para ver a próxima seção"
-        className="inline-flex absolute bottom-3 md:bottom-5 left-1/2 -translate-x-1/2 items-center justify-center rounded-full bg-background/20 backdrop-blur-sm border border-verde-eucalipto/15 text-verde-eucalipto shadow-suave h-9 w-9 md:h-10 md:w-10"
+        className="inline-flex absolute bottom-2 md:bottom-5 left-1/2 -translate-x-1/2 items-center justify-center rounded-full bg-background/20 backdrop-blur-sm border border-verde-eucalipto/15 text-verde-eucalipto shadow-suave h-9 w-9 md:h-10 md:w-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.4 }}
