@@ -71,8 +71,8 @@ Pesquisas mostram: quanto mais tempo em telas, maior a desconexão corpo-mente �
       {/* Título */}
       <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
         <h2 className="font-serif md:text-h2 text-grafite-suave mb-6 text-2xl">
-          Por Que Você Está Ansiosa <span className="text-rosa-argila">
-(E Não É Culpa Sua)</span>
+          Por Que Você Está Ansiosa
+          <span className="text-rosa-argila block">(E Não É Culpa Sua)</span>
         </h2>
         <p className="text-grafite-suave text-small">Você vive de três formas que GARANTEM que sua mente nunca vai parar:<br />
           Você vive de três formas que <strong>GARANTEM</strong> que sua mente nunca vai parar:
