@@ -20,8 +20,9 @@ const Lead = () => {
 
             <p>Você não tem nada que seja só seu.</p>
 
-            <p className="font-bold text-verde-eucalipto">
-              E se você pudesse ter 15 minutos só seus — que te acalmassem de verdade?
+            <p>
+              Tudo que você faz tem destinatário. O trabalho é para o chefe. A casa é
+              para a família. O tempo é para todo mundo — menos você.
             </p>
 
             <p>
@@ -36,12 +37,7 @@ const Lead = () => {
             <p>Mas não precisa ser assim.</p>
 
             <p>
-              Você não está “errada”. Você está sobrecarregada — e isso tem um porquê.
-            </p>
-
-            <p>
-              Daqui a pouco, eu vou te mostrar os 3 motivos que fazem essa sensação se
-              repetir… mesmo quando você tenta dar conta de tudo.
+              Isso é construído, todos os dias, pelo jeito que você vive...
             </p>
           </div>
         </div>
