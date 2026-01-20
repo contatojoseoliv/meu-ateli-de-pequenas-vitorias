@@ -57,14 +57,7 @@ Pesquisas mostram: quanto mais tempo em telas, maior a desconexÃ£o corpo-mente â
     return text.split('\n\n').map((paragraph, i) => {
       // Handle bold text
       const parts = paragraph.split(/(\*\*.*?\*\*)/g);
-      return <p key={i} className="mb-3 last:mb-0">
-          {parts.map((part, j) => {
-          if (part.startsWith('**') && part.endsWith('**')) {
-            return <strong key={j} className="text-verde-eucalipto">{part.slice(2, -2)}</strong>;
-          }
-          return part;
-        })}
-        </p>;
+      return;
     });
   };
   return <Section id="problema" background="white">
