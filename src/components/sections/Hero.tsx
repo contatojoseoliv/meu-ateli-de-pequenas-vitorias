@@ -23,16 +23,14 @@ const Hero = () => {
     icon: Users,
     label: "Suporte Imediato"
   }] as const;
-  return <section id="hero" className="relative min-h-screen pt-16 pb-12 md:pt-20 md:pb-16 bg-cover bg-no-repeat bg-[position:50%_15%] md:bg-center" style={{
+  return <section id="hero" className="relative min-h-screen pt-16 pb-12 md:pt-20 md:pb-16 bg-cover bg-no-repeat bg-[position:50%_8%] md:bg-center" style={{
     backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.68) 0%, hsl(0 0% 96% / 0.58) 55%, hsl(156 15% 42% / 0.14) 100%), url(${heroBg})`
   }}>
       <div className="container-main">
-        <div className="min-h-[62vh] md:min-h-[70vh] flex items-center justify-center">
+        <div className="min-h-[56vh] md:min-h-[70vh] flex items-center justify-center">
           {/* Conteúdo (texto) */}
           <div className="animate-fade-in text-center w-full max-w-[720px]">
-            <div className="relative px-5 py-6 md:px-8 md:py-8">
-              {/* Overlay local suave (sem “quadrado”) para legibilidade */}
-              <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-background/55 via-background/30 to-background/0" />
+            <div className="relative px-5 py-6 md:px-8 md:py-8 -mt-4 sm:mt-0">
             {/* Nome do produto + selo */}
             <div className="inline-flex items-center gap-3 mb-4 px-3 py-2 rounded-full bg-white/70 border border-verde-eucalipto/15">
               <img src={seloImage} alt="Selo Primeira Vitória em Amigurumi" className="h-7 w-7 md:h-8 md:w-8 object-contain" loading="eager" decoding="async" />
@@ -88,7 +86,7 @@ const Hero = () => {
       <motion.a
         href="#lead"
         aria-label="Role para ver a próxima seção"
-        className="hidden sm:inline-flex absolute bottom-5 left-1/2 -translate-x-1/2 items-center justify-center rounded-full bg-white/70 border border-verde-eucalipto/15 text-verde-eucalipto shadow-suave h-10 w-10"
+        className="hidden sm:inline-flex absolute bottom-5 left-1/2 -translate-x-1/2 items-center justify-center rounded-full bg-background/20 backdrop-blur-sm border border-verde-eucalipto/15 text-verde-eucalipto shadow-suave h-10 w-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.4 }}
