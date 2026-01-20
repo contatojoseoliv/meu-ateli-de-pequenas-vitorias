@@ -10,7 +10,7 @@ const Problema = () => {
     icon: Brain,
     numero: "1",
     titulo: "Você Nunca Está Presente",
-    texto: `Você quase nunca está no agora. A mente fica no passado ou no futuro, mantendo o cérebro em estado constante de alerta.
+    texto: `Você vive pensando no que já passou ou no que ainda virá. A mente fica no passado ou no futuro, mantendo o cérebro em estado constante de alerta.
 
 **Sua mente NUNCA está onde seu corpo está.**
 
@@ -54,10 +54,19 @@ Pesquisas mostram: quanto mais tempo em telas, maior a desconexão corpo-mente �
     recap: "VILÃO 3: Desconectada do corpo → 100% mental → Ansiedade ↑"
   }];
   const formatText = (text: string) => {
-    return text.split('\n\n').map((paragraph, i) => {
-      // Handle bold text
+    return text.split("\n\n").map((paragraph, i) => {
+      // suporta **negrito** dentro do texto
       const parts = paragraph.split(/(\*\*.*?\*\*)/g);
-      return;
+
+      return (
+        <p key={i} className="mb-3 last:mb-0">
+          {parts.map((part, j) => {
+            const isBold = part.startsWith("**") && part.endsWith("**");
+            const content = isBold ? part.slice(2, -2) : part;
+            return isBold ? <strong key={j}>{content}</strong> : <span key={j}>{content}</span>;
+          })}
+        </p>
+      );
     });
   };
   return <Section id="problema" background="white">
