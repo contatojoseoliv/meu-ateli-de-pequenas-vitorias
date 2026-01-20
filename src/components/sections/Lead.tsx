@@ -17,7 +17,7 @@ const Lead = () => {
 
           <p>Você não tem nada que seja só seu.</p>
 
-          <p>Tudo que você faz tem destinatário. O trabalho é para o chefe. A casa é para a família. O tempo é para todo mundo menos você.</p>
+          
 
           <p>
             E quando você não tem nada só seu — nenhum espaço, nenhum momento, nenhuma
@@ -30,9 +30,7 @@ const Lead = () => {
 
           <p>Mas não precisa ser assim.</p>
 
-          <p className="font-serif text-xl md:text-3xl italic text-verde-eucalipto">
-            E se você pudesse ter 15 minutos só seus — que te acalmassem de verdade?
-          </p>
+          
         </div>
       </div>
     </Section>;
