@@ -10,13 +10,7 @@ const Problema = () => {
     icon: Brain,
     numero: "1",
     titulo: "Você Nunca Está Presente",
-    texto: `Você vive pensando no que já passou ou no que ainda virá. A mente fica no passado ou no futuro, mantendo o cérebro em estado constante de alerta.
-
-**Sua mente NUNCA está onde seu corpo está.**
-
-A Neurociência mostra que passamos cerca de 47% do tempo pensando no passado ou no futuro — e isso faz o cérebro ficar em alerta constante.
-
-**E aí a ansiedade nunca para.**`,
+    texto: `Você vive pensando no que já passou ou no que ainda virá. A mente fica no passado ou no futuro, mantendo o cérebro em estado constante de alerta. [[green]]E aí a ansiedade nunca para.[[/green]]`,
     recap: "VILÃO 1: Nunca presente → Cérebro interpreta perigo → Ansiedade ↑"
   }, {
     icon: Package,
@@ -55,15 +49,29 @@ Pesquisas mostram: quanto mais tempo em telas, maior a desconexão corpo-mente �
   }];
   const formatText = (text: string) => {
     return text.split("\n\n").map((paragraph, i) => {
-      // suporta **negrito** dentro do texto
-      const parts = paragraph.split(/(\*\*.*?\*\*)/g);
+      // suporta **negrito** e [[green]]destaque[[/green]] dentro do texto
+      const greenParts = paragraph.split(/(\[\[green\]\].*?\[\[\/green\]\])/g);
 
       return (
         <p key={i} className="mb-3 last:mb-0">
-          {parts.map((part, j) => {
-            const isBold = part.startsWith("**") && part.endsWith("**");
-            const content = isBold ? part.slice(2, -2) : part;
-            return isBold ? <strong key={j}>{content}</strong> : <span key={j}>{content}</span>;
+          {greenParts.map((gp, j) => {
+            const isGreen = gp.startsWith("[[green]]") && gp.endsWith("[[/green]]");
+            const greenContent = isGreen ? gp.slice("[[green]]".length, -"[[/green]]".length) : gp;
+
+            const boldParts = greenContent.split(/(\*\*.*?\*\*)/g);
+            const inner = boldParts.map((part, k) => {
+              const isBold = part.startsWith("**") && part.endsWith("**");
+              const content = isBold ? part.slice(2, -2) : part;
+              return isBold ? <strong key={k}>{content}</strong> : <span key={k}>{content}</span>;
+            });
+
+            return isGreen ? (
+              <span key={j} className="text-verde-eucalipto font-semibold">
+                {inner}
+              </span>
+            ) : (
+              <span key={j}>{inner}</span>
+            );
           })}
         </p>
       );
