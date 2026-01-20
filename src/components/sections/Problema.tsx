@@ -68,6 +68,7 @@ Pesquisas mostram: quanto mais tempo em telas, maior a desconex√£o corpo-mente ‚
             return isGreen ? (
               <span key={j} className="text-verde-eucalipto font-semibold">
                 {inner}
+                <br />
               </span>
             ) : (
               <span key={j}>{inner}</span>
