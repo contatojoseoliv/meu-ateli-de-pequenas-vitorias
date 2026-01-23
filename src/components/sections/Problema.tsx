@@ -82,7 +82,9 @@ const Problema = () => {
 
       {/* Resultado Final */}
       <div className="text-center max-w-3xl mx-auto animate-fade-in">
-        <p className="text-grafite-suave mb-3 text-base">Resultado: sua mente nunca desliga. Seu corpo não relaxa. Você não sente calma de verdade.<span className="font-semibold text-rosa-argila">Por causa disso:</span> Sua mente nunca desliga. Seu corpo nunca relaxa. Você nunca sente calma de verdade.
+        <p className="text-grafite-suave mb-3 text-base">
+          <span className="font-semibold text-rosa-argila">Resultado:</span> sua mente nunca desliga. Seu corpo não relaxa. Você não sente calma de verdade.
+          <span className="font-semibold text-rosa-argila">Por causa disso:</span> Sua mente nunca desliga. Seu corpo nunca relaxa. Você nunca sente calma de verdade.
         </p>
         <p className="font-bold text-verde-eucalipto text-xl">
           Mas existe uma forma de quebrar os três — de uma vez.
