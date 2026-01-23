@@ -64,56 +64,20 @@ const Fechamento = () => {
           </div>
           
           <div className="text-grafite-suave space-y-4">
-            <p className="flex items-start gap-2">
-              <span className="text-verde-eucalipto font-bold">✓</span>
-              <span>Você dá um passo.</span>
+            <p className="leading-relaxed">
+              <span className="text-verde-eucalipto font-bold">✓</span> Você dá um passo hoje. Investe R$ 47 e, em 7 dias, cria algo com as próprias mãos.
             </p>
-            
-            <p className="font-semibold">
-              Hoje. Agora.
+
+            <p className="leading-relaxed">
+              A mente desacelera. A confiança volta.
             </p>
-            
-            <p>
-              Você investe R$ 47 — menos que uma sessão de terapia — e nos próximos 7 dias você:
-            </p>
-            
-            <ul className="space-y-2 ml-4">
-              <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-verde-eucalipto mt-1 flex-shrink-0" />
-                <span>Sente sua mente parar pela primeira vez em anos</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-verde-eucalipto mt-1 flex-shrink-0" />
-                <span>Cria algo com suas próprias mãos (do zero ao fim)</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-verde-eucalipto mt-1 flex-shrink-0" />
-                <span>Prova para si mesma que você é capaz</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-verde-eucalipto mt-1 flex-shrink-0" />
-                <span>Tem algo só seu — físico, tangível, real</span>
-              </li>
-            </ul>
-            
+
             <div className="pt-4 border-t border-verde-eucalipto/20">
-              <p className="font-serif text-lg italic text-verde-eucalipto">
-                E quando você segurar esse amigurumi no Dia 7...
+              <p className="font-serif text-lg italic text-verde-eucalipto leading-relaxed">
+                E quando segurar o amigurumi, você entende: nunca foi sobre ele.
               </p>
-              <p className="mt-2">
-                Você vai entender.
-              </p>
-              <p>
-                Não foi sobre o amigurumi. Nunca foi.
-              </p>
-              <p className="font-semibold">
-                Foi sobre provar — para você mesma — que você consegue.
-              </p>
-              <p>
-                Que você termina o que começa.
-              </p>
-              <p className="font-bold text-verde-eucalipto">
-                Que você É capaz.
+              <p className="mt-2 font-semibold leading-relaxed">
+                Foi sobre provar que você consegue — e termina o que começa.
               </p>
             </div>
           </div>
