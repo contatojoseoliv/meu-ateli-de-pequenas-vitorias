@@ -28,7 +28,7 @@ const Problema = () => {
     icon: Package,
     numero: "2",
     titulo: "Você Acumula Tensão Sem Descarregar",
-    texto: `O estresse se soma todos os dias, sem um espaço real para descarregar. [[green]]A tensão se acumula, dia após dia, sem nunca ter por onde sair.[[/green]]`,
+    texto: `O estresse se soma todos os dias, sem um espaço real para descarregar. [[green]]Sem nunca ter por onde sair.[[/green]]`,
     recap: "VILÃO 2: Acumula sem descarregar → Sem dopamina → Estresse ↑"
   }, {
     icon: Smartphone,
