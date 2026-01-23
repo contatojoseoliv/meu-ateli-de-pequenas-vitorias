@@ -41,9 +41,7 @@ const Garantia = () => {
                 Basta enviar 1 e-mail e você recebe <strong className="text-verde-eucalipto">100% do seu dinheiro de volta em até 48 horas</strong>.
               </p>
 
-              <p className="font-semibold text-verde-eucalipto">
-                Sem formulários. Sem perguntas. Sem justificativas.
-              </p>
+              
 
               <ul className="list-disc list-inside space-y-1 text-grafite-suave/80">
                 
