@@ -59,7 +59,7 @@ const Problema = () => {
         </p>;
     });
   };
-  return <Section id="problema" background="white" containerClassName="pt-6 pb-12 md:pt-10 md:pb-14">
+  return <Section id="problema" background="white" containerClassName="pt-4 pb-12 md:pt-8 md:pb-14">
       {/* Título */}
       <div className="text-center max-w-2xl mx-auto mb-6 md:mb-10 animate-fade-in">
         <h2 className="font-serif md:text-h2 text-grafite-suave mb-6 text-2xl">
