@@ -13,13 +13,13 @@ const Lead = () => {
         <div className="max-w-2xl text-center md:text-left">
           <div className="animate-fade-in space-y-3 pb-14 text-body leading-[1.5] text-grafite-suave md:space-y-4 md:pb-16">
             <header className="space-y-4">
-              <h2 className="font-serif md:text-h2 text-grafite-suave mb-6 text-2xl">
+              <h2 className="font-serif text-grafite-suave mb-6 text-2xl md:text-4xl">
                 Talvez Você se Identifique com Isso...
               </h2>
 
               {/* divisor pontilhado */}
               <div className="mx-auto w-full max-w-[420px] md:mx-0">
-                <div aria-hidden="true" className="h-1 w-full text-verde-eucalipto/40 [background-image:radial-gradient(currentColor_1.2px,transparent_1.2px)] [background-size:12px_4px] [background-position:left_center]" />
+                
               </div>
             </header>
 

@@ -31,7 +31,7 @@ const Section = React.forwardRef<HTMLElement, SectionProps>(({
     verde: "bg-verde-eucalipto text-white"
   };
   return <section ref={ref} id={id} style={style} className={cn("w-full", backgrounds[background], className)}>
-        <div className={cn("container-main my-0 py-[30px]", containerClassName)}>{children}</div>
+        
       </section>;
 });
 Section.displayName = "Section";
