@@ -7,7 +7,7 @@ import leadVisual from "@/assets/lead-visual.png";
  * Texto com imagem para aumentar impacto emocional (sem CTA)
  */
 const Lead = () => {
-  return <Section id="lead" background="white" containerClassName="pt-12 pb-12 md:pt-16 md:pb-14">
+  return <Section id="lead" background="white" containerClassName="pt-10 pb-10 md:pt-14 md:pb-12">
       <div className="relative grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12">
         {/* Coluna de texto */}
         <div className="max-w-2xl text-center md:text-left">
