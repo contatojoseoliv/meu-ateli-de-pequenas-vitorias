@@ -1,4 +1,5 @@
 import { Section } from "@/components/shared/Section";
+import { Button } from "@/components/shared/Button";
 import { Brain, Package, Smartphone } from "lucide-react";
 
 /**
@@ -6,6 +7,17 @@ import { Brain, Package, Smartphone } from "lucide-react";
  * 3 cards explicando os vilões
  */
 const Problema = () => {
+  const handleVerSolucao = () => {
+    const el = document.getElementById("solucao");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    // Fallback caso a âncora ainda não exista no DOM por algum motivo.
+    window.location.hash = "#solucao";
+  };
+
   const viloes = [{
     icon: Brain,
     numero: "1",
@@ -47,7 +59,7 @@ const Problema = () => {
         </p>;
     });
   };
-  return <Section id="problema" background="white">
+  return <Section id="problema" background="white" containerClassName="pt-12 pb-12 md:pt-16 md:pb-14">
       {/* Título */}
       <div className="text-center max-w-2xl mx-auto mb-6 md:mb-10 animate-fade-in">
         <h2 className="font-serif md:text-h2 text-grafite-suave mb-6 text-2xl">
@@ -88,6 +100,12 @@ const Problema = () => {
         <p className="font-bold text-verde-eucalipto text-xl">
           Mas existe uma forma de quebrar os três — de uma vez.
         </p>
+
+        <div className="mt-6">
+          <Button variant="secondary" onClick={handleVerSolucao} aria-label="Ir para a seção Solução">
+            Ver a Solução
+          </Button>
+        </div>
       </div>
     </Section>;
 };
