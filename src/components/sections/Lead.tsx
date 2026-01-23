@@ -7,12 +7,7 @@ import leadVisual from "@/assets/lead-visual.png";
  * Texto com imagem para aumentar impacto emocional (sem CTA)
  */
 const Lead = () => {
-  return (
-    <Section
-      id="lead"
-      background="white"
-      containerClassName="pt-12 pb-12 md:pt-16 md:pb-14"
-    >
+  return <Section id="lead" background="white" containerClassName="pt-12 pb-12 md:pt-16 md:pb-14">
       <div className="relative grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12">
         {/* Coluna de texto */}
         <div className="max-w-2xl text-center md:text-left">
@@ -24,14 +19,11 @@ const Lead = () => {
 
               {/* divisor pontilhado */}
               <div className="mx-auto w-full max-w-[420px] md:mx-0">
-                <div
-                  aria-hidden="true"
-                  className="h-3 w-full text-verde-eucalipto/40 [background-image:radial-gradient(currentColor_1.2px,transparent_1.2px)] [background-size:12px_4px] [background-position:left_center]"
-                />
+                <div aria-hidden="true" className="h-3 w-full text-verde-eucalipto/40 [background-image:radial-gradient(currentColor_1.2px,transparent_1.2px)] [background-size:12px_4px] [background-position:left_center]" />
               </div>
             </header>
 
-            <p>
+            <p className="">
               Você acorda{" "}
               <span className="font-semibold text-verde-eucalipto">ansiosa</span>. Passa o
               dia{" "}
@@ -77,26 +69,15 @@ const Lead = () => {
         {/* Coluna visual */}
         <div className="order-last md:order-none">
           <figure className="mx-auto w-full max-w-[360px] overflow-hidden rounded-2xl border border-border bg-cinza-nuvem/50 p-4 shadow-sm backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 md:max-w-[460px] md:rotate-1">
-            <img
-              src={leadVisual}
-              alt="Mulher descansando em ambiente aconchegante, evocando calma e autocuidado"
-              loading="lazy"
-              className="h-auto max-h-[340px] w-full rounded-xl object-cover md:max-h-[420px]"
-            />
+            <img src={leadVisual} alt="Mulher descansando em ambiente aconchegante, evocando calma e autocuidado" loading="lazy" className="h-auto max-h-[340px] w-full rounded-xl object-cover md:max-h-[420px]" />
           </figure>
         </div>
 
         {/* Seta sutil (ancorada para ficar na dobra) */}
-        <a
-          href="#problema"
-          aria-label="Ir para a próxima seção"
-          className="absolute bottom-3 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-full p-2 text-foreground/70 transition-transform duration-300 hover:-translate-y-0.5 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:bottom-4"
-        >
+        <a href="#problema" aria-label="Ir para a próxima seção" className="absolute bottom-3 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-full p-2 text-foreground/70 transition-transform duration-300 hover:-translate-y-0.5 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:bottom-4">
           <ChevronDown className="h-5 w-5" />
         </a>
       </div>
-    </Section>
-  );
+    </Section>;
 };
-
 export { Lead };
