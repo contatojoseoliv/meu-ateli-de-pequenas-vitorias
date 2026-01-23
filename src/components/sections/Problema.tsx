@@ -33,7 +33,7 @@ const Problema = () => {
   }, {
     icon: Smartphone,
     numero: "3",
-    titulo: "Você Está Desconectada Do Corpo",
+    titulo: "Você Está Desconectada Do Seu Corpo",
     texto: `Muitas horas em telas mantêm você só na mente, e o corpo fica esquecido. [[green]]Desconexão corpo-mente e maior a ansiedade.[[/green]]`,
     recap: "VILÃO 3: Desconectada do corpo → 100% mental → Ansiedade ↑"
   }];
