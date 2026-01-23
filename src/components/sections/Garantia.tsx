@@ -6,13 +6,13 @@ import { Shield } from "lucide-react";
  */
 const Garantia = () => {
   return (
-    <Section id="garantia" background="cinza">
+    <Section id="garantia" background="cinza" containerClassName="py-4 md:py-6">
       <div className="max-w-4xl mx-auto">
-        <div className="flex flex-col md:flex-row gap-8 items-start animate-fade-in">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start animate-fade-in">
           {/* Selo de Garantia */}
           <div className="flex-shrink-0 mx-auto md:mx-0">
-            <div className="w-32 h-32 md:w-36 md:h-36 rounded-full bg-verde-eucalipto flex flex-col items-center justify-center text-white shadow-lg">
-              <Shield className="w-12 h-12 mb-1" strokeWidth={1.5} />
+            <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-verde-eucalipto flex flex-col items-center justify-center text-white shadow-lg">
+              <Shield className="w-9 h-9 mb-1" strokeWidth={1.5} />
               <span className="text-[10px] font-bold uppercase tracking-wide text-center leading-tight">
                 7 DIAS<br />100%<br />GARANTIDO
               </span>
@@ -20,83 +20,45 @@ const Garantia = () => {
           </div>
 
           {/* Blockquote */}
-          <div className="flex-1 bg-white border-l-4 border-verde-eucalipto rounded-r-xl p-8 md:p-10 shadow-suave">
-            <h3 className="font-serif text-2xl md:text-3xl text-grafite-suave mb-6">
+          <div className="flex-1 bg-white border-l-4 border-verde-eucalipto rounded-r-xl p-6 md:p-8 shadow-suave">
+            <h3 className="font-serif text-xl md:text-2xl text-grafite-suave mb-4">
               Garantia Incondicional de 7 Dias
             </h3>
             
-            <div className="text-body text-grafite-suave/90 space-y-4 leading-relaxed">
+            <div className="text-body text-grafite-suave/90 space-y-3 leading-relaxed">
               <p>
                 Faça o método completo. Crie seu primeiro amigurumi. Sinta a diferença.
               </p>
-              
+
               <p className="font-semibold text-grafite-suave">
                 Se, ao final dos 7 dias, você não sentir que valeu a pena — por QUALQUER motivo —
               </p>
-              
+
               <p>
-                Basta enviar 1 e-mail.
+                Basta enviar 1 e-mail e você recebe <strong className="text-verde-eucalipto">100% do seu dinheiro de volta em até 48 horas</strong>.
               </p>
-              
+
               <p className="font-semibold text-verde-eucalipto">
                 Sem formulários. Sem perguntas. Sem justificativas.
               </p>
-              
-              <p>
-                Você recebe <strong className="text-verde-eucalipto">100% do seu dinheiro de volta em até 48 horas</strong>.
-              </p>
-              
-              <p>
-                Simples assim.
-              </p>
 
-              <div className="border-t border-verde-eucalipto/20 my-6" />
+              <div className="border-t border-verde-eucalipto/20 my-4" />
 
-              <p>
+              <p className="text-grafite-suave/80">
                 Eu confio que quando você:
               </p>
-              
+
               <ul className="list-disc list-inside space-y-1 ml-4 text-grafite-suave/80">
                 <li>Sentir sua mente finalmente parar</li>
                 <li>Segurar algo que VOCÊ criou</li>
                 <li>Provar para si mesma que é capaz</li>
               </ul>
-              
-              <p>
-                ...você vai saber que valeu cada centavo.
-              </p>
-              
+
               <p className="font-semibold text-rosa-argila">
-                Mas se não valer?
-              </p>
-              
-              <p>
-                Você não perde nada. Zero risco.
-              </p>
-
-              <div className="border-t border-verde-eucalipto/20 my-6" />
-
-              <p className="font-bold text-grafite-suave">
-                O único risco real é não tentar.
-              </p>
-              
-              <p>
-                É continuar vivendo ansiosa, sem nada só seu, sem nunca provar que você consegue.
-              </p>
-              
-              <p className="font-bold text-verde-eucalipto text-lg">
-                Esse é o verdadeiro risco.
+                Se não valer? Você não perde nada. Zero risco.
               </p>
             </div>
           </div>
-        </div>
-
-        {/* Reframe Final */}
-        <div className="bg-rosa-argila-10 rounded-xl p-6 text-center mt-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-          <p className="font-serif text-lg md:text-xl text-grafite-suave italic">
-            O risco está em <span className="text-rosa-argila">não</span> dar esse passo. 
-            Não em dar.
-          </p>
         </div>
       </div>
     </Section>
