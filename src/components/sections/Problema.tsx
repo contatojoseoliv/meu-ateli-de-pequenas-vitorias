@@ -34,7 +34,7 @@ const Problema = () => {
     icon: Smartphone,
     numero: "3",
     titulo: "Você Está Desconectada Do Corpo",
-    texto: `Muitas horas em telas mantêm você só na mente. O corpo fica esquecido, e isso aumenta a ansiedade. [[green]]Quanto mais tempo em telas, maior a desconexão corpo-mente e maior a ansiedade.[[/green]]`,
+    texto: `Muitas horas em telas mantêm você só na mente, e o corpo fica esquecido. [[green]]Quanto mais tempo em telas, maior a desconexão corpo-mente e maior a ansiedade.[[/green]]`,
     recap: "VILÃO 3: Desconectada do corpo → 100% mental → Ansiedade ↑"
   }];
   const formatText = (text: string) => {
