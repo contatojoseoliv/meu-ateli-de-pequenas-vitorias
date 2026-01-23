@@ -44,7 +44,7 @@ const Lead = () => {
               nenhuma identidade fora dos papéis que cumpre.
             </p>
 
-            <p className="border-l-2 border-rosa-argila/30 pl-3 font-semibold text-grafite-suave">
+            <p className="border-l-2 border-rosa-argila/30 pl-3 text-grafite-suave">
               Você desaparece.
             </p>
 
