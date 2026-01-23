@@ -23,7 +23,7 @@ const Lead = () => {
               </div>
             </header>
 
-            <p className="">
+            <p className="text-body">
               Você acorda{" "}
               <span className="font-semibold text-verde-eucalipto">ansiosa</span>. Passa o
               dia{" "}
