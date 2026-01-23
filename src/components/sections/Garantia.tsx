@@ -34,11 +34,11 @@ const Garantia = () => {
 
             <div className="text-body text-grafite-suave/90 space-y-2 leading-relaxed">
               <p className="text-grafite-suave">
-                Se, ao final dos 7 dias, você não sentir que valeu a pena — por QUALQUER motivo —
+                Se, ao final dos 7 dias, <span className="text-verde-eucalipto">você não sentir que valeu a pena</span> — por QUALQUER motivo —
               </p>
 
               <p>
-                Basta enviar 1 e-mail e você recebe <strong className="text-verde-eucalipto">100% do seu dinheiro de volta em até 48 horas</strong>.
+                Basta enviar 1 e-mail e você recebe <span className="text-verde-eucalipto">100% do seu dinheiro</span> de volta em até 48 horas.
               </p>
 
               
