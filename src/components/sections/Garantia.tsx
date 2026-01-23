@@ -38,7 +38,7 @@ const Garantia = () => {
               </p>
 
               <p>
-                Basta enviar 1 e-mail e você recebe <span className="text-verde-eucalipto">100% do seu dinheiro</span> de volta em até 48 horas.
+                Basta enviar 1 e-mail e você recebe <span className="text-verde-eucalipto font-semibold">100% do seu dinheiro</span> de volta em até 48 horas.
               </p>
 
               
