@@ -102,8 +102,8 @@ const Problema = () => {
         </p>
 
         <div className="mt-6">
-          <Button variant="secondary" onClick={handleVerSolucao} aria-label="Ir para a seção Solução">
-            Ver a Solução
+          <Button variant="primary" onClick={handleVerSolucao} aria-label="Ir para a seção Solução">
+            Quero Começar
           </Button>
         </div>
       </div>
