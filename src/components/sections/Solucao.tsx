@@ -59,12 +59,12 @@ const Solucao = () => {
   return <Section id="solucao" background="verde">
       <div className="solucao-intro text-center max-w-4xl mx-auto mb-12 animate-fade-in">
         {/* Pré-headline */}
-        <p className="text-sm md:text-base font-semibold tracking-[0.18em] uppercase text-white/70">
+        <p className="text-sm font-semibold tracking-[0.18em] uppercase text-white/70 md:text-lead">
           A Descoberta Que Muda Tudo
         </p>
 
         {/* Headline */}
-        <h2 className="mt-4 font-serif text-3xl md:text-5xl text-white leading-tight">
+        <h2 className="mt-4 font-serif text-3xl text-white leading-tight md:text-h2">
           Quando você cria Amigurumi com as mãos
           <span className="block mt-2 text-2xl md:text-4xl text-white/90">
             — algo tangível, bonito, que você vê surgir —
