@@ -10,15 +10,9 @@ const Solucao = () => {
   const mecanismos = [{
     numero: "1",
     titulo: "Você Entra Em Estado De Atenção Plena",
-    texto: `Quando suas mãos estão criando — contando pontos, seguindo um padrão, sentindo a textura do fio —
+    texto: `Quando suas mãos estão criando — contando pontos, sentindo a textura do fio — força a mente ao presente, afastando pensamentos futuros e reduzindo a ansiedade de forma natural.
 
- Sua mente não CONSEGUE estar no futuro. Ela é **forçada** para o aqui e agora.
-
- E aí a ansiedade — aquela que vem de viver sempre "no depois" — **diminui**.
-
- **Atenção Plena é o oposto neurológico da ansiedade.**
-
- *→ Isso quebra o VILÃO 1 (Nunca Estar Presente)*`
+*→ Isso quebra o VILÃO 1 (Nunca Estar Presente)*`
   }, {
     numero: "2",
     titulo: "Você Descarrega Emocionalmente",
