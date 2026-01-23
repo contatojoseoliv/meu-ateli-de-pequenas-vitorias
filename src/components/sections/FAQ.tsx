@@ -1,4 +1,5 @@
 import { Section } from "@/components/shared/Section";
+import { Button } from "@/components/shared/Button";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
@@ -290,6 +291,21 @@ Não "quando tiver tempo".
             )}
           </div>
         ))}
+      </div>
+
+      {/* CTA final */}
+      <div className="max-w-3xl mx-auto mt-10 flex justify-center">
+        <Button
+          variant="primary"
+          size="lg"
+          onClick={() => {
+            const el = document.getElementById('oferta');
+            el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }}
+          aria-label="Ir para a Oferta"
+        >
+          Quero começar agora
+        </Button>
       </div>
     </Section>
   );
