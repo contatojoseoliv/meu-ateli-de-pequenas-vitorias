@@ -80,11 +80,11 @@ Estudos brasileiros (ESF): grupos de crochê reduziram ansiedade/depressão em 7
   };
   return <Section id="solucao" background="verde">
       <div className="solucao-intro text-center max-w-4xl mx-auto mb-12 animate-fade-in">
-        <h2 className="font-serif text-3xl md:text-[42px] text-white mb-6 leading-tight">
+        <h2 className="font-serif text-3xl text-white mb-6 leading-tight md:text-xl">
           A Descoberta Que Muda Tudo
         </h2>
         
-        <p className="text-xl text-ocre-dourado font-bold mt-6 md:text-h4 py-0 my-0">
+        <p className="text-xl text-ocre-dourado font-bold mt-6 py-0 my-0 md:text-3xl">
           Quando você cria Amigurumi com as mãos
           <br />
           <span className="block">— algo tangível, bonito, que você vê surgir —</span>
