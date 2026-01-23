@@ -8,13 +8,17 @@ import leadVisual from "@/assets/lead-visual.png";
  */
 const Lead = () => {
   return (
-    <Section id="lead" background="white">
-      <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12">
+    <Section
+      id="lead"
+      background="white"
+      containerClassName="pt-12 pb-12 md:pt-16 md:pb-14"
+    >
+      <div className="relative grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12">
         {/* Coluna de texto */}
         <div className="max-w-2xl text-center md:text-left">
-          <div className="animate-fade-in space-y-4 text-sm leading-relaxed text-grafite-suave md:space-y-5 md:text-base">
+          <div className="animate-fade-in space-y-3 pb-10 text-sm leading-[1.55] text-grafite-suave md:space-y-4 md:pb-12 md:text-body">
             <header className="space-y-4">
-              <h2 className="font-serif text-3xl tracking-tight text-foreground md:text-4xl">
+              <h2 className="font-serif text-2xl tracking-tight text-foreground md:text-3xl">
                 Talvez Você se Identifique com Isso...
               </h2>
 
@@ -49,7 +53,7 @@ const Lead = () => {
               nenhuma identidade fora dos papéis que cumpre.
             </p>
 
-            <p className="font-bold text-rosa-argila text-base md:text-lg">
+            <p className="text-sm font-bold text-rosa-argila md:text-body">
               Você desaparece.
             </p>
 
@@ -67,30 +71,29 @@ const Lead = () => {
               Antes de te mostrar como, deixa eu te explicar uma coisa importante:
             </p>
 
-            {/* Seta sutil */}
-            <div className="pt-1">
-              <a
-                href="#problema"
-                aria-label="Ir para a próxima seção"
-                className="inline-flex items-center justify-center rounded-full p-2 text-foreground/70 transition-transform duration-300 hover:-translate-y-0.5 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <ChevronDown className="h-5 w-5" />
-              </a>
-            </div>
           </div>
         </div>
 
         {/* Coluna visual */}
         <div className="order-last md:order-none">
-          <figure className="mx-auto w-full max-w-[360px] rounded-2xl border border-border bg-cinza-nuvem/50 p-4 shadow-sm backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 md:max-w-[460px] md:rotate-1">
+          <figure className="mx-auto w-full max-w-[360px] overflow-hidden rounded-2xl border border-border bg-cinza-nuvem/50 p-4 shadow-sm backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 md:max-w-[460px] md:rotate-1">
             <img
               src={leadVisual}
               alt="Mulher descansando em ambiente aconchegante, evocando calma e autocuidado"
               loading="lazy"
-              className="h-auto w-full rounded-xl object-cover"
+              className="h-auto max-h-[340px] w-full rounded-xl object-cover md:max-h-[420px]"
             />
           </figure>
         </div>
+
+        {/* Seta sutil (ancorada para ficar na dobra) */}
+        <a
+          href="#problema"
+          aria-label="Ir para a próxima seção"
+          className="absolute bottom-3 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-full p-2 text-foreground/70 transition-transform duration-300 hover:-translate-y-0.5 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:bottom-4"
+        >
+          <ChevronDown className="h-5 w-5" />
+        </a>
       </div>
     </Section>
   );
