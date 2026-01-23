@@ -7,11 +7,11 @@ import leadVisual from "@/assets/lead-visual.png";
  * Texto com imagem para aumentar impacto emocional (sem CTA)
  */
 const Lead = () => {
-  return <Section id="lead" background="white" containerClassName="pt-10 pb-10 md:pt-14 md:pb-12">
+  return <Section id="lead" background="white" containerClassName="pt-10 pb-6 md:pt-14 md:pb-8">
       <div className="relative grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12">
         {/* Coluna de texto */}
         <div className="max-w-2xl text-center md:text-left">
-          <div className="animate-fade-in space-y-3 pb-14 text-body leading-[1.5] text-grafite-suave md:space-y-4 md:pb-16">
+          <div className="animate-fade-in space-y-3 pb-10 text-body leading-[1.5] text-grafite-suave md:space-y-4 md:pb-12">
             <header className="space-y-4">
               <h2 className="font-serif md:text-h2 text-grafite-suave mb-6 text-2xl">
                 Talvez Você se Identifique com Isso...
@@ -44,11 +44,11 @@ const Lead = () => {
               nenhuma identidade fora dos papéis que cumpre.
             </p>
 
-            <p className="font-bold text-rosa-argila">
+            <p className="border-l-2 border-rosa-argila/30 pl-3 font-semibold text-grafite-suave">
               Você desaparece.
             </p>
 
-            <p className="font-semibold text-foreground">Mas não precisa ser assim.</p>
+            <p className="font-bold text-rosa-argila">Mas não precisa ser assim.</p>
 
             <p>
               E se você pudesse{" "}
@@ -58,7 +58,7 @@ const Lead = () => {
               {" — que te acalmassem de verdade?"}
             </p>
 
-            <p className="pt-1">
+            <p className="border-t border-border/60 pt-3 text-sm text-grafite-suave/80 md:text-body">
               Antes de te mostrar como, deixa eu te explicar uma coisa importante:
             </p>
 
@@ -73,7 +73,7 @@ const Lead = () => {
         </div>
 
         {/* Seta sutil (ancorada para ficar na dobra) */}
-        <a href="#problema" aria-label="Ir para a próxima seção" className="absolute bottom-1 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-full p-2 text-foreground/70 transition-transform duration-300 hover:-translate-y-0.5 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:bottom-2">
+        <a href="#problema" aria-label="Ir para a próxima seção" className="absolute bottom-1 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-full p-2 text-grafite-suave/60 transition-transform duration-300 hover:-translate-y-0.5 hover:text-grafite-suave focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:bottom-2">
           <ChevronDown className="h-5 w-5" />
         </a>
       </div>
