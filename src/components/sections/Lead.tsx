@@ -82,7 +82,7 @@ const Lead = () => {
 
         {/* Coluna visual */}
         <div className="order-last md:order-none">
-          <figure className="mx-auto w-full max-w-[360px] rounded-2xl border border-border bg-cinza-nuvem/50 p-4 shadow-sm backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 md:max-w-[460px] md:rotate-1">
+          <figure className="mx-auto w-full max-w-[360px] rounded-2xl border border-border/40 bg-cinza-nuvem/50 p-4 shadow-sm backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 md:max-w-[460px] md:rotate-1">
             <img
               src={leadVisual}
               alt="Mulher descansando em ambiente aconchegante, evocando calma e autocuidado"
