@@ -16,9 +16,9 @@ const Lead = () => {
       <div className="relative grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12">
         {/* Coluna de texto */}
         <div className="max-w-2xl text-center md:text-left">
-          <div className="animate-fade-in space-y-3 pb-10 text-sm leading-[1.55] text-grafite-suave md:space-y-4 md:pb-12 md:text-body">
+          <div className="animate-fade-in space-y-3 pb-10 text-xs leading-[1.5] text-grafite-suave md:space-y-4 md:pb-12 md:text-sm">
             <header className="space-y-4">
-              <h2 className="font-serif text-2xl tracking-tight text-foreground md:text-3xl">
+              <h2 className="font-serif text-xl tracking-tight text-foreground md:text-2xl">
                 Talvez Você se Identifique com Isso...
               </h2>
 
@@ -53,7 +53,7 @@ const Lead = () => {
               nenhuma identidade fora dos papéis que cumpre.
             </p>
 
-            <p className="text-sm font-bold text-rosa-argila md:text-body">
+            <p className="text-xs font-bold text-rosa-argila md:text-sm">
               Você desaparece.
             </p>
 
