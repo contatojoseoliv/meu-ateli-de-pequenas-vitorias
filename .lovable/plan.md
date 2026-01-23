@@ -1,121 +1,63 @@
 
-## Objetivo
-Ajustar a **Sessão 4 (Solução)** para:
-1) Reordenar **pré-headline → headline → subheadline** e corrigir **hierarquia de tamanhos** (principalmente no desktop, onde hoje está invertido).
-2) Melhorar **contraste/visibilidade** com cores mais consistentes (evitando uso indevido do Ocre fora de CTA/conversão).
-3) Melhorar o design da frase **“Isso quebra a Tríade…”**, deixar mais “de impacto”, e adicionar **um botão abaixo** que leva ao **Método** — e garantir que esse bloco (frase + botão) fique **na dobra**.
-4) Relacionar a **Sessão 2 (Lead)** com a **Sessão 3 (Problema)** como “espelhamento”: a 2 descreve a sensação e a 3 explica os 3 vilões (e vice-versa), de forma sutil.
+Objetivo
+- Eliminar o “espaço sobrando na esquerda” na seção Garantia no desktop, mudando o layout (sem parecer que há uma “coluna vazia”).
+- Manter a seção mais compacta (como você já pediu antes) e remover a última frase (já alinhado).
 
----
+O que está causando o espaço hoje (diagnóstico)
+- Em `src/components/sections/Garantia.tsx`, o layout é `md:flex-row` com:
+  - “Selo” em uma coluna à esquerda (`flex-shrink-0`)
+  - “Blockquote/card” na direita (`flex-1`)
+- No desktop, esse padrão costuma gerar a sensação de “sobrou espaço” na esquerda porque:
+  - a coluna do selo ocupa uma área fixa;
+  - o card começa mais à direita, criando um “vazio” visual antes do conteúdo principal.
 
-## O que existe hoje (diagnóstico rápido)
-- Estrutura das seções está correta: `Hero → Lead → Problema → Solucao → ...` em `src/pages/Index.tsx`.
-- A Sessão 4 (`src/components/sections/Solucao.tsx`) tem:
-  - Intro com `h2` e dois `p`, porém com classes inconsistentes (ex.: `text-3xl` no mobile e `md:text-xl` no desktop, o que reduz o título em telas maiores).
-  - Um bloco de transição com a frase **“Isso quebra a Tríade…”**, hoje depois dos 3 cards e sem CTA.
-- Sessão 2 (`Lead.tsx`) e Sessão 3 (`Problema.tsx`) já conversam pelo fluxo (seta do Lead vai para `#problema`), mas falta um “gancho espelho” explícito (bem sutil) para deixar a relação clara.
+Mudança de design proposta (layout novo)
+- Trocar o layout desktop de “duas colunas (selo fora do card)” para “card único centralizado com selo integrado”, para eliminar o vão à esquerda.
+- Duas variações possíveis (vou implementar a que fica mais fiel ao seu estilo atual e mais limpa):
 
----
+Variação A (recomendada): Selo embutido no topo do card
+- Um único card centralizado (sem coluna lateral).
+- Cabeçalho do card com:
+  - selo à esquerda (menor)
+  - título à direita (ou abaixo, dependendo do espaço)
+- O conteúdo segue abaixo com menos texto/altura.
+- Benefício: 0 espaço sobrando na esquerda; leitura mais direta; fica “tamanho de sessão” no desktop.
 
-## Decisões já alinhadas (a partir das suas respostas)
-- A “última frase” a melhorar é: **“Isso quebra a Tríade da Mente Acelerada — de uma vez.”**
-- O botão novo deve levar para: **Ir para o Método** (dentro da própria sessão 4).
-- A relação entre Sessão 2 e 3 deve ser: **os dois (sutil)** — Lead aponta para Problema e Problema referencia Lead.
+Variação B: Selo como “badge” flutuante dentro do card (absolute)
+- Card `relative`, selo em `absolute` no canto superior (esq. ou dir.).
+- Benefício: bem premium visualmente.
+- Cuidado: precisa garantir que não sobreponha texto em breakpoints.
 
----
+Implementação (passos técnicos)
+1) Ajustar `src/components/sections/Garantia.tsx`
+   - Remover o wrapper `md:flex-row` e a coluna separada do selo.
+   - Criar um único container central:
+     - manter `max-w-4xl mx-auto` (ou ajustar para `max-w-3xl` se ficar mais “sessão” e compacto).
+   - Transformar o bloco principal em um único card:
+     - `bg-white`, `rounded-xl`, `shadow-suave`, `border-l-4 border-verde-eucalipto` (manter sua identidade atual).
+   - Inserir o selo dentro do card:
+     - usar um header com `flex items-center gap-4` e, em telas grandes, manter alinhado e sem “vazio lateral”.
+     - reduzir selo no desktop se necessário para não aumentar altura.
 
-## Implementação (passo a passo)
+2) Ajustar espaçamentos para ficar mais compacto no desktop
+   - Diminuir `p-6 md:p-8` para algo como `p-5 md:p-6`.
+   - Reduzir `space-y-3` para `space-y-2` e remover elementos que “estiquem” (ex.: divisórias grandes), mantendo legibilidade.
+   - Garantir que a seção não pareça “alta demais” em relação ao restante do funil.
 
-### 1) Sessão 4: reordenar pré-headline / headline / subheadline + ajustar tamanhos
-**Arquivo:** `src/components/sections/Solucao.tsx`
+3) Verificar consistência com o wrapper de seção
+   - `Section` já usa `container-main` (max width + padding). Não vou mexer nele para não afetar o site inteiro.
+   - A correção será localizada na Garantia, como você pediu.
 
-**Ajustes:**
-- Trocar a ordem do topo da Solução para ficar assim:
-  1. **Pré-headline** (pequena, com tracking, peso semibold): algo como “A DESCOBERTA QUE MUDA TUDO” (ou manter o texto atual como pré).
-  2. **Headline** (grande, alto contraste, Playfair): a frase principal da sessão.
-  3. **Subheadline** (tamanho intermediário, branco com leve opacidade): a frase que prepara para os mecanismos.
+4) QA visual (desktop)
+   - Confirmar que:
+     - não há “coluna vazia” à esquerda;
+     - o card fica visualmente centralizado;
+     - o selo parece parte do card (não um elemento “solto”);
+     - a altura total fica próxima de “uma sessão na tela”.
 
-**Correção de responsividade:**
-- Ajustar classes para que o **desktop** aumente (ex.: `text-2xl md:text-5xl`) ao invés de diminuir (hoje está `md:text-xl`).
+Arquivos envolvidos
+- `src/components/sections/Garantia.tsx` (principal)
+- (Opcional, se necessário) pequenos ajustes de classes utilitárias já existentes, mas a intenção é não mexer em `Section.tsx` nem no layout global.
 
-**Cores (visibilidade + regra do Ocre):**
-- Evitar o **Ocre** em parágrafos de conteúdo (manter Ocre mais reservado a CTA/conversão).
-- Usar:
-  - `text-white` para headline
-  - `text-white/85` para subheadline
-  - `text-rosa-argila` para destaques pequenos (sem virar “cor de CTA”)
-
----
-
-### 2) Tornar o bloco “Isso quebra a Tríade…” mais forte + botão abaixo (na dobra)
-**Arquivo:** `src/components/sections/Solucao.tsx`
-
-**Mudanças:**
-- Transformar o bloco da frase em um “micro-card” mais premium (glass):
-  - fundo `bg-white/5`
-  - borda `border-white/10` (ou `border-white/15`)
-  - tipografia mais impactante
-  - possível detalhe visual (ex.: um pequeno “selo”/linha/ícone discreto) sem poluir.
-
-**Melhorar o texto da frase (proposta inicial):**
-- Manter a ideia, mas deixar mais conclusivo e “irrefutável”, por exemplo:
-  - “Isso quebra a Tríade da Mente Acelerada — de uma vez. Em 15 minutos.”
-  - ou “Você não precisa lutar contra a mente. Você só precisa do método certo.”
-
-(na implementação eu deixo o texto em uma versão final única, curta e forte, coerente com o tom do resto da página)
-
-**Adicionar botão abaixo**
-- Inserir um CTA logo abaixo da frase:
-  - `Button variant="primary"` (mantém regra do Ocre para conversão)
-  - Label sugerido: “Ver o Método Primeira Vitória” (ou “Quero ver o Método”)
-
-**Scroll para o Método**
-- Criar um alvo consistente para scroll suave:
-  - Opção preferida (sem mexer no componente interno): envolver `<MetodoPrimeiraVitoria />` em um wrapper com `id="metodo"` dentro de `Solucao.tsx`.
-  - Ao clicar no botão, fazer `document.getElementById("metodo")?.scrollIntoView({ behavior: "smooth" })` com fallback para `window.location.hash = "#metodo"`.
-
-**“Tudo isso em uma dobra”**
-- Para garantir que **frase + botão** fiquem na dobra:
-  - posicionar esse bloco logo após a intro (antes dos 3 mecanismos) ou reduzir o espaçamento vertical (`mb/py`) para caber no primeiro viewport no mobile.
-  - Ajustar margens do intro (`mb-12`, `mt-6`, etc.) para um layout mais compacto sem perder respiro.
-
----
-
-### 3) Relacionar Sessão 2 e 3 (espelhamento) de forma sutil
-#### 3.1) Lead (Sessão 2) aponta para a explicação (Sessão 3)
-**Arquivo:** `src/components/sections/Lead.tsx`
-
-- Inserir uma linha curta (quase como um “ponto de virada”) antes do “Antes de te mostrar como…” ou bem perto do final, algo como:
-  - “E esse ‘sumir’ acontece por 3 motivos — a tríade.”
-- Essa linha pode ter um link sutil para `#problema` (ex.: sublinhado leve / texto verde eucalipto), sem virar CTA grande (para não competir com conversão).
-- Objetivo: explicitar “o que eu senti (Lead) = por que acontece (Problema)”.
-
-#### 3.2) Problema (Sessão 3) referencia o gancho emocional do Lead
-**Arquivo:** `src/components/sections/Problema.tsx`
-
-- Adicionar um micro-prefácio no topo, acima do título, em texto pequeno:
-  - “Lembra quando eu disse ‘Você desaparece’?” / “Aquele ‘sumir’ tem 3 vilões…”
-- Incluir um link discreto para `#lead` (opcional) para reforçar a sensação de espelho.
-- Manter bem curto para não aumentar muito a altura da seção.
-
----
-
-## Critérios de aceite (o que você vai ver na tela)
-1) No topo da Sessão 4, a ordem ficará claramente: **pré-headline (pequena) → headline (grande) → subheadline (média)**, com bom contraste.
-2) A frase “Isso quebra a Tríade…” ficará visualmente mais “premium” e mais forte no texto.
-3) Existirá um botão logo abaixo dessa frase que leva com scroll suave para o **Método Primeira Vitória**.
-4) No mobile, o bloco **frase + botão** ficará visível “na dobra” (primeiro viewport), sem exigir rolar.
-5) Sessão 2 e 3 terão referências cruzadas sutis (Lead → Problema e Problema → Lead) deixando explícito que uma explica a outra.
-
----
-
-## Riscos / cuidados
-- Evitar usar **Ocre Dourado** em trechos longos de texto para não “diluir” o sentido de CTA/conversão.
-- Garantir que compactar para caber “na dobra” não deixe o texto apertado demais; vou ajustar espaçamentos com prioridade em legibilidade.
-
----
-
-## Arquivos que serão alterados
-- `src/components/sections/Solucao.tsx`
-- `src/components/sections/Lead.tsx`
-- `src/components/sections/Problema.tsx`
+Resultado esperado
+- No desktop, a seção Garantia terá um único bloco central (sem layout em 2 colunas), eliminando o espaço sobrando na esquerda e deixando o design mais “fechado”, elegante e direto.
