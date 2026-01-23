@@ -1,6 +1,6 @@
 import { Section } from "@/components/shared/Section";
-import { AmigurumiThreadIllustration } from "@/components/sections/lead/AmigurumiThreadIllustration";
 import { ChevronDown } from "lucide-react";
+import leadVisual from "@/assets/lead-visual.png";
 
 /**
  * Seção Lead Emocional
@@ -18,32 +18,30 @@ const Lead = () => {
                 Talvez Você se Identifique com Isso...
               </h2>
 
-              {/* divisor em forma de “fio” */}
+              {/* divisor pontilhado */}
               <div className="mx-auto w-full max-w-[420px] md:mx-0">
-                <svg
-                  viewBox="0 0 520 22"
+                <div
                   aria-hidden="true"
-                  className="h-[22px] w-full text-verde-eucalipto/40"
-                >
-                  <path
-                    d="M10 12 C 60 4, 90 20, 140 12 C 200 2, 230 20, 290 12 C 350 4, 380 20, 440 12 C 470 8, 495 10, 510 12"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                  />
-                  <circle cx="14" cy="12" r="4" fill="currentColor" opacity="0.45" />
-                  <circle cx="510" cy="12" r="4" fill="currentColor" opacity="0.25" />
-                </svg>
+                  className="h-3 w-full text-verde-eucalipto/40 [background-image:radial-gradient(currentColor_1.2px,transparent_1.2px)] [background-size:12px_4px] [background-position:left_center]"
+                />
               </div>
             </header>
 
-            <p>Você acorda ansiosa. Passa o dia acelerada. Dorme inquieta.</p>
+            <p>
+              Você acorda{" "}
+              <span className="font-semibold text-verde-eucalipto">ansiosa</span>. Passa o
+              dia{" "}
+              <span className="font-semibold text-verde-eucalipto">acelerada</span>. Dorme{" "}
+              <span className="font-semibold text-verde-eucalipto">inquieta</span>.
+            </p>
 
             <p className="pt-1 font-medium text-foreground">E no meio disso tudo?</p>
 
             <p>
-              Você não tem nada que seja só seu. Tudo que você faz tem destinatário.
+              <span className="font-semibold text-verde-eucalipto">
+                Você não tem nada que seja só seu.
+              </span>{" "}
+              Tudo que você faz tem destinatário.
             </p>
 
             <p>
@@ -84,13 +82,14 @@ const Lead = () => {
 
         {/* Coluna visual */}
         <div className="order-last md:order-none">
-          <div className="mx-auto w-full max-w-[360px] rounded-2xl border border-border bg-cinza-nuvem/50 p-5 shadow-sm backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 md:max-w-[460px] md:rotate-1">
-            <AmigurumiThreadIllustration className="text-verde-eucalipto/45" />
-
-            <p className="mt-4 text-center text-xs text-foreground/70">
-              Um fio de cada vez — até você voltar a caber em você.
-            </p>
-          </div>
+          <figure className="mx-auto w-full max-w-[360px] rounded-2xl border border-border bg-cinza-nuvem/50 p-4 shadow-sm backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 md:max-w-[460px] md:rotate-1">
+            <img
+              src={leadVisual}
+              alt="Mulher descansando em ambiente aconchegante, evocando calma e autocuidado"
+              loading="lazy"
+              className="h-auto w-full rounded-xl object-cover"
+            />
+          </figure>
         </div>
       </div>
     </Section>
