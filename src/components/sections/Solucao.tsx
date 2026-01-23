@@ -1,5 +1,4 @@
 import { Section } from "@/components/shared/Section";
-import { Button } from "@/components/shared/Button";
 import { MetodoPrimeiraVitoria } from "@/components/sections/solucao/MetodoPrimeiraVitoria";
 import { Mapa7Dias } from "@/components/sections/solucao/Mapa7Dias";
 
@@ -8,16 +7,6 @@ import { Mapa7Dias } from "@/components/sections/solucao/Mapa7Dias";
  * Fundo Verde Eucalipto (escuro), texto branco
  */
 const Solucao = () => {
-  const handleVerMetodo = () => {
-    const el = document.getElementById("metodo");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-      return;
-    }
-
-    window.location.hash = "#metodo";
-  };
-
   const mecanismos = [{
     numero: "1",
     titulo: "Você Entra Em Estado De Atenção Plena",
@@ -46,7 +35,7 @@ const Solucao = () => {
         const bullets = content.split('\n').filter(line => line.startsWith('•'));
         return <ul key={i} className="list-none space-y-1 mb-4">
             {bullets.map((bullet, j) => <li key={j} className="flex items-start gap-2">
-                <span className="text-white/70">•</span>
+                <span className="text-ocre-dourado">•</span>
                 {bullet.substring(2)}
               </li>)}
           </ul>;
@@ -68,40 +57,17 @@ const Solucao = () => {
     });
   };
   return <Section id="solucao" background="verde">
-      <div className="solucao-intro text-center max-w-4xl mx-auto mb-8 md:mb-10 animate-fade-in">
-        {/* Pré-headline */}
-        <p className="text-sm md:text-base font-semibold tracking-[0.18em] uppercase text-white/75">
-          A descoberta que muda tudo
-        </p>
-
-        {/* Headline */}
-        <h2 className="mt-3 font-serif text-3xl md:text-5xl text-white leading-tight">
-          Quando você cria Amigurumi com as mãos
+      <div className="solucao-intro text-center max-w-4xl mx-auto mb-12 animate-fade-in">
+        <h2 className="font-serif text-3xl text-white mb-6 leading-tight md:text-xl">
+          A Descoberta Que Muda Tudo
         </h2>
-
-        {/* Subheadline */}
-        <p className="mt-4 text-lg md:text-xl text-white/85 leading-relaxed">
-          Algo tangível, bonito, que você vê surgir — e sua mente finalmente encontra um
-          lugar pra pousar.
+        
+        <p className="text-xl text-ocre-dourado font-bold mt-6 py-0 my-0 md:text-3xl">
+          Quando você cria Amigurumi com as mãos
+          <br />
+          <span className="block">— algo tangível, bonito, que você vê surgir —</span>
         </p>
-
-        {/* Frase de impacto + CTA (na dobra) */}
-        <div className="mt-6 mx-auto max-w-2xl rounded-2xl border border-white/10 bg-white/5 px-6 py-5">
-          <p className="font-serif text-xl md:text-2xl text-white leading-snug">
-            Isso quebra a Tríade da Mente Acelerada — de uma vez.
-          </p>
-          <p className="mt-2 text-sm md:text-base text-white/75">
-            E agora você vai ver exatamente como.
-          </p>
-
-          <div className="mt-4">
-            <Button variant="primary" onClick={handleVerMetodo} aria-label="Ir para o Método Primeira Vitória">
-              Ver o Método Primeira Vitória
-            </Button>
-          </div>
-        </div>
-
-        <p className="mt-6 text-base md:text-lg text-white/85">
+        <p className="text-lg md:text-xl text-white f mt-2 md:text-lead">
           Três coisas acontecem no seu cérebro:
         </p>
       </div>
@@ -112,7 +78,7 @@ const Solucao = () => {
         animationDelay: `${index * 0.15}s`
       }}>
             <div className="flex items-start gap-4 mb-5">
-              <span className="font-serif text-6xl text-white/25 leading-none flex-shrink-0">
+              <span className="font-serif text-6xl text-ocre-dourado/50 leading-none flex-shrink-0">
                 {mec.numero}
               </span>
               <h3 className="font-serif text-xl text-white leading-snug pt-1">
@@ -126,10 +92,15 @@ const Solucao = () => {
           </div>)}
       </div>
 
-      {/* Método + Pilares (sessão única, full-width) */}
-      <div id="metodo">
-        <MetodoPrimeiraVitoria />
+      {/* Box de Transição */}
+      <div className="bg-ocre-dourado/20 border-2 border-ocre-dourado rounded-xl p-8 text-center max-w-2xl mx-auto mb-20 animate-fade-in">
+        <p className="text-xl text-white font-semibold">
+          Isso quebra a Tríade da Mente Acelerada — de uma vez.
+        </p>
       </div>
+
+      {/* Método + Pilares (sessão única, full-width) */}
+      <MetodoPrimeiraVitoria />
 
       {/* Mapa de 7 Dias (visual) */}
       <Mapa7Dias />
