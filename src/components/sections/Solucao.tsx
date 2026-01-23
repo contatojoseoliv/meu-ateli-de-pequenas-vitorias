@@ -22,13 +22,7 @@ const Solucao = () => {
   }, {
     numero: "3",
     titulo: "Você Reconecta Corpo E Mente",
-    texto: `Porque você não está mais só na sua cabeça.
-
-Você está sentindo. Tocando. Vendo surgir das suas mãos.
-
-E isso — biologicamente — **reduz cortisol** (hormônio do estresse) em até 25%.
-
-Estudos brasileiros (ESF): grupos de crochê reduziram ansiedade/depressão em 73% das participantes.
+    texto: `O contato manual reconecta corpo e mente, reduz cortisol e estresse, ajudando a diminuir ansiedade e depressão.
 
 *→ Isso quebra o VILÃO 3 (Desconexão Corpo-Mente)*`
   }];
