@@ -34,7 +34,7 @@ const Garantia = () => {
 
             <div className="text-body text-grafite-suave/90 space-y-2 leading-relaxed">
               <p className="text-grafite-suave">
-                Se, ao final dos 7 dias, <span className="text-verde-eucalipto">você não sentir que valeu a pena</span> — por QUALQUER motivo —
+                Se, ao final dos 7 dias, <span className="text-verde-eucalipto font-semibold">você não sentir que valeu a pena</span> — por QUALQUER motivo —
               </p>
 
               <p>
