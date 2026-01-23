@@ -16,17 +16,7 @@ const Solucao = () => {
   }, {
     numero: "2",
     titulo: "Você Descarrega Emocionalmente",
-    texto: `Do início ao fim. Com suas próprias mãos.
-
-E quando você **termina** — seu cérebro libera dopamina.
-
-Não metáfora. Química real.
-
-**E você descarrega.**
-
-Pela primeira vez em muito tempo, você respira fundo e pensa: *"Eu fiz. Terminou. Está aqui."*
-
-E aí vem o alívio.
+    texto: `Criar e Finalizar uma peça gera dopamina, traz sensação de conclusão, alívio emocional e a calma de “eu consegui”.
 
 *→ Isso quebra o VILÃO 2 (Acumular Sem Descarregar)*`
   }, {
