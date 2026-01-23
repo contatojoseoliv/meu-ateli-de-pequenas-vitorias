@@ -1,5 +1,5 @@
 import { Section } from "@/components/shared/Section";
-import leadImage from "@/assets/lead-eu-vejo-voce.png";
+import { AmigurumiThreadIllustration } from "@/components/sections/lead/AmigurumiThreadIllustration";
 import { ChevronDown } from "lucide-react";
 
 /**
@@ -8,69 +8,88 @@ import { ChevronDown } from "lucide-react";
  */
 const Lead = () => {
   return (
-    <Section id="lead" background="cinza">
-      <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
+    <Section id="lead" background="white">
+      <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12">
+        {/* Coluna de texto */}
         <div className="max-w-2xl text-center md:text-left">
           <div className="animate-fade-in space-y-4 text-sm leading-relaxed text-grafite-suave md:space-y-5 md:text-base">
-            <header className="space-y-3">
-              <h2 className="font-serif text-3xl md:text-4xl tracking-tight text-foreground">
-                Eu Vejo Você
+            <header className="space-y-4">
+              <h2 className="font-serif text-3xl tracking-tight text-foreground md:text-4xl">
+                Talvez Você se Identifique com Isso...
               </h2>
-              <div className="h-1 w-14 rounded-full bg-primary/20 mx-auto md:mx-0" />
+
+              {/* divisor em forma de “fio” */}
+              <div className="mx-auto w-full max-w-[420px] md:mx-0">
+                <svg
+                  viewBox="0 0 520 22"
+                  aria-hidden="true"
+                  className="h-[22px] w-full text-verde-eucalipto/40"
+                >
+                  <path
+                    d="M10 12 C 60 4, 90 20, 140 12 C 200 2, 230 20, 290 12 C 350 4, 380 20, 440 12 C 470 8, 495 10, 510 12"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                  />
+                  <circle cx="14" cy="12" r="4" fill="currentColor" opacity="0.45" />
+                  <circle cx="510" cy="12" r="4" fill="currentColor" opacity="0.25" />
+                </svg>
+              </div>
             </header>
 
-            <p>
-              Você acorda{" "}
-              <em className="text-verde-eucalipto font-semibold not-italic">ansiosa</em>. Passa o dia{" "}
-              <em className="text-verde-eucalipto font-semibold not-italic">acelerada</em>.{" "}
-              <em className="text-verde-eucalipto font-semibold not-italic">Dorme inquieta</em>.
-            </p>
+            <p>Você acorda ansiosa. Passa o dia acelerada. Dorme inquieta.</p>
 
-            <p>E no meio disso tudo?</p>
-
-            <p className="font-semibold text-verde-eucalipto">Você não tem nada que seja só seu.</p>
+            <p className="pt-1 font-medium text-foreground">E no meio disso tudo?</p>
 
             <p>
-              Tudo que você faz tem destinatário. O trabalho é para o chefe. A casa é para a família. O tempo é para todo mundo — menos você.
+              Você não tem nada que seja só seu. Tudo que você faz tem destinatário.
             </p>
 
             <p>
-              E quando você não tem nada só seu — nenhum espaço, nenhum momento, nenhuma identidade fora dos papéis que cumpre —
+              E quando você não tem nada só seu — nenhum espaço, nenhum momento,
+              nenhuma identidade fora dos papéis que cumpre.
             </p>
 
             <p className="font-bold text-rosa-argila text-base md:text-lg">
-              <span className="block">Você desaparece.</span>
-              <span className="block">Mas não precisa ser assim.</span>
+              Você desaparece.
             </p>
 
-            <div className="my-5 border-t border-dashed border-verde-eucalipto/30" />
+            <p className="font-semibold text-foreground">Mas não precisa ser assim.</p>
 
-            <p className="font-semibold text-verde-eucalipto">
-              Isso é construído, todos os dias, pelo jeito que você vive...
+            <p>
+              E se você pudesse{" "}
+              <span className="font-semibold text-verde-eucalipto">
+                ter 15 minutos só seus
+              </span>
+              {" — que te acalmassem de verdade?"}
             </p>
 
-            <div className="pt-2">
+            <p className="pt-1">
+              Antes de te mostrar como, deixa eu te explicar uma coisa importante:
+            </p>
+
+            {/* Seta sutil */}
+            <div className="pt-1">
               <a
                 href="#problema"
-                className="inline-flex items-center gap-2 text-foreground/80"
-                aria-label="Continue lendo"
+                aria-label="Ir para a próxima seção"
+                className="inline-flex items-center justify-center rounded-full p-2 text-foreground/70 transition-transform duration-300 hover:-translate-y-0.5 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                Continue lendo
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className="h-5 w-5" />
               </a>
             </div>
           </div>
         </div>
 
+        {/* Coluna visual */}
         <div className="order-last md:order-none">
-          <div className="mx-auto w-full max-w-[320px] rounded-2xl border-2 border-border bg-background/60 p-3 shadow-md backdrop-blur-md transition-transform duration-300 hover:-translate-y-1 hover:rotate-0 hover:shadow-lg md:max-w-[420px] md:rotate-2 md:p-4">
-            <img
-              src={leadImage}
-              alt="Mulher em momento de calma e respiração consciente"
-              className="h-auto w-full rounded-xl object-cover"
-              loading="lazy"
-              decoding="async"
-            />
+          <div className="mx-auto w-full max-w-[360px] rounded-2xl border border-border bg-cinza-nuvem/50 p-5 shadow-sm backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 md:max-w-[460px] md:rotate-1">
+            <AmigurumiThreadIllustration className="text-verde-eucalipto/45" />
+
+            <p className="mt-4 text-center text-xs text-foreground/70">
+              Um fio de cada vez — até você voltar a caber em você.
+            </p>
           </div>
         </div>
       </div>
