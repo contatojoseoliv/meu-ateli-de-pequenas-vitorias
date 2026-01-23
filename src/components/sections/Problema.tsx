@@ -22,7 +22,7 @@ const Problema = () => {
     icon: Brain,
     numero: "1",
     titulo: "Você Nunca Está Presente",
-    texto: `Você vive pensando no que já passou ou no que ainda virá. A mente fica no passado ou no futuro, mantendo o cérebro em estado constante de alerta. [[green]]E aí a ansiedade nunca para.[[/green]]`,
+    texto: `Você vive pensando no passado ou no futuro, mantendo o cérebro em estado constante de alerta. [[green]]E aí a ansiedade nunca para.[[/green]]`,
     recap: "VILÃO 1: Nunca presente → Cérebro interpreta perigo → Ansiedade ↑"
   }, {
     icon: Package,
