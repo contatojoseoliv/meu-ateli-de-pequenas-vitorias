@@ -58,16 +58,21 @@ const Solucao = () => {
   };
   return <Section id="solucao" background="verde">
       <div className="solucao-intro text-center max-w-4xl mx-auto mb-12 animate-fade-in">
-        <h2 className="font-serif text-3xl text-white mb-6 leading-tight md:text-xl">
+        {/* Pré-headline */}
+        <p className="text-sm md:text-base font-semibold tracking-[0.18em] uppercase text-white/70">
           A Descoberta Que Muda Tudo
-        </h2>
-        
-        <p className="text-xl text-ocre-dourado font-bold mt-6 py-0 my-0 md:text-3xl">
-          Quando você cria Amigurumi com as mãos
-          <br />
-          <span className="block">— algo tangível, bonito, que você vê surgir —</span>
         </p>
-        <p className="text-lg md:text-xl text-white f mt-2 md:text-lead">
+
+        {/* Headline */}
+        <h2 className="mt-4 font-serif text-3xl md:text-5xl text-white leading-tight">
+          Quando você cria Amigurumi com as mãos
+          <span className="block mt-2 text-2xl md:text-4xl text-white/90">
+            — algo tangível, bonito, que você vê surgir —
+          </span>
+        </h2>
+
+        {/* Subheadline */}
+        <p className="mt-4 text-lg md:text-xl text-white/85">
           Três coisas acontecem no seu cérebro:
         </p>
       </div>
