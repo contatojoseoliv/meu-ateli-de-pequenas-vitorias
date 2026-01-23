@@ -62,6 +62,14 @@ const Lead = () => {
               Antes de te mostrar como, deixa eu te explicar uma coisa importante:
             </p>
 
+            <p className="pt-2 text-sm md:text-body text-grafite-suave/80">
+              Esse “sumir” acontece por 3 motivos —{' '}
+              <a href="#problema" className="story-link text-verde-eucalipto font-semibold">
+                a tríade
+              </a>
+              .
+            </p>
+
           </div>
         </div>
 

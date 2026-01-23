@@ -60,6 +60,18 @@ const Problema = () => {
     });
   };
   return <Section id="problema" background="white" containerClassName="pt-4 pb-12 md:pt-8 md:pb-14">
+      {/* Espelhamento com o Lead */}
+      <div className="text-center max-w-2xl mx-auto mb-2 md:mb-3 animate-fade-in">
+        <p className="text-xs md:text-sm text-grafite-suave/70">
+          Lembra quando eu disse <span className="font-semibold">“você desaparece”</span>? Isso acontece por
+          3 motivos —{' '}
+          <a href="#lead" className="story-link text-verde-eucalipto font-semibold">
+            volta 10 segundos
+          </a>
+          .
+        </p>
+      </div>
+
       {/* Título */}
       <div className="text-center max-w-2xl mx-auto mb-6 md:mb-10 animate-fade-in">
         <h2 className="font-serif md:text-h2 text-grafite-suave mb-6 text-2xl">
