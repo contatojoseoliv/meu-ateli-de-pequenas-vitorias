@@ -36,8 +36,7 @@ const Lead = () => {
             <p>
               <span className="font-semibold text-verde-eucalipto">
                 Você não tem nada que seja só seu.
-              </span>{" "}
-              Tudo que você faz tem destinatário.
+              </span>
             </p>
 
             <p>
