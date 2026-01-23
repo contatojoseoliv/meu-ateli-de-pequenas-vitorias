@@ -19,7 +19,7 @@ const Lead = () => {
 
               {/* divisor pontilhado */}
               <div className="mx-auto w-full max-w-[420px] md:mx-0">
-                <div aria-hidden="true" className="h-1 w-full text-verde-eucalipto/40 [background-image:radial-gradient(currentColor_1.2px,transparent_1.2px)] [background-size:12px_4px] [background-position:left_center]" />
+                
               </div>
             </header>
 
