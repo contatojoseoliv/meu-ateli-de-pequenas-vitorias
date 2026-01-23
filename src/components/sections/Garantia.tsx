@@ -5,8 +5,7 @@ import { Shield } from "lucide-react";
  * Seção Garantia - Garantia Incondicional de 7 Dias
  */
 const Garantia = () => {
-  return (
-    <Section id="garantia" background="cinza" containerClassName="py-4 md:py-6">
+  return <Section id="garantia" background="cinza" containerClassName="py-4 md:py-6">
       <div className="max-w-4xl mx-auto">
         <div className="animate-fade-in">
           <div className="bg-white border-l-4 border-verde-eucalipto rounded-xl shadow-suave p-5 md:p-6">
@@ -47,16 +46,14 @@ const Garantia = () => {
               </p>
 
               <ul className="list-disc list-inside space-y-1 text-grafite-suave/80">
-                <li>Sentir sua mente finalmente parar</li>
-                <li>Segurar algo que VOCÊ criou</li>
-                <li>Provar para si mesma que é capaz</li>
+                
+                
+                
               </ul>
             </div>
           </div>
         </div>
       </div>
-    </Section>
-  );
+    </Section>;
 };
-
 export { Garantia };
