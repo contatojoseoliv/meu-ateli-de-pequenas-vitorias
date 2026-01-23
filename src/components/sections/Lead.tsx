@@ -13,7 +13,7 @@ const Lead = () => {
         <div className="max-w-2xl text-center md:text-left">
           <div className="animate-fade-in space-y-3 pb-14 text-body leading-[1.5] text-grafite-suave md:space-y-4 md:pb-16">
             <header className="space-y-4">
-              <h2 className="font-serif text-body tracking-tight text-foreground">
+              <h2 className="font-serif tracking-tight text-foreground text-3xl">
                 Talvez Você se Identifique com Isso...
               </h2>
 
