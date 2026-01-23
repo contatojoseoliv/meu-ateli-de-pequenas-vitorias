@@ -31,7 +31,7 @@ const Lead = () => {
               <span className="font-semibold text-verde-eucalipto">inquieta</span>.
             </p>
 
-            <p className="pt-1 font-medium">E no meio disso tudo?</p>
+            <p className="pt-1">E no meio disso tudo?</p>
 
             <p>
               <span className="font-semibold text-verde-eucalipto">
