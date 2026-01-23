@@ -73,7 +73,7 @@ const Lead = () => {
         </div>
 
         {/* Seta sutil (ancorada para ficar na dobra) */}
-        <a href="#problema" aria-label="Ir para a próxima seção" className="absolute bottom-3 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-full p-2 text-foreground/70 transition-transform duration-300 hover:-translate-y-0.5 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:bottom-4">
+        <a href="#problema" aria-label="Ir para a próxima seção" className="absolute bottom-1 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-full p-2 text-foreground/70 transition-transform duration-300 hover:-translate-y-0.5 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:bottom-2">
           <ChevronDown className="h-5 w-5" />
         </a>
       </div>
