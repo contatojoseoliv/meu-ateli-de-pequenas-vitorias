@@ -58,7 +58,7 @@ const Lead = () => {
               {" — que te acalmassem de verdade?"}
             </p>
 
-            <p className="border-t border-border/60 pt-3 text-sm text-grafite-suave/80 md:text-body">
+            <p className="border-t border-border/60 pt-3 text-sm text-grafite-suave md:text-body">
               Antes de te mostrar como, deixa eu te explicar uma coisa importante:
             </p>
 
