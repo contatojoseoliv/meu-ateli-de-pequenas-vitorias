@@ -10,7 +10,7 @@ const Solucao = () => {
   const mecanismos = [{
     numero: "1",
     titulo: "Você Entra Em Estado De Atenção Plena",
-    texto: `Quando suas mãos estão criando — contando pontos, sentindo a textura do fio — força a mente ao presente, afastando pensamentos futuros e reduzindo a ansiedade de forma natural.
+    texto: `Quando você está contando pontos e sentindo a textura do fio, isso força a mente ao presente, afastando pensamentos futuros e reduzindo a ansiedade.
 
 *→ Isso quebra o VILÃO 1 (Nunca Estar Presente)*`
   }, {
