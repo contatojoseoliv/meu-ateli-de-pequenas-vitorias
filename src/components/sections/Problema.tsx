@@ -105,7 +105,6 @@ const Problema = () => {
           <Button
             variant="primary"
             size="lg"
-            className="w-full max-w-xs sm:max-w-sm"
             onClick={handleVerSolucao}
             aria-label="Ir para a seção Solução"
           >
