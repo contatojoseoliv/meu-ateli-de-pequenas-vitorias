@@ -1,71 +1,69 @@
 
 Objetivo
-- Deixar “em branco” a sessão que começa com “Por Isso Criamos o Primeira Vitória em Amigurumi©” e separar claramente a dobra (transição) entre:
-  1) A parte verde (pré-headline + headline + 3 caixinhas + botão)
-  2) O conteúdo do método (iniciando em “Por Isso Criamos...”)
+- Conferir e ajustar o espaçamento vertical da Sessão 3 (Problema) para ficar “mais compacto”.
+- Trocar a cor de fundo da Sessão 3 (Problema) para Verde Eucalipto, mantendo legibilidade/contraste.
 
-O que identifiquei no código
-- A landing page está organizada em `src/pages/Index.tsx`.
-- O texto “Por Isso Criamos o Primeira Vitória em Amigurumi©” está em `src/components/sections/solucao/MetodoPrimeiraVitoria.tsx`.
-- Esse bloco hoje fica DENTRO da seção `Solucao` (`src/components/sections/Solucao.tsx`), que tem `background="verde"`.
-- Portanto, para ficar “em branco” de verdade e criar uma dobra clara, o ideal é quebrar `Solucao` em duas seções distintas (verde em cima, branco embaixo).
+Contexto (o que encontrei no código)
+- A ordem das dobras está em `src/pages/Index.tsx`: Hero → Lead → Problema → Solução → …
+- A Sessão 3 é `src/components/sections/Problema.tsx` e hoje está com:
+  - `background="white"`
+  - `containerClassName="pt-10 pb-10 md:pt-12 md:pb-12"`
+- O componente `Section` (`src/components/shared/Section.tsx`) já suporta `background="verde"` e aplica:
+  - `bg-verde-eucalipto text-white`
 
-Decisão de implementação (alinhada ao manual e ao pedido de “dobras”)
-- Separar “Solução” em 2 seções reais:
-  - Seção 4A (verde): pré-headline + headline + sub + 3 cards + botão CTA.
-  - Seção 4B (branca): conteúdo do método (começa em “Por Isso Criamos...”).
-- Manter o scroll do botão “Quero ver o método” levando para a Seção 4B (id `metodo`), mas agora ele vai apontar para uma seção separada, com fundo branco.
+Decisões alinhadas com seu pedido
+- Cor de fundo (Sessão 3): Verde Eucalipto
+- Espaçamento (Sessão 3): Mais compacto (reduzir principalmente “respiro” inferior e alguns espaçamentos internos)
 
-Mudanças planejadas (passo a passo)
-1) `src/components/sections/Solucao.tsx`
-   - Encerrar a `<Section background="verde">` logo após o botão CTA.
-   - Criar uma nova `<Section id="metodo" background="white">` imediatamente abaixo.
-   - Mover para dentro da seção branca:
-     - `<MetodoPrimeiraVitoria />`
-     - `<Mapa7Dias />`
-     - O “fechamento emocional” (texto “E quando você segura…” etc.)
-   - Remover/ajustar o separador atual (`border-t border-white/10 pt-...`) porque ele foi pensado para separar dentro do fundo verde. A separação agora será feita por:
-     - Espaçamento consistente (ex.: `pt-16 md:pt-20`)
-     - Opcional: um separador mais editorial (linha cinza bem suave) já dentro do branco, se necessário.
+O que vou mudar (implementação)
+1) Trocar o fundo da Sessão 3 (Problema) para verde
+- Arquivo: `src/components/sections/Problema.tsx`
+- Alteração: `background="white"` → `background="verde"`
 
-2) `src/components/sections/solucao/MetodoPrimeiraVitoria.tsx`
-   - Hoje o componente assume “fundo escuro” (usa `text-white` e overlays tipo `bg-white/10`).
-   - Ajustar para funcionar em fundo branco:
-     - Trocar textos principais para `text-grafite-suave` e variações com opacidade (ex.: `/80`).
-     - Trocar cartões internos de `bg-white/10 border-white/15` para algo coerente no branco, por exemplo:
-       - cards: `bg-cinza-nuvem` ou `bg-rosa-argila-10` (claro) com `border` suave.
-     - Ajustar o wrapper full-bleed atual:
-       - Hoje ele força `w-screen` com `bg-rosa-argila-10` e `border-y border-white/10`.
-       - No branco, isso pode virar:
-         - ou um bloco centralizado normal (sem full-bleed), para ficar editorial,
-         - ou continuar full-bleed mas com bordas cinza suaves (`border-border` / `border-grafite-suave/10`).
-   - Garantir que a hierarquia visual do título (“Por Isso Criamos o” + “Primeira Vitória…”) siga o manual: tipografia serifada para headline e sans para o pre.
+2) Corrigir contraste de textos que hoje estão “forçando” grafite em fundo verde
+- Ainda em `Problema.tsx`, ajustar classes:
+  - Título/subtítulo/parágrafos que estão com `text-grafite-suave` para variantes em branco, por exemplo:
+    - `text-white` / `text-white/85` / `text-white/70`
+  - O destaque “(E Não É Culpa Sua)” hoje em `text-rosa-argila` pode permanecer (fica bom como acento no verde).
+  - O texto de “Resultado” e a frase final também precisam ir para branco (ou branco com opacidade).
 
-3) `src/components/sections/solucao/Mapa7Dias.tsx`
-   - Também está desenhado para fundo verde (muito `text-white`, `border-white/10`, `bg-white/5`).
-   - Adequar para o fundo branco:
-     - Textos: `text-grafite-suave` (e secundários `text-grafite-suave/70`).
-     - Bordas/fundos: trocar `border-white/...` por `border-grafite-suave/10` ou `border-border`.
-     - Nós (circulinhos) e chips: usar `bg-cinza-nuvem`/`bg-rosa-argila-10` com ícones em `text-verde-eucalipto` para manter identidade.
-     - Preservar o “Ocre Dourado” apenas onde for elemento de conversão (não usar como texto corrido).
+3) Ajustar os 3 cards para combinarem com fundo verde
+Há duas abordagens possíveis; vou seguir a que mantém o padrão visual da dobra verde (Solução):
+- Cards com estilo “glass”:
+  - `bg-white/10 border border-white/20`
+  - Texto interno `text-white/85` (e títulos `text-white`)
+  - Ícones: `text-white/85` (ou `text-rosa-argila` se você preferir mais “calor”)
+- Motivo: se mantivermos `bg-rosa-argila-10` nos cards, a paleta pode ficar “descolada” do fundo verde e o contraste de texto fica inconsistente.
 
-4) Ajuste fino de “dobra” (separação visual)
-   - Validar no preview (desktop e mobile) se a transição verde → branco ficou com a “respiração” correta:
-     - Espaço abaixo do botão (no verde) suficiente para “encerrar” o bloco.
-     - Espaço acima do título “Por Isso Criamos…” (no branco) para iniciar uma nova leitura.
-   - Se necessário, adicionar um divisor editorial mínimo entre as seções (ex.: uma faixa branca já existe por ser uma nova Section; geralmente isso é suficiente).
+4) Deixar a Sessão 3 mais compacta (espaçamento)
+- Reduzir padding do container da seção, por exemplo:
+  - de `pt-10 pb-10 md:pt-12 md:pb-12`
+  - para algo como `pt-10 pb-8 md:pt-12 md:pb-10` (compacta embaixo sem “esmagar” o topo)
+- Ajustar espaçamentos internos para acompanhar:
+  - `mb-10 md:mb-12` do bloco de título pode cair um pouco (ex.: `mb-8 md:mb-10`)
+  - `mb-12 md:mb-14` do grid de cards pode cair um pouco (ex.: `mb-10 md:mb-12`)
+  - A área do botão (`mt-8 mb-4 md:mb-6`) pode ficar mais enxuta se estiver sobrando espaço visual.
 
-Critérios de aceite (o que vai ficar visivelmente diferente)
-- O bloco que começa em “Por Isso Criamos o Primeira Vitória em Amigurumi©” ficará em FUNDO BRANCO (não mais no verde).
-- A seção verde terminará exatamente no botão “Quero ver o método”.
-- Ao clicar no botão, a página rola suavemente para o início do bloco branco (método).
-- Textos e cards dentro do método/mapa continuarão legíveis e consistentes com a paleta (grafite no branco; verde e rosa como acentos; ocre só para CTA).
+Checklist de verificação (visual)
+- Sessão 3 com fundo verde e leitura confortável:
+  - Título e texto legíveis (sem grafite “apagado” no verde).
+  - Cards com contraste (texto não “estoura” nem fica baixo contraste).
+  - Botão “Quero Começar” permanece com estilo de CTA consistente (e sem usar ocre para texto/cor indevida).
+- Transição Lead → Problema:
+  - Ver se a seta/âncora do Lead ainda fica “bonita” com o novo fundo abaixo.
+- Transição Problema → Solução:
+  - Ver se não ficou “verde sobre verde” cansativo (duas dobras verdes seguidas). Se ficar pesado, proponho uma alternativa rápida:
+    - Sessão 3 verde + Sessão 4 manter verde, mas diferenciar usando um separador (linha sutil) ou textura/gradiente muito leve (sem mudar o branding).
 
 Arquivos que serão alterados
-- `src/components/sections/Solucao.tsx`
-- `src/components/sections/solucao/MetodoPrimeiraVitoria.tsx`
-- `src/components/sections/solucao/Mapa7Dias.tsx`
+- `src/components/sections/Problema.tsx`
+- (provavelmente não precisa mexer) `src/components/shared/Section.tsx` já tem `background="verde"`
 
-Riscos / pontos de atenção
-- Como `MetodoPrimeiraVitoria` usa layout “full-bleed” (`w-screen`), ao passar para fundo branco precisamos garantir que não pareça uma faixa “solta” ou com contraste errado.
-- O `Mapa7Dias` tem muitos elementos com `text-white` e `border-white/...`; a troca para o tema claro precisa ser completa para não sobrar nada “lavado”/invisível.
+Risco/atenção
+- Como a Sessão 4 (Solução) já é verde, duas seções verdes consecutivas podem reduzir o contraste “entre dobras”. Se isso acontecer, eu já deixo preparado um ajuste mínimo (separador/gradiente leve) para você aprovar.
+
+Próximos passos após você aprovar este plano
+- Eu implemento as alterações acima, e você confere no preview se:
+  1) o espaçamento ficou realmente mais compacto
+  2) o fundo verde ficou agradável e legível
+  3) a transição entre as dobras está harmoniosa
