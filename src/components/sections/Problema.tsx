@@ -61,7 +61,7 @@ const Problema = () => {
         </p>;
     });
   };
-  return <Section id="problema" background="white" containerClassName="py-10 md:py-12">
+  return <Section id="problema" background="white" containerClassName="pt-10 pb-14 md:pt-12 md:pb-16">
       {/* Título */}
       <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12 animate-fade-in">
         <h2 className="font-serif md:text-h2 text-grafite-suave mb-6 text-2xl">
@@ -101,7 +101,7 @@ const Problema = () => {
         </p>
         <p className="font-bold text-verde-eucalipto text-xl">Mas existe uma forma de solucionar os três — de uma vez.</p>
 
-        <div className="mt-8">
+        <div className="mt-8 mb-4 md:mb-6">
           <Button variant="primary" onClick={handleVerSolucao} aria-label="Ir para a seção Solução">
             Quero Começar
           </Button>
