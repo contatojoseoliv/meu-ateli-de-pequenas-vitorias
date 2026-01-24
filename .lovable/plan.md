@@ -1,69 +1,54 @@
 
-Objetivo
-- Conferir e ajustar o espaçamento vertical da Sessão 3 (Problema) para ficar “mais compacto”.
-- Trocar a cor de fundo da Sessão 3 (Problema) para Verde Eucalipto, mantendo legibilidade/contraste.
+Objetivo (Dobra 3 / “Problema”)
+- Fixar a cor de fundo na opção recomendada: **Cinza Nuvem** da paleta (`background="cinza"` → `bg-cinza-nuvem`).
+- Garantir que o fundo realmente “apareça” (sem ficar parecendo branco puro), mantendo os **cards brancos** com contraste bonito e consistente com o resto da landing.
 
-Contexto (o que encontrei no código)
-- A ordem das dobras está em `src/pages/Index.tsx`: Hero → Lead → Problema → Solução → …
-- A Sessão 3 é `src/components/sections/Problema.tsx` e hoje está com:
-  - `background="white"`
-  - `containerClassName="pt-10 pb-10 md:pt-12 md:pb-12"`
-- O componente `Section` (`src/components/shared/Section.tsx`) já suporta `background="verde"` e aplica:
-  - `bg-verde-eucalipto text-white`
+O que já está correto (pelo seu diff atual)
+- A Dobra 3 já está assim:
+  - `return <Section id="problema" background="cinza" ...>`
+- Isso usa o token oficial do design system:
+  - `cinza` → `bg-cinza-nuvem`
 
-Decisões alinhadas com seu pedido
-- Cor de fundo (Sessão 3): Verde Eucalipto
-- Espaçamento (Sessão 3): Mais compacto (reduzir principalmente “respiro” inferior e alguns espaçamentos internos)
+Por que às vezes o Cinza Nuvem “parece branco”
+- O `#F4F4F4` é bem suave. Com cards `bg-white` em cima, em alguns monitores a diferença fica mínima.
+- Se houver qualquer `className` de fundo adicional, ele pode sobrescrever o `bg-cinza-nuvem` (você já removeu o `bg-verde-eucalipto-10`, ótimo).
 
-O que vou mudar (implementação)
-1) Trocar o fundo da Sessão 3 (Problema) para verde
+Implementação (o que vou fazer quando você sair do modo read-only e eu puder aplicar)
+1) “Travar” o fundo Cinza Nuvem sem risco de override
 - Arquivo: `src/components/sections/Problema.tsx`
-- Alteração: `background="white"` → `background="verde"`
+- Conferir que o `<Section>`:
+  - mantém `background="cinza"`
+  - não tem `className` com `bg-*` (nem `style` com background) que sobrescreva
 
-2) Corrigir contraste de textos que hoje estão “forçando” grafite em fundo verde
-- Ainda em `Problema.tsx`, ajustar classes:
-  - Título/subtítulo/parágrafos que estão com `text-grafite-suave` para variantes em branco, por exemplo:
-    - `text-white` / `text-white/85` / `text-white/70`
-  - O destaque “(E Não É Culpa Sua)” hoje em `text-rosa-argila` pode permanecer (fica bom como acento no verde).
-  - O texto de “Resultado” e a frase final também precisam ir para branco (ou branco com opacidade).
+2) Melhorar a percepção do Cinza Nuvem (sem trocar a cor)
+Para o cinza não “sumir” atrás dos cards brancos:
+- Ajustar levemente o contraste dos cards (continua branco, mas com borda/sombra mais definida):
+  - `border-verde-eucalipto/15` → `border-verde-eucalipto/20` (ou `/25` se necessário)
+  - opcional: aumentar um pouco a sombra (`shadow-suave` → algo entre `shadow-suave` e `shadow-elevada`, bem sutil)
+- Motivo: isso cria “recorte” e você passa a perceber melhor o fundo cinza atrás.
 
-3) Ajustar os 3 cards para combinarem com fundo verde
-Há duas abordagens possíveis; vou seguir a que mantém o padrão visual da dobra verde (Solução):
-- Cards com estilo “glass”:
-  - `bg-white/10 border border-white/20`
-  - Texto interno `text-white/85` (e títulos `text-white`)
-  - Ícones: `text-white/85` (ou `text-rosa-argila` se você preferir mais “calor”)
-- Motivo: se mantivermos `bg-rosa-argila-10` nos cards, a paleta pode ficar “descolada” do fundo verde e o contraste de texto fica inconsistente.
+3) Validação visual no Preview (checklist rápido)
+- Lead (branco) → Problema (Cinza Nuvem):
+  - a Dobra 3 precisa ficar claramente “uma nova dobra” sem parecer “igual branco”
+- Problema (Cinza Nuvem) → Solução (Verde escuro):
+  - transição limpa e com contraste forte (funciona muito bem para mudança de fase)
+- Legibilidade:
+  - títulos e parágrafos continuam em grafite; destaques em verde continuam funcionando
 
-4) Deixar a Sessão 3 mais compacta (espaçamento)
-- Reduzir padding do container da seção, por exemplo:
-  - de `pt-10 pb-10 md:pt-12 md:pb-12`
-  - para algo como `pt-10 pb-8 md:pt-12 md:pb-10` (compacta embaixo sem “esmagar” o topo)
-- Ajustar espaçamentos internos para acompanhar:
-  - `mb-10 md:mb-12` do bloco de título pode cair um pouco (ex.: `mb-8 md:mb-10`)
-  - `mb-12 md:mb-14` do grid de cards pode cair um pouco (ex.: `mb-10 md:mb-12`)
-  - A área do botão (`mt-8 mb-4 md:mb-6`) pode ficar mais enxuta se estiver sobrando espaço visual.
+Arquivos envolvidos
+- `src/components/sections/Problema.tsx` (principal)
+- `src/components/shared/Section.tsx` (não deve precisar alterar; já suporta `cinza`)
 
-Checklist de verificação (visual)
-- Sessão 3 com fundo verde e leitura confortável:
-  - Título e texto legíveis (sem grafite “apagado” no verde).
-  - Cards com contraste (texto não “estoura” nem fica baixo contraste).
-  - Botão “Quero Começar” permanece com estilo de CTA consistente (e sem usar ocre para texto/cor indevida).
-- Transição Lead → Problema:
-  - Ver se a seta/âncora do Lead ainda fica “bonita” com o novo fundo abaixo.
-- Transição Problema → Solução:
-  - Ver se não ficou “verde sobre verde” cansativo (duas dobras verdes seguidas). Se ficar pesado, proponho uma alternativa rápida:
-    - Sessão 3 verde + Sessão 4 manter verde, mas diferenciar usando um separador (linha sutil) ou textura/gradiente muito leve (sem mudar o branding).
+Riscos / alternativas rápidas (se ainda parecer branco no seu monitor)
+- Sem mudar a paleta, dá para criar “presença” com uma dessas opções (eu só faço se você pedir):
+  1) colocar um **separador** sutil no topo/rodapé da seção (`border-t border-black/5` ou `border-verde-eucalipto/10`)
+  2) aplicar um **gradient muito leve** dentro da própria seção (ex.: de `cinza-nuvem` para `white` em 15–20%), semelhante ao que vocês fazem no Fechamento, mas bem mais discreto
 
-Arquivos que serão alterados
-- `src/components/sections/Problema.tsx`
-- (provavelmente não precisa mexer) `src/components/shared/Section.tsx` já tem `background="verde"`
+Resultado esperado
+- Dobra 3 com **Cinza Nuvem real**, perceptível e elegante, sem “puxar” para verde claro e sem competir com a Solução (verde escuro).
 
-Risco/atenção
-- Como a Sessão 4 (Solução) já é verde, duas seções verdes consecutivas podem reduzir o contraste “entre dobras”. Se isso acontecer, eu já deixo preparado um ajuste mínimo (separador/gradiente leve) para você aprovar.
-
-Próximos passos após você aprovar este plano
-- Eu implemento as alterações acima, e você confere no preview se:
-  1) o espaçamento ficou realmente mais compacto
-  2) o fundo verde ficou agradável e legível
-  3) a transição entre as dobras está harmoniosa
+<lov-actions>
+  <lov-suggestion message="Ajuste fino de contraste: deixar os cards da Dobra 3 mais ‘recortados’ no Cinza Nuvem (borda um pouco mais forte e sombra sutil), sem mudar layout.">Refinar contraste dos cards</lov-suggestion>
+  <lov-suggestion message="Adicionar um separador sutil (linha/gradiente leve) entre Lead (branco) e Problema (cinza-nuvem) para a mudança de dobra ficar mais perceptível em qualquer monitor.">Adicionar separador sutil</lov-suggestion>
+  <lov-suggestion message="Criar uma variação oficial no componente Section: background='verde-claro' (bg-verde-eucalipto-10) e background='cinza' (bg-cinza-nuvem), para nunca depender de className manual.">Padronizar backgrounds no Section</lov-suggestion>
+</lov-actions>
