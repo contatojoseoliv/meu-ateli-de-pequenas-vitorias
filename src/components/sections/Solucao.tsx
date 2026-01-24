@@ -98,11 +98,7 @@ const Solucao = () => {
       </div>
 
       {/* Box de Transição */}
-      <div className="bg-ocre-dourado/20 border-2 border-ocre-dourado rounded-xl p-8 text-center max-w-2xl mx-auto mb-20 animate-fade-in">
-        <p className="text-xl text-white font-semibold">
-          Isso quebra a Tríade da Mente Acelerada — de uma vez.
-        </p>
-      </div>
+      
 
       {/* Método + Pilares (sessão única, full-width) */}
       <MetodoPrimeiraVitoria />
