@@ -1,63 +1,71 @@
 
 Objetivo
-- Eliminar o “espaço sobrando na esquerda” na seção Garantia no desktop, mudando o layout (sem parecer que há uma “coluna vazia”).
-- Manter a seção mais compacta (como você já pediu antes) e remover a última frase (já alinhado).
+- Deixar “em branco” a sessão que começa com “Por Isso Criamos o Primeira Vitória em Amigurumi©” e separar claramente a dobra (transição) entre:
+  1) A parte verde (pré-headline + headline + 3 caixinhas + botão)
+  2) O conteúdo do método (iniciando em “Por Isso Criamos...”)
 
-O que está causando o espaço hoje (diagnóstico)
-- Em `src/components/sections/Garantia.tsx`, o layout é `md:flex-row` com:
-  - “Selo” em uma coluna à esquerda (`flex-shrink-0`)
-  - “Blockquote/card” na direita (`flex-1`)
-- No desktop, esse padrão costuma gerar a sensação de “sobrou espaço” na esquerda porque:
-  - a coluna do selo ocupa uma área fixa;
-  - o card começa mais à direita, criando um “vazio” visual antes do conteúdo principal.
+O que identifiquei no código
+- A landing page está organizada em `src/pages/Index.tsx`.
+- O texto “Por Isso Criamos o Primeira Vitória em Amigurumi©” está em `src/components/sections/solucao/MetodoPrimeiraVitoria.tsx`.
+- Esse bloco hoje fica DENTRO da seção `Solucao` (`src/components/sections/Solucao.tsx`), que tem `background="verde"`.
+- Portanto, para ficar “em branco” de verdade e criar uma dobra clara, o ideal é quebrar `Solucao` em duas seções distintas (verde em cima, branco embaixo).
 
-Mudança de design proposta (layout novo)
-- Trocar o layout desktop de “duas colunas (selo fora do card)” para “card único centralizado com selo integrado”, para eliminar o vão à esquerda.
-- Duas variações possíveis (vou implementar a que fica mais fiel ao seu estilo atual e mais limpa):
+Decisão de implementação (alinhada ao manual e ao pedido de “dobras”)
+- Separar “Solução” em 2 seções reais:
+  - Seção 4A (verde): pré-headline + headline + sub + 3 cards + botão CTA.
+  - Seção 4B (branca): conteúdo do método (começa em “Por Isso Criamos...”).
+- Manter o scroll do botão “Quero ver o método” levando para a Seção 4B (id `metodo`), mas agora ele vai apontar para uma seção separada, com fundo branco.
 
-Variação A (recomendada): Selo embutido no topo do card
-- Um único card centralizado (sem coluna lateral).
-- Cabeçalho do card com:
-  - selo à esquerda (menor)
-  - título à direita (ou abaixo, dependendo do espaço)
-- O conteúdo segue abaixo com menos texto/altura.
-- Benefício: 0 espaço sobrando na esquerda; leitura mais direta; fica “tamanho de sessão” no desktop.
+Mudanças planejadas (passo a passo)
+1) `src/components/sections/Solucao.tsx`
+   - Encerrar a `<Section background="verde">` logo após o botão CTA.
+   - Criar uma nova `<Section id="metodo" background="white">` imediatamente abaixo.
+   - Mover para dentro da seção branca:
+     - `<MetodoPrimeiraVitoria />`
+     - `<Mapa7Dias />`
+     - O “fechamento emocional” (texto “E quando você segura…” etc.)
+   - Remover/ajustar o separador atual (`border-t border-white/10 pt-...`) porque ele foi pensado para separar dentro do fundo verde. A separação agora será feita por:
+     - Espaçamento consistente (ex.: `pt-16 md:pt-20`)
+     - Opcional: um separador mais editorial (linha cinza bem suave) já dentro do branco, se necessário.
 
-Variação B: Selo como “badge” flutuante dentro do card (absolute)
-- Card `relative`, selo em `absolute` no canto superior (esq. ou dir.).
-- Benefício: bem premium visualmente.
-- Cuidado: precisa garantir que não sobreponha texto em breakpoints.
+2) `src/components/sections/solucao/MetodoPrimeiraVitoria.tsx`
+   - Hoje o componente assume “fundo escuro” (usa `text-white` e overlays tipo `bg-white/10`).
+   - Ajustar para funcionar em fundo branco:
+     - Trocar textos principais para `text-grafite-suave` e variações com opacidade (ex.: `/80`).
+     - Trocar cartões internos de `bg-white/10 border-white/15` para algo coerente no branco, por exemplo:
+       - cards: `bg-cinza-nuvem` ou `bg-rosa-argila-10` (claro) com `border` suave.
+     - Ajustar o wrapper full-bleed atual:
+       - Hoje ele força `w-screen` com `bg-rosa-argila-10` e `border-y border-white/10`.
+       - No branco, isso pode virar:
+         - ou um bloco centralizado normal (sem full-bleed), para ficar editorial,
+         - ou continuar full-bleed mas com bordas cinza suaves (`border-border` / `border-grafite-suave/10`).
+   - Garantir que a hierarquia visual do título (“Por Isso Criamos o” + “Primeira Vitória…”) siga o manual: tipografia serifada para headline e sans para o pre.
 
-Implementação (passos técnicos)
-1) Ajustar `src/components/sections/Garantia.tsx`
-   - Remover o wrapper `md:flex-row` e a coluna separada do selo.
-   - Criar um único container central:
-     - manter `max-w-4xl mx-auto` (ou ajustar para `max-w-3xl` se ficar mais “sessão” e compacto).
-   - Transformar o bloco principal em um único card:
-     - `bg-white`, `rounded-xl`, `shadow-suave`, `border-l-4 border-verde-eucalipto` (manter sua identidade atual).
-   - Inserir o selo dentro do card:
-     - usar um header com `flex items-center gap-4` e, em telas grandes, manter alinhado e sem “vazio lateral”.
-     - reduzir selo no desktop se necessário para não aumentar altura.
+3) `src/components/sections/solucao/Mapa7Dias.tsx`
+   - Também está desenhado para fundo verde (muito `text-white`, `border-white/10`, `bg-white/5`).
+   - Adequar para o fundo branco:
+     - Textos: `text-grafite-suave` (e secundários `text-grafite-suave/70`).
+     - Bordas/fundos: trocar `border-white/...` por `border-grafite-suave/10` ou `border-border`.
+     - Nós (circulinhos) e chips: usar `bg-cinza-nuvem`/`bg-rosa-argila-10` com ícones em `text-verde-eucalipto` para manter identidade.
+     - Preservar o “Ocre Dourado” apenas onde for elemento de conversão (não usar como texto corrido).
 
-2) Ajustar espaçamentos para ficar mais compacto no desktop
-   - Diminuir `p-6 md:p-8` para algo como `p-5 md:p-6`.
-   - Reduzir `space-y-3` para `space-y-2` e remover elementos que “estiquem” (ex.: divisórias grandes), mantendo legibilidade.
-   - Garantir que a seção não pareça “alta demais” em relação ao restante do funil.
+4) Ajuste fino de “dobra” (separação visual)
+   - Validar no preview (desktop e mobile) se a transição verde → branco ficou com a “respiração” correta:
+     - Espaço abaixo do botão (no verde) suficiente para “encerrar” o bloco.
+     - Espaço acima do título “Por Isso Criamos…” (no branco) para iniciar uma nova leitura.
+   - Se necessário, adicionar um divisor editorial mínimo entre as seções (ex.: uma faixa branca já existe por ser uma nova Section; geralmente isso é suficiente).
 
-3) Verificar consistência com o wrapper de seção
-   - `Section` já usa `container-main` (max width + padding). Não vou mexer nele para não afetar o site inteiro.
-   - A correção será localizada na Garantia, como você pediu.
+Critérios de aceite (o que vai ficar visivelmente diferente)
+- O bloco que começa em “Por Isso Criamos o Primeira Vitória em Amigurumi©” ficará em FUNDO BRANCO (não mais no verde).
+- A seção verde terminará exatamente no botão “Quero ver o método”.
+- Ao clicar no botão, a página rola suavemente para o início do bloco branco (método).
+- Textos e cards dentro do método/mapa continuarão legíveis e consistentes com a paleta (grafite no branco; verde e rosa como acentos; ocre só para CTA).
 
-4) QA visual (desktop)
-   - Confirmar que:
-     - não há “coluna vazia” à esquerda;
-     - o card fica visualmente centralizado;
-     - o selo parece parte do card (não um elemento “solto”);
-     - a altura total fica próxima de “uma sessão na tela”.
+Arquivos que serão alterados
+- `src/components/sections/Solucao.tsx`
+- `src/components/sections/solucao/MetodoPrimeiraVitoria.tsx`
+- `src/components/sections/solucao/Mapa7Dias.tsx`
 
-Arquivos envolvidos
-- `src/components/sections/Garantia.tsx` (principal)
-- (Opcional, se necessário) pequenos ajustes de classes utilitárias já existentes, mas a intenção é não mexer em `Section.tsx` nem no layout global.
-
-Resultado esperado
-- No desktop, a seção Garantia terá um único bloco central (sem layout em 2 colunas), eliminando o espaço sobrando na esquerda e deixando o design mais “fechado”, elegante e direto.
+Riscos / pontos de atenção
+- Como `MetodoPrimeiraVitoria` usa layout “full-bleed” (`w-screen`), ao passar para fundo branco precisamos garantir que não pareça uma faixa “solta” ou com contraste errado.
+- O `Mapa7Dias` tem muitos elementos com `text-white` e `border-white/...`; a troca para o tema claro precisa ser completa para não sobrar nada “lavado”/invisível.
