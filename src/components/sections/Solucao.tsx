@@ -70,7 +70,7 @@ const Solucao = () => {
   };
   return <>
       {/* DOBRA 1 (verde): descoberta + 3 mecanismos + CTA */}
-      <Section id="solucao" background="verde">
+      <Section id="solucao" background="verde" containerClassName="pt-6 pb-0 md:pb-2">
         <div className="solucao-intro text-center max-w-4xl mx-auto mb-12 animate-fade-in">
         {/* Pré-headline */}
         <p className="text-xs font-semibold tracking-[0.32em] uppercase text-white/70 md:text-base">
@@ -112,7 +112,7 @@ const Solucao = () => {
       </div>
 
       {/* CTA logo abaixo das caixinhas */}
-      <div className="flex justify-center animate-fade-in mb-10 md:mb-14">
+      <div className="flex justify-center animate-fade-in mb-6 md:mb-8">
         <Button variant="primary" size="lg" onClick={handleVerMetodo} aria-label="Ir para o Método Primeira Vitória">
           Quero ver o método
         </Button>
