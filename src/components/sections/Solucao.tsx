@@ -71,20 +71,20 @@ const Solucao = () => {
   return <Section id="solucao" background="verde">
       <div className="solucao-intro text-center max-w-4xl mx-auto mb-12 animate-fade-in">
         {/* Pré-headline */}
-        <p className="text-xs font-semibold tracking-[0.32em] uppercase text-white/70 md:text-sm">
+        <p className="text-xs font-semibold tracking-[0.32em] uppercase text-white/70 md:text-base">
           A Descoberta Que Muda Tudo
         </p>
 
         {/* Headline */}
         <h2 className="mt-4 font-serif text-3xl text-white leading-[1.12] md:text-5xl">
-          <span className="block">Quando você cria Amigurumi com as mãos</span>
-          <span className="block mt-2 text-2xl text-white/90 md:text-4xl">
+          <span className="block text-h2">Quando você cria Amigurumi com as mãos</span>
+          <span className="block mt-2 text-2xl text-white/90 md:text-h2">
             — algo tangível, bonito, que você vê surgir —
           </span>
         </h2>
 
         {/* Subheadline */}
-        <p className="mt-4 text-base text-white/85 md:text-xl">
+        <p className="mt-4 text-base text-white/85 md:text-base">
           Três coisas acontecem no seu cérebro:
         </p>
       </div>
