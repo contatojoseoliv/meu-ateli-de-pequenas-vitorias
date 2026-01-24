@@ -84,7 +84,7 @@ const Solucao = () => {
         </h2>
 
         {/* Subheadline */}
-        <p className="mt-4 text-base text-white/85 md:text-base">
+        <p className="mt-4 text-base text-white/85 md:text-lg">
           Três coisas acontecem no seu cérebro:
         </p>
       </div>
