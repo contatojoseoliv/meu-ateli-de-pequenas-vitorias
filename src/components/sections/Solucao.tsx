@@ -112,7 +112,7 @@ const Solucao = () => {
       </div>
 
       {/* CTA logo abaixo das caixinhas */}
-      <div className="flex justify-center animate-fade-in mb-14 md:mb-20">
+      <div className="flex justify-center animate-fade-in mb-10 md:mb-14">
         <Button variant="primary" size="lg" onClick={handleVerMetodo} aria-label="Ir para o Método Primeira Vitória">
           Quero ver o método
         </Button>
@@ -120,7 +120,12 @@ const Solucao = () => {
       </Section>
 
       {/* DOBRA 2 (branca): método + mapa + fechamento */}
-      <Section id="metodo" background="white" className="scroll-mt-24" containerClassName="py-10 md:py-14">
+      <Section
+        id="metodo"
+        background="white"
+        className="scroll-mt-24"
+        containerClassName="pt-0 pb-10 md:pb-14"
+      >
         {/* Método + Pilares (sessão única, full-width) */}
         <MetodoPrimeiraVitoria />
 
