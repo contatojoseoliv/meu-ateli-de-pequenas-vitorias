@@ -75,7 +75,7 @@ const Problema = () => {
 
       {/* 3 Cards */}
       <div className="mx-auto max-w-5xl grid gap-4 md:gap-6 md:grid-cols-3 mb-10 md:mb-12">
-        {viloes.map((vilao, index) => <div key={index} className="bg-white border border-verde-eucalipto/15 rounded-2xl p-4 md:p-4 shadow-suave hover-lift animate-fade-in h-full" style={{
+        {viloes.map((vilao, index) => <div key={index} className="bg-white border border-verde-eucalipto/20 rounded-2xl p-4 md:p-4 shadow-suave hover-lift animate-fade-in h-full" style={{
         animationDelay: `${index * 0.12}s`
       }}>
             <div className="mb-3 md:mb-4">
