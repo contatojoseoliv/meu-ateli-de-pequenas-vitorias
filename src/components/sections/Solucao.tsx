@@ -57,16 +57,17 @@ const Solucao = () => {
         </p>;
     });
   };
-
   const handleVerMetodo = () => {
     const el = document.getElementById("metodo");
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      el.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
       return;
     }
     window.location.hash = "#metodo";
   };
-
   return <Section id="solucao" background="verde">
       <div className="solucao-intro text-center max-w-4xl mx-auto mb-12 animate-fade-in">
         {/* Pré-headline */}
@@ -116,7 +117,7 @@ const Solucao = () => {
       </div>
 
       {/* Separador de sessões */}
-      <div className="my-14 border-t border-white/10" aria-hidden={true} />
+      
 
       <div id="metodo" className="scroll-mt-24">
         {/* Método + Pilares (sessão única, full-width) */}
