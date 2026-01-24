@@ -110,16 +110,19 @@ const Solucao = () => {
       </div>
 
       {/* CTA logo abaixo das caixinhas */}
-      <div className="flex justify-center animate-fade-in">
+      <div className="flex justify-center animate-fade-in mb-14 md:mb-20">
         <Button variant="primary" size="lg" onClick={handleVerMetodo} aria-label="Ir para o Método Primeira Vitória">
           Quero ver o método
         </Button>
       </div>
 
       {/* Separador de sessões */}
-      
 
-      <div id="metodo" className="scroll-mt-24">
+      <div
+        id="metodo"
+        className="scroll-mt-24 border-t border-white/10 pt-14 md:pt-20"
+        aria-label="Método Primeira Vitória"
+      >
         {/* Método + Pilares (sessão única, full-width) */}
         <MetodoPrimeiraVitoria />
 
