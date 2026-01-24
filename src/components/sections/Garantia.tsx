@@ -1,5 +1,5 @@
 import { Section } from "@/components/shared/Section";
-import { Shield } from "lucide-react";
+import seloGarantia from "@/assets/selo-garantia-7-dias.png";
 
 /**
  * Seção Garantia - Garantia Incondicional de 7 Dias
@@ -12,12 +12,12 @@ const Garantia = () => {
             {/* Cabeçalho com selo integrado */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-4">
               <div className="flex-shrink-0">
-                <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-verde-eucalipto flex flex-col items-center justify-center text-white shadow-lg">
-                  <Shield className="w-8 h-8 mb-1" strokeWidth={1.5} />
-                  <span className="text-[10px] font-bold uppercase tracking-wide text-center leading-tight">
-                    7 DIAS<br />100%<br />GARANTIDO
-                  </span>
-                </div>
+                <img
+                  src={seloGarantia}
+                  alt="Selo de garantia de 7 dias"
+                  loading="lazy"
+                  className="w-20 h-20 md:w-24 md:h-24 object-contain drop-shadow"
+                />
               </div>
 
               <div className="min-w-0">
