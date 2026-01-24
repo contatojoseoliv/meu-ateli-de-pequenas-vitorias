@@ -112,7 +112,7 @@ const Solucao = () => {
       </div>
 
       {/* CTA logo abaixo das caixinhas */}
-      <div className="flex justify-center animate-fade-in mb-14 md:mb-20">
+      <div className="flex justify-center animate-fade-in mb-10 md:mb-14">
         <Button variant="primary" size="lg" onClick={handleVerMetodo} aria-label="Ir para o Método Primeira Vitória">
           Quero ver o método
         </Button>
