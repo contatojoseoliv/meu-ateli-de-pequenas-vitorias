@@ -43,17 +43,7 @@ const Solucao = () => {
 
       // Handle bold and italic
       const parts = content.split(/(\*\*.*?\*\*|\*.*?\*)/g);
-      return <p key={i} className="mb-4 last:mb-0">
-          {parts.map((part, j) => {
-          if (part.startsWith('**') && part.endsWith('**')) {
-            return <strong key={j} className="text-white">{part.slice(2, -2)}</strong>;
-          }
-          if (part.startsWith('*') && part.endsWith('*') && !part.startsWith('**')) {
-            return <em key={j} className="text-rosa-argila">{part.slice(1, -1)}</em>;
-          }
-          return part;
-        })}
-        </p>;
+      return;
     });
   };
   return <Section id="solucao" background="verde">
