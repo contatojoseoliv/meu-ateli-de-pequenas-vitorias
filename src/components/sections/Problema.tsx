@@ -61,9 +61,9 @@ const Problema = () => {
         </p>;
     });
   };
-  return <Section id="problema" background="white" containerClassName="pt-4 pb-12 md:pt-8 md:pb-14">
+  return <Section id="problema" background="white" containerClassName="py-10 md:py-12">
       {/* Título */}
-      <div className="text-center max-w-2xl mx-auto mb-6 md:mb-10 animate-fade-in">
+      <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12 animate-fade-in">
         <h2 className="font-serif md:text-h2 text-grafite-suave mb-6 text-2xl">
           Por Que Você Está Ansiosa
           <span className="text-rosa-argila block">(E Não É Culpa Sua)</span>
@@ -74,7 +74,7 @@ const Problema = () => {
       </div>
 
       {/* 3 Cards */}
-      <div className="mx-auto max-w-5xl grid gap-4 md:gap-6 md:grid-cols-3 mb-10 md:mb-12">
+      <div className="mx-auto max-w-5xl grid gap-4 md:gap-6 md:grid-cols-3 mb-12 md:mb-14">
         {viloes.map((vilao, index) => <div key={index} className="bg-rosa-argila-10 rounded-2xl p-4 md:p-4 shadow-suave hover-lift animate-fade-in h-full" style={{
         animationDelay: `${index * 0.12}s`
       }}>
@@ -101,7 +101,7 @@ const Problema = () => {
         </p>
         <p className="font-bold text-verde-eucalipto text-xl">Mas existe uma forma de solucionar os três — de uma vez.</p>
 
-        <div className="mt-6">
+        <div className="mt-8">
           <Button variant="primary" onClick={handleVerSolucao} aria-label="Ir para a seção Solução">
             Quero Começar
           </Button>
