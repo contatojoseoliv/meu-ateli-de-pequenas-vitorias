@@ -49,7 +49,7 @@ const Solucao = () => {
             return <strong key={j} className="text-white">{part.slice(2, -2)}</strong>;
           }
           if (part.startsWith('*') && part.endsWith('*') && !part.startsWith('**')) {
-            return <em key={j} className="text-rosa-argila">{part.slice(1, -1)}</em>;
+            return;
           }
           return part;
         })}
