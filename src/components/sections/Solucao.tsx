@@ -70,7 +70,7 @@ const Solucao = () => {
   };
   return <>
       {/* DOBRA 1 (verde): descoberta + 3 mecanismos + CTA */}
-      <Section id="solucao" background="verde" containerClassName="py-10 md:py-14">
+      <Section id="solucao" background="verde" containerClassName="pt-10 pb-14 md:pt-12 md:pb-16">
         <div className="solucao-intro text-center max-w-4xl mx-auto mb-12 animate-fade-in">
         {/* Pré-headline */}
         <p className="text-xs font-semibold tracking-[0.32em] uppercase text-white/70 md:text-base">
