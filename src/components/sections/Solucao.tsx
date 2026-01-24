@@ -68,8 +68,10 @@ const Solucao = () => {
     }
     window.location.hash = "#metodo";
   };
-  return <Section id="solucao" background="verde">
-      <div className="solucao-intro text-center max-w-4xl mx-auto mb-12 animate-fade-in">
+  return <>
+      {/* DOBRA 1 (verde): descoberta + 3 mecanismos + CTA */}
+      <Section id="solucao" background="verde">
+        <div className="solucao-intro text-center max-w-4xl mx-auto mb-12 animate-fade-in">
         {/* Pré-headline */}
         <p className="text-xs font-semibold tracking-[0.32em] uppercase text-white/70 md:text-base">
           A Descoberta Que Muda Tudo
@@ -115,14 +117,10 @@ const Solucao = () => {
           Quero ver o método
         </Button>
       </div>
+      </Section>
 
-      {/* Separador de sessões */}
-
-      <div
-        id="metodo"
-        className="scroll-mt-24 border-t border-white/10 pt-14 md:pt-20"
-        aria-label="Método Primeira Vitória"
-      >
+      {/* DOBRA 2 (branca): método + mapa + fechamento */}
+      <Section id="metodo" background="white" className="scroll-mt-24" containerClassName="py-10 md:py-14">
         {/* Método + Pilares (sessão única, full-width) */}
         <MetodoPrimeiraVitoria />
 
@@ -131,30 +129,28 @@ const Solucao = () => {
 
         {/* Fechamento Emocional */}
         <div className="max-w-3xl mx-auto text-center animate-fade-in">
-          <p className="text-xl md:text-2xl text-white font-semibold leading-relaxed">
-            E quando você segura seu primeiro amigurumi completo — feito por <span className="text-rosa-argila">VOCÊ</span>, do início ao fim —
+          <p className="text-xl md:text-2xl text-foreground font-semibold leading-relaxed">
+            E quando você segura seu primeiro amigurumi completo — feito por{" "}
+            <span className="text-rosa-argila">VOCÊ</span>, do início ao fim —
           </p>
 
-          <div className="mt-8 space-y-4 text-lg md:text-xl text-white/85 leading-relaxed">
+          <div className="mt-8 space-y-4 text-lg md:text-xl text-muted-foreground leading-relaxed">
             <p>Algo muda.</p>
             <p>Não só a habilidade. A sensação.</p>
-            <p>
-              Você acabou de ter uma experiência que sua mente não pode negar:
-            </p>
+            <p>Você acabou de ter uma experiência que sua mente não pode negar:</p>
           </div>
 
-          <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 px-6 py-5">
-            <p className="font-serif text-2xl md:text-3xl text-white">
+          <div className="mt-8 rounded-2xl border border-border bg-secondary/10 px-6 py-5">
+            <p className="font-serif text-2xl md:text-3xl text-foreground">
               “Eu comecei. Eu fiz. <span className="text-rosa-argila">EU TERMINEI.</span>”
             </p>
           </div>
 
-          <p className="mt-8 text-lg md:text-xl text-white/85 leading-relaxed">
+          <p className="mt-8 text-lg md:text-xl text-muted-foreground leading-relaxed">
             E pela primeira vez em muito tempo... você sente calma. Orgulho. Alívio.
           </p>
         </div>
-      </div>
-
-    </Section>;
+      </Section>
+    </>;
 };
 export { Solucao };
