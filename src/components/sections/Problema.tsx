@@ -101,8 +101,14 @@ const Problema = () => {
         </p>
         <p className="font-bold text-verde-eucalipto text-xl">Mas existe uma forma de solucionar os três — de uma vez.</p>
 
-        <div className="mt-6 mb-2 md:mb-4">
-          <Button variant="primary" onClick={handleVerSolucao} aria-label="Ir para a seção Solução">
+        <div className="mt-6 mb-2 md:mb-4 flex justify-center">
+          <Button
+            variant="primary"
+            size="lg"
+            className="w-full max-w-xs sm:max-w-sm"
+            onClick={handleVerSolucao}
+            aria-label="Ir para a seção Solução"
+          >
             Quero Começar
           </Button>
         </div>
