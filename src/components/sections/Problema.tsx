@@ -10,14 +10,16 @@ const Problema = () => {
   const handleVerSolucao = () => {
     const el = document.getElementById("solucao");
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      el.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
       return;
     }
 
     // Fallback caso a âncora ainda não exista no DOM por algum motivo.
     window.location.hash = "#solucao";
   };
-
   const viloes = [{
     icon: Brain,
     numero: "1",
@@ -97,9 +99,7 @@ const Problema = () => {
         <p className="text-grafite-suave mb-3 text-base">
           <span className="font-semibold text-rosa-argila">Resultado:</span> sua mente nunca desliga. Seu corpo não relaxa. Você não sente calma de verdade.
         </p>
-        <p className="font-bold text-verde-eucalipto text-xl">
-          Mas existe uma forma de quebrar os três — de uma vez.
-        </p>
+        <p className="font-bold text-verde-eucalipto text-xl">Mas existe uma forma de solucionar os três — de uma vez.</p>
 
         <div className="mt-6">
           <Button variant="primary" onClick={handleVerSolucao} aria-label="Ir para a seção Solução">
