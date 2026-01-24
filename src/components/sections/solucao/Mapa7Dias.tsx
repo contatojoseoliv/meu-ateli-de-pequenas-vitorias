@@ -87,16 +87,16 @@ const StepNode = ({ step }: { step: Step }) => {
           aria-label={step.tooltipTitle}
         >
           {/* Nó */}
-          <div className="relative grid place-items-center w-14 h-14 rounded-full bg-white/10 border border-white/20 shadow-sm transition-transform duration-200 group-hover:scale-[1.03]">
-            <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-rosa-argila/30 border border-white/20 grid place-items-center text-white text-xs font-bold">
+          <div className="relative grid place-items-center w-14 h-14 rounded-full bg-muted border border-border shadow-sm transition-transform duration-200 group-hover:scale-[1.03]">
+            <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-secondary/30 border border-border grid place-items-center text-foreground text-xs font-bold">
               {step.day}
             </span>
-            <Icon className="w-6 h-6 text-white" />
+            <Icon className="w-6 h-6 text-primary" />
           </div>
 
           {/* Legenda curta */}
           <div className="text-center">
-            <p className="text-white font-semibold text-sm leading-tight">{step.label}</p>
+            <p className="text-foreground font-semibold text-sm leading-tight">{step.label}</p>
           </div>
         </button>
       </TooltipTrigger>
@@ -116,23 +116,23 @@ const Mapa7Dias = () => {
     <TooltipProvider>
       <div className="mb-20">
         <div className="text-center mb-10">
-          <h3 className="font-serif text-2xl md:text-3xl text-white">
+          <h3 className="font-serif text-2xl md:text-3xl text-foreground">
             Como funciona na prática — <span className="text-rosa-argila">Mapa de 7 dias</span>
           </h3>
-          <p className="text-white/80 mt-2">10–15 min por dia. Sem sobrecarga.</p>
+          <p className="text-muted-foreground mt-2">10–15 min por dia. Sem sobrecarga.</p>
         </div>
 
         <div className="relative max-w-6xl mx-auto">
           {/* Moldura */}
-          <div className="relative rounded-2xl border border-white/10 bg-white/5 p-6 md:p-10 overflow-hidden">
+          <div className="relative rounded-2xl border border-border bg-muted/40 p-6 md:p-10 overflow-hidden">
             {/* Linha conectora (desktop) */}
-            <div className="hidden md:block absolute left-10 right-28 top-[62px] h-px bg-white/15" />
+            <div className="hidden md:block absolute left-10 right-28 top-[62px] h-px bg-border" />
 
             {/* Trilho */}
             <div className="flex md:grid md:grid-cols-[repeat(7,1fr)_auto] items-start gap-6 md:gap-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-4 md:pb-0">
               {/* Etiqueta DIAS 2-6 (desktop) */}
               <div className="hidden md:block absolute left-[calc(10%+1rem)] right-[calc(20%+1rem)] top-3 text-center">
-                <span className="inline-flex items-center gap-2 rounded-full bg-verde-eucalipto/30 border border-white/15 px-4 py-1 text-white/90 text-xs font-semibold">
+                <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-border px-4 py-1 text-foreground text-xs font-semibold">
                   <Check className="w-4 h-4" /> DIAS 2–6 • Criação guiada
                 </span>
               </div>
@@ -143,9 +143,9 @@ const Mapa7Dias = () => {
 
               {/* Chegada / selo */}
               <div className="relative flex flex-col items-center gap-3 min-w-[160px] md:min-w-[0] snap-center">
-                <div className="hidden md:block absolute -left-6 top-[32px] w-12 h-px bg-white/15" />
+                <div className="hidden md:block absolute -left-6 top-[32px] w-12 h-px bg-border" />
 
-                <div className="w-[76px] h-[76px] rounded-full bg-white/10 border border-white/20 grid place-items-center overflow-hidden">
+                <div className="w-[76px] h-[76px] rounded-full bg-background border border-border grid place-items-center overflow-hidden">
                   <img
                     src={seloPrimeiraVitoria}
                     alt="Selo Primeira Vitória em Amigurumi"
@@ -155,11 +155,11 @@ const Mapa7Dias = () => {
                 </div>
 
                 <div className="text-center">
-                  <p className="text-white font-semibold text-sm leading-tight">Sua primeira vitória</p>
-                  <p className="text-white/70 text-xs">Amigurumi completo</p>
+                  <p className="text-foreground font-semibold text-sm leading-tight">Sua primeira vitória</p>
+                  <p className="text-muted-foreground text-xs">Amigurumi completo</p>
                 </div>
 
-                <div className="inline-flex items-center gap-2 text-white/70 text-xs">
+                <div className="inline-flex items-center gap-2 text-muted-foreground text-xs">
                   <Medal className="w-4 h-4" /> Chegada
                 </div>
               </div>
@@ -167,7 +167,7 @@ const Mapa7Dias = () => {
 
             {/* Etiqueta DIAS 2-6 (mobile) */}
             <div className="md:hidden mt-4 text-center">
-              <span className="inline-flex items-center gap-2 rounded-full bg-verde-eucalipto/30 border border-white/15 px-4 py-1 text-white/90 text-xs font-semibold">
+              <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-border px-4 py-1 text-foreground text-xs font-semibold">
                 <Check className="w-4 h-4" /> DIAS 2–6 • Criação guiada
               </span>
             </div>
