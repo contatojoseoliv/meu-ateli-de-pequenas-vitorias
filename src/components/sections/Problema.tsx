@@ -53,8 +53,7 @@ const Problema = () => {
             const content = isBold ? part.slice(2, -2) : part;
             return isBold ? <strong key={k}>{content}</strong> : <span key={k}>{content}</span>;
           });
-          // No fundo verde, usamos Rosa Argila como destaque (mantém a intenção do '[[green]]').
-          return isGreen ? <span key={j} className="text-rosa-argila font-semibold">
+          return isGreen ? <span key={j} className="text-verde-eucalipto font-semibold">
                 {inner}
                 <br />
               </span> : <span key={j}>{inner}</span>;
@@ -62,31 +61,31 @@ const Problema = () => {
         </p>;
     });
   };
-  return <Section id="problema" background="verde" containerClassName="pt-10 pb-8 md:pt-12 md:pb-10">
+  return <Section id="problema" background="white" className="bg-verde-eucalipto-10" containerClassName="pt-10 pb-8 md:pt-12 md:pb-10">
       {/* Título */}
       <div className="text-center max-w-2xl mx-auto mb-8 md:mb-10 animate-fade-in">
-        <h2 className="font-serif md:text-h2 text-white mb-6 text-2xl">
+        <h2 className="font-serif md:text-h2 text-grafite-suave mb-6 text-2xl">
           Por Que Você Está Ansiosa
           <span className="text-rosa-argila block">(E Não É Culpa Sua)</span>
         </h2>
-        <p className="text-white/85 text-body">
+        <p className="text-grafite-suave text-body">
           Você vive de três formas que <strong>GARANTEM</strong> que sua mente nunca vai parar:
         </p>
       </div>
 
       {/* 3 Cards */}
       <div className="mx-auto max-w-5xl grid gap-4 md:gap-6 md:grid-cols-3 mb-10 md:mb-12">
-        {viloes.map((vilao, index) => <div key={index} className="bg-white/10 border border-white/20 rounded-2xl p-4 md:p-4 shadow-suave hover-lift animate-fade-in h-full" style={{
+        {viloes.map((vilao, index) => <div key={index} className="bg-white border border-verde-eucalipto/15 rounded-2xl p-4 md:p-4 shadow-suave hover-lift animate-fade-in h-full" style={{
         animationDelay: `${index * 0.12}s`
       }}>
             <div className="mb-3 md:mb-4">
-              <vilao.icon className="w-8 h-8 md:w-8 md:h-8 text-rosa-argila mb-2" strokeWidth={1.5} />
-              <h3 className="font-serif text-base md:text-lg text-white leading-tight">
+              <vilao.icon className="w-8 h-8 md:w-8 md:h-8 text-verde-eucalipto mb-2" strokeWidth={1.5} />
+              <h3 className="font-serif text-base md:text-lg text-grafite-suave leading-tight">
                 {vilao.numero}. {vilao.titulo}
               </h3>
             </div>
 
-            <div className="text-sm md:text-sm text-white/85 leading-snug md:leading-relaxed">
+            <div className="text-sm md:text-sm text-grafite-suave/90 leading-snug md:leading-relaxed">
               {formatText(vilao.texto)}
             </div>
           </div>)}
@@ -97,10 +96,10 @@ const Problema = () => {
 
       {/* Resultado Final */}
       <div className="text-center max-w-3xl mx-auto animate-fade-in">
-        <p className="text-white/85 mb-3 text-base">
+        <p className="text-grafite-suave mb-3 text-base">
           <span className="font-semibold text-rosa-argila">Resultado:</span> sua mente nunca desliga. Seu corpo não relaxa. Você não sente calma de verdade.
         </p>
-        <p className="font-bold text-white text-xl">Mas existe uma forma de solucionar os três — de uma vez.</p>
+        <p className="font-bold text-verde-eucalipto text-xl">Mas existe uma forma de solucionar os três — de uma vez.</p>
 
         <div className="mt-6 mb-2 md:mb-4">
           <Button variant="primary" onClick={handleVerSolucao} aria-label="Ir para a seção Solução">
