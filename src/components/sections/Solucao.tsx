@@ -1,4 +1,5 @@
 import { Section } from "@/components/shared/Section";
+import { Button } from "@/components/shared/Button";
 import { MetodoPrimeiraVitoria } from "@/components/sections/solucao/MetodoPrimeiraVitoria";
 import { Mapa7Dias } from "@/components/sections/solucao/Mapa7Dias";
 
@@ -56,6 +57,16 @@ const Solucao = () => {
         </p>;
     });
   };
+
+  const handleVerMetodo = () => {
+    const el = document.getElementById("metodo");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    window.location.hash = "#metodo";
+  };
+
   return <Section id="solucao" background="verde">
       <div className="solucao-intro text-center max-w-4xl mx-auto mb-12 animate-fade-in">
         {/* Pré-headline */}
@@ -97,39 +108,48 @@ const Solucao = () => {
           </div>)}
       </div>
 
-      {/* Box de Transição */}
-      
+      {/* CTA logo abaixo das caixinhas */}
+      <div className="flex justify-center animate-fade-in">
+        <Button variant="primary" size="lg" onClick={handleVerMetodo} aria-label="Ir para o Método Primeira Vitória">
+          Quero ver o método
+        </Button>
+      </div>
 
-      {/* Método + Pilares (sessão única, full-width) */}
-      <MetodoPrimeiraVitoria />
+      {/* Separador de sessões */}
+      <div className="my-14 border-t border-white/10" aria-hidden={true} />
 
-      {/* Mapa de 7 Dias (visual) */}
-      <Mapa7Dias />
+      <div id="metodo" className="scroll-mt-24">
+        {/* Método + Pilares (sessão única, full-width) */}
+        <MetodoPrimeiraVitoria />
 
-      {/* Fechamento Emocional */}
-       <div className="max-w-3xl mx-auto text-center animate-fade-in">
-         <p className="text-xl md:text-2xl text-white font-semibold leading-relaxed">
-           E quando você segura seu primeiro amigurumi completo — feito por <span className="text-rosa-argila">VOCÊ</span>, do início ao fim —
-         </p>
+        {/* Mapa de 7 Dias (visual) */}
+        <Mapa7Dias />
 
-         <div className="mt-8 space-y-4 text-lg md:text-xl text-white/85 leading-relaxed">
-           <p>Algo muda.</p>
-           <p>Não só a habilidade. A sensação.</p>
-           <p>
-             Você acabou de ter uma experiência que sua mente não pode negar:
-           </p>
-         </div>
+        {/* Fechamento Emocional */}
+        <div className="max-w-3xl mx-auto text-center animate-fade-in">
+          <p className="text-xl md:text-2xl text-white font-semibold leading-relaxed">
+            E quando você segura seu primeiro amigurumi completo — feito por <span className="text-rosa-argila">VOCÊ</span>, do início ao fim —
+          </p>
 
-         <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 px-6 py-5">
-           <p className="font-serif text-2xl md:text-3xl text-white">
-             “Eu comecei. Eu fiz. <span className="text-rosa-argila">EU TERMINEI.</span>”
-           </p>
-         </div>
+          <div className="mt-8 space-y-4 text-lg md:text-xl text-white/85 leading-relaxed">
+            <p>Algo muda.</p>
+            <p>Não só a habilidade. A sensação.</p>
+            <p>
+              Você acabou de ter uma experiência que sua mente não pode negar:
+            </p>
+          </div>
 
-         <p className="mt-8 text-lg md:text-xl text-white/85 leading-relaxed">
-           E pela primeira vez em muito tempo... você sente calma. Orgulho. Alívio.
-         </p>
-       </div>
+          <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 px-6 py-5">
+            <p className="font-serif text-2xl md:text-3xl text-white">
+              “Eu comecei. Eu fiz. <span className="text-rosa-argila">EU TERMINEI.</span>”
+            </p>
+          </div>
+
+          <p className="mt-8 text-lg md:text-xl text-white/85 leading-relaxed">
+            E pela primeira vez em muito tempo... você sente calma. Orgulho. Alívio.
+          </p>
+        </div>
+      </div>
 
     </Section>;
 };
