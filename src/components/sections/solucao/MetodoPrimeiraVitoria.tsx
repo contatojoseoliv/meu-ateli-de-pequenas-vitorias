@@ -108,8 +108,8 @@ const MetodoPrimeiraVitoria = () => {
           Não é só habilidade — é sensação.
         </p>
 
-        <div className="mt-6 rounded-2xl border border-border bg-background px-6 py-5 shadow-suave">
-          <p className="font-serif text-xl md:text-2xl text-grafite-suave leading-snug">
+        <div className="mt-6 rounded-2xl border border-border bg-background px-6 py-4 shadow-suave">
+          <p className="font-serif text-lg md:text-xl text-grafite-suave leading-snug">
             Você começou. Você fez. <span className="text-rosa-argila">Você terminou.</span>
           </p>
         </div>
