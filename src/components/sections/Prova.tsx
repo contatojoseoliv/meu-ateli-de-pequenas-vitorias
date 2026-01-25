@@ -93,7 +93,7 @@ const Prova = () => {
           <p className="font-bold text-rosa-argila">
             As mesmas coisas que VOCÊ quer.
           </p>
-          <p className="mt-6 italic text-muted-foreground">O estudo concluiu que o crochê oferece benefícios positivos reais para o bem-estar pessoal. </p>
+          <p className="mt-6 text-muted-foreground">O estudo concluiu que o crochê oferece benefícios positivos reais para o bem-estar pessoal. </p>
           <p className="text-sm text-muted-foreground">
             Publicado em <em>Perspectives in Public Health</em> — uma das principais revistas de saúde pública do mundo.
           </p>
