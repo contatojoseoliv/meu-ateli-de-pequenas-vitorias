@@ -1,6 +1,5 @@
 import { Section } from "@/components/shared/Section";
 import { Button } from "@/components/shared/Button";
-import { Brain, Package, Smartphone } from "lucide-react";
 
 /**
  * Seção Problema - Tríade da Ansiedade
@@ -21,19 +20,16 @@ const Problema = () => {
     window.location.hash = "#solucao";
   };
   const viloes = [{
-    icon: Brain,
     numero: "1",
     titulo: "Você Nunca Está Presente",
     texto: `Você vive pensando no passado ou no futuro, mantendo o cérebro em estado constante de alerta. [[green]]E aí a ansiedade nunca para.[[/green]]`,
     recap: "VILÃO 1: Nunca presente → Cérebro interpreta perigo → Ansiedade ↑"
   }, {
-    icon: Package,
     numero: "2",
     titulo: "Você Acumula Tensão Sem Descarregar",
     texto: `O estresse do dia a dia se soma, sem um espaço real para descarregar. [[green]]Sem nunca ter por onde sair.[[/green]]`,
     recap: "VILÃO 2: Acumula sem descarregar → Sem dopamina → Estresse ↑"
   }, {
-    icon: Smartphone,
     numero: "3",
     titulo: "Você Está Desconectada Do Seu Corpo",
     texto: `Muitas horas em telas mantêm você só na mente, e o corpo fica esquecido. [[green]]Desconexão corpo-mente e maior a ansiedade.[[/green]]`,
@@ -75,17 +71,19 @@ const Problema = () => {
 
       {/* 3 Cards */}
       <div className="mx-auto max-w-5xl grid gap-4 md:gap-6 md:grid-cols-3 mb-10 md:mb-12">
-        {viloes.map((vilao, index) => <div key={index} className="bg-white border border-verde-eucalipto/20 rounded-2xl p-4 md:p-4 shadow-suave hover-lift animate-fade-in h-full" style={{
+        {viloes.map((vilao, index) => <div key={index} className="bg-white border border-verde-eucalipto/20 rounded-2xl p-6 md:p-7 shadow-suave hover-lift animate-fade-in h-full" style={{
         animationDelay: `${index * 0.12}s`
       }}>
-            <div className="mb-3 md:mb-4">
-              <vilao.icon className="w-8 h-8 md:w-8 md:h-8 text-verde-eucalipto mb-2" strokeWidth={1.5} />
-              <h3 className="font-serif text-base md:text-lg text-grafite-suave leading-tight">
-                {vilao.numero}. {vilao.titulo}
+            <div className="flex items-start gap-4 mb-5">
+              <div className="font-serif text-6xl leading-none text-verde-eucalipto/30 select-none" aria-hidden="true">
+                {vilao.numero}
+              </div>
+              <h3 className="font-serif text-xl text-grafite-suave leading-snug pt-1">
+                {vilao.titulo}
               </h3>
             </div>
 
-            <div className="text-sm md:text-sm text-grafite-suave/90 leading-snug md:leading-relaxed">
+            <div className="text-body text-grafite-suave/90 leading-relaxed">
               {formatText(vilao.texto)}
             </div>
           </div>)}
