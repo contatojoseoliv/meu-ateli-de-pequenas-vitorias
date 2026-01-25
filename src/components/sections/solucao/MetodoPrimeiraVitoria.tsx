@@ -104,6 +104,25 @@ const MetodoPrimeiraVitoria = () => {
           })}
           </div>
         </section>
+
+        {/* Fechamento emocional (mesma dobra do método) */}
+        <section aria-label="Fechamento emocional" className="max-w-3xl mx-auto text-center mt-12 md:mt-14 animate-fade-in">
+          <p className="text-xl md:text-2xl text-foreground font-semibold leading-relaxed">
+            Quando você segura seu primeiro amigurumi feito por você, do começo ao fim, algo muda.
+            <br />
+            Não é só habilidade — é sensação.
+          </p>
+
+          <div className="mt-8 rounded-2xl border border-border bg-secondary/10 px-6 py-5">
+            <p className="font-serif text-2xl md:text-3xl text-foreground leading-snug">
+              Você começou. Você fez. <span className="text-rosa-argila">Você terminou.</span>
+            </p>
+          </div>
+
+          <p className="mt-8 text-lg md:text-xl text-muted-foreground leading-relaxed">
+            E, pela primeira vez em muito tempo, sente calma, orgulho e alívio.
+          </p>
+        </section>
       </div>
     </div>;
 };
