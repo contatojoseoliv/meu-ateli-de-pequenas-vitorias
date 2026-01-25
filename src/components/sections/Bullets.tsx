@@ -13,7 +13,6 @@ const Bullets = () => {
    "Como corrigir os 3 erros mais comuns sem desfazer tudo",
    "Recursos visuais claros e didáticos",
    "Suporte contínuo durante o aprendizado",
-   "A sensação de segurar algo que VOCÊ criou",
    "O momento em que alguém pergunta \"onde você comprou isso?\" e você responde \"EU FIZ\"",
    "Por que você nunca mais vai precisar comprar presente genérico"
  ];
