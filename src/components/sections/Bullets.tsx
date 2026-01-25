@@ -59,7 +59,7 @@ const Bullets = () => {
           {bullets.map((bullet, index) => (
             <li 
               key={index}
-              className="flex items-start gap-4 p-4 rounded-lg transition-all duration-300 hover:bg-cinza-nuvem hover:translate-x-2 cursor-default animate-fade-in"
+              className="flex items-start gap-4 p-4 rounded-lg transition-all duration-300 hover:bg-cinza-nuvem hover:shadow-sm cursor-default animate-fade-in"
               style={{ animationDelay: `${index * 0.05}s` }}
             >
               <Flower2 
