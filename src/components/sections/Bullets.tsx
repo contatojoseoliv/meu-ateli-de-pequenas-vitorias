@@ -51,11 +51,7 @@ const Bullets = () => {
      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
        {/* Coluna da Imagem */}
        <div className="order-2 md:order-1 animate-fade-in">
-         <img 
-           src={new URL('@/assets/bullets-crafting-scene.jpg', import.meta.url).href}
-           alt="Mãos criando amigurumi"
-           className="w-full h-auto rounded-lg shadow-lg"
-         />
+          <div className="w-full aspect-[4/3] rounded-lg bg-cinza-nuvem shadow-lg" />
        </div>
 
        {/* Coluna da Lista */}
