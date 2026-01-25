@@ -39,7 +39,7 @@ const Prova = () => {
   };
   return <Section id="prova" background="white">
       {/* Título */}
-      <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+      <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
         <h2 className="font-serif text-3xl md:text-h2 text-grafite-suave">
           Isto não é teoria. <span className="text-verde-eucalipto">São fatos.</span>
         </h2>
