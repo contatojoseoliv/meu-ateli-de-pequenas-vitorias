@@ -111,6 +111,11 @@ const Solucao = () => {
           </div>)}
       </div>
 
+       {/* Nota editorial (manual de marca) */}
+       <p className="mx-auto -mt-6 mb-8 max-w-2xl text-center text-sm md:text-base font-medium tracking-wide text-white/75">
+         É assim que a mente finalmente desacelera.
+       </p>
+
       {/* CTA logo abaixo das caixinhas */}
       <div className="flex justify-center animate-fade-in">
         <Button variant="primary" size="lg" onClick={handleVerMetodo} aria-label="Ir para o Método Primeira Vitória">
