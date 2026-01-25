@@ -111,7 +111,7 @@ const Prova = () => {
       animationDelay: '0.2s'
     }}>
         <h3 className="font-serif text-xl md:text-2xl text-grafite-suave mb-6">
-          Validação Brasileira em Saúde Pública
+          Segundo, a validação brasileira:
         </h3>
         <div className="text-body text-grafite-suave/90 space-y-4 mb-8">
           <p className="text-sm text-muted-foreground">
@@ -162,14 +162,7 @@ const Prova = () => {
           </p>
         </div>
 
-        <div className="text-body text-grafite-suave/90 space-y-4 mt-8">
-          <p>
-            E isso não foi um grupo isolado. Foi replicado em múltiplas cidades brasileiras. Sempre com os mesmos resultados.
-          </p>
-          <p className="font-bold text-verde-eucalipto text-lg">
-            Porque funciona.
-          </p>
-        </div>
+        
       </div>
 
       {/* Resumo Final */}
