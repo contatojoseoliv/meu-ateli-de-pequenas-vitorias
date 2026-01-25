@@ -56,7 +56,7 @@ const Prova = () => {
           <div>
             <div className="text-body text-grafite-suave/90 space-y-4 mb-8">
               <p>
-                Um estudo publicado em 2021 na revista <em>Perspectives in Public Health</em> analisou os efeitos do crochê no bem-estar psicológico de 8.391 praticantes em 87 países.
+                Em 2021, pesquisadores estudaram  em 87 países.
               </p>
               <p className="text-muted-foreground italic">
                 (Sim, crochê específico. Não artesanato genérico.)
@@ -83,11 +83,7 @@ const Prova = () => {
 
           {/* Imagem ao lado do texto */}
           <div className="w-full max-w-sm md:max-w-none mx-auto">
-            <div className="rounded-2xl overflow-hidden shadow-suave border border-verde-eucalipto/10 bg-white">
-              <AspectRatio ratio={4 / 3}>
-                <img src={provaCienciaImg} alt="Gráfico e trecho do estudo sobre os efeitos do crochê" className="h-full w-full object-cover" loading="lazy" />
-              </AspectRatio>
-            </div>
+            
           </div>
         </div>
 
