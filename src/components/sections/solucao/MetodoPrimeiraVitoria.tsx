@@ -1,4 +1,5 @@
 import { Heart, Sparkles, Target, TrendingUp } from "lucide-react";
+import { Button } from "@/components/shared/Button";
 type Pilar = {
   numero: string;
   titulo: string;
@@ -28,6 +29,18 @@ const pilares: Pilar[] = [{
   icon: TrendingUp
 }];
 const MetodoPrimeiraVitoria = () => {
+  const handleIrParaOferta = () => {
+    const el = document.getElementById("oferta");
+    if (el) {
+      el.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+      return;
+    }
+    window.location.hash = "#oferta";
+  };
+
   return <div className="animate-fade-in">
       {/* Headline (mesma linguagem da seção: Por Que Você Está Ansiosa...) */}
       <div className="text-center max-w-2xl mx-auto mb-8 md:mb-10">
@@ -59,6 +72,13 @@ const MetodoPrimeiraVitoria = () => {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* CTA abaixo da imagem */}
+        <div className="mt-5 flex justify-center">
+          <Button variant="primary" size="lg" onClick={handleIrParaOferta} aria-label="Ir para a Oferta">
+            Quero começar agora
+          </Button>
         </div>
       </div>
 
@@ -117,6 +137,13 @@ const MetodoPrimeiraVitoria = () => {
         <p className="mt-6 text-base text-grafite-suave leading-relaxed md:text-base font-normal">
           E, pela primeira vez em muito tempo, sente calma, orgulho e alívio.
         </p>
+
+        {/* CTA final da sessão */}
+        <div className="mt-6 flex justify-center">
+          <Button variant="primary" size="lg" onClick={handleIrParaOferta} aria-label="Ir para a Oferta">
+            Quero começar agora
+          </Button>
+        </div>
       </section>
     </div>;
 };
