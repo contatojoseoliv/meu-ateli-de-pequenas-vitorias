@@ -40,7 +40,6 @@ const MetodoPrimeiraVitoria = () => {
     }
     window.location.hash = "#oferta";
   };
-
   return <div className="animate-fade-in">
       {/* Headline (mesma linguagem da seção: Por Que Você Está Ansiosa...) */}
       <div className="text-center max-w-2xl mx-auto mb-8 md:mb-10">
@@ -122,9 +121,7 @@ const MetodoPrimeiraVitoria = () => {
 
       {/* Fechamento emocional (mais compacto e alinhado com a sessão) */}
       <section aria-label="Fechamento emocional" className="max-w-3xl mx-auto text-center mt-12 md:mt-14 animate-fade-in">
-        <p className="text-base text-grafite-suave leading-relaxed md:text-base font-normal">
-          Quando você segura seu primeiro amigurumi feito por você, do começo ao fim, algo muda.
-          <br />
+        <p className="text-base text-grafite-suave leading-relaxed md:text-base font-normal">Quando você segura seu primeiro amigurumi completo — feito por você, do início ao fim — algo muda: não só a habilidade, mas a sensação.<br />
           Não é só habilidade — é sensação.
         </p>
 
