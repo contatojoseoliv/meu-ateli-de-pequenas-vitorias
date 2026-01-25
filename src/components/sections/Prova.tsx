@@ -51,12 +51,12 @@ const Prova = () => {
       <div className="bg-white rounded-2xl p-8 md:p-10 shadow-suave max-w-4xl mx-auto mb-12 animate-fade-in" style={{
       animationDelay: '0.1s'
     }}>
-        <h3 className="font-serif text-xl md:text-2xl text-grafite-suave mb-6">Evidências Científicas sobre</h3>
+        <h3 className="font-serif text-xl md:text-2xl text-grafite-suave mb-6">Evidências Científicas sobre:</h3>
         <div className="grid gap-8 md:grid-cols-[1.15fr_0.85fr] items-start">
           <div>
             <div className="text-body text-grafite-suave/90 space-y-4 mb-8">
               <p>
-                Em 2021, pesquisadores estudaram <strong className="text-verde-eucalipto">8.391 pessoas que fazem crochê</strong> em 87 países.
+                Em 2021, pesquisadores estudaram  em 87 países.
               </p>
               <p className="text-muted-foreground italic">
                 (Sim, crochê específico. Não artesanato genérico.)
