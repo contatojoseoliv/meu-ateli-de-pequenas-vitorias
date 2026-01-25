@@ -1,4 +1,8 @@
-import { Brain, Check, Hand, Heart, Sparkles, Target, TrendingUp } from "lucide-react";
+import { Brain, Hand, Heart, Sparkles, Target, TrendingUp } from "lucide-react";
+import { Button } from "@/components/shared/Button";
+
+import metodoTituloRef from "@/assets/metodo-titulo-ref.png";
+import mapaIlustradoDobra from "@/assets/mapa-ilustrado-dobra.png";
 type Pilar = {
   numero: string;
   titulo: string;
@@ -28,7 +32,22 @@ const pilares: Pilar[] = [{
   icon: TrendingUp
 }];
 const MetodoPrimeiraVitoria = () => {
-  return <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-rosa-argila-10 border-y border-border mb-20 animate-fade-in">
+  const handleIrParaOferta = () => {
+    const el = document.getElementById("oferta");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    window.location.hash = "#oferta";
+  };
+
+  const beneficios = [
+    { title: "Atenção plena", desc: "(sua mente para)", icon: Brain },
+    { title: "Descarga emocional", desc: "(algo só seu)", icon: Heart },
+    { title: "Corpo-mente", desc: "(sai das telas e cria na prática)", icon: Hand },
+  ];
+
+  return <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-transparent mb-12 md:mb-14 animate-fade-in">
       <div className="max-w-5xl mx-auto px-6 md:px-8 py-12 md:py-14">
         {/* Headline */}
         <header className="text-center mb-10">
@@ -38,54 +57,59 @@ const MetodoPrimeiraVitoria = () => {
           <h3 className="font-serif text-2xl md:text-4xl text-foreground mt-2 leading-tight">
             <span className="text-foreground">Primeira Vitória em Amigurumi©</span>
           </h3>
+
+          <div className="mt-6 flex justify-center">
+            <img
+              src={metodoTituloRef}
+              alt="Título: Primeira Vitória em Amigurumi"
+              loading="lazy"
+              className="w-full max-w-3xl rounded-xl border border-border bg-background shadow-suave"
+            />
+          </div>
         </header>
 
-        {/* Subtexto + 3 benefícios */}
+        {/* Subtexto + benefícios (ícones) */}
         <div className="max-w-3xl mx-auto">
           <p className="text-muted-foreground text-lg md:text-xl text-center leading-relaxed">
-            Quando você segura seu primeiro amigurumi feito por você, do começo ao fim, algo muda. Não é só habilidade — é sensação.
-            <br />
-            Você começou. Você fez. Você terminou.
-            <br />
-            E, pela primeira vez em muito tempo, sente calma, orgulho e alívio.
+            Um Mapa Completo (com aulas, receitas, materiais e suporte) onde você é guiado, passo a passo, do zero absoluto ao seu primeiro amigurumi completo — em 7 dias — para:
           </p>
 
-          <p className="mt-5 text-foreground/80 text-base md:text-lg text-center leading-relaxed">
-            Por isso criamos um mapa guiado (com aulas, receitas, materiais e suporte) para te levar do zero absoluto ao seu primeiro amigurumi completo — em 7 dias — para:
-          </p>
-
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[{
-            title: "Gerar atenção plena",
-            desc: "(sua mente desacelera)" ,
-            icon: Brain
-          }, {
-            title: "Descarga emocional",
-            desc: "(alívio por concluir)" ,
-            icon: Heart
-          }, {
-            title: "Reconectar corpo e mente",
-            desc: "(sai das telas e cria na prática)",
-            icon: Hand
-          }].map(item => {
-            const Icon = item.icon;
-            return <article key={item.title} className="rounded-2xl bg-background border border-border p-6 shadow-suave hover-lift">
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {beneficios.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.title}
+                  className="rounded-2xl bg-background border border-border p-6 shadow-suave hover-lift animate-fade-in"
+                  style={{ animationDelay: `${idx * 0.06}s` }}
+                >
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-secondary/20 border border-border flex items-center justify-center flex-shrink-0">
+                    <div className="w-11 h-11 rounded-xl bg-secondary/20 border border-border flex items-center justify-center flex-shrink-0">
                       <Icon className="w-5 h-5 text-primary" aria-hidden={true} strokeWidth={1.8} />
                     </div>
-
-                    <div className="min-w-0">
-                      <h4 className="font-semibold text-foreground leading-snug">
-                        {item.title}
-                      </h4>
-                      <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-                        {item.desc}
-                      </p>
+                    <div>
+                      <p className="text-foreground font-semibold leading-snug">{item.title}</p>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
-                </article>;
-          })}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-10 rounded-2xl bg-background border border-border shadow-elevada overflow-hidden">
+            <img
+              src={mapaIlustradoDobra}
+              alt="Mapa ilustrado do Método Primeira Vitória em Amigurumi"
+              loading="lazy"
+              className="w-full h-auto object-contain"
+            />
+          </div>
+
+          <div className="mt-8 flex justify-center">
+            <Button variant="primary" size="lg" onClick={handleIrParaOferta} aria-label="Ir para a Oferta">
+              Quero começar agora
+            </Button>
           </div>
         </div>
 
