@@ -1,5 +1,7 @@
 import { Section } from "@/components/shared/Section";
 import { Check, Quote } from "lucide-react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import provaCienciaImg from "@/assets/prova-ciencia.png";
 
 /**
  * Seção Prova - Científica + Social
@@ -52,30 +54,48 @@ const Prova = () => {
         <h3 className="font-serif text-xl md:text-2xl text-grafite-suave mb-6">
           Primeiro, a ciência específica:
         </h3>
-        <div className="text-body text-grafite-suave/90 space-y-4 mb-8">
-          <p>
-            Em 2021, pesquisadores estudaram <strong className="text-verde-eucalipto">8.391 pessoas que fazem crochê</strong> em 87 países.
-          </p>
-          <p className="text-muted-foreground italic">
-            (Sim, crochê específico. Não artesanato genérico.)
-          </p>
-          <p className="font-bold text-grafite-suave text-lg">
-            O resultado?
-          </p>
-        </div>
+        <div className="grid gap-8 md:grid-cols-[1.15fr_0.85fr] items-start">
+          <div>
+            <div className="text-body text-grafite-suave/90 space-y-4 mb-8">
+              <p>
+                Em 2021, pesquisadores estudaram <strong className="text-verde-eucalipto">8.391 pessoas que fazem crochê</strong> em 87 países.
+              </p>
+              <p className="text-muted-foreground italic">
+                (Sim, crochê específico. Não artesanato genérico.)
+              </p>
+              <p className="font-bold text-grafite-suave text-lg">
+                O resultado?
+              </p>
+            </div>
 
-        {/* Gráfico de barras */}
-        <div className="space-y-4 mb-8">
-          {estatisticas.map((stat, index) => <div key={index} className="flex items-center gap-4">
-              <span className="font-bold text-verde-eucalipto w-16 text-right">{stat.valor}</span>
-              <div className="flex-1 h-8 bg-cinza-nuvem rounded-full overflow-hidden">
-                <div className="h-full rounded-full" style={{
-              width: stat.valor,
-              background: `linear-gradient(90deg, hsl(156 15% 42%) 0%, hsl(35 52% 50%) 100%)`
-            }} />
-              </div>
-              <span className="text-sm text-grafite-suave/80 w-40">{stat.label}</span>
-            </div>)}
+            {/* Gráfico de barras */}
+            <div className="space-y-4 mb-8">
+              {estatisticas.map((stat, index) => <div key={index} className="flex items-center gap-4">
+                  <span className="font-bold text-verde-eucalipto w-16 text-right">{stat.valor}</span>
+                  <div className="flex-1 h-8 bg-cinza-nuvem rounded-full overflow-hidden">
+                    <div className="h-full rounded-full" style={{
+                  width: stat.valor,
+                  background: `linear-gradient(90deg, hsl(156 15% 42%) 0%, hsl(35 52% 50%) 100%)`
+                }} />
+                  </div>
+                  <span className="text-sm text-grafite-suave/80 w-40">{stat.label}</span>
+                </div>)}
+            </div>
+          </div>
+
+          {/* Imagem ao lado do texto */}
+          <div className="w-full max-w-sm md:max-w-none mx-auto">
+            <div className="rounded-2xl overflow-hidden shadow-suave border border-verde-eucalipto/10 bg-white">
+              <AspectRatio ratio={4 / 3}>
+                <img
+                  src={provaCienciaImg}
+                  alt="Gráfico e trecho do estudo sobre os efeitos do crochê"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </AspectRatio>
+            </div>
+          </div>
         </div>
 
         <div className="text-body text-grafite-suave/90 space-y-4">
