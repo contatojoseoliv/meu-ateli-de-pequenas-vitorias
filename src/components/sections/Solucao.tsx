@@ -36,7 +36,7 @@ const Solucao = () => {
         const bullets = content.split('\n').filter(line => line.startsWith('•'));
         return <ul key={i} className="list-none space-y-1 mb-4">
             {bullets.map((bullet, j) => <li key={j} className="flex items-start gap-2">
-                <span className="text-ocre-dourado">•</span>
+                <span className="text-white/70">•</span>
                 {bullet.substring(2)}
               </li>)}
           </ul>;
@@ -97,7 +97,7 @@ const Solucao = () => {
         animationDelay: `${index * 0.15}s`
       }}>
             <div className="flex items-start gap-4 mb-5">
-              <span className="font-serif text-6xl text-ocre-dourado/50 leading-none flex-shrink-0">
+              <span className="font-serif text-6xl text-white/35 leading-none flex-shrink-0">
                 {mec.numero}
               </span>
               <h3 className="font-serif text-xl text-white leading-snug pt-1">
@@ -124,15 +124,20 @@ const Solucao = () => {
       </div>
       </Section>
 
-      {/* DOBRA 2 (branca): método + mapa + fechamento */}
+      {/* DOBRA 2 (papel): método (imagens + ícones + pilares) */}
       <Section
         id="metodo"
-        background="white"
+        background="cinza"
         className="scroll-mt-24"
-        containerClassName="pt-0 pb-10 md:pb-14"
+        containerClassName="pt-10 pb-10 md:pt-12 md:pb-12"
       >
         {/* Método + Pilares (sessão única, full-width) */}
         <MetodoPrimeiraVitoria />
+
+      </Section>
+
+      {/* DOBRA 3 (branca): mapa + fechamento */}
+      <Section background="white" containerClassName="pt-0 pb-10 md:pb-14">
 
         {/* Mapa de 7 Dias (visual) */}
         <Mapa7Dias />
