@@ -111,7 +111,7 @@ const Prova = () => {
       animationDelay: '0.2s'
     }}>
         <h3 className="font-serif text-xl md:text-2xl text-grafite-suave mb-6">
-          Segundo, a validação brasileira:
+          Validação Brasileira em Saúde Pública
         </h3>
         <div className="text-body text-grafite-suave/90 space-y-4 mb-8">
           <p className="text-sm text-muted-foreground">
