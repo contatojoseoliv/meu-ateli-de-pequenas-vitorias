@@ -105,6 +105,11 @@ const Oferta = () => {
         </p>
       </div>
 
+      {/* Área de Imagem */}
+      <div className="max-w-2xl mx-auto mb-16 animate-fade-in" style={{ animationDelay: '0.15s' }}>
+        <div className="w-full aspect-[16/7] rounded-lg bg-cinza-nuvem shadow-lg" />
+      </div>
+
       {/* Stack de Itens */}
       <div className="max-w-3xl mx-auto mb-12 space-y-4">
         {itens.map((item, index) => (
