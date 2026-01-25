@@ -1,7 +1,6 @@
 import { Section } from "@/components/shared/Section";
 import { Button } from "@/components/shared/Button";
 import { MetodoPrimeiraVitoria } from "@/components/sections/solucao/MetodoPrimeiraVitoria";
-import { Mapa7Dias } from "@/components/sections/solucao/Mapa7Dias";
 
 /**
  * Seção Solução - Método Primeira Vitória
@@ -136,12 +135,6 @@ const Solucao = () => {
 
       </Section>
 
-      {/* DOBRA 3 (branca): mapa + fechamento */}
-      <Section background="white" containerClassName="pt-0 pb-10 md:pb-14">
-
-        {/* Mapa de 7 Dias (visual) */}
-        <Mapa7Dias />
-      </Section>
     </>;
 };
 export { Solucao };
