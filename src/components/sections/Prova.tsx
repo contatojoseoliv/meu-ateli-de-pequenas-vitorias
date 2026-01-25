@@ -53,7 +53,7 @@ const Prova = () => {
     }}>
         <h3 className="font-serif text-xl md:text-2xl text-grafite-suave mb-6">Evidências Científicas sobre:</h3>
         <div className="text-body text-grafite-suave/90 space-y-4 mb-8">
-              <p>Em 2021, um estudo publicada na revista Perspectives in Public Health analisou especificamente os efeitos do crochê no bem-estar psicológico, com uma amostra de 8.391 praticantes em 87 países.</p>
+              <p>Em 2021, um estudo publicada na revista Perspectives in Public Health analisou especificamente os <strong className="text-verde-eucalipto">efeitos do crochê no bem-estar psicológico</strong>, com uma amostra de 8.391 praticantes em 87 países.</p>
               
               <p className="font-bold text-grafite-suave text-lg">
                 O resultado?
