@@ -121,9 +121,7 @@ const MetodoPrimeiraVitoria = () => {
 
       {/* Fechamento emocional (mais compacto e alinhado com a sessão) */}
       <section aria-label="Fechamento emocional" className="max-w-3xl mx-auto text-center mt-8 md:mt-10 animate-fade-in">
-        <p className="text-base text-grafite-suave leading-relaxed md:text-base font-normal">
-          Quando você segura seu primeiro amigurumi completo — feito por você, do início ao fim — algo muda: não só a habilidade, mas a sensação. Não é só habilidade — é sensação.
-        </p>
+        <p className="text-base text-grafite-suave leading-relaxed md:text-base font-normal">Quando você segura seu primeiro amigurumi completo — feito por você, do início ao fim — algo muda: não só a habilidade, mas a sensação.</p>
 
         <div className="mt-4 rounded-2xl border border-border bg-background px-5 py-3 shadow-suave">
           <p className="font-serif text-lg md:text-xl text-grafite-suave leading-snug">
