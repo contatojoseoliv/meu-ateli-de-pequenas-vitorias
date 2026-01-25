@@ -42,15 +42,15 @@ const Hero = () => {
                 </div>
 
                 {/* Headline */}
-                <h1 className="font-serif font-bold tracking-tight text-[28px] sm:text-[30px] leading-[1.1] md:text-[40px] lg:text-[44px] text-grafite-suave drop-shadow-sm">
-                  <span className="block whitespace-nowrap text-h2">Desligue Sua Mente Acelerada</span>
+                <h2 className="font-serif font-bold tracking-tight leading-[1.1] text-h2 text-grafite-suave drop-shadow-sm">
+                  <span className="block whitespace-nowrap">Desligue Sua Mente Acelerada</span>
                   <span className="block whitespace-nowrap">
                     em <span className={highlights.accent}>15 Minutos por Dia</span>
                   </span>
                   <span className="block whitespace-nowrap">
                     Criando <span className={highlights.accent}>Amigurumi</span> com Suas Mãos
                   </span>
-                </h1>
+                </h2>
 
                 {/* Subheadline */}
                 <p className="text-base md:text-body text-grafite-suave/90 italic drop-shadow-sm max-w-[40ch] mx-auto">
