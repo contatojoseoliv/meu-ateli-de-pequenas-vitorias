@@ -114,7 +114,7 @@ const MetodoPrimeiraVitoria = () => {
           </p>
         </div>
 
-        <p className="mt-6 text-sm md:text-base text-grafite-suave/70 leading-relaxed font-normal">
+        <p className="mt-6 text-base text-grafite-suave leading-relaxed md:text-base font-normal">
           E, pela primeira vez em muito tempo, sente calma, orgulho e alívio.
         </p>
       </section>
