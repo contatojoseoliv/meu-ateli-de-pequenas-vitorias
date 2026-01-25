@@ -2,6 +2,7 @@ import { Section } from "@/components/shared/Section";
 import { Button } from "@/components/shared/Button";
 import { MetodoPrimeiraVitoria } from "@/components/sections/solucao/MetodoPrimeiraVitoria";
 import { Mapa7Dias } from "@/components/sections/solucao/Mapa7Dias";
+import mapaIlustrado from "@/assets/mapa-ilustrado-amigurumi.png";
 
 /**
  * Seção Solução - Método Primeira Vitória
@@ -36,7 +37,7 @@ const Solucao = () => {
         const bullets = content.split('\n').filter(line => line.startsWith('•'));
         return <ul key={i} className="list-none space-y-1 mb-4">
             {bullets.map((bullet, j) => <li key={j} className="flex items-start gap-2">
-                <span className="text-ocre-dourado">•</span>
+                <span className="text-white/70">•</span>
                 {bullet.substring(2)}
               </li>)}
           </ul>;
@@ -97,7 +98,7 @@ const Solucao = () => {
         animationDelay: `${index * 0.15}s`
       }}>
             <div className="flex items-start gap-4 mb-5">
-              <span className="font-serif text-6xl text-ocre-dourado/50 leading-none flex-shrink-0">
+              <span className="font-serif text-6xl text-white/35 leading-none flex-shrink-0">
                 {mec.numero}
               </span>
               <h3 className="font-serif text-xl text-white leading-snug pt-1">
@@ -124,7 +125,42 @@ const Solucao = () => {
       </div>
       </Section>
 
-      {/* DOBRA 2 (branca): método + mapa + fechamento */}
+      {/* DOBRA 2 (cinza): “papel” + imagem (mapa) + CTA */}
+      <Section background="cinza" containerClassName="py-10 md:py-12">
+        <div className="max-w-4xl mx-auto text-center">
+          <header className="mb-8">
+            <h3 className="font-serif text-2xl md:text-3xl text-foreground leading-tight">
+              Seu caminho em 7 dias, bem guiado
+            </h3>
+            <p className="mt-3 text-base md:text-lg text-muted-foreground leading-relaxed">
+              Você só precisa seguir o mapa — 15 minutos por dia — até chegar na sua
+              primeira peça completa.
+            </p>
+          </header>
+
+          <div className="rounded-2xl border border-border bg-background shadow-suave p-4 md:p-6">
+            <img
+              src={mapaIlustrado}
+              alt="Mapa ilustrado: aventuras no amigurumi em 7 dias"
+              loading="lazy"
+              className="w-full h-auto max-h-[520px] object-contain"
+            />
+          </div>
+
+          <div className="mt-8 flex justify-center">
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={handleVerMetodo}
+              aria-label="Ver o método completo"
+            >
+              Quero ver o método
+            </Button>
+          </div>
+        </div>
+      </Section>
+
+      {/* DOBRA 3 (branca): método + mapa + fechamento */}
       <Section
         id="metodo"
         background="white"
