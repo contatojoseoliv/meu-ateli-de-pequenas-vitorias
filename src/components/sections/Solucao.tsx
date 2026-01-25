@@ -111,9 +111,9 @@ const Solucao = () => {
           </div>)}
       </div>
 
-       {/* Nota editorial (manual de marca) */}
-       <p className="mx-auto -mt-6 mb-8 max-w-2xl text-center text-sm md:text-base font-medium tracking-wide text-white/75">
-         É assim que a mente finalmente desacelera.
+       {/* Nota editorial (destaque como o texto final acima) */}
+       <p className="mx-auto -mt-6 mb-8 max-w-2xl text-center text-base md:text-lg font-semibold text-white/85">
+         É assim que a mente finalmente desacelera e o corpo relaxa.
        </p>
 
       {/* CTA logo abaixo das caixinhas */}
