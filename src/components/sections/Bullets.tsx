@@ -45,8 +45,11 @@ const Bullets = () => {
 
   return (
     <Section id="bullets" background="white">
-      {/* Título */}
+      {/* Pré-headline + Título */}
       <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+        <p className="text-xs md:text-sm uppercase tracking-[0.32em] text-verde-eucalipto mb-4">
+          O que Você Vai Descobrir
+        </p>
         <h2 className="font-serif text-2xl md:text-4xl text-grafite-suave">
           Do Primeiro Ponto ao Orgulho de Dizer{" "}
           <span className="text-verde-eucalipto">"Eu Que Fiz"</span>
