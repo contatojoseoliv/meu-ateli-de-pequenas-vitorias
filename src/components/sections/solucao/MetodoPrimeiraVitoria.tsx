@@ -1,5 +1,4 @@
 import { Heart, Sparkles, Target, TrendingUp } from "lucide-react";
-
 type Pilar = {
   numero: string;
   titulo: string;
@@ -29,8 +28,7 @@ const pilares: Pilar[] = [{
   icon: TrendingUp
 }];
 const MetodoPrimeiraVitoria = () => {
-  return (
-    <div className="animate-fade-in">
+  return <div className="animate-fade-in">
       {/* Headline (mesma linguagem da seção: Por Que Você Está Ansiosa...) */}
       <div className="text-center max-w-2xl mx-auto mb-8 md:mb-10">
         <p className="text-grafite-suave/80 text-sm md:text-base font-semibold tracking-wide">
@@ -77,13 +75,10 @@ const MetodoPrimeiraVitoria = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {pilares.map((pilar, index) => {
-            const Icon = pilar.icon;
-            return (
-              <article
-                key={pilar.numero}
-                className="rounded-2xl bg-background border border-border p-6 md:p-7 shadow-suave hover-lift animate-fade-in"
-                style={{ animationDelay: `${index * 0.08}s` }}
-              >
+          const Icon = pilar.icon;
+          return <article key={pilar.numero} className="rounded-2xl bg-background border border-border p-6 md:p-7 shadow-suave hover-lift animate-fade-in" style={{
+            animationDelay: `${index * 0.08}s`
+          }}>
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-11 h-11 rounded-xl bg-secondary/20 border border-border flex items-center justify-center flex-shrink-0">
                     <Icon className="w-5 h-5 text-primary" aria-hidden={true} strokeWidth={1.8} />
@@ -100,15 +95,14 @@ const MetodoPrimeiraVitoria = () => {
                 </div>
 
                 <p className="text-grafite-suave/80 text-body leading-relaxed">{pilar.texto}</p>
-              </article>
-            );
-          })}
+              </article>;
+        })}
         </div>
       </section>
 
       {/* Fechamento emocional (mais compacto e alinhado com a sessão) */}
       <section aria-label="Fechamento emocional" className="max-w-3xl mx-auto text-center mt-12 md:mt-14 animate-fade-in">
-        <p className="text-base md:text-lg text-grafite-suave font-semibold leading-relaxed">
+        <p className="text-base text-grafite-suave leading-relaxed md:text-base font-normal">
           Quando você segura seu primeiro amigurumi feito por você, do começo ao fim, algo muda.
           <br />
           Não é só habilidade — é sensação.
@@ -124,7 +118,6 @@ const MetodoPrimeiraVitoria = () => {
           E, pela primeira vez em muito tempo, sente calma, orgulho e alívio.
         </p>
       </section>
-    </div>
-  );
+    </div>;
 };
 export { MetodoPrimeiraVitoria };
