@@ -56,7 +56,7 @@ const Prova = () => {
           <div>
             <div className="text-body text-grafite-suave/90 space-y-4 mb-8">
               <p>
-                Em 2021, pesquisadores estudaram  em 87 países.
+                Um estudo publicado em 2021 na revista <em>Perspectives in Public Health</em> analisou os efeitos do crochê no bem-estar psicológico de 8.391 praticantes em 87 países.
               </p>
               <p className="text-muted-foreground italic">
                 (Sim, crochê específico. Não artesanato genérico.)
