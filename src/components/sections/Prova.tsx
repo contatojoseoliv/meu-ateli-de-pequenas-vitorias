@@ -34,11 +34,11 @@ const Prova = () => {
       return part;
     });
   };
-  return <Section id="prova" background="cinza">
+  return <Section id="prova" background="white">
       {/* Título */}
       <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
         <h2 className="font-serif text-3xl md:text-h2 text-grafite-suave">
-          Isto Não É Teoria. <span className="text-verde-eucalipto">São Fatos.</span>
+          Isto não é teoria. <span className="text-verde-eucalipto">São fatos.</span>
         </h2>
       </div>
 
