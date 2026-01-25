@@ -115,10 +115,13 @@ const Prova = () => {
         </h3>
         <div className="text-body text-grafite-suave/90 space-y-4 mb-8">
           <p className="text-sm text-muted-foreground">
-            Aqui no Brasil, unidades de saúde da Estratégia Saúde da Família (ESF) implementaram grupos de crochê para mulheres em sofrimento emocional.
+            No Brasil, unidades da Estratégia Saúde da Família (ESF) adotaram grupos de crochê como intervenção complementar para mulheres em sofrimento emocional.
+          </p>
+          <p className="text-grafite-suave/90">
+            Os achados apontaram melhora significativa da autoestima, redução de sintomas de ansiedade e depressão e aumento do senso de empoderamento — com maior reconhecimento das próprias capacidades.
           </p>
           <p className="font-bold text-grafite-suave text-lg">
-            O que aconteceu?
+            O que aconteceu na prática?
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="rounded-xl border border-verde-eucalipto/20 bg-verde-eucalipto-10 p-4">
@@ -159,6 +162,12 @@ const Prova = () => {
           </p>
           <p className="text-center text-muted-foreground mt-4 text-sm">
             — Participante de grupo de crochê terapêutico
+          </p>
+        </div>
+
+        <div className="mt-6 text-sm text-muted-foreground">
+          <p>
+            E isso não ficou restrito a um único grupo: a experiência foi replicada em múltiplos municípios, com resultados semelhantes — reforçando que atividades manuais estruturadas podem gerar benefícios reais para a saúde mental.
           </p>
         </div>
 
