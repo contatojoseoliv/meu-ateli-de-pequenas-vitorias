@@ -59,9 +59,9 @@ const MetodoPrimeiraVitoria = () => {
           passo a passo, do zero absoluto ao seu primeiro amigurumi completo — em 7 dias.
         </p>
 
-        {/* Placeholder de imagem (compacto) */}
-        <div className="mt-6 mx-auto max-w-3xl rounded-2xl border border-border bg-background shadow-suave overflow-hidden">
-          <div className="aspect-[16/9] grid place-items-center px-6 text-center">
+        {/* Placeholder de imagem (mais compacto) */}
+        <div className="mt-4 mx-auto max-w-2xl rounded-2xl border border-border bg-background shadow-suave overflow-hidden">
+          <div className="aspect-[16/7] grid place-items-center px-5 text-center">
             <div>
               <p className="text-sm md:text-base text-muted-foreground">
                 Área para imagem (ex.: print do mapa / aula / amigurumi pronto)
@@ -82,7 +82,7 @@ const MetodoPrimeiraVitoria = () => {
       </div>
 
       {/* Divisor */}
-      <div className="my-10 border-t border-border" />
+      <div className="my-8 border-t border-border" />
 
       {/* Pilares */}
       <section aria-label="Pilares científicos" className="max-w-5xl mx-auto">
@@ -120,23 +120,23 @@ const MetodoPrimeiraVitoria = () => {
       </section>
 
       {/* Fechamento emocional (mais compacto e alinhado com a sessão) */}
-      <section aria-label="Fechamento emocional" className="max-w-3xl mx-auto text-center mt-12 md:mt-14 animate-fade-in">
-        <p className="text-base text-grafite-suave leading-relaxed md:text-base font-normal">Quando você segura seu primeiro amigurumi completo — feito por você, do início ao fim — algo muda: não só a habilidade, mas a sensação.<br />
-          Não é só habilidade — é sensação.
+      <section aria-label="Fechamento emocional" className="max-w-3xl mx-auto text-center mt-8 md:mt-10 animate-fade-in">
+        <p className="text-base text-grafite-suave leading-relaxed md:text-base font-normal">
+          Quando você segura seu primeiro amigurumi completo — feito por você, do início ao fim — algo muda: não só a habilidade, mas a sensação. Não é só habilidade — é sensação.
         </p>
 
-        <div className="mt-6 rounded-2xl border border-border bg-background px-6 py-4 shadow-suave">
+        <div className="mt-4 rounded-2xl border border-border bg-background px-5 py-3 shadow-suave">
           <p className="font-serif text-lg md:text-xl text-grafite-suave leading-snug">
             Você começou. Você fez. <span className="text-rosa-argila">Você terminou.</span>
           </p>
         </div>
 
-        <p className="mt-6 text-base text-grafite-suave leading-relaxed md:text-base font-normal">
+        <p className="mt-4 text-base text-grafite-suave leading-relaxed md:text-base font-normal">
           E, pela primeira vez em muito tempo, sente calma, orgulho e alívio.
         </p>
 
         {/* CTA final da sessão */}
-        <div className="mt-6 flex justify-center">
+        <div className="mt-4 flex justify-center">
           <Button variant="primary" size="lg" onClick={handleIrParaOferta} aria-label="Ir para a Oferta">
             Quero começar agora
           </Button>
