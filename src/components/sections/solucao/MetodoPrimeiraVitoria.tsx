@@ -1,5 +1,4 @@
 import { Check, Heart, Sparkles, Target, TrendingUp } from "lucide-react";
-
 type Pilar = {
   numero: string;
   titulo: string;
@@ -7,41 +6,29 @@ type Pilar = {
   // Lucide components can be tricky to type across tooling; keep it flexible.
   icon: any;
 };
-
-const pilares: Pilar[] = [
-  {
-    numero: "1",
-    titulo: "Pequeno e alcançável",
-    texto:
-      "Não é projeto de meses. É 7 dias, 15 min/dia. Algo que você TERMINA.",
-    icon: Target,
-  },
-  {
-    numero: "2",
-    titulo: "Guiado passo a passo",
-    texto:
-      "Nunca fica perdida. Vídeos em câmera lenta, ângulos múltiplos. Você sempre sabe o próximo passo.",
-    icon: Sparkles,
-  },
-  {
-    numero: "3",
-    titulo: "Emocionalmente seguro",
-    texto:
-      "Erro é normal (todo mundo erra). Tem suporte integral. Sem autocrítica brutal.",
-    icon: Heart,
-  },
-  {
-    numero: "4",
-    titulo: "Progressivo",
-    texto:
-      "Vitória 1, 2, 3... Cada dia é uma conquista. Confiança cresce. Identidade muda.",
-    icon: TrendingUp,
-  },
-];
-
+const pilares: Pilar[] = [{
+  numero: "1",
+  titulo: "Pequeno e alcançável",
+  texto: "Não é projeto de meses. É 7 dias, 15 min/dia. Algo que você TERMINA.",
+  icon: Target
+}, {
+  numero: "2",
+  titulo: "Guiado passo a passo",
+  texto: "Nunca fica perdida. Vídeos em câmera lenta, ângulos múltiplos. Você sempre sabe o próximo passo.",
+  icon: Sparkles
+}, {
+  numero: "3",
+  titulo: "Emocionalmente seguro",
+  texto: "Erro é normal (todo mundo erra). Tem suporte integral. Sem autocrítica brutal.",
+  icon: Heart
+}, {
+  numero: "4",
+  titulo: "Progressivo",
+  texto: "Vitória 1, 2, 3... Cada dia é uma conquista. Confiança cresce. Identidade muda.",
+  icon: TrendingUp
+}];
 const MetodoPrimeiraVitoria = () => {
-  return (
-    <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-rosa-argila-10 border-y border-border mb-20 animate-fade-in">
+  return <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-rosa-argila-10 border-y border-border mb-20 animate-fade-in">
       <div className="max-w-5xl mx-auto px-6 md:px-8 py-12 md:py-14">
         {/* Headline */}
         <header className="text-center mb-10">
@@ -55,38 +42,29 @@ const MetodoPrimeiraVitoria = () => {
 
         {/* Subtexto + 3 benefícios */}
         <div className="max-w-3xl mx-auto">
-          <p className="text-muted-foreground text-lg md:text-xl text-center leading-relaxed">
-            Uma plataforma onde você constrói, passo a passo, do zero absoluto ao
-            seu primeiro amigurumi completo — em 7 dias — para:
-          </p>
+          <p className="text-muted-foreground text-lg md:text-xl text-center leading-relaxed">Um Mapa Completo (com aulas, receitas, materiais e suporte) onde você é guiado, passo a passo, do zero absoluto ao seu primeiro amigurumi completo — em 7 dias — para:</p>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              { title: "Gerar Atenção Plena", desc: "(sua mente para)" },
-              { title: "Criar descarga emocional", desc: "(algo só seu)" },
-              {
-                title: "Reconectar corpo-mente",
-                desc: "(sai das telas e cria na prática)",
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="rounded-xl bg-background/60 border border-border px-5 py-4"
-              >
+            {[{
+            title: "Gerar Atenção Plena",
+            desc: "(sua mente para)"
+          }, {
+            title: "Criar descarga emocional",
+            desc: "(algo só seu)"
+          }, {
+            title: "Reconectar corpo-mente",
+            desc: "(sai das telas e cria na prática)"
+          }].map(item => <div key={item.title} className="rounded-xl bg-background/60 border border-border px-5 py-4">
                 <div className="flex items-start gap-3">
                   <div className="w-9 h-9 rounded-full bg-secondary/20 border border-border flex items-center justify-center flex-shrink-0">
-                    <Check
-                      className="w-5 h-5 text-primary"
-                      aria-hidden={true}
-                    />
+                    <Check className="w-5 h-5 text-primary" aria-hidden={true} />
                   </div>
                   <div className="text-foreground leading-snug">
                     <span className="font-semibold">{item.title}</span>{" "}
                     <span className="text-muted-foreground">{item.desc}</span>
                   </div>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
 
@@ -103,20 +81,13 @@ const MetodoPrimeiraVitoria = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {pilares.map((pilar, index) => {
-              const Icon = pilar.icon;
-              return (
-                <article
-                  key={pilar.numero}
-                  className="rounded-2xl bg-background/60 border border-border p-6 md:p-7 hover-lift animate-fade-in"
-                  style={{ animationDelay: `${index * 0.08}s` }}
-                >
+            const Icon = pilar.icon;
+            return <article key={pilar.numero} className="rounded-2xl bg-background/60 border border-border p-6 md:p-7 hover-lift animate-fade-in" style={{
+              animationDelay: `${index * 0.08}s`
+            }}>
                   <div className="flex items-start gap-4 mb-4">
                     <div className="w-11 h-11 rounded-xl bg-secondary/20 border border-border flex items-center justify-center flex-shrink-0">
-                      <Icon
-                        className="w-5 h-5 text-primary"
-                        aria-hidden={true}
-                        strokeWidth={1.8}
-                      />
+                      <Icon className="w-5 h-5 text-primary" aria-hidden={true} strokeWidth={1.8} />
                     </div>
 
                     <div>
@@ -132,14 +103,11 @@ const MetodoPrimeiraVitoria = () => {
                   <p className="text-muted-foreground text-body leading-relaxed">
                     {pilar.texto}
                   </p>
-                </article>
-              );
-            })}
+                </article>;
+          })}
           </div>
         </section>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export { MetodoPrimeiraVitoria };
