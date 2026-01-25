@@ -1,4 +1,4 @@
-import { Check, Heart, Sparkles, Target, TrendingUp } from "lucide-react";
+import { Brain, Check, Hand, Heart, Sparkles, Target, TrendingUp } from "lucide-react";
 type Pilar = {
   numero: string;
   titulo: string;
@@ -42,26 +42,50 @@ const MetodoPrimeiraVitoria = () => {
 
         {/* Subtexto + 3 benefícios */}
         <div className="max-w-3xl mx-auto">
-          <p className="text-muted-foreground text-lg md:text-xl text-center leading-relaxed">Um Mapa Completo (com aulas, receitas, materiais e suporte) onde você é guiado, passo a passo, do zero absoluto ao seu primeiro amigurumi completo — em 7 dias — para:</p>
+          <p className="text-muted-foreground text-lg md:text-xl text-center leading-relaxed">
+            Quando você segura seu primeiro amigurumi feito por você, do começo ao fim, algo muda. Não é só habilidade — é sensação.
+            <br />
+            Você começou. Você fez. Você terminou.
+            <br />
+            E, pela primeira vez em muito tempo, sente calma, orgulho e alívio.
+          </p>
+
+          <p className="mt-5 text-foreground/80 text-base md:text-lg text-center leading-relaxed">
+            Por isso criamos um mapa guiado (com aulas, receitas, materiais e suporte) para te levar do zero absoluto ao seu primeiro amigurumi completo — em 7 dias — para:
+          </p>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
             {[{
-            title: "Gerar Atenção Plena",
-            desc: "(sua mente para)"
+            title: "Gerar atenção plena",
+            desc: "(sua mente desacelera)" ,
+            icon: Brain
           }, {
-            title: "Criar descarga emocional",
-            desc: "(algo só seu)"
+            title: "Descarga emocional",
+            desc: "(alívio por concluir)" ,
+            icon: Heart
           }, {
-            title: "Reconectar corpo-mente",
-            desc: "(sai das telas e cria na prática)"
-          }].map(item => <div key={item.title} className="rounded-xl bg-background/60 border border-border px-5 py-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-full bg-secondary/20 border border-border flex items-center justify-center flex-shrink-0">
-                    <Check className="w-5 h-5 text-primary" aria-hidden={true} />
+            title: "Reconectar corpo e mente",
+            desc: "(sai das telas e cria na prática)",
+            icon: Hand
+          }].map(item => {
+            const Icon = item.icon;
+            return <article key={item.title} className="rounded-2xl bg-background border border-border p-6 shadow-suave hover-lift">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-secondary/20 border border-border flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-5 h-5 text-primary" aria-hidden={true} strokeWidth={1.8} />
+                    </div>
+
+                    <div className="min-w-0">
+                      <h4 className="font-semibold text-foreground leading-snug">
+                        {item.title}
+                      </h4>
+                      <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
                   </div>
-                  
-                </div>
-              </div>)}
+                </article>;
+          })}
           </div>
         </div>
 
