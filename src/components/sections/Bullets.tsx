@@ -80,7 +80,7 @@ const Bullets = () => {
       </div>
 
     {/* CTA */}
-    <div className="text-center mt-12 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+    <div className="text-center mt-12 mb-8 animate-fade-in" style={{ animationDelay: "0.4s" }}>
       <Button
         size="lg"
         onClick={() => {
