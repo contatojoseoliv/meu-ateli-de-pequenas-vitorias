@@ -1,54 +1,60 @@
 
-Objetivo (Dobra 3 / “Problema”)
-- Fixar a cor de fundo na opção recomendada: **Cinza Nuvem** da paleta (`background="cinza"` → `bg-cinza-nuvem`).
-- Garantir que o fundo realmente “apareça” (sem ficar parecendo branco puro), mantendo os **cards brancos** com contraste bonito e consistente com o resto da landing.
+Objetivo
+- Melhorar as “caixinhas” da Sessão 3 (Problema) para ficarem com o mesmo nível de acabamento das caixas da Sessão 4 (Solução): mais respiro, hierarquia mais clara e aparência mais premium.
+- Atender sua observação de “talvez tirar o ícone” sem perder clareza.
 
-O que já está correto (pelo seu diff atual)
-- A Dobra 3 já está assim:
-  - `return <Section id="problema" background="cinza" ...>`
-- Isso usa o token oficial do design system:
-  - `cinza` → `bg-cinza-nuvem`
+O que está acontecendo hoje (diagnóstico)
+- As caixas da Sessão 3 usam `p-4` e um cabeçalho simples (ícone pequeno + título). Isso deixa o conteúdo mais “apertado” e com hierarquia fraca.
+- As caixas da Sessão 4 (Solução) funcionam melhor porque:
+  - têm padding maior (`p-7`)
+  - têm um “elemento de hierarquia” forte (número grande em serif)
+  - têm layout em `flex` com boa separação entre número e título
 
-Por que às vezes o Cinza Nuvem “parece branco”
-- O `#F4F4F4` é bem suave. Com cards `bg-white` em cima, em alguns monitores a diferença fica mínima.
-- Se houver qualquer `className` de fundo adicional, ele pode sobrescrever o `bg-cinza-nuvem` (você já removeu o `bg-verde-eucalipto-10`, ótimo).
+Decisão de design (o que vamos fazer)
+- Remover os ícones da Sessão 3 e substituir a hierarquia por um padrão semelhante ao da Sessão 4:
+  1) Número grande (serif) como âncora visual
+  2) Título em destaque
+  3) Texto com `leading-relaxed` e mais respiro
+- Manter o fundo da seção em Cinza Nuvem (já aprovado) e manter cards brancos, mas com acabamento consistente.
 
-Implementação (o que vou fazer quando você sair do modo read-only e eu puder aplicar)
-1) “Travar” o fundo Cinza Nuvem sem risco de override
+Implementação (passo a passo)
+1) Ajustar o “card container” (Sessão 3)
 - Arquivo: `src/components/sections/Problema.tsx`
-- Conferir que o `<Section>`:
-  - mantém `background="cinza"`
-  - não tem `className` com `bg-*` (nem `style` com background) que sobrescreva
+- No `map` dos `viloes`, alterar classes do card para:
+  - aumentar padding: `p-4 md:p-4` → `p-6 md:p-7`
+  - alinhar raio com o estilo premium: manter `rounded-2xl` (ou mudar para `rounded-xl` se quisermos ficar idêntico à Sessão 4; eu recomendo manter `rounded-2xl` porque já é um padrão forte do site)
+  - manter sombra suave e hover (mas garantir que não “pese” visualmente): manter `shadow-suave` e `hover-lift`
 
-2) Melhorar a percepção do Cinza Nuvem (sem trocar a cor)
-Para o cinza não “sumir” atrás dos cards brancos:
-- Ajustar levemente o contraste dos cards (continua branco, mas com borda/sombra mais definida):
-  - `border-verde-eucalipto/15` → `border-verde-eucalipto/20` (ou `/25` se necessário)
-  - opcional: aumentar um pouco a sombra (`shadow-suave` → algo entre `shadow-suave` e `shadow-elevada`, bem sutil)
-- Motivo: isso cria “recorte” e você passa a perceber melhor o fundo cinza atrás.
+2) Refazer o cabeçalho do card para ganhar hierarquia (sem ícone)
+- Trocar o bloco que hoje é:
+  - ícone + título
+- Por um layout igual ao da Sessão 4:
+  - `div` com `flex items-start gap-4 mb-5`
+  - número grande à esquerda (`font-serif text-6xl leading-none`) com cor discreta para não competir com CTA:
+    - sugestão de cor: `text-verde-eucalipto/30` (ou `text-rosa-argila/35` se quiser mais emocional)
+  - título à direita (`font-serif text-xl text-grafite-suave leading-snug pt-1`)
+- O objetivo é: “bater o olho e entender 1, 2, 3” como na Sessão 4.
 
-3) Validação visual no Preview (checklist rápido)
-- Lead (branco) → Problema (Cinza Nuvem):
-  - a Dobra 3 precisa ficar claramente “uma nova dobra” sem parecer “igual branco”
-- Problema (Cinza Nuvem) → Solução (Verde escuro):
-  - transição limpa e com contraste forte (funciona muito bem para mudança de fase)
-- Legibilidade:
-  - títulos e parágrafos continuam em grafite; destaques em verde continuam funcionando
+3) Ajustar tipografia e respiro do texto dentro do card
+- Alterar o texto do card para ficar mais “editorial”:
+  - manter `text-body` e `leading-relaxed`
+  - evitar `leading-snug` no mobile (deixa denso)
+- Se necessário, reduzir a “quebra forçada” após o destaque verde (o `<br />` que você usa no `formatText`) apenas se estiver deixando o texto com espaços estranhos — mas só mexo nisso se realmente for o causador visual.
 
-Arquivos envolvidos
-- `src/components/sections/Problema.tsx` (principal)
-- `src/components/shared/Section.tsx` (não deve precisar alterar; já suporta `cinza`)
+4) Verificação visual (no Preview)
+- Conferir em 3 larguras:
+  - mobile: cards com boa altura, sem texto colado, número não estoura linha
+  - tablet: grid com 2 ou 3 colunas (dependendo do breakpoint), alinhamento consistente
+  - desktop: hierarquia clara, “mesma família” da Sessão 4
+- Conferir contraste no Cinza Nuvem:
+  - cards brancos continuam bem “recortados” (borda atual `border-verde-eucalipto/20` pode ficar; se ainda parecer “lavado”, subir para `/25`)
 
-Riscos / alternativas rápidas (se ainda parecer branco no seu monitor)
-- Sem mudar a paleta, dá para criar “presença” com uma dessas opções (eu só faço se você pedir):
-  1) colocar um **separador** sutil no topo/rodapé da seção (`border-t border-black/5` ou `border-verde-eucalipto/10`)
-  2) aplicar um **gradient muito leve** dentro da própria seção (ex.: de `cinza-nuvem` para `white` em 15–20%), semelhante ao que vocês fazem no Fechamento, mas bem mais discreto
+Escopo / arquivos envolvidos
+- `src/components/sections/Problema.tsx` (único arquivo necessário para o ajuste)
+
+Riscos e cuidados
+- Não usar Ocre Dourado (ele é exclusivo para CTAs). Então o número grande não será ocre; será Verde Eucalipto ou Rosa Argila em baixa opacidade.
+- Manter acessibilidade: sem depender só de cor; o número + título continuam texto real.
 
 Resultado esperado
-- Dobra 3 com **Cinza Nuvem real**, perceptível e elegante, sem “puxar” para verde claro e sem competir com a Solução (verde escuro).
-
-<lov-actions>
-  <lov-suggestion message="Ajuste fino de contraste: deixar os cards da Dobra 3 mais ‘recortados’ no Cinza Nuvem (borda um pouco mais forte e sombra sutil), sem mudar layout.">Refinar contraste dos cards</lov-suggestion>
-  <lov-suggestion message="Adicionar um separador sutil (linha/gradiente leve) entre Lead (branco) e Problema (cinza-nuvem) para a mudança de dobra ficar mais perceptível em qualquer monitor.">Adicionar separador sutil</lov-suggestion>
-  <lov-suggestion message="Criar uma variação oficial no componente Section: background='verde-claro' (bg-verde-eucalipto-10) e background='cinza' (bg-cinza-nuvem), para nunca depender de className manual.">Padronizar backgrounds no Section</lov-suggestion>
-</lov-actions>
+- Caixas da Sessão 3 com o mesmo “acabamento premium” das da Sessão 4: mais respiro, hierarquia imediata e aparência consistente (sem a sensação de “estranhas”), e sem ícones como você sugeriu.
