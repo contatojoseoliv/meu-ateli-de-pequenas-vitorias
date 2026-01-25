@@ -55,12 +55,8 @@ const Prova = () => {
         <div className="grid gap-8 md:grid-cols-[1.15fr_0.85fr] items-start">
           <div>
             <div className="text-body text-grafite-suave/90 space-y-4 mb-8">
-              <p>
-                Em 2021, pesquisadores estudaram  em 87 países.
-              </p>
-              <p className="text-muted-foreground italic">
-                (Sim, crochê específico. Não artesanato genérico.)
-              </p>
+              <p>Em 2021, um estudo publicada na revista Perspectives in Public Health analisou especificamente os efeitos do crochê no bem-estar psicológico, com uma amostra de 8.391 praticantes em 87 países.</p>
+              
               <p className="font-bold text-grafite-suave text-lg">
                 O resultado?
               </p>
@@ -97,9 +93,7 @@ const Prova = () => {
           <p className="font-bold text-rosa-argila">
             As mesmas coisas que VOCÊ quer.
           </p>
-          <p className="mt-6 italic text-muted-foreground">
-            O estudo concluiu: "Crochê oferece benefícios positivos reais para bem-estar pessoal."
-          </p>
+          <p className="mt-6 italic text-muted-foreground">O estudo concluiu que o crochê oferece benefícios positivos reais para o bem-estar pessoal. </p>
           <p className="text-sm text-muted-foreground">
             Publicado em <em>Perspectives in Public Health</em> — uma das principais revistas de saúde pública do mundo.
           </p>
