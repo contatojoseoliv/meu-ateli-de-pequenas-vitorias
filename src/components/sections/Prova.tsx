@@ -66,9 +66,9 @@ const Prova = () => {
                   <span className="font-bold text-verde-eucalipto w-16 text-right">{stat.valor}</span>
                   <div className="flex-1 h-8 bg-cinza-nuvem rounded-full overflow-hidden">
                     <div className="h-full rounded-full" style={{
-                  width: stat.valor,
-                  background: `linear-gradient(90deg, hsl(156 15% 42%) 0%, hsl(35 52% 50%) 100%)`
-                }} />
+              width: stat.valor,
+              background: `linear-gradient(90deg, hsl(156 15% 42%) 0%, hsl(35 52% 50%) 100%)`
+            }} />
                   </div>
                   <span className="text-sm text-grafite-suave/80 w-40">{stat.label}</span>
                 </div>)}
@@ -92,72 +92,7 @@ const Prova = () => {
       </div>
 
       {/* Segunda Prova - Validação Brasileira */}
-      <div className="bg-white rounded-2xl p-8 md:p-10 shadow-suave max-w-4xl mx-auto mb-12 animate-fade-in" style={{
-      animationDelay: '0.2s'
-    }}>
-        <h3 className="font-serif text-xl md:text-2xl text-grafite-suave mb-6">
-          Segundo, a validação brasileira:
-        </h3>
-        <div className="text-body text-grafite-suave/90 space-y-4 mb-8">
-          <p className="text-sm text-muted-foreground">
-            No Brasil, unidades da Estratégia Saúde da Família (ESF) adotaram grupos de crochê como intervenção complementar para mulheres em sofrimento emocional.
-          </p>
-          <p className="text-grafite-suave/90">
-            Os achados apontaram melhora significativa da autoestima, redução de sintomas de ansiedade e depressão e aumento do senso de empoderamento — com maior reconhecimento das próprias capacidades.
-          </p>
-          <p className="font-bold text-grafite-suave text-lg">
-            O que aconteceu na prática?
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div className="rounded-xl border border-verde-eucalipto/20 bg-verde-eucalipto-10 p-4">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-suave">
-                  <Check className="h-4 w-4 text-verde-eucalipto" />
-                </span>
-                <p className="font-semibold text-grafite-suave">Autoestima</p>
-              </div>
-              <p className="mt-2 text-sm text-grafite-suave/80">Melhora significativa</p>
-            </div>
-            <div className="rounded-xl border border-rosa-argila/20 bg-rosa-argila-10 p-4">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-suave">
-                  <Check className="h-4 w-4 text-rosa-argila" />
-                </span>
-                <p className="font-semibold text-grafite-suave">Ansiedade</p>
-              </div>
-              <p className="mt-2 text-sm text-grafite-suave/80">Redução de sintomas</p>
-            </div>
-            <div className="rounded-xl border border-verde-eucalipto/20 bg-white p-4">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-verde-eucalipto-10 shadow-suave">
-                  <Check className="h-4 w-4 text-verde-eucalipto" />
-                </span>
-                <p className="font-semibold text-grafite-suave">Empoderamento</p>
-              </div>
-              <p className="mt-2 text-sm text-grafite-suave/80">Mais presença e voz</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Depoimento */}
-        <div className="bg-rosa-argila-10 rounded-2xl p-8 md:p-10 relative">
-          <Quote className="absolute top-6 left-6 w-16 h-16 text-rosa-argila/30" />
-          <p className="font-serif text-xl md:text-2xl text-grafite-suave italic text-center relative z-10 pt-8">
-            "Eu acho que todo mundo tinha que ir lá, faz tão bem... ajuda muito a cabeça, ajuda em tudo."
-          </p>
-          <p className="text-center text-muted-foreground mt-4 text-sm">
-            — Participante de grupo de crochê terapêutico
-          </p>
-        </div>
-
-        <div className="mt-6 text-sm text-muted-foreground">
-          <p>
-            E isso não ficou restrito a um único grupo: a experiência foi replicada em múltiplos municípios, com resultados semelhantes — reforçando que atividades manuais estruturadas podem gerar benefícios reais para a saúde mental.
-          </p>
-        </div>
-
-        
-      </div>
+      
 
       {/* Resumo Final */}
       
