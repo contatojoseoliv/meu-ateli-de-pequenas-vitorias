@@ -2,6 +2,7 @@ import { Section } from "@/components/shared/Section";
 import { Check, Quote } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import provaCienciaImg from "@/assets/prova-ciencia.png";
+import { Button } from "@/components/shared/Button";
 
 /**
  * Seção Prova - Científica + Social
@@ -95,7 +96,16 @@ const Prova = () => {
       
 
       {/* Resumo Final */}
-      
+      <div className="text-center mt-16 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+        <Button
+          size="lg"
+          onClick={() => {
+            document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        >
+          Quero começar agora
+        </Button>
+      </div>
     </Section>;
 };
 export { Prova };
