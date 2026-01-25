@@ -71,7 +71,7 @@ const MetodoPrimeiraVitoria = () => {
             ].map((item) => (
               <div
                 key={item.title}
-                 className="rounded-2xl bg-background border border-border shadow-suave px-6 py-5 hover-lift"
+                className="rounded-xl bg-background/60 border border-border px-5 py-4"
               >
                 <div className="flex items-start gap-3">
                   <div className="w-9 h-9 rounded-full bg-secondary/20 border border-border flex items-center justify-center flex-shrink-0">
@@ -80,9 +80,9 @@ const MetodoPrimeiraVitoria = () => {
                       aria-hidden={true}
                     />
                   </div>
-                   <div className="text-foreground leading-relaxed">
-                     <span className="font-semibold text-foreground">{item.title}</span>{" "}
-                     <span className="text-muted-foreground">{item.desc}</span>
+                  <div className="text-foreground leading-snug">
+                    <span className="font-semibold">{item.title}</span>{" "}
+                    <span className="text-muted-foreground">{item.desc}</span>
                   </div>
                 </div>
               </div>

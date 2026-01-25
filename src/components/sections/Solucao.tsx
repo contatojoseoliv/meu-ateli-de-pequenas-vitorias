@@ -94,8 +94,8 @@ const Solucao = () => {
       {/* 3 Mecanismos */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
         {mecanismos.map((mec, index) => <div key={index} className="bg-white/10 border border-white/20 rounded-xl p-7 animate-fade-in" style={{
-          animationDelay: `${index * 0.15}s`
-        }}>
+        animationDelay: `${index * 0.15}s`
+      }}>
             <div className="flex items-start gap-4 mb-5">
               <span className="font-serif text-6xl text-ocre-dourado/50 leading-none flex-shrink-0">
                 {mec.numero}
@@ -125,7 +125,12 @@ const Solucao = () => {
       </Section>
 
       {/* DOBRA 2 (branca): método + mapa + fechamento */}
-      <Section id="metodo" background="white" className="scroll-mt-24" containerClassName="pt-0 pb-10 md:pb-14">
+      <Section
+        id="metodo"
+        background="white"
+        className="scroll-mt-24"
+        containerClassName="pt-0 pb-10 md:pb-14"
+      >
         {/* Método + Pilares (sessão única, full-width) */}
         <MetodoPrimeiraVitoria />
 
@@ -142,7 +147,7 @@ const Solucao = () => {
           <div className="mt-8 space-y-4 text-lg md:text-xl text-muted-foreground leading-relaxed">
             <p>Algo muda.</p>
             <p>Não só a habilidade. A sensação.</p>
-            
+            <p>Você acabou de ter uma experiência que sua mente não pode negar:</p>
           </div>
 
           <div className="mt-8 rounded-2xl border border-border bg-secondary/10 px-6 py-5">
