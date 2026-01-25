@@ -28,15 +28,7 @@ const Hero = () => {
     backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.56) 0%, hsl(0 0% 96% / 0.44) 55%, hsl(156 15% 42% / 0.12) 100%), url(${heroBgUrl})`
   }}>
       {/* Preload do background (como a imagem é usada via CSS, forçamos o download cedo) */}
-      <img
-        src={heroBgUrl}
-        alt=""
-        aria-hidden="true"
-        className="sr-only"
-        loading="eager"
-        fetchPriority="high"
-        decoding="async"
-      />
+      <img src={heroBgUrl} alt="" aria-hidden="true" className="sr-only" loading="eager" fetchPriority="high" decoding="async" />
       <div className="container-main">
         <div className="min-h-[42vh] md:min-h-[70vh] flex items-center justify-center">
           {/* Conteúdo (texto) */}
@@ -51,7 +43,7 @@ const Hero = () => {
 
                 {/* Headline */}
                 <h1 className="font-serif font-bold tracking-tight text-[28px] sm:text-[30px] leading-[1.1] md:text-[40px] lg:text-[44px] text-grafite-suave drop-shadow-sm">
-                  <span className="block whitespace-nowrap">Desligue Sua Mente Acelerada</span>
+                  <span className="block whitespace-nowrap text-h2">Desligue Sua Mente Acelerada</span>
                   <span className="block whitespace-nowrap">
                     em <span className={highlights.accent}>15 Minutos por Dia</span>
                   </span>
@@ -67,13 +59,24 @@ const Hero = () => {
 
                 {/* CTA */}
                 <div className="flex justify-center">
-                  <motion.div
-                    initial={{ y: 6, scale: 0.99, opacity: 0 }}
-                    animate={{ y: 0, scale: 1, opacity: 1 }}
-                    transition={{ delay: 0.15, duration: 0.5, ease: "easeOut" }}
-                    whileHover={{ y: -1, scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                  >
+                  <motion.div initial={{
+                  y: 6,
+                  scale: 0.99,
+                  opacity: 0
+                }} animate={{
+                  y: 0,
+                  scale: 1,
+                  opacity: 1
+                }} transition={{
+                  delay: 0.15,
+                  duration: 0.5,
+                  ease: "easeOut"
+                }} whileHover={{
+                  y: -1,
+                  scale: 1.01
+                }} whileTap={{
+                  scale: 0.99
+                }}>
                     <Button variant="primary" size="lg">
                       Quero começar agora
                     </Button>
@@ -96,19 +99,21 @@ const Hero = () => {
       </div>
 
       {/* Indicador de rolagem (discreto) */}
-      <motion.a
-        href="#lead"
-        aria-label="Role para ver a próxima seção"
-        className="inline-flex absolute bottom-3 md:bottom-5 left-1/2 -translate-x-1/2 items-center justify-center rounded-full bg-background/20 backdrop-blur-sm border border-verde-eucalipto/15 text-verde-eucalipto shadow-suave h-9 w-9 md:h-10 md:w-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6, duration: 0.4 }}
-      >
-        <motion.span
-          aria-hidden
-          animate={{ y: [0, 4, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-        >
+      <motion.a href="#lead" aria-label="Role para ver a próxima seção" className="inline-flex absolute bottom-3 md:bottom-5 left-1/2 -translate-x-1/2 items-center justify-center rounded-full bg-background/20 backdrop-blur-sm border border-verde-eucalipto/15 text-verde-eucalipto shadow-suave h-9 w-9 md:h-10 md:w-10" initial={{
+      opacity: 0
+    }} animate={{
+      opacity: 1
+    }} transition={{
+      delay: 0.6,
+      duration: 0.4
+    }}>
+        <motion.span aria-hidden animate={{
+        y: [0, 4, 0]
+      }} transition={{
+        duration: 1.6,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}>
           <ChevronDown className="h-5 w-5" />
         </motion.span>
       </motion.a>
