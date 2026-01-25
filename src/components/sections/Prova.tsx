@@ -51,9 +51,7 @@ const Prova = () => {
       <div className="bg-white rounded-2xl p-8 md:p-10 shadow-suave max-w-4xl mx-auto mb-12 animate-fade-in" style={{
       animationDelay: '0.1s'
     }}>
-        <h3 className="font-serif text-xl md:text-2xl text-grafite-suave mb-6">
-          Primeiro, a ciência específica:
-        </h3>
+        <h3 className="font-serif text-xl md:text-2xl text-grafite-suave mb-6">Evidências Científicas sobre</h3>
         <div className="grid gap-8 md:grid-cols-[1.15fr_0.85fr] items-start">
           <div>
             <div className="text-body text-grafite-suave/90 space-y-4 mb-8">
@@ -87,12 +85,7 @@ const Prova = () => {
           <div className="w-full max-w-sm md:max-w-none mx-auto">
             <div className="rounded-2xl overflow-hidden shadow-suave border border-verde-eucalipto/10 bg-white">
               <AspectRatio ratio={4 / 3}>
-                <img
-                  src={provaCienciaImg}
-                  alt="Gráfico e trecho do estudo sobre os efeitos do crochê"
-                  className="h-full w-full object-cover"
-                  loading="lazy"
-                />
+                <img src={provaCienciaImg} alt="Gráfico e trecho do estudo sobre os efeitos do crochê" className="h-full w-full object-cover" loading="lazy" />
               </AspectRatio>
             </div>
           </div>
