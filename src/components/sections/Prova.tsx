@@ -175,18 +175,7 @@ const Prova = () => {
       </div>
 
       {/* Resumo Final */}
-      <div className="bg-verde-eucalipto-10 border-2 border-verde-eucalipto rounded-xl p-8 max-w-4xl mx-auto animate-fade-in" style={{
-      animationDelay: '0.3s'
-    }}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {checkpoints.map((item, index) => <div key={index} className="flex items-start gap-3">
-              <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-suave flex-shrink-0">
-                <Check className="h-3.5 w-3.5 text-verde-eucalipto" />
-              </span>
-              <span className="text-grafite-suave">{formatBold(item.texto)}</span>
-            </div>)}
-        </div>
-      </div>
+      
     </Section>;
 };
 export { Prova };
