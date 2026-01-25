@@ -96,7 +96,7 @@ const Prova = () => {
       
 
       {/* Resumo Final */}
-      <div className="text-center mt-16 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+      <div className="text-center mt-12 mb-8 animate-fade-in" style={{ animationDelay: '0.3s' }}>
         <Button
           size="lg"
           onClick={() => {
