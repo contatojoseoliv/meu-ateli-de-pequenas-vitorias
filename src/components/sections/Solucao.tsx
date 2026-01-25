@@ -141,30 +141,6 @@ const Solucao = () => {
 
         {/* Mapa de 7 Dias (visual) */}
         <Mapa7Dias />
-
-        {/* Fechamento Emocional */}
-        <div className="max-w-3xl mx-auto text-center animate-fade-in">
-          <p className="text-xl md:text-2xl text-foreground font-semibold leading-relaxed">
-            E quando você segura seu primeiro amigurumi completo — feito por{" "}
-            <span className="text-rosa-argila">VOCÊ</span>, do início ao fim —
-          </p>
-
-          <div className="mt-8 space-y-4 text-lg md:text-xl text-muted-foreground leading-relaxed">
-            <p>Algo muda.</p>
-            <p>Não só a habilidade. A sensação.</p>
-            <p>Você acabou de ter uma experiência que sua mente não pode negar:</p>
-          </div>
-
-          <div className="mt-8 rounded-2xl border border-border bg-secondary/10 px-6 py-5">
-            <p className="font-serif text-2xl md:text-3xl text-foreground">
-              “Eu comecei. Eu fiz. <span className="text-rosa-argila">EU TERMINEI.</span>”
-            </p>
-          </div>
-
-          <p className="mt-8 text-lg md:text-xl text-muted-foreground leading-relaxed">
-            E pela primeira vez em muito tempo... você sente calma. Orgulho. Alívio.
-          </p>
-        </div>
       </Section>
     </>;
 };
