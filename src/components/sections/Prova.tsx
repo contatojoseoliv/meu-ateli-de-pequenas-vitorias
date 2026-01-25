@@ -52,18 +52,16 @@ const Prova = () => {
       animationDelay: '0.1s'
     }}>
         <h3 className="font-serif text-xl md:text-2xl text-grafite-suave mb-6">Evidências Científicas sobre:</h3>
-        <div className="grid gap-8 md:grid-cols-[1.15fr_0.85fr] items-start">
-          <div>
-            <div className="text-body text-grafite-suave/90 space-y-4 mb-8">
+        <div className="text-body text-grafite-suave/90 space-y-4 mb-8">
               <p>Em 2021, um estudo publicada na revista Perspectives in Public Health analisou especificamente os efeitos do crochê no bem-estar psicológico, com uma amostra de 8.391 praticantes em 87 países.</p>
               
               <p className="font-bold text-grafite-suave text-lg">
                 O resultado?
               </p>
-            </div>
+        </div>
 
-            {/* Gráfico de barras */}
-            <div className="space-y-4 mb-8">
+        {/* Gráfico de barras */}
+        <div className="space-y-4 mb-8">
               {estatisticas.map((stat, index) => <div key={index} className="flex items-center gap-4">
                   <span className="font-bold text-verde-eucalipto w-16 text-right">{stat.valor}</span>
                   <div className="flex-1 h-8 bg-cinza-nuvem rounded-full overflow-hidden">
@@ -74,13 +72,6 @@ const Prova = () => {
                   </div>
                   <span className="text-sm text-grafite-suave/80 w-40">{stat.label}</span>
                 </div>)}
-            </div>
-          </div>
-
-          {/* Imagem ao lado do texto */}
-          <div className="w-full max-w-sm md:max-w-none mx-auto">
-            
-          </div>
         </div>
 
         <div className="text-body text-grafite-suave/90 space-y-4">
