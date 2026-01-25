@@ -1,5 +1,6 @@
 import { Section } from "@/components/shared/Section";
 import { Flower2 } from "lucide-react";
+import { Button } from "@/components/shared/Button";
 
 /**
  * Seção Bullets/Benefícios
@@ -77,6 +78,18 @@ const Bullets = () => {
          </ul>
        </div>
       </div>
+
+    {/* CTA */}
+    <div className="text-center mt-12 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+      <Button
+        size="lg"
+        onClick={() => {
+          document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' });
+        }}
+      >
+        Quero começar agora
+      </Button>
+    </div>
     </Section>;
 };
 export { Bullets };
