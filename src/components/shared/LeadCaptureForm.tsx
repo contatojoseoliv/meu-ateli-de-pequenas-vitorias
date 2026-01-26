@@ -66,6 +66,9 @@ import { useNavigate } from "react-router-dom";
        localStorage.setItem('lead_captured', 'true');
         const processedEmail = email.toLowerCase().trim();
         localStorage.setItem('lead_email', processedEmail);
+        console.log('✅ [LeadForm] Email salvo:', processedEmail);
+        console.log('✅ [LeadForm] Verificação imediata:', localStorage.getItem('lead_email'));
+        console.log('✅ [LeadForm] localStorage completo:', { ...localStorage });
  
        // Trackear evento no analytics
        const sessionId = localStorage.getItem('session_id') || '';
@@ -76,9 +79,22 @@ import { useNavigate } from "react-router-dom";
          metadata: { email }
        });
  
-      // Redirecionar para checkout após 1.5 segundos
+       // Garantir que localStorage está salvo antes de navegar
        setTimeout(() => {
-        navigate('/checkout');
+         const savedEmail = localStorage.getItem('lead_email');
+         if (savedEmail) {
+           console.log('✅ [LeadForm] Navegando para checkout com email:', savedEmail);
+           const encodedEmail = encodeURIComponent(savedEmail);
+           navigate(`/checkout?email=${encodedEmail}`);
+         } else {
+           console.error('❌ [LeadForm] ERRO: Email não foi salvo no localStorage!');
+           // Tentar salvar novamente
+           localStorage.setItem('lead_email', processedEmail);
+           console.log('🔄 [LeadForm] Tentando salvar novamente:', processedEmail);
+           // Navegar mesmo assim
+           const encodedEmail = encodeURIComponent(processedEmail);
+           navigate(`/checkout?email=${encodedEmail}`);
+         }
       }, 1500);
  
      } catch (err) {
