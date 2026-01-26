@@ -14,7 +14,84 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      conversions: {
+        Row: {
+          amount: number | null
+          created_at: string | null
+          email: string
+          id: string
+          payment_method: string | null
+          payment_status: string | null
+        }
+        Insert: {
+          amount?: number | null
+          created_at?: string | null
+          email: string
+          id?: string
+          payment_method?: string | null
+          payment_status?: string | null
+        }
+        Update: {
+          amount?: number | null
+          created_at?: string | null
+          email?: string
+          id?: string
+          payment_method?: string | null
+          payment_status?: string | null
+        }
+        Relationships: []
+      }
+      leads: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          nome: string | null
+          source: string
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          nome?: string | null
+          source: string
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          nome?: string | null
+          source?: string
+        }
+        Relationships: []
+      }
+      page_analytics: {
+        Row: {
+          event_type: string
+          id: string
+          metadata: Json | null
+          section: string | null
+          session_id: string
+          timestamp: string | null
+        }
+        Insert: {
+          event_type: string
+          id?: string
+          metadata?: Json | null
+          section?: string | null
+          session_id: string
+          timestamp?: string | null
+        }
+        Update: {
+          event_type?: string
+          id?: string
+          metadata?: Json | null
+          section?: string | null
+          session_id?: string
+          timestamp?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

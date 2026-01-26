@@ -1,5 +1,7 @@
+ import { useState } from "react";
 import { Section } from "@/components/shared/Section";
 import { Button } from "@/components/shared/Button";
+ import { LeadCaptureForm } from "@/components/shared/LeadCaptureForm";
 import { X, Check } from "lucide-react";
 
 /**
@@ -7,6 +9,19 @@ import { X, Check } from "lucide-react";
  * Duas opções lado a lado + P.S. triplo
  */
 const Fechamento = () => {
+   const [showLeadForm, setShowLeadForm] = useState(false);
+ 
+   const handleCTAClick = () => {
+     setShowLeadForm(true);
+   };
+ 
+   const handleLeadSuccess = () => {
+     setShowLeadForm(false);
+     setTimeout(() => {
+       document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' });
+     }, 300);
+   };
+ 
   return <Section id="fechamento" background="white" style={{
     background: "linear-gradient(180deg, hsl(156 15% 42% / 0.08) 0%, hsl(0 0% 96%) 100%)"
   }}>
@@ -92,7 +107,7 @@ const Fechamento = () => {
       animationDelay: '0.4s'
     }}>
         <div className="inline-block animate-pulse">
-          <Button variant="primary" size="lg" className="text-lg md:text-xl px-12 py-6">
+           <Button variant="primary" size="lg" className="text-lg md:text-xl px-12 py-6" onClick={handleCTAClick}>
             Não Vou Esperar Mais — Começar Agora
           </Button>
         </div>
@@ -110,6 +125,38 @@ const Fechamento = () => {
         </p>
         
       </div>
+
+       {/* Modal de Lead Capture */}
+       {showLeadForm && (
+         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+           <div
+             className="absolute inset-0 bg-black/75 backdrop-blur-sm"
+             onClick={() => setShowLeadForm(false)}
+           />
+           <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-scale-in">
+             <button
+               onClick={() => setShowLeadForm(false)}
+               className="absolute top-4 right-4 text-grafite-suave/50 hover:text-grafite-suave transition-colors"
+               aria-label="Fechar"
+             >
+               <X className="w-6 h-6" />
+             </button>
+             
+             <h3 className="font-serif text-3xl text-grafite-suave mb-4 text-center">
+               Última Chance
+             </h3>
+             <p className="text-grafite-suave/80 text-center mb-6">
+               Não deixe a ansiedade vencer. Comece hoje.
+             </p>
+             
+             <LeadCaptureForm
+               source="cta-final"
+               onSuccess={handleLeadSuccess}
+               variant="modal"
+             />
+           </div>
+         </div>
+       )}
     </Section>;
 };
 export { Fechamento };

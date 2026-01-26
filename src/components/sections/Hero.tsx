@@ -1,5 +1,8 @@
+ import { useState } from "react";
 import { Button } from "@/components/shared/Button";
-import { ChevronDown, Clock, Leaf, Users } from "lucide-react";
+ import { LeadCaptureForm } from "@/components/shared/LeadCaptureForm";
+ import { ViewCounter } from "@/components/conversion/ViewCounter";
+ import { ChevronDown, Clock, Leaf, Users, X } from "lucide-react";
 import { motion } from "framer-motion";
 import seloImage from "@/assets/selo-primeira-vitoria.png";
 
@@ -9,6 +12,8 @@ import seloImage from "@/assets/selo-primeira-vitoria.png";
  * Altura: 100vh
  */
 const Hero = () => {
+   const [showLeadForm, setShowLeadForm] = useState(false);
+ 
   const heroBgUrl = "/images/hero-bg.png";
   const highlights = {
     accent: "text-verde-eucalipto"
@@ -23,6 +28,18 @@ const Hero = () => {
     icon: Users,
     label: "Suporte Imediato"
   }] as const;
+
+   const handleCTAClick = () => {
+     setShowLeadForm(true);
+   };
+ 
+   const handleLeadSuccess = () => {
+     setShowLeadForm(false);
+     setTimeout(() => {
+       document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' });
+     }, 300);
+   };
+ 
   return <section id="hero" className="relative min-h-screen pt-9 pb-6 md:pt-20 md:pb-16 bg-cover bg-no-repeat bg-[position:50%_4%] md:bg-center" style={{
     // Overlay mais leve para deixar a imagem mais “viva/nítida”, sem perder legibilidade.
     backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.56) 0%, hsl(0 0% 96% / 0.44) 55%, hsl(156 15% 42% / 0.12) 100%), url(${heroBgUrl})`
@@ -77,7 +94,7 @@ const Hero = () => {
                 }} whileTap={{
                   scale: 0.99
                 }}>
-                    <Button variant="primary" size="lg">
+                     <Button variant="primary" size="lg" onClick={handleCTAClick}>
                       Quero começar agora
                     </Button>
                   </motion.div>
@@ -92,6 +109,11 @@ const Hero = () => {
                       </span>
                     </div>)}
                 </div>
+
+                 {/* View Counter */}
+                 <div className="mt-4">
+                   <ViewCounter />
+                 </div>
               </div>
             </div>
           </div>
@@ -117,6 +139,38 @@ const Hero = () => {
           <ChevronDown className="h-5 w-5" />
         </motion.span>
       </motion.a>
+
+       {/* Modal de Lead Capture */}
+       {showLeadForm && (
+         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+           <div
+             className="absolute inset-0 bg-black/75 backdrop-blur-sm"
+             onClick={() => setShowLeadForm(false)}
+           />
+           <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-scale-in">
+             <button
+               onClick={() => setShowLeadForm(false)}
+               className="absolute top-4 right-4 text-grafite-suave/50 hover:text-grafite-suave transition-colors"
+               aria-label="Fechar"
+             >
+               <X className="w-6 h-6" />
+             </button>
+             
+             <h3 className="font-serif text-3xl text-grafite-suave mb-4 text-center">
+               Garanta Sua Vaga
+             </h3>
+             <p className="text-grafite-suave/80 text-center mb-6">
+               Cadastre seu email e receba acesso imediato
+             </p>
+             
+             <LeadCaptureForm
+               source="cta-hero"
+               onSuccess={handleLeadSuccess}
+               variant="modal"
+             />
+           </div>
+         </div>
+       )}
     </section>;
 };
 export { Hero };
