@@ -1,7 +1,10 @@
+ import { useState } from "react";
 import { Section } from "@/components/shared/Section";
 import { Button } from "@/components/shared/Button";
-import { Check, Gift, Lock, CreditCard, Shield, ChevronDown, ChevronUp } from "lucide-react";
-import { useState } from "react";
+ import { LeadCaptureForm } from "@/components/shared/LeadCaptureForm";
+ import { CountdownTimer } from "@/components/conversion/CountdownTimer";
+ import { SpotsCounter } from "@/components/conversion/SpotsCounter";
+ import { Check, Gift, Lock, CreditCard, Shield, ChevronDown, ChevronUp, X } from "lucide-react";
 
 /**
  * Seção Oferta + Stack de Valor
@@ -9,6 +12,8 @@ import { useState } from "react";
  */
 const Oferta = () => {
   const [openItem, setOpenItem] = useState<number | null>(0);
+   const [showLeadForm, setShowLeadForm] = useState(false);
+ 
   const itens = [{
     titulo: "Acesso à Plataforma Primeira Vitória em Amigurumi©",
     valor: "R$ 197",
@@ -53,6 +58,16 @@ const Oferta = () => {
         </p>;
     });
   };
+
+   const handleCTAClick = () => {
+     setShowLeadForm(true);
+   };
+ 
+   const handleLeadSuccess = () => {
+     setShowLeadForm(false);
+     // Preparar para checkout (por enquanto apenas notificação)
+   };
+ 
   return <Section id="oferta" background="white" className="border-t-4 border-ocre-dourado" style={{
     background: 'linear-gradient(180deg, hsl(156 15% 42% / 0.05) 0%, hsl(0 0% 100%) 100%)'
   }}>
@@ -147,9 +162,16 @@ const Oferta = () => {
         </div>
       </div>
 
+       {/* Countdown Timer */}
+       <div className="max-w-2xl mx-auto mb-12 animate-fade-in" style={{
+       animationDelay: '0.35s'
+     }}>
+         <CountdownTimer variant="large" />
+       </div>
+ 
       {/* Breakdown de Valor */}
       <div className="max-w-xl mx-auto mb-12 animate-fade-in" style={{
-      animationDelay: '0.4s'
+       animationDelay: '0.45s'
     }}>
         <div className="bg-white border-3 border-verde-eucalipto rounded-2xl p-8 md:p-10 shadow-elevada">
           
@@ -173,14 +195,19 @@ const Oferta = () => {
             <p>Menos que um café.</p>
             <p>Para <strong className="text-verde-eucalipto">mudar como você se sente</strong>.</p>
           </div>
+
+           {/* Spots Counter */}
+           <div className="mt-6 flex justify-center">
+             <SpotsCounter />
+           </div>
         </div>
       </div>
 
       {/* CTA */}
       <div className="text-center animate-fade-in" style={{
-      animationDelay: '0.5s'
+       animationDelay: '0.55s'
     }}>
-        <Button variant="primary" size="lg" className="mb-4">
+         <Button variant="primary" size="lg" className="mb-4" onClick={handleCTAClick}>
           SIM, Eu Quero Minha Primeira Vitória
         </Button>
         
@@ -199,6 +226,40 @@ const Oferta = () => {
           </span>
         </div>
       </div>
+
+       {/* Modal de Lead Capture */}
+       {showLeadForm && (
+         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+           <div
+             className="absolute inset-0 bg-black/75 backdrop-blur-sm"
+             onClick={() => setShowLeadForm(false)}
+           />
+           <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-scale-in">
+             <button
+               onClick={() => setShowLeadForm(false)}
+               className="absolute top-4 right-4 text-grafite-suave/50 hover:text-grafite-suave transition-colors"
+               aria-label="Fechar"
+             >
+               <X className="w-6 h-6" />
+             </button>
+             
+             <div className="text-center mb-6">
+               <h3 className="font-serif text-3xl text-grafite-suave mb-2">
+                 🎉 Quase lá!
+               </h3>
+               <p className="text-grafite-suave/80">
+                 Cadastre seu email para garantir sua vaga por <strong className="text-ocre-dourado">R$ 47</strong>
+               </p>
+             </div>
+             
+             <LeadCaptureForm
+               source="cta-oferta"
+               onSuccess={handleLeadSuccess}
+               variant="modal"
+             />
+           </div>
+         </div>
+       )}
     </Section>;
 };
 export { Oferta };
