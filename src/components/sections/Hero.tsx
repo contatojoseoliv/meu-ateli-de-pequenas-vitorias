@@ -33,13 +33,6 @@ const Hero = () => {
      setShowLeadForm(true);
    };
  
-   const handleLeadSuccess = () => {
-     setShowLeadForm(false);
-     setTimeout(() => {
-       document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' });
-     }, 300);
-   };
- 
   return <section id="hero" className="relative min-h-screen pt-9 pb-6 md:pt-20 md:pb-16 bg-cover bg-no-repeat bg-[position:50%_4%] md:bg-center" style={{
     // Overlay mais leve para deixar a imagem mais “viva/nítida”, sem perder legibilidade.
     backgroundImage: `linear-gradient(135deg, hsl(0 0% 100% / 0.56) 0%, hsl(0 0% 96% / 0.44) 55%, hsl(156 15% 42% / 0.12) 100%), url(${heroBgUrl})`
@@ -165,7 +158,6 @@ const Hero = () => {
              
              <LeadCaptureForm
                source="cta-hero"
-               onSuccess={handleLeadSuccess}
                variant="modal"
              />
            </div>
