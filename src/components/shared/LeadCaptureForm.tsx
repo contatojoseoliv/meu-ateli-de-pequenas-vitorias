@@ -64,7 +64,8 @@ import { useNavigate } from "react-router-dom";
        // Sucesso
        setStatus('success');
        localStorage.setItem('lead_captured', 'true');
-       localStorage.setItem('lead_email', email);
+        const processedEmail = email.toLowerCase().trim();
+        localStorage.setItem('lead_email', processedEmail);
  
        // Trackear evento no analytics
        const sessionId = localStorage.getItem('session_id') || '';

@@ -1,4 +1,4 @@
- import { useEffect } from "react";
+import { useEffect, useState } from "react";
  import { useNavigate } from "react-router-dom";
  import { Button } from "@/components/shared/Button";
  import { Check, Mail, ArrowRight, Gift, Calendar, Users } from "lucide-react";
@@ -11,14 +11,50 @@
   */
  const ThankYou = () => {
    const navigate = useNavigate();
-   const leadEmail = localStorage.getItem('lead_email');
+  const [leadEmail, setLeadEmail] = useState<string | null>(null);
+  const [isChecking, setIsChecking] = useState(true);
  
-   // Redirecionar se não houver lead capturado
+  // Verificar localStorage com retry
    useEffect(() => {
-     if (!leadEmail) {
-       navigate('/', { replace: true });
-     }
-   }, [leadEmail, navigate]);
+    const checkEmail = () => {
+      const email = localStorage.getItem('lead_email');
+      
+      if (email) {
+        setLeadEmail(email);
+        setIsChecking(false);
+      } else {
+        // Dar uma chance extra antes de redirecionar
+        setTimeout(() => {
+          const retryEmail = localStorage.getItem('lead_email');
+          if (retryEmail) {
+            setLeadEmail(retryEmail);
+          } else {
+            // Ainda não encontrou, redirecionar
+            navigate('/', { replace: true });
+          }
+          setIsChecking(false);
+        }, 500);
+      }
+    };
+
+    checkEmail();
+  }, [navigate]);
+
+  // Mostrar loading enquanto verifica
+  if (isChecking) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-verde-eucalipto/5 via-background to-cinza-nuvem/30 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-verde-eucalipto/30 border-t-verde-eucalipto rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-grafite-suave/60">Carregando confirmação...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!leadEmail) {
+    return null;
+  }
  
    const proximosPassos = [
      {
