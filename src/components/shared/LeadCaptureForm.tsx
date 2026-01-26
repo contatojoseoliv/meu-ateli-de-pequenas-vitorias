@@ -1,4 +1,5 @@
  import { useState } from "react";
+import { useNavigate } from "react-router-dom";
  import { supabase } from "@/integrations/supabase/client";
  import { Button } from "./Button";
  import { Loader2, Check } from "lucide-react";
@@ -18,6 +19,7 @@
    const [nome, setNome] = useState('');
    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
    const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
  
    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  
@@ -73,10 +75,10 @@
          metadata: { email }
        });
  
-       // Callback após 2 segundos
+      // Redirecionar para checkout após 1.5 segundos
        setTimeout(() => {
-         onSuccess?.();
-       }, 2000);
+        navigate('/checkout');
+      }, 1500);
  
      } catch (err) {
        console.error('Unexpected error:', err);

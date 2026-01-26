@@ -15,13 +15,6 @@ const Fechamento = () => {
      setShowLeadForm(true);
    };
  
-   const handleLeadSuccess = () => {
-     setShowLeadForm(false);
-     setTimeout(() => {
-       document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' });
-     }, 300);
-   };
- 
   return <Section id="fechamento" background="white" style={{
     background: "linear-gradient(180deg, hsl(156 15% 42% / 0.08) 0%, hsl(0 0% 96%) 100%)"
   }}>
@@ -151,7 +144,6 @@ const Fechamento = () => {
              
              <LeadCaptureForm
                source="cta-final"
-               onSuccess={handleLeadSuccess}
                variant="modal"
              />
            </div>
