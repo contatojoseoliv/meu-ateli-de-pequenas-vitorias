@@ -1,10 +1,8 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Loader2, Lock, CheckCircle2 } from "lucide-react";
 import { AppLayout } from "@/components/app/AppLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useAppAuth } from "@/hooks/useAppAuth";
-import { useEntitlement } from "@/hooks/useEntitlement";
 import { useJourneyProgress } from "@/hooks/useJourneyProgress";
 import { JOURNEY_DAYS } from "@/content/journey";
 
@@ -12,20 +10,15 @@ const DAYS = Array.from({ length: 7 }).map((_, i) => i + 1);
 
 export default function AppMap() {
   const navigate = useNavigate();
-  const { user, isLoading } = useAppAuth();
-  const { data: entitlement, isLoading: entitlementLoading } = useEntitlement(user?.id);
-  const { data: progress, isLoading: progressLoading } = useJourneyProgress(user?.id);
+  const { data: progress, isLoading: progressLoading } = useJourneyProgress(null);
 
-  if (isLoading || entitlementLoading || progressLoading) {
+  if (progressLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-muted/30">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     );
   }
-
-  if (!user) return <Navigate to="/app/login" replace />;
-  if (!entitlement?.hasAccess) return <Navigate to="/app/acesso" replace />;
 
   const currentDay = progress?.current_day ?? 1;
   const completed = new Set(progress?.completed_days ?? []);

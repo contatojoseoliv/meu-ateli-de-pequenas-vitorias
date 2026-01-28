@@ -1,19 +1,8 @@
 import { ReactNode } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useAppAuth } from "@/hooks/useAppAuth";
-import { useProfile } from "@/hooks/useProfile";
 
 export function AppLayout({ children }: { children: ReactNode }) {
-  const navigate = useNavigate();
-  const { user, signOut } = useAppAuth();
-  const { data: profile } = useProfile(user?.id);
-
-  const handleSignOut = async () => {
-    await signOut();
-    navigate("/", { replace: true });
-  };
-
   return (
     <div className="min-h-screen bg-muted/30">
       <header className="border-b bg-background/80 backdrop-blur">
@@ -24,7 +13,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
                 Meu Ateliê de Pequenas Vitórias
               </p>
               <p className="text-sm text-muted-foreground truncate">
-                {profile?.display_name ? `Oi, ${profile.display_name}` : "Primeira Vitória em Amigurumi"}
+                Primeira Vitória em Amigurumi
               </p>
             </Link>
           </div>
@@ -33,11 +22,6 @@ export function AppLayout({ children }: { children: ReactNode }) {
             <Button variant="secondary" asChild>
               <Link to="/">Voltar ao site</Link>
             </Button>
-            {user && (
-              <Button variant="outline" onClick={handleSignOut}>
-                Sair
-              </Button>
-            )}
           </div>
         </div>
       </header>
