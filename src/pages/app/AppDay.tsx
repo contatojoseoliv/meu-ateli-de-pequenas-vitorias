@@ -4,8 +4,6 @@ import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { AppLayout } from "@/components/app/AppLayout";
 import { Button } from "@/components/ui/button";
-import { useAppAuth } from "@/hooks/useAppAuth";
-import { useEntitlement } from "@/hooks/useEntitlement";
 import { useJourneyProgress } from "@/hooks/useJourneyProgress";
 import { getJourneyDay } from "@/content/journey";
 import { ProgressIndicator } from "@/components/app/journey/ProgressIndicator";
@@ -18,27 +16,20 @@ export default function AppDay() {
   const params = useParams();
   const day = Number(params.day);
 
-  const { user, isLoading } = useAppAuth();
-  const { data: entitlement, isLoading: entitlementLoading } = useEntitlement(user?.id);
-  const { data: progress, isLoading: progressLoading, completeDay, isCompleting } = useJourneyProgress(
-    user?.id,
-  );
+  const { data: progress, isLoading: progressLoading, completeDay, isCompleting } = useJourneyProgress(null);
 
   const safeDay = useMemo(() => {
     if (!Number.isFinite(day)) return 1;
     return Math.min(Math.max(day, 1), 7);
   }, [day]);
 
-  if (isLoading || entitlementLoading || progressLoading) {
+  if (progressLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-muted/30">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     );
   }
-
-  if (!user) return <Navigate to="/app/login" replace />;
-  if (!entitlement?.hasAccess) return <Navigate to="/app/acesso" replace />;
 
   const currentDay = progress?.current_day ?? 1;
   const completed = new Set(progress?.completed_days ?? []);
