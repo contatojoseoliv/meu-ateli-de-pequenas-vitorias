@@ -61,11 +61,12 @@ function writeStorage(value: JourneyProgress | null) {
 }
 
 export function useJourneyCalendarProgress() {
-  const [progress, setProgress] = React.useState<JourneyProgress | null>(null);
-
-  React.useEffect(() => {
-    setProgress(readStorage());
-  }, []);
+  // Importante: inicializa de forma síncrona para evitar “race” ao navegar
+  // imediatamente após salvar nome/data (ex.: AppHome -> /app/dia/1).
+  const [progress, setProgress] = React.useState<JourneyProgress | null>(() => {
+    if (typeof window === "undefined") return null;
+    return readStorage();
+  });
 
   const isOnboarded = !!progress?.name && !!progress?.startDateISO;
 
@@ -105,46 +106,51 @@ export function useJourneyCalendarProgress() {
     return availableDay;
   }, [availableDay, completedSet]);
 
+  function getBaseProgress(): JourneyProgress {
+    // Fonte da verdade: localStorage (modo aberto sem login).
+    // Isso garante que writes aconteçam antes de qualquer navigate().
+    return (
+      readStorage() ??
+      ({ version: 1, name: "", startDateISO: "", completedDays: [] } as const)
+    );
+  }
+
   const setName = React.useCallback((name: string) => {
-    setProgress((prev) => {
-      const next: JourneyProgress = {
-        version: 1,
-        name: name.trim(),
-        startDateISO: prev?.startDateISO ?? "",
-        completedDays: prev?.completedDays ?? [],
-      };
-      writeStorage(next);
-      return next;
-    });
+    const base = getBaseProgress();
+    const next: JourneyProgress = {
+      ...base,
+      version: 1,
+      name: name.trim(),
+    };
+    writeStorage(next);
+    setProgress(next);
   }, []);
 
   const setStartDate = React.useCallback((date: Date) => {
     const iso = toISODate(startOfDay(date));
-    setProgress((prev) => {
-      const next: JourneyProgress = {
-        version: 1,
-        name: prev?.name ?? "",
-        startDateISO: iso,
-        completedDays: prev?.completedDays ?? [],
-      };
-      writeStorage(next);
-      return next;
-    });
+    const base = getBaseProgress();
+    const next: JourneyProgress = {
+      ...base,
+      version: 1,
+      startDateISO: iso,
+    };
+    writeStorage(next);
+    setProgress(next);
   }, []);
 
   const markDayComplete = React.useCallback(
     (day: number) => {
       const d = clampDay(day);
       if (getDayStatus(d).status !== "available") return;
-      setProgress((prev) => {
-        const base: JourneyProgress =
-          prev ?? ({ version: 1, name: "", startDateISO: "", completedDays: [] } as const);
-        const set = new Set(base.completedDays);
-        set.add(d);
-        const next: JourneyProgress = { ...base, completedDays: Array.from(set).sort((a, b) => a - b) };
-        writeStorage(next);
-        return next;
-      });
+      const base = getBaseProgress();
+      const set = new Set(base.completedDays);
+      set.add(d);
+      const next: JourneyProgress = {
+        ...base,
+        completedDays: Array.from(set).sort((a, b) => a - b),
+      };
+      writeStorage(next);
+      setProgress(next);
     },
     [getDayStatus],
   );
