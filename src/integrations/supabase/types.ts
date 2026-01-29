@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      access_requests: {
+        Row: {
+          created_at: string
+          id: string
+          note: string | null
+          purchase_email: string
+          reviewed_at: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          note?: string | null
+          purchase_email: string
+          reviewed_at?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          note?: string | null
+          purchase_email?: string
+          reviewed_at?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       conversions: {
         Row: {
           amount: number | null
@@ -38,6 +68,57 @@ export type Database = {
           id?: string
           payment_method?: string | null
           payment_status?: string | null
+        }
+        Relationships: []
+      }
+      entitlements: {
+        Row: {
+          granted_at: string
+          granted_by: string | null
+          note: string | null
+          product_code: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          granted_at?: string
+          granted_by?: string | null
+          note?: string | null
+          product_code?: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          granted_at?: string
+          granted_by?: string | null
+          note?: string | null
+          product_code?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      journey_progress: {
+        Row: {
+          completed_days: number[]
+          created_at: string
+          current_day: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_days?: number[]
+          created_at?: string
+          current_day?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_days?: number[]
+          created_at?: string
+          current_day?: number
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -89,6 +170,27 @@ export type Database = {
           section?: string | null
           session_id?: string
           timestamp?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
