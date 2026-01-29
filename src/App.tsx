@@ -9,6 +9,11 @@ import NotFound from "./pages/NotFound";
 import Checkout from "./pages/Checkout";
 import { Loader2 } from "lucide-react";
 
+// App do produto (passo a passo)
+import AppHome from "./pages/app/AppHome";
+import AppDay from "./pages/app/AppDay";
+import AppConfig from "./pages/app/AppConfig";
+
 // Lazy load admin pages
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
@@ -32,6 +37,11 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/checkout" element={<Checkout />} />
+
+            {/* Produto (sem login) */}
+            <Route path="/app" element={<AppHome />} />
+            <Route path="/app/dia/:day" element={<AppDay />} />
+            <Route path="/app/config" element={<AppConfig />} />
             
             {/* Admin Routes */}
             <Route path="/admin/login" element={
