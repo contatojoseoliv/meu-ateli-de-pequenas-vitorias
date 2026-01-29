@@ -6,8 +6,7 @@ import {
   BarChart3, 
   LogOut,
   Menu,
-  X,
-  KeyRound
+  X
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -22,7 +21,6 @@ interface AdminLayoutProps {
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/leads', label: 'Leads', icon: Users },
-  { href: '/admin/acessos', label: 'Acessos', icon: KeyRound },
   { href: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
 ];
 

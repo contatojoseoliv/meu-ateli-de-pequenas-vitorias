@@ -1,112 +1,86 @@
 
-Objetivo desta mudança (temporária)
-- Remover a exigência de login apenas para o “app do produto” (`/app` e `/app/dia/:day`).
-- Deixar o conteúdo do app aberto (sem compra) por enquanto.
-- Manter a progressão (dias bloqueados/futuros) funcionando, salvando o progresso “no aparelho” (localStorage).
-- Não mexer no admin (`/admin/*`) — continua com login como está.
+Contexto do pedido (confirmado)
+- Inserir uma nova dobra logo abaixo da frase “É assim que a mente finalmente desacelera e o corpo relaxa.”, separando bem o conteúdo.
+- Usar a imagem “Mapa ilustrado (quadrado)” como destaque visual nessa nova dobra.
+- Criar dois CTAs (um permanece no bloco verde; outro abaixo da imagem).
+- Fundo da nova dobra: “Cinza Nuvem (papel)”.
+- Ajustar “as caixinhas”: especificamente as 3 caixinhas de benefícios dentro do bloco “Por isso criamos o Primeira Vitória…” (MetodoPrimeiraVitoria).
 
-Impacto (o que muda para a usuária)
-- Ao abrir `/app`, ela entra direto no Mapa.
-- Ao abrir `/app/dia/3`, ela só entra se o “dia atual” no aparelho permitir; caso contrário, continua bloqueado igual hoje.
-- Ao clicar “Concluir o Dia”, desbloqueia o próximo e isso fica guardado naquele navegador/aparelho.
-- Se a pessoa limpar dados do navegador ou trocar de aparelho, o progresso recomeça.
+Exploração rápida (onde mexer)
+- A frase e o CTA do bloco verde estão em: `src/components/sections/Solucao.tsx` (DOBRA 1, verde).
+- O bloco “Por isso criamos…” e as 3 caixinhas de benefícios estão em: `src/components/sections/solucao/MetodoPrimeiraVitoria.tsx`.
+- O componente `Section` já suporta `background="cinza"` para Cinza Nuvem: `src/components/shared/Section.tsx`.
 
-O que existe hoje (onde o login é exigido)
-- `src/pages/app/AppMap.tsx`:
-  - `if (!user) return <Navigate to="/app/login" replace />;`
-  - usa `useEntitlement(user?.id)` e `useJourneyProgress(user?.id)`
-- `src/pages/app/AppDay.tsx`:
-  - mesmas verificações + bloqueio por `current_day`
-- `src/components/app/AppLayout.tsx`:
-  - usa `useAppAuth()` + `useProfile()` para saudação e botão “Sair”
-- `src/pages/app/AppAccess.tsx`:
-  - redireciona para `/app/login` se não houver usuário e gerencia solicitação manual (vai ficar “em espera”, mas não será usada no fluxo aberto)
+Decisões de implementação (seguindo manual de marca)
+1) Nova dobra “papel” em Cinza Nuvem
+- Criar uma nova `<Section background="cinza">` inserida em `Solucao.tsx` logo após o CTA do bloco verde e antes da dobra branca `#metodo`.
+- Objetivo visual: parecer uma “dobra” própria (respiro, separação clara, hierarquia editorial).
 
-Estratégia de implementação (sem login)
-1) Criar um “modo visitante” para o app (frontend only)
-- Implementar um hook novo (ex: `useLocalJourneyProgress`) ou adaptar o atual (`useJourneyProgress`) para:
-  - quando não houver `userId`, ler e escrever progresso no `localStorage`
-  - manter o mesmo formato:
-    - `current_day` (1..7)
-    - `completed_days` (array de números)
-  - expor uma função `completeDay(day)` que:
-    - adiciona day em `completed_days` (sem duplicar)
-    - se day >= current_day, atualiza `current_day = min(7, day + 1)` (comportamento atual)
-- Definir uma chave única de storage, por exemplo:
-  - `pv_journey_progress_v1`
-- Validar no carregamento:
-  - se dados forem inválidos/corrompidos, resetar para padrão `{ current_day: 1, completed_days: [] }`
+2) Inserção da imagem (Mapa ilustrado)
+- Copiar o upload `user-uploads://Gemini_Generated_Image_a4f8f7a4f8f7a4f8.png` para `src/assets/` (ex.: `src/assets/mapa-ilustrado-amigurumi.png`).
+- Importar a imagem via ES module no `Solucao.tsx` e renderizar dentro dessa nova dobra com:
+  - um container central (max-width controlado)
+  - moldura “papel premium”: `rounded-2xl`, `border`, `shadow-suave`, `bg-background`
+  - `img` com `object-contain` e `loading="lazy"`
+  - responsivo (não estourar no mobile; manter boa leitura no desktop)
 
-2) Remover a trava de login e entitlement do app do produto
-- Em `AppMap.tsx`:
-  - remover o `Navigate` para `/app/login`
-  - parar de chamar `useAppAuth()` e `useEntitlement()`
-  - usar somente o progresso local (hook novo/fallback)
-- Em `AppDay.tsx`:
-  - remover o `Navigate` para `/app/login`
-  - remover `useEntitlement()`
-  - usar somente o progresso local
-  - manter a regra de bloqueio `safeDay > currentDay` com toast e redirect para `/app` (igual hoje)
+3) Dois CTAs
+- Manter o CTA existente no bloco verde (já está funcionando com scroll para `#metodo` via `handleVerMetodo`).
+- Adicionar um segundo CTA no final da nova dobra “papel”, reutilizando o mesmo handler `handleVerMetodo` (mesma âncora, consistência de conversão).
+- O botão deve seguir o manual:
+  - CTA em Ocre Dourado apenas no componente de botão (já é o padrão do `Button variant="primary"`), sem usar ocre em textos ou fundos grandes.
 
-3) Ajustar o layout do app para não depender de perfil/autenticação
-- Em `AppLayout.tsx`:
-  - remover dependência de `useAppAuth()` e `useProfile()`, porque não haverá usuário
-  - trocar a saudação “Oi, {nome}” por algo neutro e acolhedor, por exemplo:
-    - “Primeira Vitória em Amigurumi”
-    - ou “Bem-vinda ao seu Ateliê”
-  - remover o botão “Sair” (não faz sentido sem login)
-  - manter “Voltar ao site”
+4) Ajuste das 3 caixinhas de benefícios (MetodoPrimeiraVitoria)
+- Ajustar as classes das 3 caixinhas em `MetodoPrimeiraVitoria.tsx` para ficarem mais “clean/premium” como referência do print:
+  - aumentar respiro: `px/py` maiores (ex.: `p-6` ou `px-6 py-5`)
+  - raio mais premium: `rounded-2xl` (em vez de `rounded-xl`)
+  - fundo mais “papel”: `bg-background` (remover transparência /60 para ficar mais sólido no Cinza Nuvem/Rosa Argila)
+  - borda mais sutil e consistente com o manual: `border border-border`
+  - sombra leve: `shadow-suave` e `hover-lift` para refinamento
+  - tipografia:
+    - título: `font-semibold text-foreground`
+    - complemento: `text-muted-foreground`
+    - ajustar `leading` para ficar legível sem “apertar” (evitar `leading-snug` no bloco inteiro; usar no máximo no título)
+  - ícone check:
+    - manter o círculo, mas com acabamento mais suave: `bg-cinza-nuvem` ou `bg-secondary/20` e borda `border-border`
+    - check em Verde Eucalipto/primary (`text-primary`) para consistência (sem ocre)
 
-4) Decidir o que fazer com as rotas /app/login, /app/cadastro, /app/acesso (mantidas, mas fora do fluxo)
-Como você pediu “por enquanto”, a abordagem mais segura é:
-- Manter essas páginas existindo (para não quebrar links antigos e para reativar login depois sem retrabalho).
-- Opcional (recomendado) adicionar um aviso simples nessas páginas:
-  - “Neste momento, o app está aberto e não precisa de login.”
-  - com botão “Ir para o app”
-- Opcional: fazer `/app/login` redirecionar automaticamente para `/app` (para reduzir fricção), mas isso pode confundir se você quiser reativar login logo; então:
-  - sugestão: redirecionar apenas se um `VITE_APP_OPEN_ACCESS=true` (feature flag simples) ou se criarmos uma constante no código.
+5) Ajuste leve de paleta/consistência na Solução (apenas o necessário)
+- Conferir se algum elemento dentro dessa sequência (frase → nova dobra → CTAs) está usando Ocre fora de conversão.
+- Se necessário, trocar o destaque do “número grande” (em mecanismos) para uma cor permitida pelo manual (ex.: `text-white/35` ou `text-verde-eucalipto-30`) mantendo o CTA como único ponto em Ocre. (Só aplico se estiver claramente competindo visualmente com CTA ou quebrando a regra do Ocre.)
 
-5) Garantir que o admin continue protegido
-- Não alterar nada em `/admin/*`.
-- Não mexer em `useAdminAuth` nem no layout admin.
+Sequência de trabalho (para implementar em Default mode)
+1) Assets
+- Copiar a imagem do `user-uploads://...png` para `src/assets/`.
+- Validar import funcionando.
 
-6) Testes necessários (critério de pronto)
-- Acessar `/app` em aba anônima:
-  - deve abrir o mapa sem pedir login
-- Clicar Dia 1 → concluir → voltar ao mapa:
-  - Dia 1 marcado como concluído
-  - Dia 2 disponível
-- Tentar acessar `/app/dia/7` sem ter concluído os anteriores:
-  - deve bloquear e voltar para `/app` com toast
-- Recarregar a página:
-  - progresso deve permanecer (localStorage)
-- Testar no mobile (largura pequena):
-  - mapa e tela do dia continuam legíveis e botões clicáveis
+2) Nova dobra em `src/components/sections/Solucao.tsx`
+- Importar imagem.
+- Inserir nova `<Section background="cinza">` entre a DOBRA 1 (verde) e a DOBRA 2 (branca `#metodo`).
+- Construir layout:
+  - título curto (H3 serif) + subtítulo (body) opcionais para guiar a leitura
+  - card/moldura com a imagem centralizada
+  - CTA 2 abaixo da imagem, centralizado, usando `Button variant="primary" size="lg"` e `onClick={handleVerMetodo}`
 
-Riscos/limitações desta decisão (para você estar ciente)
-- Qualquer pessoa terá acesso ao conteúdo (inclusive compartilhando o link).
-- Progresso fica preso ao navegador/aparelho; se limpar cache, perde.
-- A estrutura de entitlement/liberação manual fica “ociosa” até você reativar login (mas não será removida, só não usada).
+3) Ajustar 3 caixinhas de benefícios em `src/components/sections/solucao/MetodoPrimeiraVitoria.tsx`
+- Atualizar estilos conforme “clean/premium” (padding, radius, bg sólido, borda, sombra, tipografia).
+- Garantir consistência com a paleta do manual (sem ocre fora de CTA).
 
-Plano de execução (passos práticos de código)
-1. Ler os arquivos atuais de progresso/auth para reaproveitar o máximo possível:
-   - `src/hooks/useJourneyProgress.ts`
-   - `src/hooks/useAppAuth.ts`
-2. Implementar o fallback/local hook de progresso:
-   - opção A: novo arquivo `src/hooks/useLocalJourneyProgress.ts`
-   - opção B (preferida): ajustar `useJourneyProgress` para:
-     - se `userId` existir, usar backend (como hoje)
-     - se não existir, usar localStorage
-3. Atualizar:
-   - `src/pages/app/AppMap.tsx` para usar progresso local e remover login/entitlement guard
-   - `src/pages/app/AppDay.tsx` para usar progresso local e remover login/entitlement guard
-4. Atualizar `src/components/app/AppLayout.tsx` para ficar “guest-friendly” (sem perfil/sem sair)
-5. (Opcional) Ajustar `AppLogin/AppSignup/AppAccess` para ter CTA “Ir para o app” e evitar confusão
-6. Rodar um teste manual end-to-end do fluxo do app + confirmar admin intacto
+4) Revisão visual (preview)
+- Verificar em 3 breakpoints (mobile/tablet/desktop):
+  - separação clara entre as dobras
+  - imagem bem dimensionada (sem cortar; sem ficar enorme demais)
+  - o segundo CTA aparece naturalmente após a imagem
+  - ritmo vertical: frase do verde → CTA verde → nova dobra → CTA 2 → método
 
-Como vamos reativar login depois (sem retrabalho)
-- Ao reativar, basta:
-  - recolocar guards de `user` + `entitlement` em AppMap/AppDay (ou criar um AppGuard wrapper)
-  - trocar o hook para usar backend novamente
-  - (opcional) oferecer “migrar progresso local para conta” no primeiro login (podemos planejar depois)
+Critérios de aceite (como saber que ficou certo)
+- A frase final do bloco verde continua como “fechamento” emocional do mecanismo.
+- A nova dobra “papel” em Cinza Nuvem cria uma pausa clara e elegante e traz a imagem como reforço visual.
+- Existem dois CTAs: um no verde e um logo após a imagem.
+- As 3 caixinhas de benefícios estão mais premium (mais respiro, bordas/sombras suaves, tipografia limpa e consistente).
+- Ocre Dourado permanece restrito aos elementos de conversão (botões), sem virar cor dominante de layout.
 
+Notas técnicas (para manter o projeto organizado)
+- Preferir `src/assets/` para a imagem (importável e otimizada pelo bundler).
+- Reutilizar `handleVerMetodo` para os dois botões (evita duplicação e mantém comportamento consistente).
+- Manter headings com semântica coerente (H2/H3 conforme a hierarquia existente no projeto).
