@@ -41,9 +41,21 @@ export default function AppHome() {
       toast("Escolha a data de início para liberar os dias pelo calendário.");
       return;
     }
+
+    console.debug("[AppHome] onboarding:start", {
+      name: trimmed,
+      startDate: startDate.toISOString(),
+    });
+
     setName(trimmed);
     setStartDate(startDate);
-    navigate(`/app/dia/${getSuggestedDay()}`);
+
+    // Importante: garante que o próximo screen (AppDay) leia o localStorage já preenchido.
+    // Isso evita “ping-pong” /app -> /app/dia/1 -> /app por timing.
+    queueMicrotask(() => {
+      console.debug("[AppHome] onboarding:navigate", { to: "/app/dia/1" });
+      navigate("/app/dia/1");
+    });
   }
 
   return (
