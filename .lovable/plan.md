@@ -1,86 +1,168 @@
 
-Contexto do pedido (confirmado)
-- Inserir uma nova dobra logo abaixo da frase “É assim que a mente finalmente desacelera e o corpo relaxa.”, separando bem o conteúdo.
-- Usar a imagem “Mapa ilustrado (quadrado)” como destaque visual nessa nova dobra.
-- Criar dois CTAs (um permanece no bloco verde; outro abaixo da imagem).
-- Fundo da nova dobra: “Cinza Nuvem (papel)”.
-- Ajustar “as caixinhas”: especificamente as 3 caixinhas de benefícios dentro do bloco “Por isso criamos o Primeira Vitória…” (MetodoPrimeiraVitoria).
+Objetivo
+- Construir a “plataforma do passo a passo” (o app do produto) dentro do mesmo projeto, separada da Landing Page.
+- Requisitos confirmados por você:
+  - Acesso aberto (sem login)
+  - Experiência principal: “Modo guiado” (o app conduz a pessoa, passo a passo)
+  - Progressão: liberar por calendário
+  - Coletar nome (para personalizar a experiência)
 
-Exploração rápida (onde mexer)
-- A frase e o CTA do bloco verde estão em: `src/components/sections/Solucao.tsx` (DOBRA 1, verde).
-- O bloco “Por isso criamos…” e as 3 caixinhas de benefícios estão em: `src/components/sections/solucao/MetodoPrimeiraVitoria.tsx`.
-- O componente `Section` já suporta `background="cinza"` para Cinza Nuvem: `src/components/shared/Section.tsx`.
+O que já existe hoje no projeto (estado atual)
+- Páginas públicas:
+  - `/` = Landing Page (vendas)
+  - `/checkout` = página intermediária (atual: confirma email e volta para `/#oferta`)
+  - `*` = NotFound
+- Admin (já existe e pode continuar separado):
+  - `/admin/login`, `/admin`, `/admin/leads`, `/admin/analytics`
+- Banco/back-end (Lovable Cloud) já tem tabelas úteis para futuro (profiles, entitlements, journey_progress etc.), mas como o app será “aberto (sem login)”, o progresso e o nome serão salvos localmente no navegador (localStorage) para ficar simples e rápido.
 
-Decisões de implementação (seguindo manual de marca)
-1) Nova dobra “papel” em Cinza Nuvem
-- Criar uma nova `<Section background="cinza">` inserida em `Solucao.tsx` logo após o CTA do bloco verde e antes da dobra branca `#metodo`.
-- Objetivo visual: parecer uma “dobra” própria (respiro, separação clara, hierarquia editorial).
+Conteúdo base do produto (extraído do PDF)
+- Jornada de 7 dias para criar um mini coelho amigurumi (chaveiro).
+- Estrutura por dia (resumo do que vamos transformar em telas):
+  - Dia 1 — anel mágico + ponto baixo (Volta 1 MR 6 pb; Volta 2 6 aum)
+  - Dia 2 — aumentos para crescer a base (Volta 3 e 4)
+  - Dia 3 — subir as paredes (Voltas 5 a 9: 24 pb)
+  - Dia 4 — diminuição e fechar (Voltas 10–12 + enchimento)
+  - Dia 5 — fechamento total + acabamento (Voltas 13–18 + arremate e fechar)
+  - Dia 6 — orelhas, bracinhos e perninhas
+  - Dia 7 — montagem, rosto e argola do chaveiro + “missão final”
 
-2) Inserção da imagem (Mapa ilustrado)
-- Copiar o upload `user-uploads://Gemini_Generated_Image_a4f8f7a4f8f7a4f8.png` para `src/assets/` (ex.: `src/assets/mapa-ilustrado-amigurumi.png`).
-- Importar a imagem via ES module no `Solucao.tsx` e renderizar dentro dessa nova dobra com:
-  - um container central (max-width controlado)
-  - moldura “papel premium”: `rounded-2xl`, `border`, `shadow-suave`, `bg-background`
-  - `img` com `object-contain` e `loading="lazy"`
-  - responsivo (não estourar no mobile; manter boa leitura no desktop)
+Decisões de UX (como o app vai funcionar)
+1) Fluxo principal (modo guiado)
+- Primeira vez que a pessoa entra no app:
+  1. Tela de boas-vindas + “Qual seu nome?”
+  2. Definir “data de início” da jornada (por padrão: hoje) para habilitar “liberar por calendário”
+  3. Entrar no “Dia de hoje”
+- A partir daí:
+  - O app sempre abre no “Dia disponível de hoje” (ou no próximo passo pendente).
+  - Cada dia tem:
+    - Objetivo simples (bem curto)
+    - Tempo sugerido (10–15 min)
+    - Passos em cards (bem guiados, uma coisa de cada vez)
+    - Ajuda com “erros comuns” (quando existir)
+    - Botão “Concluir o dia” (só habilitado quando o dia estiver disponível)
+  - Ao concluir:
+    - Marca o dia como concluído
+    - Mostra “amanhã você faz o próximo” (se calendário travar) ou “ir para o próximo” (se já estiver liberado)
 
-3) Dois CTAs
-- Manter o CTA existente no bloco verde (já está funcionando com scroll para `#metodo` via `handleVerMetodo`).
-- Adicionar um segundo CTA no final da nova dobra “papel”, reutilizando o mesmo handler `handleVerMetodo` (mesma âncora, consistência de conversão).
-- O botão deve seguir o manual:
-  - CTA em Ocre Dourado apenas no componente de botão (já é o padrão do `Button variant="primary"`), sem usar ocre em textos ou fundos grandes.
+2) Regra “liberar por calendário”
+- O dia N fica disponível se:
+  - hoje >= dataInicio + (N-1) dias
+- Mesmo se a pessoa concluir rápido, ela não “pula” dias futuros antes da data (isso é o que você pediu).
+- Ainda assim, ela pode rever dias passados (reassistir/reler).
 
-4) Ajuste das 3 caixinhas de benefícios (MetodoPrimeiraVitoria)
-- Ajustar as classes das 3 caixinhas em `MetodoPrimeiraVitoria.tsx` para ficarem mais “clean/premium” como referência do print:
-  - aumentar respiro: `px/py` maiores (ex.: `p-6` ou `px-6 py-5`)
-  - raio mais premium: `rounded-2xl` (em vez de `rounded-xl`)
-  - fundo mais “papel”: `bg-background` (remover transparência /60 para ficar mais sólido no Cinza Nuvem/Rosa Argila)
-  - borda mais sutil e consistente com o manual: `border border-border`
-  - sombra leve: `shadow-suave` e `hover-lift` para refinamento
-  - tipografia:
-    - título: `font-semibold text-foreground`
-    - complemento: `text-muted-foreground`
-    - ajustar `leading` para ficar legível sem “apertar” (evitar `leading-snug` no bloco inteiro; usar no máximo no título)
-  - ícone check:
-    - manter o círculo, mas com acabamento mais suave: `bg-cinza-nuvem` ou `bg-secondary/20` e borda `border-border`
-    - check em Verde Eucalipto/primary (`text-primary`) para consistência (sem ocre)
+3) Dados locais (sem login)
+- Vamos persistir no localStorage:
+  - nome
+  - data de início
+  - dia atual (para navegação)
+  - dias concluídos
+  - (opcional) “anotações do aluno” por dia (pode ficar para fase 2)
 
-5) Ajuste leve de paleta/consistência na Solução (apenas o necessário)
-- Conferir se algum elemento dentro dessa sequência (frase → nova dobra → CTAs) está usando Ocre fora de conversão.
-- Se necessário, trocar o destaque do “número grande” (em mecanismos) para uma cor permitida pelo manual (ex.: `text-white/35` ou `text-verde-eucalipto-30`) mantendo o CTA como único ponto em Ocre. (Só aplico se estiver claramente competindo visualmente com CTA ou quebrando a regra do Ocre.)
+Arquitetura de Rotas (o que vamos criar no front)
+- Adicionar novas rotas no `App.tsx`:
+  - `/app` → Home do app (decide: onboarding ou redireciona para dia atual)
+  - `/app/dia/:day` → Tela do dia (1 a 7)
+  - `/app/sobre` (opcional) → “como funciona / materiais / abreviações”
+  - `/app/config` (opcional) → redefinir nome, reiniciar jornada, trocar data de início
 
-Sequência de trabalho (para implementar em Default mode)
-1) Assets
-- Copiar a imagem do `user-uploads://...png` para `src/assets/`.
-- Validar import funcionando.
+Observação: não vamos mexer na Landing Page. O app fica em `/app/*` separado.
 
-2) Nova dobra em `src/components/sections/Solucao.tsx`
-- Importar imagem.
-- Inserir nova `<Section background="cinza">` entre a DOBRA 1 (verde) e a DOBRA 2 (branca `#metodo`).
-- Construir layout:
-  - título curto (H3 serif) + subtítulo (body) opcionais para guiar a leitura
-  - card/moldura com a imagem centralizada
-  - CTA 2 abaixo da imagem, centralizado, usando `Button variant="primary" size="lg"` e `onClick={handleVerMetodo}`
+Componentes e estrutura (o que vamos implementar)
+1) Conteúdo em arquivo próprio (para manter organizado)
+- Criar um arquivo de conteúdo com a jornada (ex.: `src/content/journey.ts`), contendo:
+  - title do dia
+  - objetivo
+  - duração
+  - lista de passos (texto curto em sequência)
+  - “problemas comuns” (quando existir)
+  - “missão do dia” (checklist)
+  - “amanhã” (mensagem motivacional)
+- Esse conteúdo será baseado diretamente no PDF que você enviou (já extraímos os trechos principais acima).
 
-3) Ajustar 3 caixinhas de benefícios em `src/components/sections/solucao/MetodoPrimeiraVitoria.tsx`
-- Atualizar estilos conforme “clean/premium” (padding, radius, bg sólido, borda, sombra, tipografia).
-- Garantir consistência com a paleta do manual (sem ocre fora de CTA).
+2) Hook de progresso com calendário (core do app)
+- Criar um hook (ex.: `useJourneyCalendarProgress`) responsável por:
+  - Ler/escrever localStorage
+  - Calcular “dia liberado hoje” conforme data de início
+  - Informar estados por dia: locked | available | completed
+  - Ações:
+    - setName(name)
+    - setStartDate(date)
+    - markDayComplete(day)
+    - resetJourney()
 
-4) Revisão visual (preview)
-- Verificar em 3 breakpoints (mobile/tablet/desktop):
-  - separação clara entre as dobras
-  - imagem bem dimensionada (sem cortar; sem ficar enorme demais)
-  - o segundo CTA aparece naturalmente após a imagem
-  - ritmo vertical: frase do verde → CTA verde → nova dobra → CTA 2 → método
+3) Layout do app (visual e navegação)
+- Criar um layout diferente da Landing Page:
+  - Topbar simples (nome do app + “Olá, {nome}”)
+  - Botões: “Mapa dos 7 dias”, “Configurações”
+  - Design calmo, premium, com Cinza Nuvem/papel como fundo (seguindo marca)
 
-Critérios de aceite (como saber que ficou certo)
-- A frase final do bloco verde continua como “fechamento” emocional do mecanismo.
-- A nova dobra “papel” em Cinza Nuvem cria uma pausa clara e elegante e traz a imagem como reforço visual.
-- Existem dois CTAs: um no verde e um logo após a imagem.
-- As 3 caixinhas de benefícios estão mais premium (mais respiro, bordas/sombras suaves, tipografia limpa e consistente).
-- Ocre Dourado permanece restrito aos elementos de conversão (botões), sem virar cor dominante de layout.
+4) Tela “Mapa”
+- Um componente “Mapa dos 7 dias” com:
+  - 7 cards/etapas
+  - estado visual:
+    - Concluído (marcado)
+    - Disponível (clicável)
+    - Bloqueado (mostra “Disponível em dd/mm”)
+  - Botão principal: “Continuar jornada” (leva pro dia correto)
 
-Notas técnicas (para manter o projeto organizado)
-- Preferir `src/assets/` para a imagem (importável e otimizada pelo bundler).
-- Reutilizar `handleVerMetodo` para os dois botões (evita duplicação e mantém comportamento consistente).
-- Manter headings com semântica coerente (H2/H3 conforme a hierarquia existente no projeto).
+5) Tela do Dia (modo guiado)
+- Estrutura:
+  - Cabeçalho: “Dia X — {título}”
+  - Sub: objetivo + tempo estimado
+  - Cards de passo-a-passo (comprogressivo: “Passo 1 de N”)
+  - Bloco “Se travar, veja isso” (erros comuns)
+  - Botão “Concluir o dia”
+  - Ao concluir: modal/alert com mensagem do PDF (tom acolhedor)
+
+Sequência de implementação (passo a passo)
+1) Preparar base do app
+- Criar novas páginas `/app` e `/app/dia/:day`
+- Adicionar rotas no `App.tsx`
+- Criar layout do app (header e container)
+
+2) Criar o “motor” de progressão por calendário
+- Implementar hook de progresso em localStorage (versãoada, ex.: `pv_journey_progress_v1`)
+- Implementar cálculo de desbloqueio por data
+- Implementar função “qual dia devo abrir agora”
+
+3) Colocar conteúdo do PDF em estrutura de dados
+- Criar `src/content/journey.ts` com 7 dias
+- Manter texto com tom calmo e iniciante (sem jargão excessivo)
+- Onde o PDF diz [IMAGEM SUGERIDA], vamos colocar “cards de placeholder” (e depois você troca por imagens reais)
+
+4) Construir UI do “Mapa” + UI do “Dia”
+- Mapa:
+  - lista dos 7 dias com estados
+  - CTA “Continuar”
+- Dia:
+  - passos em cards (next/back ou scroll guiado)
+  - botão “Concluir o dia”
+  - bloqueio se não liberado ainda
+
+5) Polimento + salvaguardas
+- Validar:
+  - se day fora de 1..7 → NotFound
+  - se não tem nome → mandar para onboarding
+- Adicionar botão “reiniciar jornada” (config)
+- Testes manuais em mobile/desktop
+
+Critérios de aceite (para você aprovar)
+- Ao acessar `/app` pela primeira vez: pede nome e define data de início.
+- O app libera apenas o dia “permitido hoje” (calendário).
+- Dia futuro aparece bloqueado com mensagem clara.
+- “Concluir o dia” registra e marca como concluído.
+- Visual simples, calmo e consistente com a marca.
+
+Riscos / pontos de atenção
+- Sem login: se a pessoa trocar de celular/navegador, perde o progresso (porque fica no localStorage). Isso é esperado nesta fase. Depois podemos adicionar login e sincronização no back-end.
+- “Liberar por calendário” pode frustrar quem quer acelerar; por isso vamos manter “rever dias anteriores” sempre disponível.
+
+O que eu preciso de você (para começar a implementar com precisão)
+- Confirmação de UX final para o modo guiado (1 escolha):
+  A) “Passo a passo com botão Próximo/Anterior” (mais guiado)
+  B) “Passos em lista rolável + checkboxes” (mais simples)
+- Confirmação da data de início:
+  - Deve ser “automaticamente hoje” ou você quer que a pessoa escolha manualmente sempre?
+
+Assim que você aprovar este plano, eu passo para a implementação criando as rotas `/app` e a primeira versão funcional do Dia 1 (e depois replico para os 7 dias).
