@@ -1,7 +1,7 @@
 import * as React from "react";
 import { format } from "date-fns";
 import { useMemo, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "sonner";
 
 import { AppLayout } from "@/components/app/AppLayout";
@@ -33,8 +33,42 @@ export default function AppDay() {
     setChecks(Array.from({ length: stepsCount }, () => false));
   }, [stepsCount, dayNumber]);
 
-  if (!isOnboarded) return <Navigate to="/app" replace />;
-  if (!dayNumber || !day) return <Navigate to="/app" replace />;
+  if (!isOnboarded) {
+    console.warn("[AppDay] not onboarded yet — showing fallback instead of redirect");
+    return (
+      <AppLayout title="Antes de começar" subtitle="Complete seu nome e data de início">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Falta só um passo</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <p className="text-sm text-muted-foreground">
+              Não encontrei seu onboarding salvo ainda (nome/data). Volte para a tela inicial do app e
+              preencha para liberar os dias.
+            </p>
+            <Button asChild className="w-full">
+              <Link to="/app">Voltar para configurar</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      </AppLayout>
+    );
+  }
+
+  if (!dayNumber || !day) {
+    return (
+      <AppLayout title="Dia inválido" subtitle="Escolha um dia entre 1 e 7">
+        <Card>
+          <CardContent className="space-y-3 pt-6">
+            <p className="text-sm text-muted-foreground">Esse dia não existe. Volte ao mapa para escolher.</p>
+            <Button asChild className="w-full">
+              <Link to="/app">Ir para o mapa</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      </AppLayout>
+    );
+  }
 
   const isLocked = status?.status === "locked";
   const isCompleted = status?.status === "completed";

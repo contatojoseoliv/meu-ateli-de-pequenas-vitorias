@@ -14,6 +14,8 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
+    // Evita múltiplas instâncias de React no bundle (causa conhecida de bugs “fantasma” em hooks/router)
+    dedupe: ["react", "react-dom", "react/jsx-runtime"],
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
