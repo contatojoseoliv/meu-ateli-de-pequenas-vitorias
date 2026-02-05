@@ -1,86 +1,173 @@
 
-Contexto do pedido (confirmado)
-- Inserir uma nova dobra logo abaixo da frase “É assim que a mente finalmente desacelera e o corpo relaxa.”, separando bem o conteúdo.
-- Usar a imagem “Mapa ilustrado (quadrado)” como destaque visual nessa nova dobra.
-- Criar dois CTAs (um permanece no bloco verde; outro abaixo da imagem).
-- Fundo da nova dobra: “Cinza Nuvem (papel)”.
-- Ajustar “as caixinhas”: especificamente as 3 caixinhas de benefícios dentro do bloco “Por isso criamos o Primeira Vitória…” (MetodoPrimeiraVitoria).
+## Objetivo (o que você pediu agora)
+Garantir que, na página interna do produto (Receita Guiada / Dia X), **as Tabs sejam botões** e que o **Checklist seja organizado por blocos** exatamente como está descrito no seu esboço do produto (PDFs).
 
-Exploração rápida (onde mexer)
-- A frase e o CTA do bloco verde estão em: `src/components/sections/Solucao.tsx` (DOBRA 1, verde).
-- O bloco “Por isso criamos…” e as 3 caixinhas de benefícios estão em: `src/components/sections/solucao/MetodoPrimeiraVitoria.tsx`.
-- O componente `Section` já suporta `background="cinza"` para Cinza Nuvem: `src/components/shared/Section.tsx`.
+Isso vai orientar toda a UI do “Dia” para ficar:
+- intuitiva para iniciante
+- guiada por etapas
+- consistente com a identidade visual (Verde Eucalipto / Rosa Argila / Ocre só em CTA)
+- preparada para receber imagens reais depois (por enquanto placeholders)
 
-Decisões de implementação (seguindo manual de marca)
-1) Nova dobra “papel” em Cinza Nuvem
-- Criar uma nova `<Section background="cinza">` inserida em `Solucao.tsx` logo após o CTA do bloco verde e antes da dobra branca `#metodo`.
-- Objetivo visual: parecer uma “dobra” própria (respiro, separação clara, hierarquia editorial).
+---
 
-2) Inserção da imagem (Mapa ilustrado)
-- Copiar o upload `user-uploads://Gemini_Generated_Image_a4f8f7a4f8f7a4f8.png` para `src/assets/` (ex.: `src/assets/mapa-ilustrado-amigurumi.png`).
-- Importar a imagem via ES module no `Solucao.tsx` e renderizar dentro dessa nova dobra com:
-  - um container central (max-width controlado)
-  - moldura “papel premium”: `rounded-2xl`, `border`, `shadow-suave`, `bg-background`
-  - `img` com `object-contain` e `loading="lazy"`
-  - responsivo (não estourar no mobile; manter boa leitura no desktop)
+## O que já está definido pelos seus esboços (fonte de verdade)
+### 1) Tabs como “mini botões”
+No “Esboço da aplicação” você descreve explicitamente:
+- “Mini botões: Receita Completa, Materiais, Técnicas e Recursos”
 
-3) Dois CTAs
-- Manter o CTA existente no bloco verde (já está funcionando com scroll para `#metodo` via `handleVerMetodo`).
-- Adicionar um segundo CTA no final da nova dobra “papel”, reutilizando o mesmo handler `handleVerMetodo` (mesma âncora, consistência de conversão).
-- O botão deve seguir o manual:
-  - CTA em Ocre Dourado apenas no componente de botão (já é o padrão do `Button variant="primary"`), sem usar ocre em textos ou fundos grandes.
+Como você também pediu **“Guiado + receita completa”**, vamos ter:
+- **Guiado** (principal, com checklist por blocos)
+- **Receita completa** (consulta corrida)
+- **Materiais**
+- **Técnicas e recursos**
 
-4) Ajuste das 3 caixinhas de benefícios (MetodoPrimeiraVitoria)
-- Ajustar as classes das 3 caixinhas em `MetodoPrimeiraVitoria.tsx` para ficarem mais “clean/premium” como referência do print:
-  - aumentar respiro: `px/py` maiores (ex.: `p-6` ou `px-6 py-5`)
-  - raio mais premium: `rounded-2xl` (em vez de `rounded-xl`)
-  - fundo mais “papel”: `bg-background` (remover transparência /60 para ficar mais sólido no Cinza Nuvem/Rosa Argila)
-  - borda mais sutil e consistente com o manual: `border border-border`
-  - sombra leve: `shadow-suave` e `hover-lift` para refinamento
-  - tipografia:
-    - título: `font-semibold text-foreground`
-    - complemento: `text-muted-foreground`
-    - ajustar `leading` para ficar legível sem “apertar” (evitar `leading-snug` no bloco inteiro; usar no máximo no título)
-  - ícone check:
-    - manter o círculo, mas com acabamento mais suave: `bg-cinza-nuvem` ou `bg-secondary/20` e borda `border-border`
-    - check em Verde Eucalipto/primary (`text-primary`) para consistência (sem ocre)
+Regra de UX:
+- **Guiado** é a aba padrão.
+- As outras abas são “consulta”, e devem parecer **botões pequenos** (pill/chip) e não abas grandes.
 
-5) Ajuste leve de paleta/consistência na Solução (apenas o necessário)
-- Conferir se algum elemento dentro dessa sequência (frase → nova dobra → CTAs) está usando Ocre fora de conversão.
-- Se necessário, trocar o destaque do “número grande” (em mecanismos) para uma cor permitida pelo manual (ex.: `text-white/35` ou `text-verde-eucalipto-30`) mantendo o CTA como único ponto em Ocre. (Só aplico se estiver claramente competindo visualmente com CTA ou quebrando a regra do Ocre.)
+### 2) Checklist por blocos
+No “Esboço da aplicação”:
+- Blocos: **preparação**, **voltas**, **verificação**, **objetivo final**
 
-Sequência de trabalho (para implementar em Default mode)
-1) Assets
-- Copiar a imagem do `user-uploads://...png` para `src/assets/`.
-- Validar import funcionando.
+Regra de estrutura:
+- O conteúdo do “Guiado” deve ser um fluxo vertical com esses 4 blocos fixos (mesmo que um dia tenha pouco conteúdo em algum bloco; nesse caso o bloco pode aparecer com 1 item curto, ou ficar oculto se você preferir — definiremos isso no padrão).
 
-2) Nova dobra em `src/components/sections/Solucao.tsx`
-- Importar imagem.
-- Inserir nova `<Section background="cinza">` entre a DOBRA 1 (verde) e a DOBRA 2 (branca `#metodo`).
-- Construir layout:
-  - título curto (H3 serif) + subtítulo (body) opcionais para guiar a leitura
-  - card/moldura com a imagem centralizada
-  - CTA 2 abaixo da imagem, centralizado, usando `Button variant="primary" size="lg"` e `onClick={handleVerMetodo}`
+---
 
-3) Ajustar 3 caixinhas de benefícios em `src/components/sections/solucao/MetodoPrimeiraVitoria.tsx`
-- Atualizar estilos conforme “clean/premium” (padding, radius, bg sólido, borda, sombra, tipografia).
-- Garantir consistência com a paleta do manual (sem ocre fora de CTA).
+## Exploração do que existe hoje no projeto (para reaproveitar padrões)
+- Já existe o componente `Tabs` em `src/components/ui/tabs.tsx` (Radix Tabs) com `TabsTrigger` e `TabsList`.
+- Já existe `Checkbox` em `src/components/ui/checkbox.tsx`.
+- Já existe um sistema visual próprio (manual da marca) e o Button premium em `src/components/shared/Button.tsx` (CTA em gradiente ocre).
+- Já existe `Progress` em `src/components/ui/progress.tsx`, útil para “% do dia” e “% geral”.
 
-4) Revisão visual (preview)
-- Verificar em 3 breakpoints (mobile/tablet/desktop):
-  - separação clara entre as dobras
-  - imagem bem dimensionada (sem cortar; sem ficar enorme demais)
-  - o segundo CTA aparece naturalmente após a imagem
-  - ritmo vertical: frase do verde → CTA verde → nova dobra → CTA 2 → método
+---
 
-Critérios de aceite (como saber que ficou certo)
-- A frase final do bloco verde continua como “fechamento” emocional do mecanismo.
-- A nova dobra “papel” em Cinza Nuvem cria uma pausa clara e elegante e traz a imagem como reforço visual.
-- Existem dois CTAs: um no verde e um logo após a imagem.
-- As 3 caixinhas de benefícios estão mais premium (mais respiro, bordas/sombras suaves, tipografia limpa e consistente).
-- Ocre Dourado permanece restrito aos elementos de conversão (botões), sem virar cor dominante de layout.
+## Decisões de implementação (para bater 100% com o esboço)
+### A) Como as Tabs vão virar “botões”
+Em vez de “tabs tradicionais”, vamos estilizar o `TabsList`/`TabsTrigger` para ficar como “mini botões”:
 
-Notas técnicas (para manter o projeto organizado)
-- Preferir `src/assets/` para a imagem (importável e otimizada pelo bundler).
-- Reutilizar `handleVerMetodo` para os dois botões (evita duplicação e mantém comportamento consistente).
-- Manter headings com semântica coerente (H2/H3 conforme a hierarquia existente no projeto).
+**Estilo sugerido (identidade visual):**
+- Fundo geral do container: Cinza Nuvem
+- “Botões” (triggers):
+  - Inativos: `bg-background` (branco), `border border-border`, texto grafite
+  - Ativo: `bg-verde-eucalipto` com `text-white` (ou `bg-secondary` Rosa Argila se você preferir; minha recomendação é verde para reforçar “guia”)
+  - Tamanho compacto: height menor, padding curto, bordas arredondadas bem suaves (pill)
+- Nada de Ocre aqui (ocre fica só para CTA de concluir/continuar)
+
+**Aba Guiado**
+- Nome do botão: “Guiado”
+- Ícone opcional (ex.: list/check) — discreto, sem poluir.
+
+**Aba Receita Completa**
+- Deve mostrar a receita corrida daquele dia (texto organizado por voltas/carreiras), fácil de copiar/ler.
+
+**Aba Materiais**
+- Lista simples (bullet list) e um aviso acolhedor “não precisa ser perfeito”.
+
+**Aba Técnicas e recursos**
+- Conteúdo de técnicas (MR, pb, aum, dim) e dicas rápidas, com placeholders de imagem quando o PDF indicar “[IMAGEM SUGERIDA]”.
+
+### B) Como o checklist por blocos vai funcionar (Guiado)
+Vamos criar um componente de “Bloco do dia”, com:
+- Título do bloco (H3 pequeno): “Preparação”, “Voltas”, “Verificação”, “Objetivo final”
+- Uma lista de itens com checkbox (cada item é uma ação simples)
+- Dentro de cada item, suportar:
+  - texto principal (curto e direto)
+  - “Dica” (callout pequeno em verde suave)
+  - placeholder de imagem (card cinza com legenda “Imagem ilustrativa (em breve)”)
+
+**Ordem fixa de blocos (sempre):**
+1. Preparação  
+2. Voltas  
+3. Verificação  
+4. Objetivo final  
+
+**Conclusão do dia**
+- O botão principal “Concluir dia” (CTA ocre) só aparece/habilita quando:
+  - todos os itens do dia (todos os blocos) estiverem marcados
+- Ao concluir:
+  - salvar progresso
+  - desbloquear próximo dia
+  - toast discreto de “vitória”
+
+---
+
+## Estrutura de dados (para garantir que UI siga o esboço e não vire bagunça)
+Vamos estruturar o conteúdo do “Dia” já separando por blocos e por tabs, para a interface ficar automática e consistente:
+
+- `day.guisado.blocks.preparacao[]`
+- `day.guisado.blocks.voltas[]`
+- `day.guisado.blocks.verificacao[]`
+- `day.guisado.blocks.objetivoFinal[]`
+
+E para as tabs:
+- `day.tabs.fullRecipe` (texto corrido em seções)
+- `day.tabs.materials` (lista)
+- `day.tabs.techniques` (lista + dicas + placeholders)
+
+Isso garante que:
+- o checklist sempre nasce por blocos
+- as tabs sempre têm o mesmo formato
+- futuramente dá para plugar imagens reais sem refatorar telas
+
+---
+
+## Plano de execução (sequência segura)
+### 1) Mapear a “estrutura do Dia” a partir dos PDFs
+- Usar o “Esboço da aplicação” como guia de layout (tabs + blocos)
+- Usar o “Esboço do Produto” e a “Receita Amigurumi” para preencher:
+  - o que entra em “Voltas”
+  - o que entra em “Verificação” (contagem de pontos, “se estiver ondulado…”)
+  - o que entra em “Objetivo final” (missão do dia)
+  - o que entra em “Técnicas e recursos” (MR, pb, aum, dim) e imagens sugeridas
+
+### 2) Implementar a UI das Tabs como botões (mini botões)
+- Ajustar estilos do `TabsTrigger` para ficar com cara de botão pequeno
+- Garantir acessibilidade:
+  - foco visível
+  - navegação por teclado
+  - contraste
+
+### 3) Implementar a aba “Guiado” com checklist por blocos
+- Construir o componente visual de bloco + lista de checkbox
+- Garantir que cada item suporte “dica” e placeholder de imagem
+
+### 4) Implementar as abas de consulta (Receita completa / Materiais / Técnicas e recursos)
+- Conteúdo simples, direto e “consultável”
+- Mantendo tom acolhedor e iniciante-friendly
+
+### 5) Persistência e desbloqueio (localStorage)
+- Persistir:
+  - checkboxes por dia e por item
+  - dias concluídos
+  - último dia visitado (para “retomar”)
+- Regra de desbloqueio:
+  - Dia 1 livre
+  - Dia N+1 só desbloqueia quando Dia N for concluído
+
+---
+
+## Critérios de aceite (como você vai bater o olho e dizer “está igual ao esboço”)
+1) Na página do dia, as tabs aparecem como **mini botões**:  
+   “Guiado”, “Receita completa”, “Materiais”, “Técnicas e recursos”.
+
+2) Na aba “Guiado”, o conteúdo aparece em **4 blocos** nessa ordem:
+   - Preparação
+   - Voltas
+   - Verificação
+   - Objetivo final
+
+3) Cada bloco tem checklist funcional (marca/desmarca), com:
+   - texto do passo
+   - dica opcional
+   - placeholder de imagem quando necessário
+
+4) Ao marcar tudo e concluir o dia:
+   - salva ao recarregar a página
+   - libera o próximo dia
+
+---
+
+## Observação importante (para não travar depois)
+Como o acesso está livre por enquanto, tudo ficará em `localStorage`. Quando você escolher gateway + webhook, a gente troca apenas a “camada de acesso” e (se quiser) migra o progresso para o backend, sem refazer a interface — porque a UI já estará bem estruturada (tabs + blocos) e separada do armazenamento.
+
