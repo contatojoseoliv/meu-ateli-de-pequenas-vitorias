@@ -57,7 +57,8 @@ import { useEffect, useState } from "react";
        metadata: { email: leadEmail }
      });
      
-     navigate('/obrigado');
+     // Redirecionar de volta para a homepage com âncora na seção de oferta
+     navigate('/#oferta');
    };
  
   if (isChecking) {
