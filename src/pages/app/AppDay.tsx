@@ -1,0 +1,249 @@
+import { useMemo } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/shared/Button";
+import { getJourneyDay, type DayBlockKey } from "@/content/journey";
+import { useJourneyProgress } from "@/hooks/useJourneyProgress";
+import { toast } from "@/components/ui/sonner";
+
+const BLOCK_LABEL: Record<DayBlockKey, string> = {
+  preparacao: "Preparação",
+  voltas: "Voltas",
+  verificacao: "Verificação",
+  objetivoFinal: "Objetivo final",
+};
+
+const BLOCK_ORDER: DayBlockKey[] = ["preparacao", "voltas", "verificacao", "objetivoFinal"];
+
+export default function AppDay() {
+  const params = useParams();
+  const navigate = useNavigate();
+  const dayNumber = Number(params.day);
+
+  const day = getJourneyDay(dayNumber);
+  const { isDayUnlocked, getStepChecked, setStepChecked, completeDay } = useJourneyProgress();
+
+  const unlocked = Number.isFinite(dayNumber) && isDayUnlocked(dayNumber);
+
+  const allSteps = useMemo(() => {
+    if (!day) return [];
+    return BLOCK_ORDER.flatMap((k) => day.guided[k]);
+  }, [day]);
+
+  const total = allSteps.length;
+  const checkedCount = useMemo(() => {
+    if (!day) return 0;
+    return allSteps.reduce((acc, s) => acc + (getStepChecked(day.day, s.id) ? 1 : 0), 0);
+  }, [allSteps, day, getStepChecked]);
+
+  const percent = total === 0 ? 0 : Math.round((checkedCount / total) * 100);
+  const canComplete = total > 0 && checkedCount === total;
+
+  if (!day) {
+    return (
+      <div className="min-h-screen bg-muted">
+        <main className="container-main py-10">
+          <Card>
+            <CardHeader>
+              <CardTitle>Dia não encontrado</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Link to="/app" className="text-primary hover:underline">Voltar para a Jornada</Link>
+            </CardContent>
+          </Card>
+        </main>
+      </div>
+    );
+  }
+
+  if (!unlocked) {
+    return (
+      <div className="min-h-screen bg-muted">
+        <main className="container-main py-10">
+          <Card>
+            <CardHeader>
+              <CardTitle>Dia {day.day} bloqueado</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <p className="text-muted-foreground">Conclua o dia anterior para desbloquear este conteúdo.</p>
+              <div className="flex gap-3 flex-wrap">
+                <button
+                  className="text-sm font-medium text-primary hover:underline"
+                  onClick={() => navigate("/app")}
+                >
+                  Voltar
+                </button>
+              </div>
+            </CardContent>
+          </Card>
+        </main>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-muted">
+      <main className="container-main py-8 space-y-5">
+        <header className="space-y-2">
+          <div className="flex items-center justify-between gap-3 flex-wrap">
+            <div>
+              <p className="text-sm text-muted-foreground">
+                <Link to="/app" className="hover:underline">Jornada</Link> / Dia {day.day}
+              </p>
+              <h1 className="text-3xl font-bold text-foreground">Dia {day.day} — {day.title}</h1>
+            </div>
+            <div className="min-w-[220px] space-y-1">
+              <div className="flex items-center justify-between text-xs text-muted-foreground">
+                <span>Seu progresso hoje</span>
+                <span className="font-medium text-foreground">{percent}%</span>
+              </div>
+              <Progress value={percent} />
+            </div>
+          </div>
+          <p className="text-muted-foreground">Tempo estimado: {day.estimatedTime}</p>
+        </header>
+
+        <Tabs defaultValue="guiado" className="w-full">
+          {/* Tabs como mini-botões (pill) */}
+          <TabsList className="flex w-full flex-wrap gap-2 bg-transparent p-0 h-auto justify-start">
+            <TabsTrigger
+              value="guiado"
+              className="h-9 rounded-full border border-border bg-background px-4 text-sm text-foreground shadow-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+            >
+              Guiado
+            </TabsTrigger>
+            <TabsTrigger
+              value="receita"
+              className="h-9 rounded-full border border-border bg-background px-4 text-sm text-foreground shadow-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+            >
+              Receita completa
+            </TabsTrigger>
+            <TabsTrigger
+              value="materiais"
+              className="h-9 rounded-full border border-border bg-background px-4 text-sm text-foreground shadow-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+            >
+              Materiais
+            </TabsTrigger>
+            <TabsTrigger
+              value="tecnicas"
+              className="h-9 rounded-full border border-border bg-background px-4 text-sm text-foreground shadow-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+            >
+              Técnicas e recursos
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="guiado" className="mt-4">
+            <div className="space-y-4">
+              {BLOCK_ORDER.map((blockKey) => {
+                const steps = day.guided[blockKey];
+                if (!steps || steps.length === 0) return null;
+
+                return (
+                  <Card key={blockKey}>
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-lg">{BLOCK_LABEL[blockKey]}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      {steps.map((step) => {
+                        const checked = getStepChecked(day.day, step.id);
+                        return (
+                          <div key={step.id} className="flex items-start gap-3">
+                            <Checkbox
+                              checked={checked}
+                              onCheckedChange={(v) => setStepChecked(day.day, step.id, Boolean(v))}
+                              aria-label={step.text}
+                              className="mt-1"
+                            />
+                            <div className="flex-1 space-y-2">
+                              <p className={"text-sm " + (checked ? "text-muted-foreground line-through" : "text-foreground")}>{step.text}</p>
+
+                              {step.tip ? (
+                                <div className="rounded-md border border-border bg-muted p-3">
+                                  <p className="text-sm text-foreground"><span className="font-medium">Dica:</span> {step.tip}</p>
+                                </div>
+                              ) : null}
+
+                              {step.imagePlaceholderLabel ? (
+                                <div className="rounded-lg border border-border bg-muted p-4">
+                                  <p className="text-xs text-muted-foreground">{step.imagePlaceholderLabel}</p>
+                                </div>
+                              ) : null}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </CardContent>
+                  </Card>
+                );
+              })}
+
+              <div className="pt-2">
+                <Button
+                  variant="primary"
+                  size="default"
+                  disabled={!canComplete}
+                  onClick={() => {
+                    completeDay(day.day);
+                    toast("Vitória do dia!", { description: "Dia concluído — você merece esse momento." });
+                    const next = Math.min(day.day + 1, 7);
+                    navigate(`/app/dia/${next}`);
+                  }}
+                >
+                  Concluir dia
+                </Button>
+                {!canComplete ? (
+                  <p className="mt-2 text-xs text-muted-foreground">Marque todos os passos para concluir.</p>
+                ) : null}
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="receita" className="mt-4">
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg">Receita completa</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                {day.tabs.fullRecipe.map((line, idx) => (
+                  <p key={idx} className="text-sm text-foreground leading-relaxed">{line}</p>
+                ))}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="materiais" className="mt-4">
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg">Materiais</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="list-disc pl-5 space-y-1">
+                  {day.tabs.materials.map((m, idx) => (
+                    <li key={idx} className="text-sm text-foreground">{m}</li>
+                  ))}
+                </ul>
+                <p className="mt-4 text-sm text-muted-foreground">Não precisa ser perfeito — dá para fazer com o que você tem.</p>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="tecnicas" className="mt-4">
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg">Técnicas e recursos</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                {day.tabs.techniquesAndResources.map((t, idx) => (
+                  <p key={idx} className="text-sm text-foreground leading-relaxed">• {t}</p>
+                ))}
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </main>
+    </div>
+  );
+}

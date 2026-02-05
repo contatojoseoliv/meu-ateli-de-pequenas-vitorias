@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Checkout from "./pages/Checkout";
+import AppHome from "./pages/app/AppHome";
+import AppDay from "./pages/app/AppDay";
 import { Loader2 } from "lucide-react";
 
 // Lazy load admin pages
@@ -32,29 +34,45 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/checkout" element={<Checkout />} />
-            
+
+            {/* Product App (aluna) */}
+            <Route path="/app" element={<AppHome />} />
+            <Route path="/app/dia/:day" element={<AppDay />} />
+
             {/* Admin Routes */}
-            <Route path="/admin/login" element={
-              <Suspense fallback={<AdminLoader />}>
-                <AdminLogin />
-              </Suspense>
-            } />
-            <Route path="/admin" element={
-              <Suspense fallback={<AdminLoader />}>
-                <AdminDashboard />
-              </Suspense>
-            } />
-            <Route path="/admin/leads" element={
-              <Suspense fallback={<AdminLoader />}>
-                <AdminLeads />
-              </Suspense>
-            } />
-            <Route path="/admin/analytics" element={
-              <Suspense fallback={<AdminLoader />}>
-                <AdminAnalytics />
-              </Suspense>
-            } />
-            
+            <Route
+              path="/admin/login"
+              element={
+                <Suspense fallback={<AdminLoader />}>
+                  <AdminLogin />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <Suspense fallback={<AdminLoader />}>
+                  <AdminDashboard />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/admin/leads"
+              element={
+                <Suspense fallback={<AdminLoader />}>
+                  <AdminLeads />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/admin/analytics"
+              element={
+                <Suspense fallback={<AdminLoader />}>
+                  <AdminAnalytics />
+                </Suspense>
+              }
+            />
+
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
