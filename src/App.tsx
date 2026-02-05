@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import ThankYou from "./pages/ThankYou";
 import Checkout from "./pages/Checkout";
 import { Loader2 } from "lucide-react";
 
@@ -32,6 +33,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/obrigado" element={<ThankYou />} />
             
             {/* Admin Routes */}
             <Route path="/admin/login" element={
