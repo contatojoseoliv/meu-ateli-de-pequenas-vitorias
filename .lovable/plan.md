@@ -1,71 +1,86 @@
 
-Contexto do bug (o que eu acho que está acontecendo)
-- Você preenche nome + data e clica “Entrar no passo a passo”, mas continua em /app.
-- Pelo código atual, isso pode acontecer em dois cenários:
-  1) A navegação para /app/dia/1 até acontece, mas o AppDay redireciona imediatamente de volta para /app porque não “enxerga” o onboarding concluído (isOnboarded = false naquele instante).
-  2) Existe um problema de runtime (especialmente “duplicação de React” no bundle) que impede o Router/estado de funcionar corretamente. Esse problema já apareceu antes como “Should have a queue…”, e mesmo quando não aparece explicitamente, pode causar comportamentos “fantasma” em hooks/navegação.
+Contexto do pedido (confirmado)
+- Inserir uma nova dobra logo abaixo da frase “É assim que a mente finalmente desacelera e o corpo relaxa.”, separando bem o conteúdo.
+- Usar a imagem “Mapa ilustrado (quadrado)” como destaque visual nessa nova dobra.
+- Criar dois CTAs (um permanece no bloco verde; outro abaixo da imagem).
+- Fundo da nova dobra: “Cinza Nuvem (papel)”.
+- Ajustar “as caixinhas”: especificamente as 3 caixinhas de benefícios dentro do bloco “Por isso criamos o Primeira Vitória…” (MetodoPrimeiraVitoria).
 
-Hipóteses mais prováveis (em ordem)
-1) Redirecionamento imediato: /app/dia/1 -> volta pra /app porque isOnboarded ainda está false quando AppDay monta.
-   - Sintoma percebido: “não sai do /app”.
-   - Isso combina com o seu relato: “fica no /app” e “sem erro no console”.
+Exploração rápida (onde mexer)
+- A frase e o CTA do bloco verde estão em: `src/components/sections/Solucao.tsx` (DOBRA 1, verde).
+- O bloco “Por isso criamos…” e as 3 caixinhas de benefícios estão em: `src/components/sections/solucao/MetodoPrimeiraVitoria.tsx`.
+- O componente `Section` já suporta `background="cinza"` para Cinza Nuvem: `src/components/shared/Section.tsx`.
 
-2) Instâncias duplicadas de React no bundle (causando instabilidade dos hooks / router).
-   - Sintoma anterior: “Should have a queue…”.
-   - Solução comprovada (padrão de produção): configurar Vite para deduplicar react/react-dom/react/jsx-runtime.
+Decisões de implementação (seguindo manual de marca)
+1) Nova dobra “papel” em Cinza Nuvem
+- Criar uma nova `<Section background="cinza">` inserida em `Solucao.tsx` logo após o CTA do bloco verde e antes da dobra branca `#metodo`.
+- Objetivo visual: parecer uma “dobra” própria (respiro, separação clara, hierarquia editorial).
 
-3) A data não está sendo realmente setada (DatePicker não dispara onChange) e o handleStart dá “return” (mas você não percebe o toast).
-   - Eu considero menos provável porque você disse que preencheu tudo, mas vou deixar um “plano B” de logs para confirmar.
+2) Inserção da imagem (Mapa ilustrado)
+- Copiar o upload `user-uploads://Gemini_Generated_Image_a4f8f7a4f8f7a4f8.png` para `src/assets/` (ex.: `src/assets/mapa-ilustrado-amigurumi.png`).
+- Importar a imagem via ES module no `Solucao.tsx` e renderizar dentro dessa nova dobra com:
+  - um container central (max-width controlado)
+  - moldura “papel premium”: `rounded-2xl`, `border`, `shadow-suave`, `bg-background`
+  - `img` com `object-contain` e `loading="lazy"`
+  - responsivo (não estourar no mobile; manter boa leitura no desktop)
 
-Mudanças que vou implementar (para corrigir com robustez)
-A) “Hardening” do build para impedir React duplicado (alto impacto, baixa mudança)
-- Editar vite.config.ts para adicionar:
-  - resolve.dedupe: ["react", "react-dom", "react/jsx-runtime"]
-- Isso força o Vite a usar uma única instância de React no bundle, o que elimina uma causa conhecida do “Should have a queue” e bugs estranhos de hooks.
+3) Dois CTAs
+- Manter o CTA existente no bloco verde (já está funcionando com scroll para `#metodo` via `handleVerMetodo`).
+- Adicionar um segundo CTA no final da nova dobra “papel”, reutilizando o mesmo handler `handleVerMetodo` (mesma âncora, consistência de conversão).
+- O botão deve seguir o manual:
+  - CTA em Ocre Dourado apenas no componente de botão (já é o padrão do `Button variant="primary"`), sem usar ocre em textos ou fundos grandes.
 
-B) Tornar a transição /app -> /app/dia/1 impossível de “voltar” por timing
-- Ajustar o fluxo do AppHome para garantir que, ao clicar no botão:
-  1) Name e StartDate sejam persistidos (localStorage) de forma confiável
-  2) Só depois disso a navegação ocorra
-- Implementação prática:
-  - Depois de setName + setStartDate, navegar com um pequeno “defer” (ex.: queueMicrotask / setTimeout 0) para garantir que o próximo screen (AppDay) leia o storage já preenchido.
-  - Alternativa (mais direta): em vez de confiar em estado derivado anterior, recalcular o “dia alvo” a partir do storage atualizado antes de navegar.
+4) Ajuste das 3 caixinhas de benefícios (MetodoPrimeiraVitoria)
+- Ajustar as classes das 3 caixinhas em `MetodoPrimeiraVitoria.tsx` para ficarem mais “clean/premium” como referência do print:
+  - aumentar respiro: `px/py` maiores (ex.: `p-6` ou `px-6 py-5`)
+  - raio mais premium: `rounded-2xl` (em vez de `rounded-xl`)
+  - fundo mais “papel”: `bg-background` (remover transparência /60 para ficar mais sólido no Cinza Nuvem/Rosa Argila)
+  - borda mais sutil e consistente com o manual: `border border-border`
+  - sombra leve: `shadow-suave` e `hover-lift` para refinamento
+  - tipografia:
+    - título: `font-semibold text-foreground`
+    - complemento: `text-muted-foreground`
+    - ajustar `leading` para ficar legível sem “apertar” (evitar `leading-snug` no bloco inteiro; usar no máximo no título)
+  - ícone check:
+    - manter o círculo, mas com acabamento mais suave: `bg-cinza-nuvem` ou `bg-secondary/20` e borda `border-border`
+    - check em Verde Eucalipto/primary (`text-primary`) para consistência (sem ocre)
 
-C) Fazer o AppDay menos “agressivo” no redirect (evitar “ping-pong”)
-- Hoje AppDay faz: if (!isOnboarded) return <Navigate to="/app" />
-- Vou ajustar para:
-  - Mostrar uma mensagem amigável (“Seu nome e data não foram salvos ainda”) + botão “Voltar para configurar”,
-  - E também logar um console.warn em dev para diagnosticar.
-- Isso evita a sensação de “não aconteceu nada” e ajuda a diagnosticar qualquer falha de persistência.
+5) Ajuste leve de paleta/consistência na Solução (apenas o necessário)
+- Conferir se algum elemento dentro dessa sequência (frase → nova dobra → CTAs) está usando Ocre fora de conversão.
+- Se necessário, trocar o destaque do “número grande” (em mecanismos) para uma cor permitida pelo manual (ex.: `text-white/35` ou `text-verde-eucalipto-30`) mantendo o CTA como único ponto em Ocre. (Só aplico se estiver claramente competindo visualmente com CTA ou quebrando a regra do Ocre.)
 
-D) Instrumentação mínima (só para diagnosticar rapidamente se persistência falhar)
-- Adicionar logs temporários (console.debug) no clique do botão e na inicialização do hook:
-  - No AppHome: log do name/startDate antes de salvar + log após salvar.
-  - No hook: log do que readStorage está retornando.
-- Se depois de corrigir o fluxo você ainda relatar problema, esses logs vão dizer exatamente se o storage está vazio ou se o redirect está acontecendo por outro motivo.
+Sequência de trabalho (para implementar em Default mode)
+1) Assets
+- Copiar a imagem do `user-uploads://...png` para `src/assets/`.
+- Validar import funcionando.
 
-Como vou testar end-to-end (na implementação)
-1) Abrir /app
-2) Preencher nome e selecionar uma data
-3) Clicar “Entrar no passo a passo”
-4) Confirmar que a URL muda para /app/dia/1 e a tela do Dia 1 aparece
-5) Voltar para o mapa e abrir um dia futuro para confirmar que aparece “bloqueado”
-6) Ir em Config e clicar “Reiniciar jornada” para confirmar que volta ao onboarding
+2) Nova dobra em `src/components/sections/Solucao.tsx`
+- Importar imagem.
+- Inserir nova `<Section background="cinza">` entre a DOBRA 1 (verde) e a DOBRA 2 (branca `#metodo`).
+- Construir layout:
+  - título curto (H3 serif) + subtítulo (body) opcionais para guiar a leitura
+  - card/moldura com a imagem centralizada
+  - CTA 2 abaixo da imagem, centralizado, usando `Button variant="primary" size="lg"` e `onClick={handleVerMetodo}`
 
-Critérios de aceite (para considerar resolvido)
-- Ao clicar “Entrar no passo a passo”, você vai para /app/dia/1 sem “voltar” automaticamente.
-- Se por algum motivo o onboarding não estiver salvo, você vê uma mensagem clara no Dia 1 (não fica “preso”/silencioso).
-- Não aparece mais o erro “Should have a queue…” (ou, se aparecer, a dedupe do Vite elimina na próxima atualização).
+3) Ajustar 3 caixinhas de benefícios em `src/components/sections/solucao/MetodoPrimeiraVitoria.tsx`
+- Atualizar estilos conforme “clean/premium” (padding, radius, bg sólido, borda, sombra, tipografia).
+- Garantir consistência com a paleta do manual (sem ocre fora de CTA).
 
-Arquivos que pretendo alterar
-- vite.config.ts (adicionar resolve.dedupe)
-- src/pages/app/AppHome.tsx (garantir persistência antes de navegar + logs)
-- src/pages/app/AppDay.tsx (melhorar fallback/diagnóstico quando isOnboarded = false)
-- (se necessário) src/hooks/useJourneyCalendarProgress.ts (expor uma leitura “fresh” ou reforçar try/catch do storage)
+4) Revisão visual (preview)
+- Verificar em 3 breakpoints (mobile/tablet/desktop):
+  - separação clara entre as dobras
+  - imagem bem dimensionada (sem cortar; sem ficar enorme demais)
+  - o segundo CTA aparece naturalmente após a imagem
+  - ritmo vertical: frase do verde → CTA verde → nova dobra → CTA 2 → método
 
-Riscos/Trade-offs
-- resolve.dedupe é uma mudança segura e comum; risco baixo.
-- Logs temporários serão mantidos em nível debug/warn e podem ser removidos depois que estabilizar.
+Critérios de aceite (como saber que ficou certo)
+- A frase final do bloco verde continua como “fechamento” emocional do mecanismo.
+- A nova dobra “papel” em Cinza Nuvem cria uma pausa clara e elegante e traz a imagem como reforço visual.
+- Existem dois CTAs: um no verde e um logo após a imagem.
+- As 3 caixinhas de benefícios estão mais premium (mais respiro, bordas/sombras suaves, tipografia limpa e consistente).
+- Ocre Dourado permanece restrito aos elementos de conversão (botões), sem virar cor dominante de layout.
 
-Depois que eu implementar
-- Vou te pedir para testar novamente exatamente o fluxo: /app -> preencher -> entrar -> dia 1 -> concluir -> checar bloqueio -> config -> reiniciar.
+Notas técnicas (para manter o projeto organizado)
+- Preferir `src/assets/` para a imagem (importável e otimizada pelo bundler).
+- Reutilizar `handleVerMetodo` para os dois botões (evita duplicação e mantém comportamento consistente).
+- Manter headings com semântica coerente (H2/H3 conforme a hierarquia existente no projeto).
