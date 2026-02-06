@@ -9,6 +9,9 @@ import NotFound from "./pages/NotFound";
 import Checkout from "./pages/Checkout";
 import AppHome from "./pages/app/AppHome";
 import AppDay from "./pages/app/AppDay";
+import AppProfile from "./pages/app/AppProfile";
+import AppSupport from "./pages/app/AppSupport";
+import AppBadges from "./pages/app/AppBadges";
 import { Loader2 } from "lucide-react";
 
 // Lazy load admin pages
@@ -38,6 +41,9 @@ const App = () => (
             {/* Product App (aluna) */}
             <Route path="/app" element={<AppHome />} />
             <Route path="/app/dia/:day" element={<AppDay />} />
+            <Route path="/app/perfil" element={<AppProfile />} />
+            <Route path="/app/suporte" element={<AppSupport />} />
+            <Route path="/app/selos" element={<AppBadges />} />
 
             {/* Admin Routes */}
             <Route
