@@ -8,6 +8,7 @@ import { Button } from "@/components/shared/Button";
 import { getJourneyDay, type DayBlockKey } from "@/content/journey";
 import { useJourneyProgress } from "@/hooks/useJourneyProgress";
 import { toast } from "@/components/ui/sonner";
+import { AppShell } from "@/components/app/AppShell";
 
 const BLOCK_LABEL: Record<DayBlockKey, string> = {
   preparacao: "Preparação",
@@ -44,9 +45,9 @@ export default function AppDay() {
 
   if (!day) {
     return (
-      <div className="min-h-screen bg-muted">
+      <AppShell title="Dia" backTo="/app" backLabel="Jornada">
         <main className="container-main py-10">
-          <Card>
+          <Card className="app-stitch">
             <CardHeader>
               <CardTitle>Dia não encontrado</CardTitle>
             </CardHeader>
@@ -55,15 +56,15 @@ export default function AppDay() {
             </CardContent>
           </Card>
         </main>
-      </div>
+      </AppShell>
     );
   }
 
   if (!unlocked) {
     return (
-      <div className="min-h-screen bg-muted">
+      <AppShell title={`Dia ${day.day}`} backTo="/app" backLabel="Jornada">
         <main className="container-main py-10">
-          <Card>
+          <Card className="app-stitch">
             <CardHeader>
               <CardTitle>Dia {day.day} bloqueado</CardTitle>
             </CardHeader>
@@ -80,27 +81,25 @@ export default function AppDay() {
             </CardContent>
           </Card>
         </main>
-      </div>
+      </AppShell>
     );
   }
 
   return (
-    <div className="min-h-screen bg-muted">
+    <AppShell title={`Dia ${day.day}`} backTo="/app" backLabel="Jornada">
       <main className="container-main py-8 space-y-5">
         <header className="space-y-2">
           <div className="flex items-center justify-between gap-3 flex-wrap">
             <div>
-              <p className="text-sm text-muted-foreground">
-                <Link to="/app" className="hover:underline">Jornada</Link> / Dia {day.day}
-              </p>
-              <h1 className="text-3xl font-bold text-foreground">Dia {day.day} — {day.title}</h1>
+              <p className="text-sm text-muted-foreground">Dia {day.day}</p>
+              <h1 className="text-3xl font-bold text-foreground">{day.title}</h1>
             </div>
             <div className="min-w-[220px] space-y-1">
               <div className="flex items-center justify-between text-xs text-muted-foreground">
                 <span>Seu progresso hoje</span>
                 <span className="font-medium text-foreground">{percent}%</span>
               </div>
-              <Progress value={percent} />
+              <Progress value={percent} className="bg-secondary/70" />
             </div>
           </div>
           <p className="text-muted-foreground">Tempo estimado: {day.estimatedTime}</p>
@@ -142,7 +141,7 @@ export default function AppDay() {
                 if (!steps || steps.length === 0) return null;
 
                 return (
-                  <Card key={blockKey}>
+                  <Card key={blockKey} className="app-stitch">
                     <CardHeader className="pb-3">
                       <CardTitle className="text-lg">{BLOCK_LABEL[blockKey]}</CardTitle>
                     </CardHeader>
@@ -161,13 +160,13 @@ export default function AppDay() {
                               <p className={"text-sm " + (checked ? "text-muted-foreground line-through" : "text-foreground")}>{step.text}</p>
 
                               {step.tip ? (
-                                <div className="rounded-md border border-border bg-muted p-3">
+                                <div className="rounded-md border border-border bg-muted/50 p-3">
                                   <p className="text-sm text-foreground"><span className="font-medium">Dica:</span> {step.tip}</p>
                                 </div>
                               ) : null}
 
                               {step.imagePlaceholderLabel ? (
-                                <div className="rounded-lg border border-border bg-muted p-4">
+                                <div className="rounded-lg border border-border bg-muted/50 p-4">
                                   <p className="text-xs text-muted-foreground">{step.imagePlaceholderLabel}</p>
                                 </div>
                               ) : null}
@@ -202,7 +201,7 @@ export default function AppDay() {
           </TabsContent>
 
           <TabsContent value="receita" className="mt-4">
-            <Card>
+            <Card className="app-stitch">
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg">Receita completa</CardTitle>
               </CardHeader>
@@ -215,7 +214,7 @@ export default function AppDay() {
           </TabsContent>
 
           <TabsContent value="materiais" className="mt-4">
-            <Card>
+            <Card className="app-stitch">
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg">Materiais</CardTitle>
               </CardHeader>
@@ -231,7 +230,7 @@ export default function AppDay() {
           </TabsContent>
 
           <TabsContent value="tecnicas" className="mt-4">
-            <Card>
+            <Card className="app-stitch">
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg">Técnicas e recursos</CardTitle>
               </CardHeader>
@@ -244,6 +243,6 @@ export default function AppDay() {
           </TabsContent>
         </Tabs>
       </main>
-    </div>
+    </AppShell>
   );
 }

@@ -4,6 +4,7 @@ import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/shared/Button";
 import { journeyDays } from "@/content/journey";
 import { useJourneyProgress } from "@/hooks/useJourneyProgress";
+import { AppShell } from "@/components/app/AppShell";
 
 export default function AppHome() {
   const { progress, isDayUnlocked, isDayCompleted } = useJourneyProgress();
@@ -13,14 +14,14 @@ export default function AppHome() {
   const percent = Math.round((completedCount / totalDays) * 100);
 
   return (
-    <div className="min-h-screen bg-muted">
-      <main className="container-main py-10 space-y-6">
+    <AppShell title="Jornada" backTo="/" backLabel="Início">
+      <main className="container-main py-8 space-y-6">
         <header className="space-y-2">
           <h1 className="text-3xl font-bold text-foreground">Sua Jornada</h1>
           <p className="text-muted-foreground">Um dia de cada vez — com calma e carinho.</p>
         </header>
 
-        <Card>
+        <Card className="app-stitch">
           <CardHeader>
             <CardTitle className="text-lg">Progresso geral</CardTitle>
           </CardHeader>
@@ -29,7 +30,7 @@ export default function AppHome() {
               <span className="text-muted-foreground">Concluído</span>
               <span className="font-medium text-foreground">{percent}%</span>
             </div>
-            <Progress value={percent} />
+            <Progress value={percent} className="bg-secondary/70" />
             <div className="pt-2">
               <Link to={`/app/dia/${progress.currentDay}`}>
                 <Button variant="primary" size="default">Continuar do Dia {progress.currentDay}</Button>
@@ -45,7 +46,8 @@ export default function AppHome() {
               const unlocked = isDayUnlocked(d.day);
               const completed = isDayCompleted(d.day);
               return (
-                <Card key={d.day} className={!unlocked ? "opacity-60" : ""}>
+                <Card key={d.day} className={"app-stitch " + (!unlocked ? "opacity-60" : "")}
+                >
                   <CardContent className="p-4 space-y-2">
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-medium text-foreground">Dia {d.day}</p>
@@ -70,6 +72,6 @@ export default function AppHome() {
           </div>
         </section>
       </main>
-    </div>
+    </AppShell>
   );
 }
