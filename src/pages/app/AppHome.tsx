@@ -6,6 +6,8 @@ import { useJourneyProgress } from "@/hooks/useJourneyProgress";
 import { AppShell } from "@/components/app/AppShell";
 import { YarnProgress } from "@/components/app/YarnProgress";
 import { DayCard } from "@/components/app/DayCard";
+import { AppSupportSection } from "@/components/app/AppSupportSection";
+import { AppFooterMinimal } from "@/components/app/AppFooterMinimal";
 
 export default function AppHome() {
   const { progress, isDayUnlocked, isDayCompleted } = useJourneyProgress();
@@ -65,6 +67,10 @@ export default function AppHome() {
             })}
           </div>
         </section>
+
+
+        <AppSupportSection />
+        <AppFooterMinimal />
       </main>
     </AppShell>
   );
