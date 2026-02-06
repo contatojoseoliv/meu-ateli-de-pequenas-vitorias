@@ -9,6 +9,8 @@ import { useJourneyProgress } from "@/hooks/useJourneyProgress";
 import { toast } from "@/components/ui/sonner";
 import { AppShell } from "@/components/app/AppShell";
 import { YarnProgress } from "@/components/app/YarnProgress";
+import { motion, useReducedMotion } from "framer-motion";
+import { Sparkles } from "lucide-react";
 
 const BLOCK_LABEL: Record<DayBlockKey, string> = {
   preparacao: "Preparação",
@@ -22,6 +24,7 @@ const BLOCK_ORDER: DayBlockKey[] = ["preparacao", "voltas", "verificacao", "obje
 export default function AppDay() {
   const params = useParams();
   const navigate = useNavigate();
+  const prefersReducedMotion = useReducedMotion();
   const dayNumber = Number(params.day);
 
   const day = getJourneyDay(dayNumber);
@@ -110,25 +113,25 @@ export default function AppDay() {
           <TabsList className="flex w-full flex-wrap gap-2 bg-transparent p-0 h-auto justify-start">
             <TabsTrigger
               value="guiado"
-              className="h-9 rounded-full border border-border bg-background px-4 text-sm text-foreground shadow-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              className="app-tab-pill h-9 rounded-full px-4 text-sm text-foreground transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=active]:text-primary-foreground"
             >
               Guiado
             </TabsTrigger>
             <TabsTrigger
               value="receita"
-              className="h-9 rounded-full border border-border bg-background px-4 text-sm text-foreground shadow-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              className="app-tab-pill h-9 rounded-full px-4 text-sm text-foreground transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=active]:text-primary-foreground"
             >
               Receita completa
             </TabsTrigger>
             <TabsTrigger
               value="materiais"
-              className="h-9 rounded-full border border-border bg-background px-4 text-sm text-foreground shadow-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              className="app-tab-pill h-9 rounded-full px-4 text-sm text-foreground transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=active]:text-primary-foreground"
             >
               Materiais
             </TabsTrigger>
             <TabsTrigger
               value="tecnicas"
-              className="h-9 rounded-full border border-border bg-background px-4 text-sm text-foreground shadow-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              className="app-tab-pill h-9 rounded-full px-4 text-sm text-foreground transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=active]:text-primary-foreground"
             >
               Técnicas e recursos
             </TabsTrigger>
@@ -184,14 +187,29 @@ export default function AppDay() {
                 );
               })}
 
-              <div className="pt-2">
+              <div className="pt-2 space-y-2">
+                {canComplete ? (
+                  <motion.div
+                    initial={prefersReducedMotion ? false : { opacity: 0, y: 6 }}
+                    animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+                    className="inline-flex items-center gap-2 rounded-full border border-border bg-accent/10 px-3 py-1 text-sm text-foreground"
+                    aria-live="polite"
+                  >
+                    <Sparkles className="h-4 w-4" />
+                    Tudo pronto para concluir.
+                  </motion.div>
+                ) : null}
+
                 <Button
                   variant="primary"
                   size="default"
                   disabled={!canComplete}
                   onClick={() => {
                     completeDay(day.day);
-                    toast("Vitória do dia!", { description: "Dia concluído — você merece esse momento." });
+                    toast("Vitória do dia!", {
+                      description: "Dia concluído — você merece esse momento.",
+                      icon: <Sparkles className="h-4 w-4" />,
+                    });
                     const next = Math.min(day.day + 1, 7);
                     navigate(`/app/dia/${next}`);
                   }}
@@ -199,7 +217,7 @@ export default function AppDay() {
                   Concluir dia
                 </Button>
                 {!canComplete ? (
-                  <p className="mt-2 text-xs text-muted-foreground">Marque todos os passos para concluir.</p>
+                  <p className="text-xs text-muted-foreground">Marque todos os passos para concluir.</p>
                 ) : null}
               </div>
             </div>
