@@ -46,6 +46,22 @@
   backdrop-filter: blur(10px);
 }
 
+/* Tabs (mini-botões artesanais) */
+.app-tab-pill {
+  border: 1px solid hsl(var(--border));
+  background:
+    radial-gradient(320px 140px at 30% 0%, hsl(var(--secondary) / 0.12), transparent 60%),
+    linear-gradient(180deg, hsl(var(--background)), hsl(var(--background)));
+  box-shadow: 0 10px 18px -16px hsl(var(--foreground) / 0.35);
+}
+
+.app-tab-pill[data-state="active"] {
+  border-color: hsl(var(--primary) / 0.35);
+  background:
+    radial-gradient(420px 160px at 20% 0%, hsl(var(--primary) / 0.22), transparent 65%),
+    linear-gradient(180deg, hsl(var(--primary)), hsl(var(--primary)));
+}
+
 /* Blocos do Dia */
 .app-block {
   background: hsl(var(--background) / 0.55);
@@ -85,4 +101,22 @@
   border: 1px dashed hsl(var(--border));
   border-radius: calc(var(--radius) - 2px);
   pointer-events: none;
+}
+
+/* Dark mode tweaks (mais contraste e menos “embaçado”) */
+.dark .app-paper::before {
+  opacity: 0.55;
+  mix-blend-mode: normal;
+}
+
+.dark .app-topbar {
+  background: hsl(var(--background) / 0.62);
+}
+
+.dark .app-stitch {
+  box-shadow: 0 12px 30px -22px hsl(var(--foreground) / 0.35);
+}
+
+.dark .app-tab-pill {
+  box-shadow: 0 12px 22px -18px hsl(var(--foreground) / 0.45);
 }
