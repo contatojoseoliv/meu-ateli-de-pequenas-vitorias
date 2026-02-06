@@ -10,7 +10,7 @@ export default function AppBadges() {
   const primeiraVitoria = completed >= 1;
 
   return (
-    <AppShell title="Selos" backTo="/app" backLabel="Jornada">
+    <AppShell title="Selos">
       <main className="container-main py-8 space-y-6">
         <header className="space-y-1">
           <h1 className="text-2xl font-bold text-foreground">Selos & Conquistas</h1>

@@ -15,7 +15,7 @@ export default function AppHome() {
   const percent = Math.round((completedCount / totalDays) * 100);
 
   return (
-    <AppShell title="Jornada" backTo="/" backLabel="Início">
+    <AppShell>
       <main className="container-main py-8 space-y-6">
         <header className="space-y-2">
           <h1 className="text-4xl font-bold text-foreground">

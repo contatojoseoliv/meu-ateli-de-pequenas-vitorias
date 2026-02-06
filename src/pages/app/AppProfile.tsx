@@ -8,7 +8,7 @@ export default function AppProfile() {
   const { profile, setDisplayName, initials } = useAppProfile();
 
   return (
-    <AppShell title="Perfil" backTo="/app" backLabel="Jornada">
+    <AppShell title="Perfil">
       <main className="container-main py-8 space-y-6">
         <header className="space-y-1">
           <h1 className="text-2xl font-bold text-foreground">Seu Perfil</h1>
