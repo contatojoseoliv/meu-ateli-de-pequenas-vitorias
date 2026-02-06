@@ -1,15 +1,10 @@
 import { Mail, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-
 import { Button } from "@/components/shared/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
 export function AppSupportSection() {
-  return (
-    <section className="space-y-3" aria-labelledby="app-support-title">
-      <h2 id="app-support-title" className="text-xl font-bold text-foreground">
-        Suporte
-      </h2>
+  return <section className="space-y-3" aria-labelledby="app-support-title">
+      
 
       <Card className="app-stitch">
         <CardHeader className="pb-3">
@@ -42,6 +37,5 @@ export function AppSupportSection() {
           </div>
         </CardContent>
       </Card>
-    </section>
-  );
+    </section>;
 }
