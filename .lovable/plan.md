@@ -1,123 +1,91 @@
 
-Objetivo
-- No cabeçalho do app (/app e /app/dia/:day), colocar:
-  - Logo à esquerda (usar a “logo enviada” do upload).
-  - À direita, um menu acionado por um avatar (rosto/ícone) com as opções:
-    - Home
-    - Perfil
-    - Suporte / Fale Conosco
-    - Selos & Conquistas
+Objetivo (estrutura da Home como você propôs)
+- Header: Logo + ícone de menu (já está ok)
+- Bloco 1: “Bem-vinda ao seu Ateliê, [Nome da Aluna]!”
+- Bloco 2 (junto do bloco 1, no mesmo “retângulo”): “Meu Progresso — Pronta para a sua Primeira Vitória em Amigurumi?” + progresso (percentual + fio)
+- Seção: “Meus Dias” (cards dos dias)
+- Seção: “Meus Materiais e Técnicas” (nova, na Home)
+- Seção: “Meu Suporte” (já existe, só ajustar título)
+- Rodapé (já existe)
 
-O que eu encontrei no projeto (contexto rápido)
-- O “app do produto” usa o componente `src/components/app/AppShell.tsx` para o topo (topbar).
-- Hoje o `AppShell` tem: botão Voltar à esquerda + título central + espaço vazio à direita.
-- Rotas existentes em `src/App.tsx`: `/app` e `/app/dia/:day` (não há Perfil/Suporte/Selos ainda).
-- Já existem componentes prontos para:
-  - Dropdown: `src/components/ui/dropdown-menu.tsx` (Radix) com fundo `bg-popover` e z-index alto.
-  - Avatar: `src/components/ui/avatar.tsx`.
+O que já segue isso hoje
+- Logo + Menu: AppShell + AppUserMenu já entregam essa parte.
+- Progresso: já existe (Card com percent + YarnProgress + botão “Começar/Continuar…”).
+- Meus Dias: já existe (grid de DayCard).
+- Suporte + Rodapé: já existem (AppSupportSection + AppFooterMinimal).
 
-Decisões já alinhadas (com suas respostas)
-- Logo do App: usar a imagem enviada (upload).
-- Avatar: padrão (sem puxar de conta por enquanto).
-- Suporte: botões WhatsApp/E-mail (com placeholders).
+Mudanças que vamos fazer (front-end)
+1) Ajustar a cópia e hierarquia do primeiro card (boas-vindas + progresso)
+   - Em `src/pages/app/AppHome.tsx`:
+     - Trocar o título para: “Bem-vinda ao seu Ateliê, {profile.displayName}!”
+     - Adicionar logo abaixo o texto: “Meu Progresso — Pronta para a sua Primeira Vitória em Amigurumi?”
+     - Manter a frase do percentual (“Você está na sua Primeira Vitória – X% concluída.”) como texto de apoio (ou substituir por uma versão mais curta, se você preferir; mas pela sua instrução, vamos manter o essencial do X% porque é o que dá feedback claro de avanço).
+   - Resultado: o “quadrado de progresso geral” já fica trabalhando junto do texto, como você quer.
 
-Plano de implementação (passo a passo)
-1) Adicionar a logo enviada ao projeto
-- Copiar a imagem do upload para `src/assets/` (por exemplo: `src/assets/app-logo.png`).
-- A logo será importada no cabeçalho do app como módulo (melhor para bundling).
+2) Padronizar títulos/seções para bater com sua divisão
+   - Em `src/pages/app/AppHome.tsx`:
+     - Renomear “Dias” para “Meus Dias”.
+     - O título “Sua jornada” pode permanecer como título geral da página (h1) com o mesmo tamanho dos outros (text-xl font-bold), ou podemos remover o header e deixar o primeiro card “abrir” a Home (mais limpo). Pela sua lista (“Logo + Menu” e depois a frase de boas-vindas), a tendência é remover o “Sua jornada” e tratar a Home como “Ateliê”. Vou implementar assim:
+       - Remover o `<header>` “Sua jornada” e começar direto pelo card de boas-vindas/progresso (fica exatamente na ordem que você listou).
+     - Ajustar o título da seção suporte de “Suporte” para “Meu Suporte”.
+     - Garantir que todos os títulos (“Meus Dias”, “Meus Materiais e Técnicas”, “Meu Suporte”) usem o mesmo padrão `text-xl font-bold`.
 
-2) Criar um “perfil local” simples (sem backend) para o Avatar
-- Criar um pequeno util/hook para ler/gravar no `localStorage`:
-  - chave sugerida: `pv_app_profile_v1`
-  - campos: `displayName` (ex.: “Ana”), opcional `avatarColorSeed` (para gerar cor de fundo consistente), e derivados (iniciais).
-- Comportamento:
-  - Se não houver nome salvo: fallback “Aluna” e iniciais “A”.
-  - O avatar do topo usa iniciais em vez de foto.
+3) Criar a seção “Meus Materiais e Técnicas” na Home (sem criar página nova)
+   - Criar um novo componente (para manter o AppHome limpo), por exemplo:
+     - `src/components/app/AppMaterialsTechniquesSection.tsx` (nome sugerido)
+   - Conteúdo pro “primeiro momento” (MVP útil e consistente com o que já existe):
+     - Um Card “app-stitch” com:
+       - Um texto curto explicando: “Aqui você encontra os materiais e técnicas essenciais. Você pode abrir direto no dia que estiver fazendo.”
+       - Dois botões:
+         - “Ver Materiais”
+         - “Ver Técnicas”
+     - Ambos levam a usuária para o dia atual (`progress.currentDay`) e já abrem a aba correta.
+       - Exemplo de navegação:
+         - `/app/dia/1?tab=materiais`
+         - `/app/dia/1?tab=tecnicas`
 
-3) Criar o componente do menu do usuário (Avatar + Dropdown)
-- Criar `src/components/app/AppUserMenu.tsx` (novo):
-  - Trigger: botão circular com `Avatar` (iniciais) e um chevron discreto (opcional).
-  - Menu (`DropdownMenuContent`) alinhado à direita (`align="end"`) com itens:
-    - Home → `/app`
-    - Perfil → `/app/perfil`
-    - Suporte/Fale Conosco → `/app/suporte`
-    - Selos & Conquistas → `/app/selos`
-  - Itens com ícones (lucide): `Home`, `User`, `Headset` (ou `MessageCircle`), `Award`.
-  - Acessibilidade:
-    - `aria-label` no botão do avatar.
-    - foco visível, navegação por teclado funcionando (Radix já ajuda bastante).
+4) Permitir abrir o AppDay já na aba Materiais/Técnicas via URL (query param)
+   - Em `src/pages/app/AppDay.tsx`:
+     - Ler `tab` via `useSearchParams()` (ex.: `tab=materiais|tecnicas|guiado|receita`).
+     - Usar esse valor como `defaultValue` das Tabs.
+     - (Opcional, mas recomendado) Quando a usuária clicar nas Tabs, atualizar o query param para manter o link compartilhável e consistente (ex.: ao clicar “Técnicas”, vira `?tab=tecnicas`).
+   - Benefício: a seção “Meus Materiais e Técnicas” da Home fica funcional imediatamente, reaproveitando o conteúdo existente dos dias (sem inventar conteúdo novo agora).
 
-4) Refatorar o `AppShell` para o novo cabeçalho
-- Atualizar `src/components/app/AppShell.tsx` para:
-  - Esquerda: Logo (link para `/app`).
-  - Centro: manter o `title` opcional (ex.: em `/app/dia/:day` mostrar “Dia X” ou o título atual).
-  - Direita: `AppUserMenu`.
-- Preservar o “voltar” sem quebrar o pedido “logo na esquerda”:
-  - Em telas que precisam de “voltar” (ex.: AppDay), transformar o back em um ícone pequeno (ArrowLeft) antes da logo (não como bloco principal).
-  - Em `/app` (Home), normalmente esconder o back (ou deixar opcional via prop).
-- Ajustar o layout para caber bem no mobile:
-  - Logo com altura controlada (ex.: `h-8 md:h-10`) e `object-contain`.
-  - Centro com `truncate` para não estourar.
+5) Reordenar o menu para refletir essa organização
+   - Em `src/components/app/AppUserMenu.tsx`:
+     - Reordenar itens para: “Página inicial”, “Perfil”, “Materiais e Técnicas”, “Suporte”, “Selos & Conquistas”.
+     - Como “Materiais e Técnicas” será uma seção dentro da Home (e não uma rota):
+       - Opção A (mais simples e robusta): item aponta para `/app` e, ao entrar na Home, a usuária rola até a seção automaticamente.
+         - Para isso, definimos um `id="materiais-tecnicas"` na seção e usamos `navigate("/app#materiais-tecnicas")`.
+         - Em `AppHome`, adicionamos um `useEffect` que detecta `location.hash` e faz `document.getElementById(...).scrollIntoView({ behavior: "smooth" })`.
+       - Vou seguir a Opção A, porque mantém a navegação clara e não cria rota nova.
 
-5) Criar as novas páginas do menu (rotas)
-- Criar novos arquivos:
-  - `src/pages/app/AppProfile.tsx`
-  - `src/pages/app/AppSupport.tsx`
-  - `src/pages/app/AppBadges.tsx`
-- Implementação inicial (simples e coerente com o estilo “Ateliê”):
-  - Todas usando `<AppShell ...>` e cards com `app-stitch`.
-  - Perfil:
-    - Campo para “Nome / como prefere ser chamada” (salva no localStorage).
-    - Mostra prévia do avatar com iniciais.
-  - Suporte:
-    - Botões:
-      - WhatsApp (placeholder): link `https://wa.me/55SEUNUMERO` ou `https://wa.me/` com instrução.
-      - E-mail (placeholder): `mailto:suporte@seusite.com`
-    - Textinho explicando horários/retorno (opcional).
-  - Selos & Conquistas:
-    - Primeira versão pode ser “em construção” + um card mostrando conquistas atuais derivadas do progresso local:
-      - Ex.: “Dias concluídos: X/7”
-      - Ex.: “Primeira vitória” quando conclui ao menos 1 dia
-    - (Sem banco de dados por enquanto; só usando `useJourneyProgress`.)
-
-6) Registrar as rotas no roteador principal
-- Atualizar `src/App.tsx` para incluir:
-  - `/app/perfil` → `AppProfile`
-  - `/app/suporte` → `AppSupport`
-  - `/app/selos` → `AppBadges`
-- Manter a rota `*` no final.
-
-7) Estilos (CSS) para ficar com aparência “artesanal” e não transparente
-- Atualizar `src/styles/app-product.css` com classes específicas para o cabeçalho do app:
-  - `.app-header-logo` (tamanho/encaixe)
-  - `.app-avatar-trigger` (borda, hover suave, foco)
-- Garantir que o dropdown fique sólido:
-  - O `DropdownMenuContent` já usa `bg-popover` + `border` + `shadow`; vamos apenas validar contraste no dark mode.
-
-8) Checklist de testes (manual)
-- Navegação:
-  - Em `/app`, clicar no avatar → abrir menu → ir para Perfil/Suporte/Selos → voltar para Home.
-- Responsivo:
-  - Mobile: logo não “empurra” o avatar para fora; título central não quebra layout.
-- Acessibilidade:
-  - Tab/Shift+Tab chega no avatar; Enter/Espaço abre menu; setas navegam itens; Esc fecha.
-- Persistência local:
-  - Alterar nome no Perfil → recarregar → avatar mantém iniciais atualizadas.
-
-Arquivos que serão alterados/criados
+Arquivos que provavelmente serão alterados/criados
+- Alterar:
+  - `src/pages/app/AppHome.tsx` (cópia, títulos, inserção da nova seção, ordem)
+  - `src/pages/app/AppDay.tsx` (suporte a `?tab=` e opcionalmente sincronizar clique das tabs com query param)
+  - `src/components/app/AppUserMenu.tsx` (reordenação + item “Materiais e Técnicas” navegando para âncora)
 - Criar:
-  - `src/assets/app-logo.(png)` (cópia do upload)
-  - `src/components/app/AppUserMenu.tsx`
-  - `src/pages/app/AppProfile.tsx`
-  - `src/pages/app/AppSupport.tsx`
-  - `src/pages/app/AppBadges.tsx`
-  - (opcional) `src/hooks/useAppProfile.ts` ou `src/lib/appProfile.ts` para localStorage
-- Editar:
-  - `src/components/app/AppShell.tsx` (novo layout do header)
-  - `src/App.tsx` (novas rotas)
-  - `src/styles/app-product.css` (classes do header/avatar)
+  - `src/components/app/AppMaterialsTechniquesSection.tsx` (nova seção, reaproveitando `app-stitch` e Botões existentes)
 
-Observações / próximos incrementos (não entram agora, mas já ficam prontos para evoluir)
-- Mais tarde, se você quiser “rosto de verdade” (foto):
-  - A gente pode permitir upload no Perfil e salvar no backend (armazenamento + tabela de perfil).
-- “Selos & Conquistas” pode virar uma área rica com badges, animações e histórico de vitórias (hoje vamos começar simples com base no progresso local).
+Critérios de aceite (para você validar visualmente)
+- Home (/app):
+  - Não aparece mais “Sua jornada” grandão no topo; a Home começa com o card de boas-vindas.
+  - Texto exato: “Bem-vinda ao seu Ateliê, Ana!”
+  - A linha: “Meu Progresso — Pronta para a sua Primeira Vitória em Amigurumi?” aparece junto do card de progresso.
+  - Seções com títulos iguais (mesmo tamanho/peso): “Meus Dias”, “Meus Materiais e Técnicas”, “Meu Suporte”.
+  - Botão do card principal:
+    - Se nunca completou nada: “Começar”
+    - Depois: “Continuar do Dia X”
+- Navegação:
+  - Menu reordenado como combinado.
+  - Clicar “Materiais e Técnicas” no menu leva para a Home e rola até a seção.
+  - Na seção “Meus Materiais e Técnicas”, os botões abrem o dia atual já na aba certa (Materiais ou Técnicas).
+
+Riscos/atenções
+- “defaultValue” das Tabs só vale na primeira renderização. Se a pessoa mudar o `?tab=` na mesma tela sem remount, pode não refletir.
+  - Solução (já prevista no plano): controlar o valor das Tabs via estado derivado do `searchParams` (Tabs “controlled”), ou usar uma `key` no componente Tabs baseada no `tab` para forçar remount.
+  - Vou implementar do jeito mais estável (controlled), para não dar comportamento “estranho”.
+
+Próximo passo
+- Com sua aprovação, eu implemento essa estrutura em 1 rodada e você valida no /app (desktop e mobile), clicando também nos botões de Materiais/Técnicas para confirmar que abre na aba certa.
