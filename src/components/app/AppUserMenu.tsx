@@ -1,4 +1,4 @@
-import { Award, Headset, Home, Menu, User } from "lucide-react";
+import { Award, BookOpen, Headset, Home, Menu, User } from "lucide-react";
 import { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -17,6 +17,13 @@ type MenuItem = {
   icon: React.ComponentType<{ className?: string }>;
 };
 
+function isActivePath(pathname: string, hash: string, to: string) {
+  if (!to.includes("#")) return pathname === to;
+
+  const [toPath, toHash] = to.split("#");
+  return pathname === toPath && hash === `#${toHash ?? ""}`;
+}
+
 export function AppUserMenu() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,8 +31,9 @@ export function AppUserMenu() {
 
   const items = useMemo<MenuItem[]>(
     () => [
-      { label: "Home", to: "/app", icon: Home },
+      { label: "Página inicial", to: "/app", icon: Home },
       { label: "Perfil", to: "/app/perfil", icon: User },
+      { label: "Materiais e Técnicas", to: "/app#materiais-tecnicas", icon: BookOpen },
       { label: "Suporte / Fale Conosco", to: "/app/suporte", icon: Headset },
       { label: "Selos & Conquistas", to: "/app/selos", icon: Award },
     ],
@@ -50,7 +58,7 @@ export function AppUserMenu() {
         <DropdownMenuSeparator />
         {items.map((item) => {
           const Icon = item.icon;
-          const active = location.pathname === item.to;
+          const active = isActivePath(location.pathname, location.hash, item.to);
           return (
             <DropdownMenuItem
               key={item.to}

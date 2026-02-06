@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -21,11 +21,22 @@ const BLOCK_LABEL: Record<DayBlockKey, string> = {
 
 const BLOCK_ORDER: DayBlockKey[] = ["preparacao", "voltas", "verificacao", "objetivoFinal"];
 
+const ALLOWED_TABS = ["guiado", "receita", "materiais", "tecnicas"] as const;
+type AllowedTab = (typeof ALLOWED_TABS)[number];
+
+function toAllowedTab(value: string | null): AllowedTab {
+  if (!value) return "guiado";
+  return (ALLOWED_TABS as readonly string[]).includes(value) ? (value as AllowedTab) : "guiado";
+}
+
 export default function AppDay() {
   const params = useParams();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const prefersReducedMotion = useReducedMotion();
   const dayNumber = Number(params.day);
+
+  const tab = toAllowedTab(searchParams.get("tab"));
 
   const day = getJourneyDay(dayNumber);
   const { isDayUnlocked, getStepChecked, setStepChecked, completeDay } = useJourneyProgress();
@@ -55,7 +66,9 @@ export default function AppDay() {
               <CardTitle>Dia não encontrado</CardTitle>
             </CardHeader>
             <CardContent>
-              <Link to="/app" className="text-primary hover:underline">Voltar para a Jornada</Link>
+              <Link to="/app" className="text-primary hover:underline">
+                Voltar para a Jornada
+              </Link>
             </CardContent>
           </Card>
         </main>
@@ -74,10 +87,7 @@ export default function AppDay() {
             <CardContent className="space-y-3">
               <p className="text-muted-foreground">Conclua o dia anterior para desbloquear este conteúdo.</p>
               <div className="flex gap-3 flex-wrap">
-                <button
-                  className="text-sm font-medium text-primary hover:underline"
-                  onClick={() => navigate("/app")}
-                >
+                <button className="text-sm font-medium text-primary hover:underline" onClick={() => navigate("/app")}>
                   Voltar
                 </button>
               </div>
@@ -108,7 +118,21 @@ export default function AppDay() {
           <p className="text-muted-foreground">Tempo estimado: {day.estimatedTime}</p>
         </header>
 
-        <Tabs defaultValue="guiado" className="w-full">
+        <Tabs
+          value={tab}
+          onValueChange={(value) => {
+            const nextValue = toAllowedTab(value);
+            setSearchParams(
+              (prev) => {
+                const next = new URLSearchParams(prev);
+                next.set("tab", nextValue);
+                return next;
+              },
+              { replace: true },
+            );
+          }}
+          className="w-full"
+        >
           {/* Tabs como mini-botões (pill) */}
           <TabsList className="flex w-full flex-wrap gap-2 bg-transparent p-0 h-auto justify-start">
             <TabsTrigger
@@ -150,7 +174,9 @@ export default function AppDay() {
                         <div className="app-block-label">
                           <span className="font-handwritten text-base text-foreground">{BLOCK_LABEL[blockKey]}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground">{steps.length} passo{steps.length > 1 ? "s" : ""}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {steps.length} passo{steps.length > 1 ? "s" : ""}
+                        </p>
                       </div>
                     </CardHeader>
                     <CardContent className="space-y-3">
@@ -165,11 +191,20 @@ export default function AppDay() {
                               className="mt-1"
                             />
                             <div className="flex-1 space-y-2">
-                              <p className={"text-sm leading-relaxed " + (checked ? "text-muted-foreground line-through" : "text-foreground")}>{step.text}</p>
+                              <p
+                                className={
+                                  "text-sm leading-relaxed " +
+                                  (checked ? "text-muted-foreground line-through" : "text-foreground")
+                                }
+                              >
+                                {step.text}
+                              </p>
 
                               {step.tip ? (
                                 <div className="app-tip rounded-md border border-border p-3">
-                                  <p className="text-sm text-foreground"><span className="font-medium">Dica:</span> {step.tip}</p>
+                                  <p className="text-sm text-foreground">
+                                    <span className="font-medium">Dica:</span> {step.tip}
+                                  </p>
                                 </div>
                               ) : null}
 
@@ -230,7 +265,9 @@ export default function AppDay() {
               </CardHeader>
               <CardContent className="space-y-2">
                 {day.tabs.fullRecipe.map((line, idx) => (
-                  <p key={idx} className="text-sm text-foreground leading-relaxed">{line}</p>
+                  <p key={idx} className="text-sm text-foreground leading-relaxed">
+                    {line}
+                  </p>
                 ))}
               </CardContent>
             </Card>
@@ -244,10 +281,14 @@ export default function AppDay() {
               <CardContent>
                 <ul className="list-disc pl-5 space-y-1">
                   {day.tabs.materials.map((m, idx) => (
-                    <li key={idx} className="text-sm text-foreground">{m}</li>
+                    <li key={idx} className="text-sm text-foreground">
+                      {m}
+                    </li>
                   ))}
                 </ul>
-                <p className="mt-4 text-sm text-muted-foreground">Não precisa ser perfeito — dá para fazer com o que você tem.</p>
+                <p className="mt-4 text-sm text-muted-foreground">
+                  Não precisa ser perfeito — dá para fazer com o que você tem.
+                </p>
               </CardContent>
             </Card>
           </TabsContent>
@@ -259,7 +300,9 @@ export default function AppDay() {
               </CardHeader>
               <CardContent className="space-y-2">
                 {day.tabs.techniquesAndResources.map((t, idx) => (
-                  <p key={idx} className="text-sm text-foreground leading-relaxed">• {t}</p>
+                  <p key={idx} className="text-sm text-foreground leading-relaxed">
+                    • {t}
+                  </p>
                 ))}
               </CardContent>
             </Card>
