@@ -5,6 +5,7 @@ import { journeyDays } from "@/content/journey";
 import { useJourneyProgress } from "@/hooks/useJourneyProgress";
 import { AppShell } from "@/components/app/AppShell";
 import { YarnProgress } from "@/components/app/YarnProgress";
+import { DayCard } from "@/components/app/DayCard";
 
 export default function AppHome() {
   const { progress, isDayUnlocked, isDayCompleted } = useJourneyProgress();
@@ -41,32 +42,23 @@ export default function AppHome() {
 
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-foreground">Dias</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {journeyDays.map((d) => {
               const unlocked = isDayUnlocked(d.day);
               const completed = isDayCompleted(d.day);
+              const isCurrent = unlocked && !completed && progress.currentDay === d.day;
+
               return (
-                <Card key={d.day} className={"app-stitch " + (!unlocked ? "opacity-60" : "")}
-                >
-                  <CardContent className="p-4 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <p className="text-sm font-medium text-foreground">Dia {d.day}</p>
-                      {completed ? (
-                        <span className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary">Concluído</span>
-                      ) : (
-                        <span className="text-xs text-muted-foreground">{d.estimatedTime}</span>
-                      )}
-                    </div>
-                    <p className="text-sm text-muted-foreground line-clamp-2">{d.title}</p>
-                    {unlocked ? (
-                      <Link to={`/app/dia/${d.day}`} className="inline-block">
-                        <button className="text-sm font-medium text-primary hover:underline">Abrir</button>
-                      </Link>
-                    ) : (
-                      <p className="text-xs text-muted-foreground">Desbloqueie concluindo o dia anterior</p>
-                    )}
-                  </CardContent>
-                </Card>
+                <DayCard
+                  key={d.day}
+                  day={d.day}
+                  title={d.title}
+                  estimatedTime={d.estimatedTime}
+                  unlocked={unlocked}
+                  completed={completed}
+                  isCurrent={isCurrent}
+                  href={`/app/dia/${d.day}`}
+                />
               );
             })}
           </div>

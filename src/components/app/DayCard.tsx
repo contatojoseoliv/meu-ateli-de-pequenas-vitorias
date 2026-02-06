@@ -1,0 +1,86 @@
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Lock, Sparkles, ArrowRight } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+
+type DayCardProps = {
+  day: number;
+  title: string;
+  estimatedTime: string;
+  unlocked: boolean;
+  completed: boolean;
+  href: string;
+  isCurrent?: boolean;
+};
+
+export function DayCard({
+  day,
+  title,
+  estimatedTime,
+  unlocked,
+  completed,
+  href,
+  isCurrent,
+}: DayCardProps) {
+  const rotationClass = day % 2 === 0 ? "md:rotate-[-0.35deg]" : "md:rotate-[0.35deg]";
+
+  const stateClass = completed
+    ? "bg-primary/10"
+    : isCurrent
+      ? "ring-1 ring-accent/45"
+      : "";
+
+  return (
+    <motion.div
+      whileHover={unlocked ? { y: -3, rotate: day % 2 === 0 ? -0.2 : 0.2 } : undefined}
+      whileTap={unlocked ? { scale: 0.99 } : undefined}
+      transition={{ duration: 0.22 }}
+      className={cn(rotationClass, !unlocked && "opacity-65")}
+    >
+      <Card
+        className={cn(
+          "app-stitch overflow-hidden",
+          stateClass,
+          unlocked ? "hover-lift" : "cursor-not-allowed",
+        )}
+      >
+        <CardContent className="p-4 space-y-3">
+          <div className="flex items-start justify-between gap-3">
+            <div className="space-y-1">
+              <p className="text-sm font-medium text-foreground">Dia {day}</p>
+              <p className="text-sm text-muted-foreground line-clamp-2">{title}</p>
+            </div>
+
+            <div className="shrink-0">
+              {completed ? (
+                <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-2 py-1 text-xs font-medium text-foreground">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  Primeira vitória
+                </span>
+              ) : !unlocked ? (
+                <span className="inline-flex items-center justify-center rounded-full border border-border bg-background/60 p-2">
+                  <Lock className="h-4 w-4 text-muted-foreground" />
+                </span>
+              ) : (
+                <span className="text-xs text-muted-foreground">{estimatedTime}</span>
+              )}
+            </div>
+          </div>
+
+          {unlocked ? (
+            <Link
+              to={href}
+              className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+              aria-label={`Abrir o Dia ${day}`}
+            >
+              Abrir <ArrowRight className="h-4 w-4" />
+            </Link>
+          ) : (
+            <p className="text-xs text-muted-foreground">Desbloqueie concluindo o dia anterior</p>
+          )}
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
+}
