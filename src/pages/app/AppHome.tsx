@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/shared/Button";
 import { journeyDays } from "@/content/journey";
@@ -9,27 +11,36 @@ import { YarnProgress } from "@/components/app/YarnProgress";
 import { DayCard } from "@/components/app/DayCard";
 import { AppSupportSection } from "@/components/app/AppSupportSection";
 import { AppFooterMinimal } from "@/components/app/AppFooterMinimal";
+import { AppMaterialsTechniquesSection } from "@/components/app/AppMaterialsTechniquesSection";
 
 export default function AppHome() {
   const { progress, isDayUnlocked, isDayCompleted } = useJourneyProgress();
   const { profile } = useAppProfile();
+  const location = useLocation();
 
   const totalDays = journeyDays.length;
   const completedCount = progress.completedDays.length;
   const percent = totalDays > 0 ? Math.round((completedCount / totalDays) * 100) : 0;
 
+  useEffect(() => {
+    if (!location.hash) return;
+
+    const id = location.hash.replace("#", "");
+    const element = document.getElementById(id);
+    if (!element) return;
+
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [location.hash]);
+
   return (
     <AppShell>
       <main className="container-main py-8 space-y-6">
-        <header className="space-y-2">
-          <h1 className="text-xl font-bold text-foreground">Sua jornada</h1>
-        </header>
-
         <Card className="app-stitch">
           <CardHeader className="space-y-2">
-            <CardTitle className="text-xl sm:text-2xl">
-              Bem-vinda, {profile.displayName}! 🧶
-            </CardTitle>
+            <CardTitle className="text-xl sm:text-2xl">Bem-vinda ao seu Ateliê, {profile.displayName}!</CardTitle>
+            <p className="text-sm font-medium text-foreground">
+              Meu Progresso — Pronta para a sua Primeira Vitória em Amigurumi?
+            </p>
             <p className="text-sm text-muted-foreground">
               Você está na sua Primeira Vitória – <span className="font-medium text-foreground">{percent}%</span> concluída.
             </p>
@@ -54,7 +65,7 @@ export default function AppHome() {
         </Card>
 
         <section className="space-y-3">
-          <h2 className="text-xl font-bold text-foreground">Dias</h2>
+          <h2 className="text-xl font-bold text-foreground">Meus Dias</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {journeyDays.map((d) => {
               const unlocked = isDayUnlocked(d.day);
@@ -77,8 +88,13 @@ export default function AppHome() {
           </div>
         </section>
 
+        <AppMaterialsTechniquesSection currentDay={progress.currentDay} />
 
-        <AppSupportSection />
+        <section className="space-y-3">
+          <h2 className="text-xl font-bold text-foreground">Meu Suporte</h2>
+          <AppSupportSection />
+        </section>
+
         <AppFooterMinimal />
       </main>
     </AppShell>
