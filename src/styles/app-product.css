@@ -46,6 +46,45 @@
   backdrop-filter: blur(10px);
 }
 
+/* Logo do cabeçalho do app */
+.app-header-logo {
+  height: 34px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Trigger do avatar (menu) */
+.app-avatar-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--background));
+  box-shadow: 0 10px 18px -16px hsl(var(--foreground) / 0.35);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.app-avatar-trigger:hover {
+  box-shadow: 0 12px 22px -18px hsl(var(--foreground) / 0.45);
+}
+
+.app-avatar-trigger:active {
+  transform: scale(0.98);
+}
+
+.app-avatar-trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--ring)), 0 12px 22px -18px hsl(var(--foreground) / 0.45);
+}
+
+@media (min-width: 768px) {
+  .app-header-logo {
+    height: 38px;
+  }
+}
+
+
 /* Tabs (mini-botões artesanais) */
 .app-tab-pill {
   border: 1px solid hsl(var(--border));
