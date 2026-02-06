@@ -1,173 +1,186 @@
 
-## Objetivo (o que você pediu agora)
-Garantir que, na página interna do produto (Receita Guiada / Dia X), **as Tabs sejam botões** e que o **Checklist seja organizado por blocos** exatamente como está descrito no seu esboço do produto (PDFs).
+## O que eu consigo fazer (capacidade real de redesign)
+Consigo transformar o app para ficar bem próximo do estilo do mock (“papel antigo + artesanal + fio de lã + cards polaroid”), mantendo:
+- performance boa (sem imagens pesadas por padrão)
+- responsividade (mobile primeiro)
+- acessibilidade (contraste, foco, navegação por teclado)
+- consistência com seu design system (fonts já estão configuradas: Playfair, Montserrat, Dancing Script)
 
-Isso vai orientar toda a UI do “Dia” para ficar:
-- intuitiva para iniciante
-- guiada por etapas
-- consistente com a identidade visual (Verde Eucalipto / Rosa Argila / Ocre só em CTA)
-- preparada para receber imagens reais depois (por enquanto placeholders)
+O que eu **não** consigo “automaticamente” só com IA:
+- criar ilustrações autorais no mesmo nível do Gemini dentro do código (a imagem é uma referência); mas consigo:
+  - aplicar estética artesanal via CSS
+  - criar elementos vetoriais simples (SVG) como “fio de lã”, “pontos de costura”, “mini coelho” estilizado (simples)
+  - deixar tudo preparado para no futuro trocar os placeholders por ilustrações/ícones finais
 
----
-
-## O que já está definido pelos seus esboços (fonte de verdade)
-### 1) Tabs como “mini botões”
-No “Esboço da aplicação” você descreve explicitamente:
-- “Mini botões: Receita Completa, Materiais, Técnicas e Recursos”
-
-Como você também pediu **“Guiado + receita completa”**, vamos ter:
-- **Guiado** (principal, com checklist por blocos)
-- **Receita completa** (consulta corrida)
-- **Materiais**
-- **Técnicas e recursos**
-
-Regra de UX:
-- **Guiado** é a aba padrão.
-- As outras abas são “consulta”, e devem parecer **botões pequenos** (pill/chip) e não abas grandes.
-
-### 2) Checklist por blocos
-No “Esboço da aplicação”:
-- Blocos: **preparação**, **voltas**, **verificação**, **objetivo final**
-
-Regra de estrutura:
-- O conteúdo do “Guiado” deve ser um fluxo vertical com esses 4 blocos fixos (mesmo que um dia tenha pouco conteúdo em algum bloco; nesse caso o bloco pode aparecer com 1 item curto, ou ficar oculto se você preferir — definiremos isso no padrão).
+Você aprovou: **Ocre também no progresso**. Então vou usar o ocre em pequenos destaques (barra/fio, marcador, estados), sem virar “fundo grande” ocre.
 
 ---
 
-## Exploração do que existe hoje no projeto (para reaproveitar padrões)
-- Já existe o componente `Tabs` em `src/components/ui/tabs.tsx` (Radix Tabs) com `TabsTrigger` e `TabsList`.
-- Já existe `Checkbox` em `src/components/ui/checkbox.tsx`.
-- Já existe um sistema visual próprio (manual da marca) e o Button premium em `src/components/shared/Button.tsx` (CTA em gradiente ocre).
-- Já existe `Progress` em `src/components/ui/progress.tsx`, útil para “% do dia” e “% geral”.
+## Diagnóstico do estado atual (onde mexer)
+Hoje:
+- `/app` (AppHome) está funcional, mas com visual “shadcn padrão”: fundo `bg-muted`, cards simples, timeline em grid básica.
+- `/app/dia/:day` (AppDay) já tem:
+  - Tabs como mini-botões (pill)
+  - Checklist por blocos fixos (Preparação/Voltas/Verificação/Objetivo final)
+  - Progress bar do dia e CTA “Concluir dia”
+- Tokens de cor e fontes já existem no Tailwind (`cinza-nuvem`, `ocre-dourado`, `verde-eucalipto`, `rosa-argila`, fontes serif/sans/handwritten).
+- `Card` é genérico; se eu alterar globalmente, pode afetar landing/admin. Para evitar isso, o redesign do “app do produto” deve vir por **classes específicas** e/ou **novos componentes de app** (mais seguro).
 
 ---
 
-## Decisões de implementação (para bater 100% com o esboço)
-### A) Como as Tabs vão virar “botões”
-Em vez de “tabs tradicionais”, vamos estilizar o `TabsList`/`TabsTrigger` para ficar como “mini botões”:
+## Redesign proposto (baseado no seu texto + imagem referência)
 
-**Estilo sugerido (identidade visual):**
-- Fundo geral do container: Cinza Nuvem
-- “Botões” (triggers):
-  - Inativos: `bg-background` (branco), `border border-border`, texto grafite
-  - Ativo: `bg-verde-eucalipto` com `text-white` (ou `bg-secondary` Rosa Argila se você preferir; minha recomendação é verde para reforçar “guia”)
-  - Tamanho compacto: height menor, padding curto, bordas arredondadas bem suaves (pill)
-- Nada de Ocre aqui (ocre fica só para CTA de concluir/continuar)
+### 1) Fundo “papel antigo” (off-white/creme com textura leve)
+Objetivo: reduzir contraste do branco puro e dar sensação artesanal.
 
-**Aba Guiado**
-- Nome do botão: “Guiado”
-- Ícone opcional (ex.: list/check) — discreto, sem poluir.
+Implementação:
+- Criar um “AppSurface” visual para páginas `/app/*` com:
+  - cor base creme (ex.: algo próximo a `#fbf6ee`)
+  - textura sutil via CSS (camadas de `radial-gradient`/`linear-gradient` bem leves)
+  - opcional: leve vinheta (borda mais escura) para profundidade
 
-**Aba Receita Completa**
-- Deve mostrar a receita corrida daquele dia (texto organizado por voltas/carreiras), fácil de copiar/ler.
+Arquivos:
+- `src/index.css` (adicionar utilitários/classes específicas do app, ex.: `.app-paper` e `.app-paper::before` para textura)
+- `src/pages/app/AppHome.tsx` e `src/pages/app/AppDay.tsx` (trocar wrapper `bg-muted` para `app-paper`)
 
-**Aba Materiais**
-- Lista simples (bullet list) e um aviso acolhedor “não precisa ser perfeito”.
+### 2) Progresso como “fio de lã tecido” + marcador (mini coelho)
+Objetivo: trocar a barra reta por algo mais imersivo.
 
-**Aba Técnicas e recursos**
-- Conteúdo de técnicas (MR, pb, aum, dim) e dicas rápidas, com placeholders de imagem quando o PDF indicar “[IMAGEM SUGERIDA]”.
+Implementação (sem depender de imagens):
+- Criar um componente `YarnProgress` (novo) que renderiza:
+  - trilha com “torção” de fio (efeito com `repeating-linear-gradient` + blur/sombra leve)
+  - preenchimento ocre “tecido” conforme % (mask/clip)
+  - marcador (bunny) como SVG simples ou ícone custom (pode começar com um “coelhinho minimalista” em SVG)
+  - posicionar o marcador ao longo do fio por `left: calc(percent% - ajuste)` com `position: absolute`
+  - animação leve quando o progresso muda (framer-motion já existe no projeto; usar micro motion bem suave)
 
-### B) Como o checklist por blocos vai funcionar (Guiado)
-Vamos criar um componente de “Bloco do dia”, com:
-- Título do bloco (H3 pequeno): “Preparação”, “Voltas”, “Verificação”, “Objetivo final”
-- Uma lista de itens com checkbox (cada item é uma ação simples)
-- Dentro de cada item, suportar:
-  - texto principal (curto e direto)
-  - “Dica” (callout pequeno em verde suave)
-  - placeholder de imagem (card cinza com legenda “Imagem ilustrativa (em breve)”)
+Arquivos:
+- Criar `src/components/app/YarnProgress.tsx`
+- Atualizar `src/pages/app/AppHome.tsx` para usar YarnProgress em vez de `Progress`
+- (Opcional) também usar no topo do `AppDay` para “Seu progresso hoje”
 
-**Ordem fixa de blocos (sempre):**
-1. Preparação  
-2. Voltas  
-3. Verificação  
-4. Objetivo final  
+### 3) Cards dos dias estilo “polaroid / papel com costura”
+Objetivo: sair do “card cinza padrão” para cards com personalidade.
 
-**Conclusão do dia**
-- O botão principal “Concluir dia” (CTA ocre) só aparece/habilita quando:
-  - todos os itens do dia (todos os blocos) estiverem marcados
-- Ao concluir:
-  - salvar progresso
-  - desbloquear próximo dia
-  - toast discreto de “vitória”
+Estados visuais:
+- Concluído:
+  - fundo menta bem suave (verde-eucalipto-10)
+  - selo “Primeira Vitória” (badge pequeno)
+  - borda pontilhada/“costura” discreta
+- Atual (desbloqueado e não concluído):
+  - borda ocre
+  - leve sombra elevada
+  - pequeno “ícone/ilustração” simples (inicialmente SVG line-art: novelo, agulha, orelhinha, etc.)
+- Bloqueado:
+  - opacidade reduzida
+  - ícone de cadeado “fofinho” (pode ser Lucide com estilização + “tag” circular como botão)
 
----
+Implementação técnica:
+- Criar componente `DayCard` para encapsular:
+  - layout
+  - estilos por estado
+  - acessibilidade (botão/link com área clicável grande)
+- “Costura”:
+  - usar `outline` com `outline-dashed` ou pseudo-element com `border: 1px dashed` e `border-radius`
+  - adicionar um “frame” interno com padding e borda costurada
+- “Polaroid feel”:
+  - leve rotação aleatória controlada (apenas desktop e muito discreto, ex. `-0.5deg / +0.5deg`) para não prejudicar legibilidade
+  - sombra `shadow-elevada` e fundo creme
 
-## Estrutura de dados (para garantir que UI siga o esboço e não vire bagunça)
-Vamos estruturar o conteúdo do “Dia” já separando por blocos e por tabs, para a interface ficar automática e consistente:
+Arquivos:
+- Criar `src/components/app/DayCard.tsx`
+- Atualizar `src/pages/app/AppHome.tsx` para usar DayCard no grid dos dias
 
-- `day.guisado.blocks.preparacao[]`
-- `day.guisado.blocks.voltas[]`
-- `day.guisado.blocks.verificacao[]`
-- `day.guisado.blocks.objetivoFinal[]`
+### 4) Tipografia e hierarquia (mais emocional e “atelie”)
+- Título principal no Home:
+  - trocar “Sua Jornada” para “Suas Pequenas Vitórias” (como na sua proposta), usando `font-handwritten` e tamanho moderado (sem exagerar)
+- Subtítulo e microcopys:
+  - manter Montserrat e tons `text-muted-foreground` para conforto
+- Botão principal “Continuar”:
+  - manter seu Button de marca (já tem gradiente) e reforçar protagonismo com:
+    - ícone pequeno (agulha/linha) com Lucide
+    - micro texto de apoio embaixo (“Você está indo muito bem.”)
 
-E para as tabs:
-- `day.tabs.fullRecipe` (texto corrido em seções)
-- `day.tabs.materials` (lista)
-- `day.tabs.techniques` (lista + dicas + placeholders)
+Arquivos:
+- `src/pages/app/AppHome.tsx` (ajustar header/cópias)
 
-Isso garante que:
-- o checklist sempre nasce por blocos
-- as tabs sempre têm o mesmo formato
-- futuramente dá para plugar imagens reais sem refatorar telas
+### 5) Checklist por blocos (no Dia) com “acabamento artesanal”
+Sem mudar a estrutura (porque isso é regra do produto), só melhorar o visual:
+- Cada bloco (Card) ganha:
+  - uma “etiqueta” (chip) com o nome do bloco
+  - borda costurada interna
+  - fundo creme leve (em vez de branco puro)
+- Cada item do checklist:
+  - checkbox maior um pouco e alinhado
+  - “Dica” vira um callout com ícone e tom verde suave
+  - placeholder de imagem vira “porta-retrato” (frame) com textura e legenda
 
----
+Tabs já estão como mini-botões; vamos refinar:
+- inativo: creme claro + borda
+- ativo: verde ou ocre suave? (recomendação: verde para estado ativo, mantendo ocre para progresso/CTA; mas posso harmonizar com ocre no estado ativo também desde que não “grite”)
 
-## Plano de execução (sequência segura)
-### 1) Mapear a “estrutura do Dia” a partir dos PDFs
-- Usar o “Esboço da aplicação” como guia de layout (tabs + blocos)
-- Usar o “Esboço do Produto” e a “Receita Amigurumi” para preencher:
-  - o que entra em “Voltas”
-  - o que entra em “Verificação” (contagem de pontos, “se estiver ondulado…”)
-  - o que entra em “Objetivo final” (missão do dia)
-  - o que entra em “Técnicas e recursos” (MR, pb, aum, dim) e imagens sugeridas
-
-### 2) Implementar a UI das Tabs como botões (mini botões)
-- Ajustar estilos do `TabsTrigger` para ficar com cara de botão pequeno
-- Garantir acessibilidade:
-  - foco visível
-  - navegação por teclado
-  - contraste
-
-### 3) Implementar a aba “Guiado” com checklist por blocos
-- Construir o componente visual de bloco + lista de checkbox
-- Garantir que cada item suporte “dica” e placeholder de imagem
-
-### 4) Implementar as abas de consulta (Receita completa / Materiais / Técnicas e recursos)
-- Conteúdo simples, direto e “consultável”
-- Mantendo tom acolhedor e iniciante-friendly
-
-### 5) Persistência e desbloqueio (localStorage)
-- Persistir:
-  - checkboxes por dia e por item
-  - dias concluídos
-  - último dia visitado (para “retomar”)
-- Regra de desbloqueio:
-  - Dia 1 livre
-  - Dia N+1 só desbloqueia quando Dia N for concluído
+Arquivos:
+- `src/pages/app/AppDay.tsx` (classes e wrappers)
+- (Opcional) criar componentes auxiliares:
+  - `src/components/app/StitchedCard.tsx` para reutilizar o “frame costurado” dentro de cards
 
 ---
 
-## Critérios de aceite (como você vai bater o olho e dizer “está igual ao esboço”)
-1) Na página do dia, as tabs aparecem como **mini botões**:  
-   “Guiado”, “Receita completa”, “Materiais”, “Técnicas e recursos”.
-
-2) Na aba “Guiado”, o conteúdo aparece em **4 blocos** nessa ordem:
-   - Preparação
-   - Voltas
-   - Verificação
-   - Objetivo final
-
-3) Cada bloco tem checklist funcional (marca/desmarca), com:
-   - texto do passo
-   - dica opcional
-   - placeholder de imagem quando necessário
-
-4) Ao marcar tudo e concluir o dia:
-   - salva ao recarregar a página
-   - libera o próximo dia
+## Sequência de implementação (segura, incremental)
+1) Aplicar “AppSurface” (papel/creme + textura) em `/app` e `/app/dia/:day`.
+2) Implementar `YarnProgress` e substituir a barra de progresso do Home (e opcionalmente do Dia).
+3) Implementar `DayCard` e redesenhar o grid de dias no Home com estados (concluído/atual/bloqueado).
+4) Refinar visual do Dia:
+   - blocos com costura
+   - callout de dica
+   - placeholder de imagem em “porta-retrato”
+   - tabs com acabamento mais artesanal
+5) Polimento:
+   - micro-animações leves (hover/tap)
+   - revisão mobile (toques, espaçamento, tipografia)
+   - garantir contraste e foco visível
 
 ---
 
-## Observação importante (para não travar depois)
-Como o acesso está livre por enquanto, tudo ficará em `localStorage`. Quando você escolher gateway + webhook, a gente troca apenas a “camada de acesso” e (se quiser) migra o progresso para o backend, sem refazer a interface — porque a UI já estará bem estruturada (tabs + blocos) e separada do armazenamento.
+## Critérios de aceite (como você valida no preview)
+- `/app` parece “papel antigo” (creme) com textura leve, sem ficar pesado.
+- Progresso do Home é um “fio de lã” (ocre) com marcador (coelhinho) se movendo conforme %.
+- Cards dos dias têm estados claros e bonitos:
+  - concluído com selo
+  - atual com borda ocre e destaque
+  - bloqueado com cadeado e opacidade
+- `/app/dia/1` mantém exatamente a estrutura do esboço:
+  - Tabs como botões
+  - Checklist por blocos fixos
+  - Apenas com visual mais artesanal e acolhedor
+- O fluxo ainda funciona (marcar passos, concluir dia, desbloquear próximo, persistir ao recarregar).
 
+---
+
+## Observações importantes
+- Vou usar a imagem do Gemini apenas como **referência estética**, não vou “colá-la” dentro do app.
+- Não vou alterar o `Card` global para não quebrar landing/admin; o redesign ficará isolado no “App do Produto”.
+- Se depois você quiser um coelhinho mais “fofo” (mesmo nível da imagem), a melhor prática é você me enviar/definir um pacote de ícones/ilustrações (PNG/SVG) para eu aplicar no lugar dos SVGs simples.
+
+---
+
+## Arquivos que provavelmente serão criados/alterados
+Criar:
+- `src/components/app/YarnProgress.tsx`
+- `src/components/app/DayCard.tsx`
+- (opcional) `src/components/app/StitchedPanel.tsx` ou `StitchedCard.tsx`
+
+Alterar:
+- `src/index.css` (classes utilitárias do “papel/texture” e “costura”)
+- `src/pages/app/AppHome.tsx` (layout do dashboard)
+- `src/pages/app/AppDay.tsx` (refino visual mantendo estrutura)
+
+---
+
+## Perguntas (não bloqueiam, mas melhoram o resultado)
+1) O “mini coelho” marcador: você prefere um coelho bem minimalista (linha/SVG simples) agora, ou você quer usar uma imagem/ícone específico seu (se tiver)?
+2) O menu do app: por enquanto você quer manter sem topbar/bottom bar (como está), ou quer aproximar do mock com uma navegação inferior no mobile?
+
+Se você não responder, eu sigo com:
+- coelho minimalista em SVG
+- navegação atual (sem bottom bar), focando primeiro em Home + Dia e na estética artesanal.
