@@ -1,8 +1,7 @@
-import { Award, ChevronDown, Headset, Home, User } from "lucide-react";
+import { Award, Headset, Home, Menu, User } from "lucide-react";
 import { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,7 +20,7 @@ type MenuItem = {
 export function AppUserMenu() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { profile, initials } = useAppProfile();
+  const { profile } = useAppProfile();
 
   const items = useMemo<MenuItem[]>(
     () => [
@@ -36,17 +35,8 @@ export function AppUserMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button
-          type="button"
-          className="app-avatar-trigger group inline-flex items-center gap-2 px-2"
-          aria-label="Abrir menu do usuário"
-          title="Menu"
-        >
-          <Avatar className="h-9 w-9">
-            <AvatarFallback className="text-xs font-semibold text-foreground">{initials}</AvatarFallback>
-          </Avatar>
-          <span className="hidden sm:inline text-xs font-medium text-muted-foreground">Menu</span>
-          <ChevronDown className="h-4 w-4 text-muted-foreground transition-transform group-data-[state=open]:rotate-180" />
+        <button type="button" className="app-avatar-trigger h-10 w-10" aria-label="Abrir menu" title="Menu">
+          <Menu className="h-5 w-5 text-foreground" aria-hidden="true" />
         </button>
       </DropdownMenuTrigger>
 
@@ -76,3 +66,4 @@ export function AppUserMenu() {
     </DropdownMenu>
   );
 }
+

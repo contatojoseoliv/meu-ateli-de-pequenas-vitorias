@@ -48,9 +48,11 @@
 
 /* Logo do cabeçalho do app */
 .app-header-logo {
-  height: 34px;
-  width: auto;
-  object-fit: contain;
+  height: 40px;
+  width: 170px;
+  object-fit: cover;
+  object-position: left;
+  border: 0;
 }
 
 /* Trigger do avatar (menu) */
@@ -80,7 +82,8 @@
 
 @media (min-width: 768px) {
   .app-header-logo {
-    height: 38px;
+    height: 48px;
+    width: 320px;
   }
 }
 
