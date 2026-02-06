@@ -21,6 +21,10 @@ export default function AppHome() {
   return (
     <AppShell>
       <main className="container-main py-8 space-y-6">
+        <header className="space-y-2">
+          <h1 className="text-3xl sm:text-4xl font-bold text-foreground">Sua jornada</h1>
+        </header>
+
         <Card className="app-stitch">
           <CardHeader className="space-y-2">
             <CardTitle className="text-xl sm:text-2xl">
@@ -41,7 +45,9 @@ export default function AppHome() {
 
             <div className="pt-2">
               <Link to={`/app/dia/${progress.currentDay}`}>
-                <Button variant="primary" size="default">Continuar do Dia {progress.currentDay}</Button>
+                <Button variant="primary" size="default">
+                  {completedCount === 0 ? "Iniciar do Dia 1" : `Continuar do Dia ${progress.currentDay}`}
+                </Button>
               </Link>
             </div>
           </CardContent>
