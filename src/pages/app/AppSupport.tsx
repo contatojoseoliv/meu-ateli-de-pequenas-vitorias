@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function AppSupport() {
   return (
-    <AppShell title="Suporte" backTo="/app" backLabel="Jornada">
+    <AppShell title="Suporte">
       <main className="container-main py-8 space-y-6">
         <header className="space-y-1">
           <h1 className="text-2xl font-bold text-foreground">Suporte / Fale Conosco</h1>

@@ -48,7 +48,7 @@ export default function AppDay() {
 
   if (!day) {
     return (
-      <AppShell title="Dia" backTo="/app" backLabel="Jornada">
+      <AppShell title="Dia">
         <main className="container-main py-10">
           <Card className="app-stitch">
             <CardHeader>
@@ -65,7 +65,7 @@ export default function AppDay() {
 
   if (!unlocked) {
     return (
-      <AppShell title={`Dia ${day.day}`} backTo="/app" backLabel="Jornada">
+      <AppShell title={`Dia ${day.day}`}>
         <main className="container-main py-10">
           <Card className="app-stitch">
             <CardHeader>
@@ -89,7 +89,7 @@ export default function AppDay() {
   }
 
   return (
-    <AppShell title={`Dia ${day.day}`} backTo="/app" backLabel="Jornada">
+    <AppShell title={`Dia ${day.day}`}>
       <main className="container-main py-8 space-y-5">
         <header className="space-y-2">
           <div className="flex items-center justify-between gap-3 flex-wrap">
