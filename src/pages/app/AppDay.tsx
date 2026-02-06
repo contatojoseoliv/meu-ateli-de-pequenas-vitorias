@@ -3,12 +3,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/shared/Button";
 import { getJourneyDay, type DayBlockKey } from "@/content/journey";
 import { useJourneyProgress } from "@/hooks/useJourneyProgress";
 import { toast } from "@/components/ui/sonner";
 import { AppShell } from "@/components/app/AppShell";
+import { YarnProgress } from "@/components/app/YarnProgress";
 
 const BLOCK_LABEL: Record<DayBlockKey, string> = {
   preparacao: "Preparação",
@@ -99,7 +99,7 @@ export default function AppDay() {
                 <span>Seu progresso hoje</span>
                 <span className="font-medium text-foreground">{percent}%</span>
               </div>
-              <Progress value={percent} className="bg-secondary/70" />
+              <YarnProgress value={percent} label="Seu progresso hoje" size="sm" />
             </div>
           </div>
           <p className="text-muted-foreground">Tempo estimado: {day.estimatedTime}</p>
