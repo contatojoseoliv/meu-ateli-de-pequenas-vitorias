@@ -99,7 +99,7 @@ export default function AppDay() {
                 <span>Seu progresso hoje</span>
                 <span className="font-medium text-foreground">{percent}%</span>
               </div>
-              <YarnProgress value={percent} label="Seu progresso hoje" size="sm" />
+              <YarnProgress value={percent} label="Seu progresso hoje" size="sm" className="pt-1" />
             </div>
           </div>
           <p className="text-muted-foreground">Tempo estimado: {day.estimatedTime}</p>
@@ -141,9 +141,14 @@ export default function AppDay() {
                 if (!steps || steps.length === 0) return null;
 
                 return (
-                  <Card key={blockKey} className="app-stitch">
+                  <Card key={blockKey} className="app-stitch app-block">
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-lg">{BLOCK_LABEL[blockKey]}</CardTitle>
+                      <div className="flex items-center justify-between gap-3 flex-wrap">
+                        <div className="app-block-label">
+                          <span className="font-handwritten text-base text-foreground">{BLOCK_LABEL[blockKey]}</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground">{steps.length} passo{steps.length > 1 ? "s" : ""}</p>
+                      </div>
                     </CardHeader>
                     <CardContent className="space-y-3">
                       {steps.map((step) => {
@@ -157,16 +162,16 @@ export default function AppDay() {
                               className="mt-1"
                             />
                             <div className="flex-1 space-y-2">
-                              <p className={"text-sm " + (checked ? "text-muted-foreground line-through" : "text-foreground")}>{step.text}</p>
+                              <p className={"text-sm leading-relaxed " + (checked ? "text-muted-foreground line-through" : "text-foreground")}>{step.text}</p>
 
                               {step.tip ? (
-                                <div className="rounded-md border border-border bg-muted/50 p-3">
+                                <div className="app-tip rounded-md border border-border p-3">
                                   <p className="text-sm text-foreground"><span className="font-medium">Dica:</span> {step.tip}</p>
                                 </div>
                               ) : null}
 
                               {step.imagePlaceholderLabel ? (
-                                <div className="rounded-lg border border-border bg-muted/50 p-4">
+                                <div className="app-photo-frame rounded-lg border border-border p-4">
                                   <p className="text-xs text-muted-foreground">{step.imagePlaceholderLabel}</p>
                                 </div>
                               ) : null}
