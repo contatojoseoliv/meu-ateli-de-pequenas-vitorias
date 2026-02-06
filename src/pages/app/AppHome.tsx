@@ -65,7 +65,7 @@ export default function AppHome() {
         </Card>
 
         <section className="space-y-3">
-          <h2 className="text-xl font-bold text-foreground">Meus Dias</h2>
+          <h2 className="text-xl font-bold text-foreground">Meus Dias de Criação</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {journeyDays.map((d) => {
               const unlocked = isDayUnlocked(d.day);
