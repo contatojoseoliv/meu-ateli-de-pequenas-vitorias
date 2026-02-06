@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/shared/Button";
 import { journeyDays } from "@/content/journey";
 import { useJourneyProgress } from "@/hooks/useJourneyProgress";
 import { AppShell } from "@/components/app/AppShell";
+import { YarnProgress } from "@/components/app/YarnProgress";
 
 export default function AppHome() {
   const { progress, isDayUnlocked, isDayCompleted } = useJourneyProgress();
@@ -30,7 +30,7 @@ export default function AppHome() {
               <span className="text-muted-foreground">Concluído</span>
               <span className="font-medium text-foreground">{percent}%</span>
             </div>
-            <Progress value={percent} className="bg-secondary/70" />
+            <YarnProgress value={percent} label="Progresso geral" />
             <div className="pt-2">
               <Link to={`/app/dia/${progress.currentDay}`}>
                 <Button variant="primary" size="default">Continuar do Dia {progress.currentDay}</Button>
