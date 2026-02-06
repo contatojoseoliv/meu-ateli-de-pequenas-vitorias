@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/shared/Button";
 import { journeyDays } from "@/content/journey";
 import { useJourneyProgress } from "@/hooks/useJourneyProgress";
+import { useAppProfile } from "@/hooks/useAppProfile";
 import { AppShell } from "@/components/app/AppShell";
 import { YarnProgress } from "@/components/app/YarnProgress";
 import { DayCard } from "@/components/app/DayCard";
@@ -11,31 +12,33 @@ import { AppFooterMinimal } from "@/components/app/AppFooterMinimal";
 
 export default function AppHome() {
   const { progress, isDayUnlocked, isDayCompleted } = useJourneyProgress();
+  const { profile } = useAppProfile();
 
   const totalDays = journeyDays.length;
   const completedCount = progress.completedDays.length;
-  const percent = Math.round((completedCount / totalDays) * 100);
+  const percent = totalDays > 0 ? Math.round((completedCount / totalDays) * 100) : 0;
 
   return (
     <AppShell>
       <main className="container-main py-8 space-y-6">
-        <header className="space-y-2">
-          <h1 className="text-4xl font-bold text-foreground">
-            <span className="font-handwritten font-normal tracking-tight">Suas Pequenas Vitórias</span>
-          </h1>
-          <p className="text-muted-foreground">Um dia de cada vez — com calma, carinho e orgulho do que você já fez.</p>
-        </header>
-
         <Card className="app-stitch">
-          <CardHeader>
-            <CardTitle className="text-lg">Progresso geral</CardTitle>
+          <CardHeader className="space-y-2">
+            <CardTitle className="text-xl sm:text-2xl">
+              Bem-vinda, {profile.displayName}! 🧶
+            </CardTitle>
+            <p className="text-sm text-muted-foreground">
+              Você está na sua Primeira Vitória – <span className="font-medium text-foreground">{percent}%</span> concluída.
+            </p>
           </CardHeader>
+
           <CardContent className="space-y-3">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground">Concluído</span>
+              <span className="text-muted-foreground">Progresso geral</span>
               <span className="font-medium text-foreground">{percent}%</span>
             </div>
+
             <YarnProgress value={percent} label="Progresso geral" />
+
             <div className="pt-2">
               <Link to={`/app/dia/${progress.currentDay}`}>
                 <Button variant="primary" size="default">Continuar do Dia {progress.currentDay}</Button>
