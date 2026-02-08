@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import menuLogo from "@/assets/logo-meu-atelie-menu.png";
+import { AppHeaderAvatar } from "@/components/app/AppHeaderAvatar";
 import { AppUserMenu } from "@/components/app/AppUserMenu";
 
 type AppShellProps = {
@@ -25,7 +26,8 @@ export function AppShell({ title, children }: AppShellProps) {
             {hasTitle ? <p className="text-sm font-medium text-foreground truncate">{title}</p> : null}
           </div>
 
-          <div className="flex items-center justify-end w-[72px]">
+          <div className="flex items-center justify-end gap-2 w-[112px]">
+            <AppHeaderAvatar />
             <AppUserMenu />
           </div>
         </div>
