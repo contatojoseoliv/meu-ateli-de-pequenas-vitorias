@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 
+import defaultAvatar from "@/assets/profile-default.png";
 import { AppShell } from "@/components/app/AppShell";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -31,7 +32,7 @@ export default function AppProfile() {
           <CardContent className="space-y-4">
             <div className="flex items-center gap-4">
               <Avatar className="h-16 w-16">
-                {profile.avatarUrl ? <AvatarImage src={profile.avatarUrl} alt={previewAlt} /> : null}
+                <AvatarImage src={profile.avatarUrl ?? defaultAvatar} alt={previewAlt} />
                 <AvatarFallback className="text-base font-medium text-foreground">{initials}</AvatarFallback>
               </Avatar>
 
