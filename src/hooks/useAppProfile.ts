@@ -4,19 +4,27 @@ const STORAGE_KEY = "pv_app_profile_v1";
 
 type AppProfile = {
   displayName: string;
+  /** Pode ser uma URL pública ou um dataURL (base64) salvo localmente. */
+  avatarUrl?: string | null;
 };
 
 const defaultProfile: AppProfile = {
   displayName: "Aluna",
+  avatarUrl: null,
 };
 
 function safeParse(json: string | null): AppProfile | null {
   if (!json) return null;
   try {
     const parsed = JSON.parse(json) as Partial<AppProfile>;
-    return {
-      displayName: typeof parsed.displayName === "string" && parsed.displayName.trim() ? parsed.displayName.trim() : defaultProfile.displayName,
-    };
+    const displayName =
+      typeof parsed.displayName === "string" && parsed.displayName.trim()
+        ? parsed.displayName.trim()
+        : defaultProfile.displayName;
+
+    const avatarUrl = typeof parsed.avatarUrl === "string" && parsed.avatarUrl.trim() ? parsed.avatarUrl.trim() : null;
+
+    return { displayName, avatarUrl };
   } catch {
     return null;
   }
@@ -43,7 +51,11 @@ export function useAppProfile() {
   }, [profile]);
 
   const setDisplayName = useCallback((displayName: string) => {
-    setProfile({ displayName });
+    setProfile((prev) => ({ ...prev, displayName }));
+  }, []);
+
+  const setAvatarUrl = useCallback((avatarUrl: string | null) => {
+    setProfile((prev) => ({ ...prev, avatarUrl }));
   }, []);
 
   const initials = useMemo(() => initialsFromName(profile.displayName), [profile.displayName]);
@@ -51,6 +63,7 @@ export function useAppProfile() {
   return {
     profile,
     setDisplayName,
+    setAvatarUrl,
     initials,
   };
 }
