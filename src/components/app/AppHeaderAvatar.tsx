@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
+import defaultAvatar from "@/assets/profile-default.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAppProfile } from "@/hooks/useAppProfile";
 
@@ -16,9 +17,7 @@ export function AppHeaderAvatar() {
       title="Perfil"
     >
       <Avatar className="h-9 w-9">
-        {profile.avatarUrl ? (
-          <AvatarImage src={profile.avatarUrl} alt={`Foto de perfil de ${profile.displayName}`} />
-        ) : null}
+        <AvatarImage src={profile.avatarUrl ?? defaultAvatar} alt={`Foto de perfil de ${profile.displayName}`} />
         <AvatarFallback className="text-xs font-medium text-foreground">{initials}</AvatarFallback>
       </Avatar>
     </button>
