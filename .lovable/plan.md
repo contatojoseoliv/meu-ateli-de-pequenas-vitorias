@@ -1,91 +1,89 @@
 
-Objetivo (estrutura da Home como você propôs)
-- Header: Logo + ícone de menu (já está ok)
-- Bloco 1: “Bem-vinda ao seu Ateliê, [Nome da Aluna]!”
-- Bloco 2 (junto do bloco 1, no mesmo “retângulo”): “Meu Progresso — Pronta para a sua Primeira Vitória em Amigurumi?” + progresso (percentual + fio)
-- Seção: “Meus Dias” (cards dos dias)
-- Seção: “Meus Materiais e Técnicas” (nova, na Home)
-- Seção: “Meu Suporte” (já existe, só ajustar título)
-- Rodapé (já existe)
+Objetivo do ajuste (Home)
+- Separar o “bloco de entrada” (bem pequeno) do “bloco principal” (card grande), como você descreveu e como a referência da imagem sugere:
+  1) Mini-bloco: só “Bem-vinda…” + a linha de progresso logo abaixo, com percentual (sem CTA, sem fio grande).
+  2) Bloco principal (logo abaixo): card no estilo da imagem (mini-foto à esquerda, infos no meio, botão de continuar à direita, e uma barrinha/progresso embaixo).
+  3) Depois seguem: “Meus Dias de Criação”, “Meus Materiais e Técnicas”, “Meu Suporte”, rodapé.
 
-O que já segue isso hoje
-- Logo + Menu: AppShell + AppUserMenu já entregam essa parte.
-- Progresso: já existe (Card com percent + YarnProgress + botão “Começar/Continuar…”).
-- Meus Dias: já existe (grid de DayCard).
-- Suporte + Rodapé: já existem (AppSupportSection + AppFooterMinimal).
+O que vou mudar (front-end)
 
-Mudanças que vamos fazer (front-end)
-1) Ajustar a cópia e hierarquia do primeiro card (boas-vindas + progresso)
-   - Em `src/pages/app/AppHome.tsx`:
-     - Trocar o título para: “Bem-vinda ao seu Ateliê, {profile.displayName}!”
-     - Adicionar logo abaixo o texto: “Meu Progresso — Pronta para a sua Primeira Vitória em Amigurumi?”
-     - Manter a frase do percentual (“Você está na sua Primeira Vitória – X% concluída.”) como texto de apoio (ou substituir por uma versão mais curta, se você preferir; mas pela sua instrução, vamos manter o essencial do X% porque é o que dá feedback claro de avanço).
-   - Resultado: o “quadrado de progresso geral” já fica trabalhando junto do texto, como você quer.
+1) Ajustar o topo da Home em `src/pages/app/AppHome.tsx`
+- Hoje existe um único Card grande com:
+  - “Bem-vinda…”
+  - “Meu Progresso — …”
+  - texto do percentual
+  - YarnProgress
+  - botão “Começar/Continuar…”
+- Vou dividir em dois blocos:
 
-2) Padronizar títulos/seções para bater com sua divisão
-   - Em `src/pages/app/AppHome.tsx`:
-     - Renomear “Dias” para “Meus Dias”.
-     - O título “Sua jornada” pode permanecer como título geral da página (h1) com o mesmo tamanho dos outros (text-xl font-bold), ou podemos remover o header e deixar o primeiro card “abrir” a Home (mais limpo). Pela sua lista (“Logo + Menu” e depois a frase de boas-vindas), a tendência é remover o “Sua jornada” e tratar a Home como “Ateliê”. Vou implementar assim:
-       - Remover o `<header>` “Sua jornada” e começar direto pelo card de boas-vindas/progresso (fica exatamente na ordem que você listou).
-     - Ajustar o título da seção suporte de “Suporte” para “Meu Suporte”.
-     - Garantir que todos os títulos (“Meus Dias”, “Meus Materiais e Técnicas”, “Meu Suporte”) usem o mesmo padrão `text-xl font-bold`.
+1.1) Mini-bloco de entrada (novo Card pequeno)
+- Conteúdo (exato como você pediu):
+  - Linha 1: “Bem-vinda ao seu Ateliê, {profile.displayName}!”
+  - Linha 2: “Meu Progresso — Pronta para a sua Primeira Vitória em Amigurumi?”
+  - Percentual: como você escolheu “Com percentual”, vou manter um texto curto menor (ex.: “{percent}% concluída.”) logo abaixo (sem o YarnProgress grande e sem botão).
+- Estilo para ficar “bem pequenininho”:
+  - reduzir paddings (ex.: `p-4` no header em vez de `p-6`)
+  - tipografia menor (ex.: title `text-base sm:text-lg`, e a linha de progresso `text-xs sm:text-sm`)
+  - reduzir espaçamento vertical (`space-y-1`)
 
-3) Criar a seção “Meus Materiais e Técnicas” na Home (sem criar página nova)
-   - Criar um novo componente (para manter o AppHome limpo), por exemplo:
-     - `src/components/app/AppMaterialsTechniquesSection.tsx` (nome sugerido)
-   - Conteúdo pro “primeiro momento” (MVP útil e consistente com o que já existe):
-     - Um Card “app-stitch” com:
-       - Um texto curto explicando: “Aqui você encontra os materiais e técnicas essenciais. Você pode abrir direto no dia que estiver fazendo.”
-       - Dois botões:
-         - “Ver Materiais”
-         - “Ver Técnicas”
-     - Ambos levam a usuária para o dia atual (`progress.currentDay`) e já abrem a aba correta.
-       - Exemplo de navegação:
-         - `/app/dia/1?tab=materiais`
-         - `/app/dia/1?tab=tecnicas`
+1.2) Bloco principal no estilo da imagem (novo Card grande logo abaixo)
+- Layout (horizontal em desktop, empilhado no mobile):
+  - Esquerda: um “thumbnail” circular (imagem placeholder) dentro de um anel sutil
+    - Como ainda não existe uma imagem por dia no conteúdo, vou usar uma imagem do projeto como padrão (ex.: `src/assets/hero-amigurumi.png`) só como placeholder visual.
+    - Futuro: dá para evoluir para imagem por dia quando você quiser.
+  - Centro: texto com informações do “estado atual”
+    - “Primeira Vitória em Amigurumi” (título)
+    - “Etapa: Dia {progress.currentDay} — {journeyDays[currentDay-1].title}”
+    - opcional pequeno: “Tempo estimado: {estimatedTime}”
+  - Direita: botão CTA (mantendo seu critério “Texto atual”):
+    - Se `completedCount === 0`: “Começar”
+    - Senão: “Continuar do Dia {progress.currentDay}”
+    - Ao clicar: vai para `/app/dia/{progress.currentDay}`
+  - Embaixo: uma barrinha/progresso
+    - Vou reaproveitar o `YarnProgress`, mas em modo mais discreto (ex.: `size="sm"`) e com um rótulo curto.
+    - Ao lado da barrinha (direita), mostrar `percent%` (para ficar bem parecido com o “65% concluído…” da referência).
 
-4) Permitir abrir o AppDay já na aba Materiais/Técnicas via URL (query param)
-   - Em `src/pages/app/AppDay.tsx`:
-     - Ler `tab` via `useSearchParams()` (ex.: `tab=materiais|tecnicas|guiado|receita`).
-     - Usar esse valor como `defaultValue` das Tabs.
-     - (Opcional, mas recomendado) Quando a usuária clicar nas Tabs, atualizar o query param para manter o link compartilhável e consistente (ex.: ao clicar “Técnicas”, vira `?tab=tecnicas`).
-   - Benefício: a seção “Meus Materiais e Técnicas” da Home fica funcional imediatamente, reaproveitando o conteúdo existente dos dias (sem inventar conteúdo novo agora).
+2) Garantir que o restante da Home continue igual
+- Manter a seção “Meus Dias de Criação” e o grid de `DayCard` exatamente como está.
+- Manter `AppMaterialsTechniquesSection` e `Meu Suporte` na mesma ordem atual.
+- Manter o scroll por âncora (`#materiais-tecnicas`) já implementado.
 
-5) Reordenar o menu para refletir essa organização
-   - Em `src/components/app/AppUserMenu.tsx`:
-     - Reordenar itens para: “Página inicial”, “Perfil”, “Materiais e Técnicas”, “Suporte”, “Selos & Conquistas”.
-     - Como “Materiais e Técnicas” será uma seção dentro da Home (e não uma rota):
-       - Opção A (mais simples e robusta): item aponta para `/app` e, ao entrar na Home, a usuária rola até a seção automaticamente.
-         - Para isso, definimos um `id="materiais-tecnicas"` na seção e usamos `navigate("/app#materiais-tecnicas")`.
-         - Em `AppHome`, adicionamos um `useEffect` que detecta `location.hash` e faz `document.getElementById(...).scrollIntoView({ behavior: "smooth" })`.
-       - Vou seguir a Opção A, porque mantém a navegação clara e não cria rota nova.
-
-Arquivos que provavelmente serão alterados/criados
+Arquivos envolvidos
 - Alterar:
-  - `src/pages/app/AppHome.tsx` (cópia, títulos, inserção da nova seção, ordem)
-  - `src/pages/app/AppDay.tsx` (suporte a `?tab=` e opcionalmente sincronizar clique das tabs com query param)
-  - `src/components/app/AppUserMenu.tsx` (reordenação + item “Materiais e Técnicas” navegando para âncora)
-- Criar:
-  - `src/components/app/AppMaterialsTechniquesSection.tsx` (nova seção, reaproveitando `app-stitch` e Botões existentes)
+  - `src/pages/app/AppHome.tsx`
+- Sem necessidade de mexer em backend/autenticação.
+- Sem necessidade de alterar menu para este ajuste específico (o menu já foi reordenado antes).
 
-Critérios de aceite (para você validar visualmente)
-- Home (/app):
-  - Não aparece mais “Sua jornada” grandão no topo; a Home começa com o card de boas-vindas.
-  - Texto exato: “Bem-vinda ao seu Ateliê, Ana!”
-  - A linha: “Meu Progresso — Pronta para a sua Primeira Vitória em Amigurumi?” aparece junto do card de progresso.
-  - Seções com títulos iguais (mesmo tamanho/peso): “Meus Dias”, “Meus Materiais e Técnicas”, “Meu Suporte”.
-  - Botão do card principal:
-    - Se nunca completou nada: “Começar”
-    - Depois: “Continuar do Dia X”
-- Navegação:
-  - Menu reordenado como combinado.
-  - Clicar “Materiais e Técnicas” no menu leva para a Home e rola até a seção.
-  - Na seção “Meus Materiais e Técnicas”, os botões abrem o dia atual já na aba certa (Materiais ou Técnicas).
+Detalhes técnicos de implementação (para ficar estável e fácil de ajustar)
+- Em `AppHome.tsx`:
+  - Calcular `currentDayData` com `journeyDays.find(d => d.day === progress.currentDay)`
+  - Importar uma imagem existente como placeholder do thumbnail do card principal (ex.: `import heroAmigurumi from "@/assets/hero-amigurumi.png";`)
+  - Usar Tailwind para replicar o “cartão costurado” e a proporção do layout da referência:
+    - container principal do card: `flex flex-col md:flex-row md:items-center gap-4`
+    - thumbnail: `h-14 w-14 md:h-16 md:w-16 rounded-full overflow-hidden ring-2 ring-accent/30`
+    - CTA à direita: manter `Button variant="primary"` (ou secondary, se você achar que primary está “forte demais” para o app; mas vou manter como está hoje para não quebrar consistência)
 
-Riscos/atenções
-- “defaultValue” das Tabs só vale na primeira renderização. Se a pessoa mudar o `?tab=` na mesma tela sem remount, pode não refletir.
-  - Solução (já prevista no plano): controlar o valor das Tabs via estado derivado do `searchParams` (Tabs “controlled”), ou usar uma `key` no componente Tabs baseada no `tab` para forçar remount.
-  - Vou implementar do jeito mais estável (controlled), para não dar comportamento “estranho”.
+Critérios de aceite (o que você vai ver no /app)
+1) O primeiro bloco virou um card pequeno com:
+   - “Bem-vinda ao seu Ateliê, [Nome]!”
+   - “Meu Progresso — Pronta para a sua Primeira Vitória em Amigurumi?”
+   - e um “X% concluída.” pequeno (sem fio e sem botão).
+2) Logo abaixo aparece um card grande “estilo imagem”, com:
+   - bolinha com imagem à esquerda
+   - info de etapa/dia no centro
+   - botão “Começar” ou “Continuar do Dia X” à direita
+   - barrinha de progresso embaixo
+3) O resto da Home continua na mesma ordem:
+   - Meus Dias de Criação
+   - Meus Materiais e Técnicas
+   - Meu Suporte
+   - Rodapé
 
-Próximo passo
-- Com sua aprovação, eu implemento essa estrutura em 1 rodada e você valida no /app (desktop e mobile), clicando também nos botões de Materiais/Técnicas para confirmar que abre na aba certa.
+Observação rápida sobre a imagem enviada (referência)
+- Vou usá-la apenas como referência visual de layout (card horizontal com thumbnail + infos + CTA + barra). Não vou “embutir” essa imagem específica na interface, a menos que você peça explicitamente para usar ela como asset do app.
+
+Próximo passo de validação (quando eu implementar)
+- Você vai testar end-to-end no /app:
+  - conferir o “mini-bloco” bem compacto
+  - clicar no CTA do bloco principal
+  - checar no mobile para garantir que o card quebra linha bonito e não fica apertado
