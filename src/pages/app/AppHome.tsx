@@ -7,7 +7,6 @@ import { journeyDays } from "@/content/journey";
 import { useJourneyProgress } from "@/hooks/useJourneyProgress";
 import { useAppProfile } from "@/hooks/useAppProfile";
 import { AppShell } from "@/components/app/AppShell";
-import { YarnProgress } from "@/components/app/YarnProgress";
 import { DayCard } from "@/components/app/DayCard";
 import { AppSupportSection } from "@/components/app/AppSupportSection";
 import { AppFooterMinimal } from "@/components/app/AppFooterMinimal";
@@ -15,8 +14,29 @@ import { AppMaterialsTechniquesSection } from "@/components/app/AppMaterialsTech
 import { JourneyMiniProgress } from "@/components/app/JourneyMiniProgress";
 
 import heroAmigurumi from "@/assets/hero-amigurumi.png";
+import bulletsCraftingScene from "@/assets/bullets-crafting-scene.jpg";
+import leadVisual from "@/assets/lead-visual.png";
+import mapa7Dias from "@/assets/mapa-7-dias-referencia.png";
+import metodoTitulo from "@/assets/metodo-titulo-ref.png";
+import provaCiencia from "@/assets/prova-ciencia.png";
+import seloPrimeiraVitoria from "@/assets/selo-primeira-vitoria.png";
+
+const dayStageImages: Record<number, string> = {
+  1: heroAmigurumi,
+  2: bulletsCraftingScene,
+  3: leadVisual,
+  4: mapa7Dias,
+  5: metodoTitulo,
+  6: provaCiencia,
+  7: seloPrimeiraVitoria,
+};
+
+function clamp(n: number, min = 0, max = 100) {
+  return Math.min(max, Math.max(min, n));
+}
+
 export default function AppHome() {
-  const { progress, isDayUnlocked, isDayCompleted } = useJourneyProgress();
+  const { progress, isDayUnlocked, isDayCompleted, getStepChecked } = useJourneyProgress();
   const { profile } = useAppProfile();
   const location = useLocation();
 
@@ -28,6 +48,23 @@ export default function AppHome() {
     () => journeyDays.find((d) => d.day === progress.currentDay),
     [progress.currentDay],
   );
+
+  const stageImage = dayStageImages[progress.currentDay] ?? heroAmigurumi;
+
+  const stagePercent = useMemo(() => {
+    const day = progress.currentDay;
+    if (isDayCompleted(day)) return 100;
+
+    const guided = currentDayData?.guided;
+    if (!guided) return 0;
+
+    const steps = Object.values(guided).flat();
+    const total = steps.length;
+    if (total === 0) return 0;
+
+    const checked = steps.reduce((acc, step) => acc + (getStepChecked(day, step.id) ? 1 : 0), 0);
+    return clamp(Math.round((checked / total) * 100));
+  }, [currentDayData?.guided, getStepChecked, isDayCompleted, progress.currentDay]);
 
   useEffect(() => {
     if (!location.hash) return;
@@ -54,11 +91,7 @@ export default function AppHome() {
               <span className="font-medium text-foreground">{percent}%</span>
             </div>
 
-            <JourneyMiniProgress
-              currentDay={progress.currentDay}
-              completedDays={progress.completedDays}
-              percent={percent}
-            />
+            <JourneyMiniProgress currentDay={progress.currentDay} completedDays={progress.completedDays} percent={percent} />
           </CardContent>
         </Card>
 
@@ -69,8 +102,8 @@ export default function AppHome() {
               <div className="shrink-0">
                 <div className="h-14 w-14 md:h-16 md:w-16 rounded-full overflow-hidden ring-2 ring-accent/30">
                   <img
-                    src={heroAmigurumi}
-                    alt="Ilustração de amigurumi"
+                    src={stageImage}
+                    alt={`Imagem da etapa do Dia ${progress.currentDay}`}
                     className="h-full w-full object-cover"
                     loading="lazy"
                   />
@@ -86,6 +119,28 @@ export default function AppHome() {
                 {currentDayData?.estimatedTime ? (
                   <p className="text-xs text-muted-foreground">Tempo estimado: {currentDayData.estimatedTime}</p>
                 ) : null}
+
+                {/* Linha pequena de progresso da etapa */}
+                <div className="pt-2 space-y-1">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-muted-foreground">Progresso desta etapa</span>
+                    <span className="font-medium text-foreground">{stagePercent}%</span>
+                  </div>
+
+                  <div
+                    className="h-2 w-full rounded-full overflow-hidden bg-secondary"
+                    role="progressbar"
+                    aria-label="Progresso desta etapa"
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-valuenow={stagePercent}
+                  >
+                    <div
+                      className="h-full rounded-full bg-accent transition-[width]"
+                      style={{ width: `${stagePercent}%` }}
+                    />
+                  </div>
+                </div>
               </div>
 
               <div className="md:self-center">
@@ -95,14 +150,6 @@ export default function AppHome() {
                   </Button>
                 </Link>
               </div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between text-xs">
-                <span className="text-muted-foreground">Progresso geral</span>
-                <span className="font-medium text-foreground">{percent}%</span>
-              </div>
-              <YarnProgress value={percent} label="Progresso geral" size="sm" />
             </div>
           </CardContent>
         </Card>
