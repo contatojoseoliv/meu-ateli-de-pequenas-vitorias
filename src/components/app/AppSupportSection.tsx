@@ -16,7 +16,7 @@ export function AppSupportSection() {
         </CardHeader>
         <CardContent className="space-y-3">
           <p className="text-sm text-muted-foreground">
-            Fale com a gente pelo canal que for mais confortável. (Os contatos abaixo são placeholders e podem ser trocados depois.)
+            Fale com a gente pelo canal que for mais confortável.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-2">
