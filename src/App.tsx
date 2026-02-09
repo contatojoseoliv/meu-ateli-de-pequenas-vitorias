@@ -9,6 +9,8 @@ import NotFound from "./pages/NotFound";
 import Checkout from "./pages/Checkout";
 import AppHome from "./pages/app/AppHome";
 import AppIntro from "./pages/app/AppIntro";
+import AppMateriais from "./pages/app/AppMateriais";
+import AppFundamentos from "./pages/app/AppFundamentos";
 import AppDay from "./pages/app/AppDay";
 import AppProfile from "./pages/app/AppProfile";
 import AppSupport from "./pages/app/AppSupport";
@@ -42,6 +44,8 @@ const App = () => (
             {/* Product App (aluna) */}
             <Route path="/app" element={<AppHome />} />
             <Route path="/app/comecar" element={<AppIntro />} />
+            <Route path="/app/materiais" element={<AppMateriais />} />
+            <Route path="/app/fundamentos" element={<AppFundamentos />} />
             <Route path="/app/dia/:day" element={<AppDay />} />
             <Route path="/app/perfil" element={<AppProfile />} />
             <Route path="/app/suporte" element={<AppSupport />} />
