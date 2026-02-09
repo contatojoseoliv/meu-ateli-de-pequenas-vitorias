@@ -48,7 +48,8 @@ export function IntroCard({ cardIndex, unlocked, completed, className }: IntroCa
   const data = INTRO_CARDS[cardIndex];
   if (!data) return null;
 
-  const href = `/app/comecar?card=${cardIndex}`;
+  const routes = ["/app/comecar", "/app/materiais", "/app/fundamentos"];
+  const href = routes[cardIndex] ?? "/app/comecar";
 
   // Locked
   if (!unlocked) {

@@ -13,10 +13,10 @@ import { AppShell } from "@/components/app/AppShell";
 import { useIntroProgress } from "@/hooks/useIntroProgress";
 import { INTRO_CARD_CONTENTS, type Topic } from "@/content/introCards";
 
-const CARD_INDEX = 0;
+const CARD_INDEX = 1;
 const card = INTRO_CARD_CONTENTS[CARD_INDEX];
 
-export default function AppIntro() {
+export default function AppMateriais() {
   const intro = useIntroProgress();
   const topicRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
@@ -26,6 +26,7 @@ export default function AppIntro() {
     }, 120);
   }, []);
 
+  const unlocked = intro.isCardUnlocked(CARD_INDEX);
   const stepIds = card.topics.map((t) => t.id);
   const completed = intro.isCardCompleted(CARD_INDEX);
   const activeStepId = intro.getActiveStep(CARD_INDEX, stepIds);
@@ -46,8 +47,25 @@ export default function AppIntro() {
     intro.completeCard(CARD_INDEX);
   }, [intro]);
 
+  if (!unlocked) {
+    return (
+      <AppShell title="Materiais">
+        <main className="container-main py-8 space-y-6">
+          <Card className="app-daycard app-daycard--locked">
+            <CardContent className="p-8 text-center space-y-3">
+              <p className="text-muted-foreground">Conclua a etapa anterior para desbloquear.</p>
+              <Link to="/app">
+                <Button variant="ghost" size="default">Voltar</Button>
+              </Link>
+            </CardContent>
+          </Card>
+        </main>
+      </AppShell>
+    );
+  }
+
   return (
-    <AppShell title="Comece por aqui">
+    <AppShell title="Materiais">
       <main className="container-main py-8 space-y-6">
         <Card className={`app-daycard ${completed ? "app-daycard--done" : card.tintClass} app-daycard--seal`}>
           <div className="p-5 md:p-6 flex items-center gap-3">
@@ -104,7 +122,7 @@ export default function AppIntro() {
   );
 }
 
-/* ── Topic row component (reused across intro pages) ── */
+/* ── Topic row ── */
 
 type TopicRowProps = {
   topic: Topic;
