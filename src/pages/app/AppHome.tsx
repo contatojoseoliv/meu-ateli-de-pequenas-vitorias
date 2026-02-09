@@ -8,6 +8,7 @@ import { useJourneyProgress } from "@/hooks/useJourneyProgress";
 import { useAppProfile } from "@/hooks/useAppProfile";
 import { AppShell } from "@/components/app/AppShell";
 import { DayCard } from "@/components/app/DayCard";
+import { IntroCard } from "@/components/app/IntroCard";
 import { AppSupportSection } from "@/components/app/AppSupportSection";
 import { AppFooterMinimal } from "@/components/app/AppFooterMinimal";
 import { AppMaterialsTechniquesSection } from "@/components/app/AppMaterialsTechniquesSection";
@@ -154,6 +155,8 @@ export default function AppHome() {
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-foreground">Meus Dias de Criação</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+            <IntroCard href="/app/comecar" />
+
             {journeyDays.map((d) => {
               const unlocked = isDayUnlocked(d.day);
               const completed = isDayCompleted(d.day);
