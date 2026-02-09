@@ -81,12 +81,12 @@ export default function AppHome() {
       <main className="container-main py-8 space-y-6">
         {/* Mini-bloco de entrada */}
         <Card className="app-stitch">
-          <CardHeader className="space-y-1 p-4">
-            <CardTitle className="text-base sm:text-lg">Bem-vinda ao seu Ateliê, {profile.displayName}!</CardTitle>
+          <CardHeader className="space-y-1 p-3 sm:p-4">
+            <CardTitle className="text-sm sm:text-base">Bem-vinda ao seu Ateliê, {profile.displayName}!</CardTitle>
           </CardHeader>
 
-          <CardContent className="p-4 pt-0 space-y-2">
-            <div className="flex items-center justify-between text-xs sm:text-sm">
+          <CardContent className="p-3 sm:p-4 pt-0 space-y-2">
+            <div className="flex items-center justify-between text-xs">
               <span className="text-muted-foreground">Meu progresso</span>
               <span className="font-medium text-foreground">{percent}%</span>
             </div>
@@ -97,10 +97,10 @@ export default function AppHome() {
 
         {/* Bloco principal (estilo imagem) */}
         <Card className="app-stitch">
-          <CardContent className="p-6 space-y-4">
-            <div className="flex flex-col md:flex-row md:items-center gap-4">
+          <CardContent className="p-7 md:p-8 space-y-4">
+            <div className="flex flex-col md:flex-row md:items-center gap-5">
               <div className="shrink-0">
-                <div className="h-14 w-14 md:h-16 md:w-16 rounded-full overflow-hidden ring-2 ring-accent/30">
+                <div className="h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden ring-2 ring-accent/30">
                   <img
                     src={stageImage}
                     alt={`Imagem da etapa do Dia ${progress.currentDay}`}
@@ -111,7 +111,7 @@ export default function AppHome() {
               </div>
 
               <div className="min-w-0 flex-1 space-y-1">
-                <p className="text-sm font-semibold text-foreground">Primeira Vitória em Amigurumi</p>
+                <p className="text-base font-semibold text-foreground">Primeira Vitória em Amigurumi</p>
                 <p className="text-sm text-muted-foreground">
                   Etapa: Dia {progress.currentDay}
                   {currentDayData?.title ? ` — ${currentDayData.title}` : ""}
@@ -121,7 +121,7 @@ export default function AppHome() {
                 ) : null}
 
                 {/* Linha pequena de progresso da etapa */}
-                <div className="pt-2 space-y-1">
+                <div className="pt-3 space-y-1">
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-muted-foreground">Progresso desta etapa</span>
                     <span className="font-medium text-foreground">{stagePercent}%</span>
@@ -135,10 +135,7 @@ export default function AppHome() {
                     aria-valuemax={100}
                     aria-valuenow={stagePercent}
                   >
-                    <div
-                      className="h-full rounded-full bg-accent transition-[width]"
-                      style={{ width: `${stagePercent}%` }}
-                    />
+                    <div className="h-full rounded-full bg-accent transition-[width]" style={{ width: `${stagePercent}%` }} />
                   </div>
                 </div>
               </div>
