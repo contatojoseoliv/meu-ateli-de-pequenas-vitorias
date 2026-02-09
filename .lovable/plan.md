@@ -1,108 +1,67 @@
 
 
-## Pagina "Comece Por Aqui" — Progressao guiada em dois niveis
+## Atualizar o conteudo do Dia 1 — "Seu primeiro ponto e o anel magico"
 
-### Conceito
+### O que muda
 
-A pagina tera **dois niveis de progressao**:
+O Dia 1 atual tem conteudo placeholder generico. Vamos substituir pelo conteudo completo fornecido, mantendo a estrutura guiada existente do `AppDay.tsx` (4 blocos com checklist + abas de Receita, Materiais e Tecnicas).
 
-1. **Nivel 1 — Cards**: 3 cards sequenciais que desbloqueiam um por um
-2. **Nivel 2 — Topicos dentro de cada card**: cada subtopico aparece um de cada vez, conforme a aluna marca "Entendi" ou "Proximo"
+### Mapeamento do conteudo para a estrutura existente
 
-Isso evita mostrar blocoes de texto e segue o padrao guiado ja usado no `AppDay.tsx`.
+O `AppDay.tsx` ja usa 4 blocos (Preparacao, Voltas, Verificacao, Objetivo final) com checklist e 3 abas auxiliares. O conteudo do Dia 1 sera mapeado assim:
 
-### Como vai funcionar na pratica
+**Aba "Guiado" — Bloco Preparacao**
+1. Titulo do dia atualizado para "Seu primeiro ponto e o anel magico"
+2. Step: "Respire fundo e separe seus materiais" (com tip do texto "Antes de comecar")
+3. Step: "Leia a receita do dia" (com tip mostrando a receita: MR com 6pb, 6 aum)
 
-```text
-+------------------------------------------+
-|  AppShell (title="Comece por aqui")       |
-+------------------------------------------+
-|  Progresso: [===-----] 1 de 3             |
-|                                           |
-|  CARD 1 - "Seu primeiro amigurumi..."     |
-|  +--------------------------------------+ |
-|  | Topico ativo (ex: "O que e esse      | |
-|  | projeto?") — conteudo visivel         | |
-|  |                                       | |
-|  | [Entendi, proximo >]                  | |
-|  +--------------------------------------+ |
-|  | Topico seguinte (bloqueado/oculto)    | |
-|  | Topico seguinte (bloqueado/oculto)    | |
-|  +--------------------------------------+ |
-|                                           |
-|  CARD 2 (bloqueado)                       |
-|  CARD 3 (bloqueado)                       |
-+------------------------------------------+
-```
+**Aba "Guiado" — Bloco Voltas** (os passos praticos)
+1. Step: "Passo 1 — Enrolar o fio no dedo" (com sub-instrucoes e imagem placeholder)
+2. Step: "Passo 2 — Entrar com a agulha" (com sub-instrucoes e imagem placeholder)
+3. Step: "Passo 3 — Fazer uma correntinha para travar"
+4. Step: "Passo 4 — Fazer 6 pontos baixos dentro do anel" (com sub-instrucoes e imagem placeholder)
+5. Step: "Passo 5 — Fechar o anel" (com tip e imagem placeholder)
+6. Step: "Confira: conte 6 Vzinhos na borda do circulo" (com tip sobre erros comuns)
+7. Step: "Volta 2 — Faca 1 aumento em cada ponto (6 aum = 12 pontos)" (com sub-instrucoes e imagem placeholder)
 
-### Comportamento detalhado
+**Aba "Guiado" — Bloco Verificacao**
+1. Step: "Verifique se sua peca tem centro fechado e bordas arredondadas" (com tip sobre aparencia esperada)
+2. Step: "Consulte a tabela de problemas comuns se algo estiver diferente" (com tip listando buraco no meio / peca dobrando / ondulada)
 
-**Dentro de cada card:**
-- Os topicos sao listados como itens verticais (similar ao checklist do AppDay)
-- Apenas o topico ativo mostra o conteudo expandido
-- Topicos ja lidos ficam colapsados com um check verde, mas clicaveis para reler
-- Topicos ainda nao alcancados mostram apenas o titulo em cinza
-- Ao clicar "Entendi, proximo", o topico atual recebe check, o proximo expande automaticamente e a tela faz scroll suave ate ele
-- Quando todos os topicos de um card estao marcados, aparece o botao "Concluir etapa"
+**Aba "Guiado" — Bloco Objetivo final**
+1. Step: "Missao do Dia 1 completa: anel magico + 6pb + fechar + volta de aumentos (12 pontos)" (com tip motivacional "Amanha: vamos continuar crescendo a base do corpinho do coelhinho")
 
-**Entre cards:**
-- Card bloqueado: titulo visivel + icone de cadeado + visual cinza (`app-daycard--locked`)
-- Card ativo: expandido com os topicos
-- Card concluido: colapsado com check, clicavel para reler
+**Aba "Receita completa"**
+- Receita formatada: Volta 1 (MR com 6pb → 6), Volta 2 (6 aum → 12)
 
-**Apos concluir os 3 cards:**
-- Aparece o bloco final com "Ir para o Dia 1" e "Voltar"
+**Aba "Materiais"**
+- Linha amigurumi, Agulha 2.0-2.5mm, Marcador de ponto, Tesoura
 
-### Mapeamento de topicos por card
+**Aba "Tecnicas e recursos"**
+- Anel magico (MR), Ponto baixo (pb), Aumento (aum), Como contar pontos
 
-**Card 1 — "Seu primeiro amigurumi, um dia de cada vez"** (6 topicos)
-1. Abertura emocional (texto inicial + lista de sentimentos)
-2. "O que e esse projeto?" 
-3. "O que vamos criar" (coelho + simbolo + por que o coelho)
-4. "Mais do que croche"
-5. "Nao existe jeito certo"
-6. "Como funciona a jornada" + fechamento emocional
+### Adaptacao do tipo GuidedStep
 
-**Card 2 — "Materiais (so o essencial)"** (9 topicos)
-1. Introducao dos materiais
-2. Fio
-3. Agulha de croche
-4. Enchimento
-5. Olhos
-6. Marcador de ponto
-7. Agulha de tapecaria
-8. Argola de chaveiro
-9. Resumo simples + "O mais importante"
-
-**Card 3 — "Fundamentos sem complicacao"** (8 topicos)
-1. Introducao dos fundamentos
-2. Como segurar a agulha
-3. Como segurar o fio
-4. O que e um ponto
-5. Contar pontos + voltas/carreiras
-6. Tabela de tecnicas (MR, pb, aum, dim)
-7. Detalhamento: MR e pb
-8. Detalhamento: aum e dim + "O que voce precisa lembrar"
+O tipo `GuidedStep` atual ja suporta `text`, `tip` e `imagePlaceholderLabel`. Para acomodar os sub-passos detalhados (listas numeradas dentro de um step), vamos adicionar um campo opcional `details` (array de strings) que sera renderizado como lista ordenada abaixo do texto principal.
 
 ### Detalhes tecnicos
 
-**Novo hook:** `src/hooks/useIntroProgress.ts`
-- Chave localStorage: `pv_intro_progress_v1`
-- Estado: `{ completedCards: number[], cardStepState: Record<string, Record<string, boolean>> }`
-- Funcoes: `isCardUnlocked(n)`, `isCardCompleted(n)`, `completeCard(n)`, `getStepRead(card, stepId)`, `markStepRead(card, stepId)`, `getActiveStep(card)`, `reset()`
-- Card 1 sempre desbloqueado; Card N desbloqueado se Card N-1 concluido
+**Arquivos editados:**
 
-**Arquivo reescrito:** `src/pages/app/AppIntro.tsx`
-- Dados dos topicos definidos como array de objetos `{ id, title, emoji, content: JSX }` por card
-- Cada topico renderizado dentro de um `Collapsible` (do radix, ja instalado)
-- Topico ativo: `Collapsible` aberto, com botao "Entendi, proximo" no final
-- Topico lido: `CollapsibleTrigger` com check verde, clicavel para reabrir
-- Topico futuro: titulo em cinza, `CollapsibleTrigger` desabilitado
-- Cards usam `Card` com `app-stitch` e logica de bloqueio/desbloqueio
-- Scroll suave automatico ao expandir proximo topico (`scrollIntoView({ behavior: 'smooth' })`)
-- Todo o conteudo textual mantido exatamente como fornecido, sem alteracao
-- Helpers reutilizados: `ImagePlaceholder`, `StoreTip`
-- Componente `Table` do shadcn/ui para a tabela de tecnicas
+1. `src/content/journey.ts`
+   - Adicionar campo opcional `details?: string[]` ao tipo `GuidedStep`
+   - Substituir todo o conteudo do dia 1 (title, estimatedTime, guided, tabs)
+   - Title: "Seu primeiro ponto e o anel magico"
+   - EstimatedTime: "15-20 min"
 
-**Nenhum outro arquivo sera criado ou editado alem dos dois mencionados.**
+2. `src/pages/app/AppDay.tsx`
+   - Adicionar renderizacao do campo `details` (quando presente) como `<ol>` abaixo do texto do step
+   - Manter toda a logica de checklist, progresso e conclusao inalterada
 
+**Nenhum outro arquivo sera criado ou editado.**
+
+### Conteudo textual
+
+Todo o texto sera mantido **exatamente** como fornecido, incluindo emojis, negritos, repeticoes intencionais e tom emocional. Os marcadores [IMAGEM SUGERIDA] serao convertidos para `imagePlaceholderLabel` com a descricao correspondente.
+
+A tabela de problemas comuns (buraco no meio / peca dobrando / ondulada) sera incluida como tip formatado no step de verificacao correspondente.
