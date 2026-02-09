@@ -1,32 +1,50 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/shared/Button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { Scissors, BookOpen } from "lucide-react";
+
 type Props = {
   currentDay: number;
 };
-export function AppMaterialsTechniquesSection({
-  currentDay
-}: Props) {
+
+export function AppMaterialsTechniquesSection({ currentDay }: Props) {
   const navigate = useNavigate();
-  return <section id="materiais-tecnicas" className="space-y-3">
+
+  return (
+    <section id="materiais-tecnicas" className="space-y-3">
       <h2 className="text-xl font-bold text-foreground">Meus Materiais e Técnicas</h2>
 
-      <Card className="app-stitch">
-        <CardHeader className="pb-3">
-          <CardTitle className="text-lg">Atalhos rápidos</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          <p className="text-sm text-muted-foreground">Acesse rapidamente os materiais e técnicas que você usa no dia a dia, organizados para facilitar sua rotina.</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <Card className="app-stitch">
+          <CardContent className="p-5 space-y-3">
+            <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+              <Scissors className="h-5 w-5 text-primary" />
+            </div>
+            <h3 className="text-base font-semibold text-foreground">Explore Materiais</h3>
+            <p className="text-sm text-muted-foreground">
+              Acesse materiais e recursos essenciais para o seu Amigurumi.
+            </p>
+            <Button variant="secondary" size="sm" onClick={() => navigate(`/app/dia/${currentDay}?tab=materiais`)}>
+              Materiais
+            </Button>
+          </CardContent>
+        </Card>
 
-          <div className="flex flex-wrap gap-2">
-            <Button variant="secondary" size="default" onClick={() => navigate(`/app/dia/${currentDay}?tab=materiais`)}>
-              Ver Materiais
+        <Card className="app-stitch">
+          <CardContent className="p-5 space-y-3">
+            <div className="h-10 w-10 rounded-full bg-accent/10 flex items-center justify-center">
+              <BookOpen className="h-5 w-5 text-accent" />
+            </div>
+            <h3 className="text-base font-semibold text-foreground">Aprenda Técnicas</h3>
+            <p className="text-sm text-muted-foreground">
+              Aprenda e consulte métodos e processos para executar suas atividades.
+            </p>
+            <Button variant="secondary" size="sm" onClick={() => navigate(`/app/dia/${currentDay}?tab=tecnicas`)}>
+              Técnicas
             </Button>
-            <Button variant="secondary" size="default" onClick={() => navigate(`/app/dia/${currentDay}?tab=tecnicas`)}>
-              Ver Técnicas
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </section>;
+          </CardContent>
+        </Card>
+      </div>
+    </section>
+  );
 }
