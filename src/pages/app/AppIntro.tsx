@@ -1,5 +1,5 @@
-import { useRef, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { useRef, useCallback, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { ImageIcon, Check, Lock, ChevronRight, ChevronDown } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -635,12 +635,25 @@ const CARDS: IntroCard[] = [
 export default function AppIntro() {
   const intro = useIntroProgress();
   const topicRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const cardRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  const [searchParams] = useSearchParams();
 
   const scrollToTopic = useCallback((id: string) => {
     setTimeout(() => {
       topicRefs.current[id]?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 120);
   }, []);
+
+  // Scroll to specific card from ?card= param
+  useEffect(() => {
+    const cardParam = searchParams.get("card");
+    if (cardParam == null) return;
+    const idx = parseInt(cardParam, 10);
+    if (Number.isNaN(idx)) return;
+    setTimeout(() => {
+      cardRefs.current[idx]?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 200);
+  }, [searchParams]);
 
   const totalCards = CARDS.length;
   const completedCount = intro.progress.completedCards.length;
@@ -669,18 +682,19 @@ export default function AppIntro() {
           const allRead = intro.allStepsRead(cardIndex, stepIds);
 
           return (
-            <IntroCardBlock
-              key={cardIndex}
-              card={card}
-              cardIndex={cardIndex}
-              unlocked={unlocked}
-              completed={completed}
-              activeStepId={activeStepId}
-              allRead={allRead}
-              intro={intro}
-              topicRefs={topicRefs}
-              scrollToTopic={scrollToTopic}
-            />
+            <div key={cardIndex} ref={(el) => { cardRefs.current[cardIndex] = el; }} style={{ scrollMarginTop: 80 }}>
+              <IntroCardBlock
+                card={card}
+                cardIndex={cardIndex}
+                unlocked={unlocked}
+                completed={completed}
+                activeStepId={activeStepId}
+                allRead={allRead}
+                intro={intro}
+                topicRefs={topicRefs}
+                scrollToTopic={scrollToTopic}
+              />
+            </div>
           );
         })}
 
