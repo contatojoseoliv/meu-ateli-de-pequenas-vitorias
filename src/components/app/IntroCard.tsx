@@ -18,7 +18,7 @@ export function IntroCard({ href, className }: IntroCardProps) {
       transition={{ duration: 0.22 }}
       className={cn("md:rotate-[-0.25deg]", className)}
     >
-      <Card className={cn("app-stitch overflow-hidden hover-lift")}> 
+      <Card className={cn("app-stitch app-daycard app-daycard--intro app-daycard--seal overflow-hidden hover-lift")}> 
         <CardContent className="p-4 space-y-3">
           <div className="flex items-start justify-between gap-3">
             <div className="space-y-1 min-w-0">

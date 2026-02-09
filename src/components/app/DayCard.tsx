@@ -31,6 +31,10 @@ export function DayCard({
       ? "ring-1 ring-accent/45"
       : "";
 
+  const dayVariants = ["mint", "clay", "gold"] as const;
+  const dayVariant = dayVariants[(day - 1) % dayVariants.length];
+  const dayVariantClass = unlocked ? `app-daycard--${dayVariant}` : "app-daycard--locked";
+
   return (
     <motion.div
       whileHover={unlocked ? { y: -3, rotate: day % 2 === 0 ? -0.2 : 0.2 } : undefined}
@@ -40,7 +44,9 @@ export function DayCard({
     >
       <Card
         className={cn(
-          "app-stitch overflow-hidden",
+          "app-stitch app-daycard app-daycard--seal overflow-hidden",
+          dayVariantClass,
+          completed && "app-daycard--done",
           stateClass,
           unlocked ? "hover-lift" : "cursor-not-allowed",
         )}
