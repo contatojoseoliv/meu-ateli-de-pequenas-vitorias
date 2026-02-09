@@ -12,6 +12,7 @@ import { DayCard } from "@/components/app/DayCard";
 import { AppSupportSection } from "@/components/app/AppSupportSection";
 import { AppFooterMinimal } from "@/components/app/AppFooterMinimal";
 import { AppMaterialsTechniquesSection } from "@/components/app/AppMaterialsTechniquesSection";
+import { JourneyMiniProgress } from "@/components/app/JourneyMiniProgress";
 
 import heroAmigurumi from "@/assets/hero-amigurumi.png";
 export default function AppHome() {
@@ -47,11 +48,17 @@ export default function AppHome() {
             <CardTitle className="text-base sm:text-lg">Bem-vinda ao seu Ateliê, {profile.displayName}!</CardTitle>
           </CardHeader>
 
-          <CardContent className="p-4 pt-0">
+          <CardContent className="p-4 pt-0 space-y-2">
             <div className="flex items-center justify-between text-xs sm:text-sm">
               <span className="text-muted-foreground">Meu progresso</span>
               <span className="font-medium text-foreground">{percent}%</span>
             </div>
+
+            <JourneyMiniProgress
+              currentDay={progress.currentDay}
+              completedDays={progress.completedDays}
+              percent={percent}
+            />
           </CardContent>
         </Card>
 
