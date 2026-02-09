@@ -82,7 +82,7 @@ export default function AppHome() {
         {/* Mini-bloco de entrada */}
         <Card className="app-stitch">
           <CardHeader className="space-y-1 p-4">
-            <CardTitle className="text-base sm:text-lg">Bem-vinda ao seu Ateliê, {profile.displayName}!</CardTitle>
+            <CardTitle className="text-base sm:text-lg">Bem-vinda ao Meu Ateliê, {profile.displayName}!</CardTitle>
           </CardHeader>
 
           <CardContent className="p-4 pt-0 space-y-2">
