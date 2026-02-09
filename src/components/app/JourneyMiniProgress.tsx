@@ -37,8 +37,8 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
   const lineProgress = `${(p / 100) * 100}%`;
 
   return (
-    <div className={cn("space-y-2", className)}>
-      <div className="relative pt-2">
+    <div className={cn("space-y-1", className)}>
+      <div className="relative pt-1">
         {/* trilha */}
         <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 rounded-full bg-secondary" />
         {/* preenchimento */}
@@ -59,7 +59,7 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
               <div key={day} className="flex justify-center">
                 <div
                   className={cn(
-                    "h-7 w-7 rounded-full border bg-card flex items-center justify-center shadow-sm",
+                    "h-6 w-6 rounded-full border bg-card flex items-center justify-center shadow-sm",
                     completed && "border-accent/50 ring-2 ring-accent/20",
                     isCurrent && "border-accent/60 ring-2 ring-accent/30",
                     !completed && !isCurrent && "border-border",
@@ -68,7 +68,7 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
                 >
                   <Icon
                     className={cn(
-                      "h-4 w-4",
+                      "h-3 w-3",
                       completed || isCurrent ? "text-foreground" : "text-muted-foreground",
                     )}
                     aria-hidden="true"
@@ -78,12 +78,15 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
             );
           })}
 
-          {/* nó final: selo */}
+          {/* nó final: selo (maior destaque) */}
           <div className="flex justify-center">
             <div
               className={cn(
-                "h-8 w-8 rounded-full border bg-card shadow-sm overflow-hidden",
-                finalUnlocked ? "border-accent/60 ring-2 ring-accent/30" : "border-border opacity-60",
+                "h-11 w-11 rounded-full border bg-card shadow-sm overflow-hidden",
+                "ring-2 ring-accent/15",
+                finalUnlocked
+                  ? "border-accent/70 ring-accent/35 shadow-md"
+                  : "border-border opacity-70",
               )}
               aria-label={finalUnlocked ? "Conquista final desbloqueada" : "Conquista final"}
             >
@@ -98,7 +101,7 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
         </div>
       </div>
 
-      <p className="text-[11px] text-muted-foreground">
+      <p className="text-[10px] text-muted-foreground">
         {finalUnlocked ? "Conquista final desbloqueada." : `Conclua os dias para liberar o selo final.`}
       </p>
     </div>
