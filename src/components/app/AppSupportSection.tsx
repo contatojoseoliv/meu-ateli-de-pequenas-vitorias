@@ -2,13 +2,17 @@ import { Mail, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/shared/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useAppProfile } from "@/hooks/useAppProfile";
+
 export function AppSupportSection() {
+  const { profile } = useAppProfile();
+
   return <section className="space-y-3" aria-labelledby="app-support-title">
       
 
       <Card className="app-stitch">
         <CardHeader className="pb-3">
-          <CardTitle className="text-lg">Precisa de ajuda?</CardTitle>
+          <CardTitle className="text-lg">Olá {profile.displayName}👋. Como podemos ajudar?</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           <p className="text-sm text-muted-foreground">
