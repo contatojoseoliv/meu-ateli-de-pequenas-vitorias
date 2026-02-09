@@ -200,9 +200,17 @@ export default function AppDay() {
                                 {step.text}
                               </p>
 
+                              {step.details && step.details.length > 0 ? (
+                                <ol className="list-decimal pl-5 space-y-1">
+                                  {step.details.map((d, i) => (
+                                    <li key={i} className="text-sm text-foreground leading-relaxed">{d}</li>
+                                  ))}
+                                </ol>
+                              ) : null}
+
                               {step.tip ? (
                                 <div className="app-tip rounded-md border border-border p-3">
-                                  <p className="text-sm text-foreground">
+                                  <p className="text-sm text-foreground whitespace-pre-line">
                                     <span className="font-medium">Dica:</span> {step.tip}
                                   </p>
                                 </div>
