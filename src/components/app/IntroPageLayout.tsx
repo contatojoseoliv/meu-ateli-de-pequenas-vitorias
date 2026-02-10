@@ -5,28 +5,39 @@ import { Check, ChevronRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/shared/Button";
 import { AppShell } from "@/components/app/AppShell";
-import { useIntroProgress } from "@/hooks/useIntroProgress";
 import { useIsMobile } from "@/hooks/use-mobile";
 import type { IntroCardData, Topic } from "@/content/introCards";
+
+export type ContentProgressAPI = {
+  isCardUnlocked: (idx: number) => boolean;
+  isCardCompleted: (idx: number) => boolean;
+  completeCard: (idx: number) => void;
+  getStepRead: (idx: number, stepId: string) => boolean;
+  markStepRead: (idx: number, stepId: string) => void;
+  getActiveStep: (idx: number, stepIds: string[]) => string | null;
+  allStepsRead: (idx: number, stepIds: string[]) => boolean;
+};
 
 type Props = {
   cardIndex: number;
   card: IntroCardData;
   shellTitle: string;
+  progress: ContentProgressAPI;
+  onComplete?: () => void;
+  completionActions?: React.ReactNode;
 };
 
-export default function IntroPageLayout({ cardIndex, card, shellTitle }: Props) {
-  const intro = useIntroProgress();
+export default function IntroPageLayout({ cardIndex, card, shellTitle, progress, onComplete, completionActions }: Props) {
   const isMobile = useIsMobile();
   const contentRef = useRef<HTMLDivElement>(null);
   const topicRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const [visibleTopicId, setVisibleTopicId] = useState<string | null>(null);
 
-  const unlocked = cardIndex === 0 || intro.isCardUnlocked(cardIndex);
+  const unlocked = cardIndex === 0 || progress.isCardUnlocked(cardIndex);
   const stepIds = card.topics.map((t) => t.id);
-  const completed = intro.isCardCompleted(cardIndex);
-  const activeStepId = intro.getActiveStep(cardIndex, stepIds);
-  const allRead = intro.allStepsRead(cardIndex, stepIds);
+  const completed = progress.isCardCompleted(cardIndex);
+  const activeStepId = progress.getActiveStep(cardIndex, stepIds);
+  const allRead = progress.allStepsRead(cardIndex, stepIds);
 
   // Track which topic is currently in view
   useEffect(() => {
@@ -57,18 +68,19 @@ export default function IntroPageLayout({ cardIndex, card, shellTitle }: Props) 
 
   const handleAdvance = useCallback(
     (currentStepId: string) => {
-      intro.markStepRead(cardIndex, currentStepId);
+      progress.markStepRead(cardIndex, currentStepId);
       const idx = stepIds.indexOf(currentStepId);
       if (idx < stepIds.length - 1) {
         scrollToTopic(stepIds[idx + 1]);
       }
     },
-    [intro, cardIndex, stepIds, scrollToTopic],
+    [progress, cardIndex, stepIds, scrollToTopic],
   );
 
   const handleCompleteCard = useCallback(() => {
-    intro.completeCard(cardIndex);
-  }, [intro, cardIndex]);
+    progress.completeCard(cardIndex);
+    onComplete?.();
+  }, [progress, cardIndex, onComplete]);
 
   if (!unlocked) {
     return (
@@ -107,8 +119,8 @@ export default function IntroPageLayout({ cardIndex, card, shellTitle }: Props) 
         {/* Mobile: horizontal scrollable TOC */}
         {isMobile && (
           <nav className="flex gap-2 overflow-x-auto pb-3 mb-4 -mx-1 px-1 scrollbar-none">
-            {card.topics.map((topic, i) => {
-              const isRead = intro.getStepRead(cardIndex, topic.id);
+            {card.topics.map((topic) => {
+              const isRead = progress.getStepRead(cardIndex, topic.id);
               const isCurrent = topic.id === currentVisible;
               const isLocked = !isRead && topic.id !== activeStepId;
 
@@ -139,8 +151,8 @@ export default function IntroPageLayout({ cardIndex, card, shellTitle }: Props) 
           {!isMobile && (
             <nav className="w-56 flex-shrink-0 sticky top-20 self-start max-h-[calc(100vh-6rem)] overflow-y-auto">
               <div className="space-y-0.5">
-                {card.topics.map((topic, i) => {
-                  const isRead = intro.getStepRead(cardIndex, topic.id);
+                {card.topics.map((topic) => {
+                  const isRead = progress.getStepRead(cardIndex, topic.id);
                   const isCurrent = topic.id === currentVisible;
                   const isLocked = !isRead && topic.id !== activeStepId;
 
@@ -178,12 +190,12 @@ export default function IntroPageLayout({ cardIndex, card, shellTitle }: Props) 
                   <div
                     className="h-full bg-primary rounded-full transition-all duration-500"
                     style={{
-                      width: `${(stepIds.filter((id) => intro.getStepRead(cardIndex, id)).length / stepIds.length) * 100}%`,
+                      width: `${(stepIds.filter((id) => progress.getStepRead(cardIndex, id)).length / stepIds.length) * 100}%`,
                     }}
                   />
                 </div>
                 <p className="text-xs text-muted-foreground mt-1.5">
-                  {stepIds.filter((id) => intro.getStepRead(cardIndex, id)).length}/{stepIds.length} tópicos
+                  {stepIds.filter((id) => progress.getStepRead(cardIndex, id)).length}/{stepIds.length} tópicos
                 </p>
               </div>
             </nav>
@@ -192,7 +204,7 @@ export default function IntroPageLayout({ cardIndex, card, shellTitle }: Props) 
           {/* Content area */}
           <div ref={contentRef} className="flex-1 min-w-0 space-y-6">
             {card.topics.map((topic) => {
-              const isRead = intro.getStepRead(cardIndex, topic.id);
+              const isRead = progress.getStepRead(cardIndex, topic.id);
               const isActive = topic.id === activeStepId;
               const isLocked = !isRead && !isActive;
 
@@ -242,9 +254,11 @@ export default function IntroPageLayout({ cardIndex, card, shellTitle }: Props) 
 
             {completed && (
               <div className="flex flex-wrap gap-3 justify-center py-4 animate-fade-in">
-                <Link to="/app">
-                  <Button variant="primary" size="default">Voltar para o início</Button>
-                </Link>
+                {completionActions ?? (
+                  <Link to="/app">
+                    <Button variant="primary" size="default">Voltar para o início</Button>
+                  </Link>
+                )}
               </div>
             )}
           </div>
