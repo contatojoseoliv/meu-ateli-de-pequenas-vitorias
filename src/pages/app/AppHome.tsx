@@ -43,9 +43,10 @@ export default function AppHome() {
   const introProgress = useIntroProgress();
   const location = useLocation();
 
-  const totalDays = journeyDays.length;
-  const completedCount = progress.completedDays.length;
-  const percent = totalDays > 0 ? Math.round((completedCount / totalDays) * 100) : 0;
+  const totalSteps = 10; // 3 intro + 7 days
+  const introCompletedCount = introProgress.progress.completedCards.length;
+  const completedCount = introCompletedCount + progress.completedDays.length;
+  const percent = totalSteps > 0 ? Math.round((completedCount / totalSteps) * 100) : 0;
 
   const currentDayData = useMemo(
     () => journeyDays.find((d) => d.day === progress.currentDay),
@@ -94,7 +95,7 @@ export default function AppHome() {
               <span className="font-medium text-foreground">{percent}%</span>
             </div>
 
-            <JourneyMiniProgress currentDay={progress.currentDay} completedDays={progress.completedDays} percent={percent} />
+            <JourneyMiniProgress currentDay={progress.currentDay} completedDays={progress.completedDays} introCompleted={introProgress.progress.completedCards} percent={percent} />
           </CardContent>
         </Card>
 
