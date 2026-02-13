@@ -63,6 +63,9 @@ export default function AppHome() {
   const stageThumbnail = STAGE_THUMBNAILS[currentStageIndex] ?? STAGE_THUMBNAILS[0];
 
   const stagePercent = useMemo(() => {
+    const introCount = introProgress.progress.completedCards.length;
+    if (introCount < 3) return 0;
+
     const day = progress.currentDay;
     if (isDayCompleted(day)) return 100;
 
@@ -75,7 +78,7 @@ export default function AppHome() {
 
     const checked = steps.reduce((acc, step) => acc + (getStepChecked(day, step.id) ? 1 : 0), 0);
     return clamp(Math.round((checked / total) * 100));
-  }, [currentDayData?.guided, getStepChecked, isDayCompleted, progress.currentDay]);
+  }, [currentDayData?.guided, getStepChecked, isDayCompleted, progress.currentDay, introProgress.progress.completedCards.length]);
 
   useEffect(() => {
     if (!location.hash) return;
@@ -102,7 +105,7 @@ export default function AppHome() {
               <span className="font-medium text-foreground">{percent}%</span>
             </div>
 
-            <JourneyMiniProgress currentDay={progress.currentDay} completedDays={progress.completedDays} introCompleted={introProgress.progress.completedCards} percent={percent} />
+            <JourneyMiniProgress percent={percent} />
           </CardContent>
         </Card>
 
@@ -126,7 +129,7 @@ export default function AppHome() {
                       aria-label={`Imagem da etapa atual`}
                       style={{
                         backgroundImage: `url(${stageThumbnail.src})`,
-                        backgroundSize: "300% 300%",
+                        backgroundSize: "500% 500%",
                         backgroundPosition: stageThumbnail.bgPosition,
                       }}
                     />
@@ -136,22 +139,18 @@ export default function AppHome() {
               <div className="min-w-0 flex-1 space-y-1">
                 <p className="text-base font-semibold text-foreground">Primeira Vitória em Amigurumi</p>
                 <p className="text-sm text-muted-foreground">
-                  Etapa: Dia {progress.currentDay}
-                  {currentDayData?.title ? ` — ${currentDayData.title}` : ""}
+                  {currentStageIndex < 3
+                    ? `Etapa: ${["Comece por aqui", "Materiais", "Fundamentos"][currentStageIndex]}`
+                    : `Etapa: Dia ${progress.currentDay}${currentDayData?.title ? ` — ${currentDayData.title}` : ""}`}
                 </p>
-                {currentDayData?.estimatedTime ? (
+                {currentStageIndex >= 3 && currentDayData?.estimatedTime ? (
                   <p className="text-xs text-muted-foreground">Tempo estimado: {currentDayData.estimatedTime}</p>
                 ) : null}
 
                 {/* Linha pequena de progresso da etapa */}
-                <div className="pt-3 space-y-1">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-muted-foreground">Progresso desta etapa</span>
-                    <span className="font-medium text-foreground">{stagePercent}%</span>
-                  </div>
-
+                <div className="pt-2">
                   <div
-                    className="h-2 w-full rounded-full overflow-hidden bg-secondary"
+                    className="h-1.5 w-full rounded-full overflow-hidden bg-secondary"
                     role="progressbar"
                     aria-label="Progresso desta etapa"
                     aria-valuemin={0}
