@@ -16,22 +16,22 @@ import { AppMaterialsTechniquesSection } from "@/components/app/AppMaterialsTech
 import { JourneyMiniProgress } from "@/components/app/JourneyMiniProgress";
 
 import heroAmigurumi from "@/assets/hero-amigurumi.png";
-import bulletsCraftingScene from "@/assets/bullets-crafting-scene.jpg";
-import leadVisual from "@/assets/lead-visual.png";
-import mapa7Dias from "@/assets/mapa-7-dias-referencia.png";
-import metodoTitulo from "@/assets/metodo-titulo-ref.png";
-import provaCiencia from "@/assets/prova-ciencia.png";
-import seloPrimeiraVitoria from "@/assets/selo-primeira-vitoria.png";
+import stageGrid from "@/assets/stage-grid.png";
 
-const dayStageImages: Record<number, string> = {
-  1: heroAmigurumi,
-  2: bulletsCraftingScene,
-  3: leadVisual,
-  4: mapa7Dias,
-  5: metodoTitulo,
-  6: provaCiencia,
-  7: seloPrimeiraVitoria,
-};
+// 10 stages: 3 intro cards (0-2) + 7 days (3-9)
+// Grid positions for the 3x3 sprite (indices 0-8), Day 7 uses separate image
+const STAGE_THUMBNAILS: { src: string; bgPosition: string }[] = [
+  { src: stageGrid, bgPosition: "0% 0%" },       // Comece por aqui
+  { src: stageGrid, bgPosition: "50% 0%" },       // Materiais
+  { src: stageGrid, bgPosition: "100% 0%" },      // Fundamentos
+  { src: stageGrid, bgPosition: "0% 50%" },       // Dia 1
+  { src: stageGrid, bgPosition: "50% 50%" },      // Dia 2
+  { src: stageGrid, bgPosition: "100% 50%" },     // Dia 3
+  { src: stageGrid, bgPosition: "0% 100%" },      // Dia 4
+  { src: stageGrid, bgPosition: "50% 100%" },     // Dia 5
+  { src: stageGrid, bgPosition: "100% 100%" },    // Dia 6
+  { src: heroAmigurumi, bgPosition: "center" },    // Dia 7
+];
 
 function clamp(n: number, min = 0, max = 100) {
   return Math.min(max, Math.max(min, n));
@@ -53,7 +53,14 @@ export default function AppHome() {
     [progress.currentDay],
   );
 
-  const stageImage = dayStageImages[progress.currentDay] ?? heroAmigurumi;
+  // Calculate current stage index: intro cards first, then days
+  const currentStageIndex = useMemo(() => {
+    const introCount = introProgress.progress.completedCards.length;
+    if (introCount < 3) return introCount; // still in intro phase
+    return 2 + progress.currentDay; // 3 intro + day offset (day1=index3, day7=index9)
+  }, [introProgress.progress.completedCards.length, progress.currentDay]);
+
+  const stageThumbnail = STAGE_THUMBNAILS[currentStageIndex] ?? STAGE_THUMBNAILS[0];
 
   const stagePercent = useMemo(() => {
     const day = progress.currentDay;
@@ -105,15 +112,27 @@ export default function AppHome() {
             <div className="flex flex-col md:flex-row md:items-center gap-5">
               <div className="shrink-0">
                 <div className="h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden ring-2 ring-accent/30">
-                  <img
-                    src={stageImage}
-                    alt={`Imagem da etapa do Dia ${progress.currentDay}`}
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                  />
+                  {currentStageIndex === 9 ? (
+                    <img
+                      src={stageThumbnail.src}
+                      alt="Coelhinho amigurumi"
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div
+                      className="h-full w-full"
+                      role="img"
+                      aria-label={`Imagem da etapa atual`}
+                      style={{
+                        backgroundImage: `url(${stageThumbnail.src})`,
+                        backgroundSize: "300% 300%",
+                        backgroundPosition: stageThumbnail.bgPosition,
+                      }}
+                    />
+                  )}
                 </div>
               </div>
-
               <div className="min-w-0 flex-1 space-y-1">
                 <p className="text-base font-semibold text-foreground">Primeira Vitória em Amigurumi</p>
                 <p className="text-sm text-muted-foreground">
