@@ -14,64 +14,59 @@ export function JourneyMiniProgress({ percent, className }: JourneyMiniProgressP
   const p = clamp(Number.isFinite(percent) ? percent : 0);
   const allDone = p >= 100;
 
-  // SVG circular progress ring
-  const size = 64;
-  const stroke = 3.5;
-  const radius = (size - stroke) / 2;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (p / 100) * circumference;
-
   return (
     <div className={cn("flex items-center gap-3", className)}>
-      {/* Selo com anel de progresso */}
-      <div className="relative shrink-0" style={{ width: size, height: size }}>
-        <svg
-          width={size}
-          height={size}
-          className="absolute inset-0"
-          viewBox={`0 0 ${size} ${size}`}
-        >
-          {/* Trilha */}
-          <circle
-            cx={size / 2}
-            cy={size / 2}
-            r={radius}
-            fill="none"
-            stroke="hsl(var(--secondary) / 0.4)"
-            strokeWidth={stroke}
-          />
-          {/* Progresso */}
-          <circle
-            cx={size / 2}
-            cy={size / 2}
-            r={radius}
-            fill="none"
-            stroke="hsl(var(--primary))"
-            strokeWidth={stroke}
-            strokeLinecap="round"
-            strokeDasharray={circumference}
-            strokeDashoffset={offset}
-            transform={`rotate(-90 ${size / 2} ${size / 2})`}
-            className="transition-[stroke-dashoffset] duration-500 ease-out"
-          />
-        </svg>
+      {/* Barra de progresso + texto */}
+      <div className="flex-1 min-w-0 space-y-1.5">
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-medium text-foreground">{p}% concluído</p>
+          <p className="text-[11px] text-muted-foreground">
+            {allDone ? "Conquista desbloqueada! ✨" : "Sua meta"}
+          </p>
+        </div>
 
-        <img
-          src={seloPrimeiraVitoria}
-          alt="Selo Primeira Vitória"
-          className={cn(
-            "absolute inset-0 m-auto rounded-full object-cover transition-all duration-500",
-            allDone ? "grayscale-0 opacity-100" : "grayscale opacity-40"
-          )}
-          style={{ width: size - stroke * 4, height: size - stroke * 4 }}
-        />
+        {/* Trilha */}
+        <div className="relative h-2.5 w-full rounded-full overflow-hidden bg-secondary/40">
+          <div
+            className="absolute inset-y-0 left-0 rounded-full transition-[width] duration-500 ease-out"
+            style={{
+              width: `${p}%`,
+              background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.75))",
+            }}
+          />
+        </div>
+
+        <p className="text-[11px] text-muted-foreground leading-tight">
+          {allDone
+            ? "Parabéns! Você conquistou o selo Primeira Vitória."
+            : "Conclua todas as etapas para conquistar o selo."}
+        </p>
       </div>
 
-      <div className="min-w-0 space-y-0.5">
-        <p className="text-xs font-medium text-foreground">{p}% concluído</p>
-        <p className="text-[11px] text-muted-foreground">
-          {allDone ? "Conquista final desbloqueada!" : "Conclua os dias para liberar o selo final."}
-        </p>
+      {/* Selo final (meta visual) */}
+      <div className="shrink-0 relative">
+        <div
+          className={cn(
+            "rounded-full overflow-hidden ring-2 transition-all duration-500",
+            allDone
+              ? "ring-primary/50 shadow-[0_0_16px_hsl(var(--primary)/0.25)]"
+              : "ring-secondary/40"
+          )}
+        >
+          <img
+            src={seloPrimeiraVitoria}
+            alt="Selo Primeira Vitória"
+            className={cn(
+              "h-16 w-16 sm:h-[72px] sm:w-[72px] object-cover transition-all duration-500",
+              allDone ? "grayscale-0 opacity-100" : "grayscale opacity-35"
+            )}
+          />
+        </div>
+
+        {/* Brilho sutil quando completo */}
+        {allDone && (
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/10 to-transparent pointer-events-none" />
+        )}
       </div>
     </div>
   );
