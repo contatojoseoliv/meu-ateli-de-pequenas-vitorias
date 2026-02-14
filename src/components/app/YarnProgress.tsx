@@ -77,14 +77,14 @@ export function YarnProgress({ value, className, label, size = "md" }: YarnProgr
           }}
         />
 
-        {/* preenchimento: verde eucalipto "tecido" */}
+        {/* preenchimento: ocre “tecido” */}
         <div
           className="absolute inset-0"
           style={{
             width: `${v}%`,
             background:
-              "repeating-linear-gradient(45deg, hsl(var(--primary) / 0.95) 0 8px, hsl(var(--primary) / 0.65) 8px 16px)",
-            boxShadow: "0 0 0 1px hsl(var(--primary) / 0.25) inset",
+              "repeating-linear-gradient(45deg, hsl(var(--accent) / 0.95) 0 8px, hsl(var(--accent) / 0.65) 8px 16px)",
+            boxShadow: "0 0 0 1px hsl(var(--accent) / 0.25) inset",
           }}
         />
 
@@ -97,19 +97,17 @@ export function YarnProgress({ value, className, label, size = "md" }: YarnProgr
         />
       </div>
 
-      {/* marcador: coelhinho (apenas no tamanho md) */}
-      {size === "md" && (
-        <motion.div
-          className="relative"
-          initial={false}
-          animate={{ x: `calc(${v}% - 12px)` }}
-          transition={{ type: "spring", stiffness: 200, damping: 26, mass: 0.6 }}
-        >
-          <div className={cn("-mt-3", marker)}>
-            <BunnyMarker className="drop-shadow-sm" />
-          </div>
-        </motion.div>
-      )}
+      {/* marcador: coelhinho */}
+      <motion.div
+        className="relative"
+        initial={false}
+        animate={{ x: `calc(${v}% - 12px)` }}
+        transition={{ type: "spring", stiffness: 200, damping: 26, mass: 0.6 }}
+      >
+        <div className={cn("-mt-3", marker)}>
+          <BunnyMarker className="drop-shadow-sm" />
+        </div>
+      </motion.div>
     </div>
   );
 }
