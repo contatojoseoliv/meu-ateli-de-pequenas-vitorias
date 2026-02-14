@@ -19,16 +19,16 @@ export function AppSupportSection() {
             Fale com a gente pelo canal que for mais confortável.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-2">
-            <a href="https://wa.me/55SEUNUMERO" target="_blank" rel="noreferrer" className="sm:flex-1">
-              <Button variant="secondary" size="default" className="w-full">
-                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+          <div className="flex flex-row gap-2">
+            <a href="https://wa.me/55SEUNUMERO" target="_blank" rel="noreferrer">
+              <Button variant="secondary" size="sm" className="text-xs px-4 py-2">
+                <MessageCircle className="h-3.5 w-3.5" aria-hidden="true" />
                 WhatsApp
               </Button>
             </a>
-            <a href="mailto:suporte@seusite.com" className="sm:flex-1">
-              <Button variant="ghost" size="default" className="w-full">
-                <Mail className="h-4 w-4" aria-hidden="true" />
+            <a href="mailto:suporte@seusite.com">
+              <Button variant="ghost" size="sm" className="text-xs px-4 py-2">
+                <Mail className="h-3.5 w-3.5" aria-hidden="true" />
                 E-mail
               </Button>
             </a>
