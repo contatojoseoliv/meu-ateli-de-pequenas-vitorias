@@ -1,14 +1,7 @@
 import { cn } from "@/lib/utils";
-import {
-  Sparkles,
-  Scissors,
-  BadgeCheck,
-  Puzzle,
-  Wand2,
-  Heart,
-} from "lucide-react";
 
 import finalSeal from "@/assets/selo-primeira-vitoria-circular.png";
+import seloIcon from "@/assets/selo-vitoria-icon.png";
 
 type JourneyMiniProgressProps = {
   currentDay: number;
@@ -17,8 +10,6 @@ type JourneyMiniProgressProps = {
   className?: string;
 };
 
-const dayIcons = [Sparkles, Heart, Scissors, Wand2, Puzzle, BadgeCheck];
-
 function clamp(n: number, min = 0, max = 100) {
   return Math.min(max, Math.max(min, n));
 }
@@ -26,14 +17,9 @@ function clamp(n: number, min = 0, max = 100) {
 export function JourneyMiniProgress({ currentDay, completedDays, percent, className }: JourneyMiniProgressProps) {
   const p = clamp(Number.isFinite(percent) ? percent : 0);
 
-  // 7 dias + 1 conquista final (selo)
   const totalNodes = 8;
-
-  // “Progresso de nós”: dia concluído = nó preenchido; conquista final só quando dia 7 concluído
   const isDayCompleted = (day: number) => completedDays.includes(day);
   const finalUnlocked = isDayCompleted(7);
-
-  // Converte percent para uma linha que percorre até o último nó (sem passar do selo)
   const lineProgress = `${(p / 100) * 100}%`;
 
   return (
@@ -53,23 +39,24 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
             const day = i + 1;
             const completed = isDayCompleted(day);
             const isCurrent = day === currentDay && !completed;
-            const Icon = dayIcons[i] ?? Sparkles;
 
             return (
               <div key={day} className="flex justify-center">
                 <div
                   className={cn(
-                    "h-7 w-7 rounded-full border bg-card flex items-center justify-center shadow-sm",
+                    "h-7 w-7 rounded-full border bg-card flex items-center justify-center shadow-sm overflow-hidden p-0.5",
                     completed && "border-accent/50 ring-2 ring-accent/20",
                     isCurrent && "border-accent/60 ring-2 ring-accent/30",
                     !completed && !isCurrent && "border-border",
                   )}
                   aria-label={completed ? `Dia ${day} concluído` : `Dia ${day}`}
                 >
-                  <Icon
+                  <img
+                    src={seloIcon}
+                    alt=""
                     className={cn(
-                      "h-4 w-4",
-                      completed || isCurrent ? "text-foreground" : "text-muted-foreground",
+                      "h-full w-full object-contain",
+                      !completed && !isCurrent && "grayscale opacity-40",
                     )}
                     aria-hidden="true"
                   />
@@ -99,7 +86,7 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
       </div>
 
       <p className="text-[11px] text-muted-foreground">
-        {finalUnlocked ? "Conquista final desbloqueada." : `Conclua os dias para liberar o selo final.`}
+        {finalUnlocked ? "Conquista final desbloqueada." : "Conclua todos os dias para liberar o selo de Primeira Vitória."}
       </p>
     </div>
   );
