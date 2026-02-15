@@ -44,7 +44,7 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
               <div key={day} className="flex justify-center">
                 <div
                   className={cn(
-                    "h-7 w-7 rounded-full border bg-card flex items-center justify-center shadow-sm overflow-hidden p-0.5",
+                    "h-7 w-7 rounded-full border shadow-sm overflow-hidden",
                     completed && "border-accent/50 ring-2 ring-accent/20",
                     isCurrent && "border-accent/60 ring-2 ring-accent/30",
                     !completed && !isCurrent && "border-border",
@@ -55,7 +55,7 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
                     src={seloIcon}
                     alt=""
                     className={cn(
-                      "h-full w-full object-contain",
+                      "h-full w-full object-cover",
                       !completed && !isCurrent && "grayscale opacity-40",
                     )}
                     aria-hidden="true"
