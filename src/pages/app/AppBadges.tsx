@@ -1,13 +1,14 @@
 import { AppShell } from "@/components/app/AppShell";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { useJourneyProgress } from "@/hooks/useJourneyProgress";
+
+import seloPrimeiraVitoria from "@/assets/selo-primeira-vitoria-circular.png";
 
 export default function AppBadges() {
   const { progress } = useJourneyProgress();
   const completed = progress.completedDays.length;
 
-  const primeiraVitoria = completed >= 1;
+  const primeiraVitoria = completed >= 7;
 
   return (
     <AppShell title="Selos">
@@ -27,13 +28,20 @@ export default function AppBadges() {
               <p className="text-sm font-medium text-foreground">{completed}/7</p>
             </div>
 
-            <div className="flex flex-wrap gap-2">
-              <Badge variant={primeiraVitoria ? "default" : "secondary"}>
-                Primeira vitória
-              </Badge>
-              {!primeiraVitoria ? (
-                <p className="text-xs text-muted-foreground w-full">Conclua 1 dia para desbloquear seu primeiro selo.</p>
-              ) : null}
+            <div className="flex flex-col items-center gap-3 py-4">
+              <img
+                src={seloPrimeiraVitoria}
+                alt="Selo Primeira Vitória"
+                className={`h-24 w-24 object-contain ${primeiraVitoria ? "" : "grayscale opacity-40"}`}
+              />
+              <p className="text-sm font-medium text-foreground">
+                Primeira Vitória
+              </p>
+              {!primeiraVitoria && (
+                <p className="text-xs text-muted-foreground text-center">
+                  Conclua todos os dias para liberar o selo de Primeira Vitória.
+                </p>
+              )}
             </div>
 
             <p className="text-xs text-muted-foreground">Em breve: mais selos, animações e histórico.</p>
