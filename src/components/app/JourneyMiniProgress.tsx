@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import finalSeal from "@/assets/selo-primeira-vitoria-circular.png";
+import crochetV from "@/assets/crochet-v-stitch.png";
 
 type JourneyMiniProgressProps = {
   currentDay: number;
@@ -10,49 +11,6 @@ type JourneyMiniProgressProps = {
 
 function clamp(n: number, min = 0, max = 100) {
   return Math.min(max, Math.max(min, n));
-}
-
-function CrochetStitchV({ completed, isCurrent }: { completed: boolean; isCurrent: boolean }) {
-  const strokeColor = completed || isCurrent
-    ? "hsl(var(--accent))"
-    : "hsl(var(--muted-foreground) / 0.35)";
-  const strokeWidth = completed ? 3 : 2.5;
-
-  return (
-    <svg
-      width="28"
-      height="24"
-      viewBox="0 0 28 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={cn(
-        "drop-shadow-sm",
-        isCurrent && "drop-shadow-md",
-        !completed && !isCurrent && "opacity-50",
-      )}
-    >
-      {/* Left leg */}
-      <path
-        d="M4 3 C6 8, 10 16, 14 21"
-        stroke={strokeColor}
-        strokeWidth={strokeWidth}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      {/* Right leg */}
-      <path
-        d="M24 3 C22 8, 18 16, 14 21"
-        stroke={strokeColor}
-        strokeWidth={strokeWidth}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      {/* Small loop at top-left */}
-      <circle cx="4" cy="3" r="1.5" fill={strokeColor} />
-      {/* Small loop at top-right */}
-      <circle cx="24" cy="3" r="1.5" fill={strokeColor} />
-    </svg>
-  );
 }
 
 export function JourneyMiniProgress({ currentDay, completedDays, percent, className }: JourneyMiniProgressProps) {
@@ -82,7 +40,16 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
 
             return (
               <div key={day} className="flex justify-center" aria-label={completed ? `Dia ${day} concluído` : `Dia ${day}`}>
-                <CrochetStitchV completed={completed} isCurrent={isCurrent} />
+                <img
+                  src={crochetV}
+                  alt=""
+                  className={cn(
+                    "h-7 w-7 object-contain drop-shadow-sm",
+                    isCurrent && "drop-shadow-md",
+                    !completed && !isCurrent && "grayscale opacity-40",
+                  )}
+                  aria-hidden="true"
+                />
               </div>
             );
           })}
