@@ -77,9 +77,9 @@ export default function AppHome() {
   return (
     <AppShell>
       <main className="container-main py-8 space-y-6">
-        {/* Mini-bloco de entrada - Card 1 */}
+        {/* Mini-bloco de entrada - Mais compacto */}
         <Card className="app-stitch">
-          <CardContent className="p-4 md:p-5 space-y-2">
+          <CardContent className="p-3 space-y-2">
             <p className="text-xl font-serif text-foreground">Bem-vinda ao Meu Ateliê, {profile.displayName}!</p>
             <div className="flex items-center justify-between text-sm text-muted-foreground">
               <span>Meu Progresso para o Primeiro Amigurumi</span>
@@ -90,12 +90,12 @@ export default function AppHome() {
           </CardContent>
         </Card>
 
-        {/* Bloco principal - Card 2 (Igualado ao Card 1 com borda de destaque) */}
-        <Card className="app-stitch border-2 border-accent/20 shadow-elevada">
-          <CardContent className="p-4 md:p-5 space-y-4">
-            <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
-              <div className="shrink-0 flex justify-center">
-                <div className="h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden ring-2 ring-accent/20 bg-muted shadow-sm">
+        {/* Bloco principal (estilo imagem) */}
+        <Card className="app-stitch">
+          <CardContent className="p-7 md:p-8 space-y-4">
+            <div className="flex flex-col md:flex-row md:items-center gap-5">
+              <div className="shrink-0">
+                <div className="h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden ring-2 ring-accent/30 bg-muted">
                   <img
                     src={stageImage}
                     alt={`Imagem da etapa do Dia ${progress.currentDay}`}
@@ -118,7 +118,7 @@ export default function AppHome() {
                 {/* Linha fina de progresso da etapa */}
                 <div className="pt-3">
                   <div
-                    className="h-1 w-full rounded-full overflow-hidden bg-secondary/30"
+                    className="h-0.5 w-full rounded-full overflow-hidden bg-secondary/30"
                     role="progressbar"
                     aria-label="Progresso desta etapa"
                     aria-valuemin={0}
@@ -133,9 +133,9 @@ export default function AppHome() {
                 </div>
               </div>
 
-              <div className="md:self-center pt-2 md:pt-0">
+              <div className="md:self-center">
                 <Link to={`/app/dia/${progress.currentDay}`}>
-                  <Button variant="primary" size="default" className="w-full md:w-auto px-8">
+                  <Button variant="primary" size="default" className="w-full md:w-auto">
                     {completedCount === 0 ? "Começar" : `Continuar do Dia ${progress.currentDay}`}
                   </Button>
                 </Link>

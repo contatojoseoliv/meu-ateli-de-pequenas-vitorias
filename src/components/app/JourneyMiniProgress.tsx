@@ -53,7 +53,7 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
                         src={crochetV}
                         alt=""
                         className={cn(
-                          "h-12 w-12 md:h-16 md:w-16 object-contain drop-shadow-sm transition-all duration-300",
+                          "h-14 w-14 md:h-20 md:w-20 object-contain drop-shadow-sm transition-all duration-300",
                           isCurrent && "drop-shadow-md scale-110",
                           !completed && !isCurrent && "grayscale opacity-40",
                         )}
@@ -68,7 +68,7 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
               );
             })}
 
-            {/* nó final: selo */}
+            {/* nó final: selo reduzido */}
             <Tooltip>
               <TooltipTrigger asChild>
                 <div className="flex justify-center relative z-10">
