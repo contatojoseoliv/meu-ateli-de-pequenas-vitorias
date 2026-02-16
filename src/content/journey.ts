@@ -11,6 +11,7 @@ export type GuidedStep = {
 export type JourneyDay = {
   day: number;
   title: string;
+  tag: string;
   estimatedTime: string;
   guided: Record<DayBlockKey, GuidedStep[]>;
   tabs: {
@@ -25,6 +26,7 @@ export const journeyDays: JourneyDay[] = [
   {
     day: 1,
     title: "Seu primeiro ponto e o anel mágico",
+    tag: "Anel mágico",
     estimatedTime: "15–20 min",
     guided: {
       preparacao: [
@@ -155,6 +157,7 @@ export const journeyDays: JourneyDay[] = [
   {
     day: 2,
     title: "Fazendo o corpinho crescer",
+    tag: "Base",
     estimatedTime: "15–20 min",
     guided: { preparacao: [], voltas: [], verificacao: [], objetivoFinal: [] },
     tabs: { fullRecipe: ["(em breve)"], materials: ["(em breve)"], techniquesAndResources: ["(em breve)"] },
@@ -162,6 +165,7 @@ export const journeyDays: JourneyDay[] = [
   {
     day: 3,
     title: "Subindo as paredes (sem aumentar)",
+    tag: "Repetição",
     estimatedTime: "15–20 min",
     guided: { preparacao: [], voltas: [], verificacao: [], objetivoFinal: [] },
     tabs: { fullRecipe: ["(em breve)"], materials: ["(em breve)"], techniquesAndResources: ["(em breve)"] },
@@ -169,6 +173,7 @@ export const journeyDays: JourneyDay[] = [
   {
     day: 4,
     title: "Fechando o corpinho do coelho",
+    tag: "Corpinho",
     estimatedTime: "15–20 min",
     guided: { preparacao: [], voltas: [], verificacao: [], objetivoFinal: [] },
     tabs: { fullRecipe: ["(em breve)"], materials: ["(em breve)"], techniquesAndResources: ["(em breve)"] },
@@ -176,6 +181,7 @@ export const journeyDays: JourneyDay[] = [
   {
     day: 5,
     title: "Fechamento total do corpo",
+    tag: "Arremate",
     estimatedTime: "15–20 min",
     guided: { preparacao: [], voltas: [], verificacao: [], objetivoFinal: [] },
     tabs: { fullRecipe: ["(em breve)"], materials: ["(em breve)"], techniquesAndResources: ["(em breve)"] },
@@ -183,6 +189,7 @@ export const journeyDays: JourneyDay[] = [
   {
     day: 6,
     title: "Orelhas, bracinhos e perninhas",
+    tag: "Orelhas",
     estimatedTime: "15–20 min",
     guided: { preparacao: [], voltas: [], verificacao: [], objetivoFinal: [] },
     tabs: { fullRecipe: ["(em breve)"], materials: ["(em breve)"], techniquesAndResources: ["(em breve)"] },
@@ -190,6 +197,7 @@ export const journeyDays: JourneyDay[] = [
   {
     day: 7,
     title: "Montagem, rostinho e chaveiro",
+    tag: "Finalização",
     estimatedTime: "20–30 min",
     guided: { preparacao: [], voltas: [], verificacao: [], objetivoFinal: [] },
     tabs: { fullRecipe: ["(em breve)"], materials: ["(em breve)"], techniquesAndResources: ["(em breve)"] },
