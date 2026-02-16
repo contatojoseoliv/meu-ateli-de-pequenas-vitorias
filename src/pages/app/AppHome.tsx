@@ -28,6 +28,16 @@ const dayStageImages: Record<number, string> = {
   7: placeholderImg,
 };
 
+const dayTags: Record<number, string> = {
+  1: "Primeiro Passo",
+  2: "Segundo Passo",
+  3: "Terceiro Passo",
+  4: "Quarto Passo",
+  5: "Quinto Passo",
+  6: "Sexto Passo",
+  7: "Sétimo Passo",
+};
+
 function clamp(n: number, min = 0, max = 100) {
   return Math.min(max, Math.max(min, n));
 }
@@ -77,11 +87,11 @@ export default function AppHome() {
   return (
     <AppShell>
       <main className="container-main py-8 space-y-6">
-        {/* Mini-bloco de entrada - Mais compacto */}
+        {/* Mini-bloco de entrada - Compacto */}
         <Card className="app-stitch">
-          <CardContent className="p-3 space-y-2">
-            <p className="text-xl font-serif text-foreground">Bem-vinda ao Meu Ateliê, {profile.displayName}!</p>
-            <div className="flex items-center justify-between text-sm text-muted-foreground">
+          <CardContent className="p-2 md:p-3 space-y-1">
+            <p className="text-lg md:text-xl font-serif text-foreground">Bem-vinda ao Meu Ateliê, {profile.displayName}!</p>
+            <div className="flex items-center justify-between text-[11px] md:text-sm text-muted-foreground">
               <span>Meu Progresso para o Primeiro Amigurumi</span>
               <span className="font-bold text-foreground">{percent}% concluído</span>
             </div>
@@ -90,12 +100,12 @@ export default function AppHome() {
           </CardContent>
         </Card>
 
-        {/* Bloco principal (estilo imagem) */}
+        {/* Bloco principal (estilo imagem) - Compacto */}
         <Card className="app-stitch">
-          <CardContent className="p-7 md:p-8 space-y-4">
-            <div className="flex flex-col md:flex-row md:items-center gap-5">
-              <div className="shrink-0">
-                <div className="h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden ring-2 ring-accent/30 bg-muted">
+          <CardContent className="p-2 md:p-3 space-y-2">
+            <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
+              <div className="shrink-0 flex justify-center">
+                <div className="h-16 w-16 md:h-20 md:w-20 rounded-full overflow-hidden ring-2 ring-accent/20 bg-muted shadow-sm">
                   <img
                     src={stageImage}
                     alt={`Imagem da etapa do Dia ${progress.currentDay}`}
@@ -105,18 +115,18 @@ export default function AppHome() {
                 </div>
               </div>
 
-              <div className="min-w-0 flex-1 space-y-1">
+              <div className="min-w-0 flex-1 space-y-0.5">
                 <p className="text-lg md:text-xl font-serif text-foreground">Primeira Vitória em Amigurumi</p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs md:text-sm text-muted-foreground">
                   Etapa: Dia {progress.currentDay}
                   {currentDayData?.title ? ` — ${currentDayData.title}` : ""}
                 </p>
                 {currentDayData?.estimatedTime ? (
-                  <p className="text-xs text-muted-foreground">Tempo estimado: {currentDayData.estimatedTime}</p>
+                  <p className="text-[10px] md:text-xs text-muted-foreground">Tempo estimado: {currentDayData.estimatedTime}</p>
                 ) : null}
 
                 {/* Linha fina de progresso da etapa */}
-                <div className="pt-3">
+                <div className="pt-2">
                   <div
                     className="h-0.5 w-full rounded-full overflow-hidden bg-secondary/30"
                     role="progressbar"
@@ -133,9 +143,9 @@ export default function AppHome() {
                 </div>
               </div>
 
-              <div className="md:self-center">
+              <div className="md:self-center pt-2 md:pt-0">
                 <Link to={`/app/dia/${progress.currentDay}`}>
-                  <Button variant="primary" size="default" className="w-full md:w-auto">
+                  <Button variant="primary" size="sm" className="w-full md:w-auto px-6">
                     {completedCount === 0 ? "Começar" : `Continuar do Dia ${progress.currentDay}`}
                   </Button>
                 </Link>
@@ -176,6 +186,7 @@ export default function AppHome() {
                   completed={completed}
                   isCurrent={isCurrent}
                   href={`/app/dia/${d.day}`}
+                  tag={dayTags[d.day]}
                 />
               );
             })}
