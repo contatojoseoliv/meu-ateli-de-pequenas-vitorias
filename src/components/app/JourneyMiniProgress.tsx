@@ -44,7 +44,7 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
                   src={crochetV}
                   alt=""
                   className={cn(
-                    "h-7 w-7 object-contain drop-shadow-sm",
+                    "h-10 w-10 object-contain drop-shadow-sm",
                     isCurrent && "drop-shadow-md",
                     !completed && !isCurrent && "grayscale opacity-40",
                   )}
