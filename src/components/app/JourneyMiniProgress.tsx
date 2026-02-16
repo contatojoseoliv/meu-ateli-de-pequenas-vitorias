@@ -31,10 +31,10 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
       <div className={cn("space-y-1.5", className)}>
         <div className="relative pt-1 pb-0.5">
           {/* trilha */}
-          <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 rounded-full bg-secondary" />
+          <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-0.5 rounded-full bg-secondary" />
           {/* preenchimento */}
           <div
-            className="absolute left-0 top-1/2 -translate-y-1/2 h-1 rounded-full bg-accent transition-[width] duration-500 ease-out"
+            className="absolute left-0 top-1/2 -translate-y-1/2 h-0.5 rounded-full bg-accent transition-[width] duration-500 ease-out"
             style={{ width: lineProgress }}
             aria-hidden="true"
           />
@@ -53,7 +53,7 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
                         src={crochetV}
                         alt=""
                         className={cn(
-                          "h-10 w-10 object-contain drop-shadow-sm transition-all duration-300",
+                          "h-8 w-8 object-contain drop-shadow-sm transition-all duration-300",
                           isCurrent && "drop-shadow-md scale-110",
                           !completed && !isCurrent && "grayscale opacity-40",
                         )}
@@ -74,7 +74,7 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
                 <div className="flex justify-center relative z-10">
                   <div
                     className={cn(
-                      "h-12 w-12 rounded-full border-2 bg-card shadow-md overflow-hidden transition-all duration-300",
+                      "h-10 w-10 rounded-full border-2 bg-card shadow-md overflow-hidden transition-all duration-300",
                       finalUnlocked
                         ? "border-accent/60 ring-2 ring-accent/30 animate-[pulse_3s_ease-in-out_infinite]"
                         : "border-border opacity-60 grayscale",
