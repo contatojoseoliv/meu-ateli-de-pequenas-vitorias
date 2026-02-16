@@ -44,7 +44,7 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
                   src={crochetV}
                   alt=""
                   className={cn(
-                    "h-10 w-10 object-contain drop-shadow-sm",
+                    "h-14 w-14 object-contain drop-shadow-sm",
                     isCurrent && "drop-shadow-md",
                     !completed && !isCurrent && "grayscale opacity-40",
                   )}
@@ -55,10 +55,10 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
           })}
 
           {/* nó final: selo */}
-          <div className="flex justify-center">
+          <div className="flex justify-center relative z-10">
             <div
               className={cn(
-                "h-8 w-8 rounded-full border bg-card shadow-sm overflow-hidden",
+                "h-14 w-14 rounded-full border-2 bg-card shadow-md overflow-hidden",
                 finalUnlocked ? "border-accent/60 ring-2 ring-accent/30" : "border-border opacity-60",
               )}
               aria-label={finalUnlocked ? "Conquista final desbloqueada" : "Conquista final"}
