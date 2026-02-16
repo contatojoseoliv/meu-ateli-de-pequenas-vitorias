@@ -85,7 +85,7 @@ export default function AppHome() {
         {/* Mini-bloco de entrada - Mais compacto */}
         <Card className="app-stitch">
           <CardContent className="p-3 space-y-2">
-            <p className="text-base font-bold text-foreground">Bem-vinda ao Meu Ateliê, {profile.displayName}!</p>
+            <p className="text-xl font-serif text-foreground">Bem-vinda ao Meu Ateliê, {profile.displayName}!</p>
             <div className="flex items-center justify-between text-sm text-muted-foreground">
               <span>Meu Progresso para o Primeiro Amigurumi</span>
               <span className="font-bold text-foreground">{percent}% concluído</span>
