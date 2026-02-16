@@ -82,11 +82,11 @@ export default function AppHome() {
   return (
     <AppShell>
       <main className="container-main py-8 space-y-6">
-        {/* Mini-bloco de entrada */}
+        {/* Mini-bloco de entrada - Mais compacto */}
         <Card className="app-stitch">
-          <CardContent className="p-4 space-y-3">
-            <p className="text-base md:text-lg font-bold text-foreground">Bem-vinda ao Meu Ateliê, {profile.displayName}!</p>
-            <div className="flex items-center justify-between text-sm md:text-base text-muted-foreground">
+          <CardContent className="p-3 space-y-2">
+            <p className="text-base font-bold text-foreground">Bem-vinda ao Meu Ateliê, {profile.displayName}!</p>
+            <div className="flex items-center justify-between text-sm text-muted-foreground">
               <span>Meu Progresso para o Primeiro Amigurumi</span>
               <span className="font-bold text-foreground">{percent}% concluído</span>
             </div>

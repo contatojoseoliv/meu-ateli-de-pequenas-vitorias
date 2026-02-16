@@ -28,13 +28,13 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
 
   return (
     <TooltipProvider delayDuration={200}>
-      <div className={cn("space-y-2", className)}>
-        <div className="relative flex items-center h-16 md:h-20">
+      <div className={cn("space-y-1", className)}>
+        <div className="relative flex items-center h-12 md:h-16">
           {/* trilha */}
-          <div className="absolute left-0 right-0 h-1 rounded-full bg-secondary" />
+          <div className="absolute left-0 right-0 h-0.5 rounded-full bg-secondary" />
           {/* preenchimento */}
           <div
-            className="absolute left-0 h-1 rounded-full bg-accent transition-[width] duration-500 ease-out"
+            className="absolute left-0 h-0.5 rounded-full bg-accent transition-[width] duration-500 ease-out"
             style={{ width: lineProgress }}
             aria-hidden="true"
           />
@@ -68,13 +68,13 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
               );
             })}
 
-            {/* nó final: selo */}
+            {/* nó final: selo reduzido */}
             <Tooltip>
               <TooltipTrigger asChild>
                 <div className="flex justify-center relative z-10">
                   <div
                     className={cn(
-                      "h-14 w-14 md:h-24 md:w-24 rounded-full border-2 bg-card shadow-md overflow-hidden transition-all duration-300",
+                      "h-10 w-10 md:h-14 md:w-14 rounded-full border-2 bg-card shadow-md overflow-hidden transition-all duration-300",
                       finalUnlocked
                         ? "border-accent/60 ring-2 ring-accent/30 animate-[pulse_3s_ease-in-out_infinite]"
                         : "border-border opacity-60 grayscale",
@@ -97,7 +97,7 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
           </div>
         </div>
 
-        <p className="text-xs md:text-sm text-muted-foreground">
+        <p className="text-[11px] md:text-xs text-muted-foreground">
           {finalUnlocked ? "Conquista final desbloqueada! 🎉" : "Conclua todos os dias para liberar o selo de Primeira Vitória."}
         </p>
       </div>
