@@ -49,6 +49,20 @@ export default function AppHome() {
 
   const stageImage = dayStageImages[progress.currentDay] ?? placeholderImg;
 
+  const activeStepTitle = useMemo(() => {
+    const day = progress.currentDay;
+    const guided = currentDayData?.guided;
+    if (!guided) return null;
+
+    const steps = Object.values(guided).flat();
+    for (const step of steps) {
+      if (!getStepChecked(day, step.id)) {
+        return step.text;
+      }
+    }
+    return "Tudo pronto por hoje!";
+  }, [currentDayData?.guided, getStepChecked, progress.currentDay]);
+
   const stagePercent = useMemo(() => {
     const day = progress.currentDay;
     if (isDayCompleted(day)) return 100;
@@ -90,12 +104,12 @@ export default function AppHome() {
           </CardContent>
         </Card>
 
-        {/* Bloco principal (estilo imagem) */}
-        <Card className="app-stitch">
+        {/* Bloco principal (estilo imagem) - Destaque aumentado */}
+        <Card className="app-stitch ring-1 ring-primary/20 shadow-elevada">
           <CardContent className="p-7 md:p-8 space-y-4">
             <div className="flex flex-col md:flex-row md:items-center gap-5">
               <div className="shrink-0">
-                <div className="h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden ring-2 ring-accent/30 bg-muted">
+                <div className="h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden ring-2 ring-accent/30 bg-muted shadow-inner">
                   <img
                     src={stageImage}
                     alt={`Imagem da etapa do Dia ${progress.currentDay}`}
@@ -106,14 +120,22 @@ export default function AppHome() {
               </div>
 
               <div className="min-w-0 flex-1 space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-0.5 rounded-full bg-accent/10 text-[10px] font-bold text-accent uppercase tracking-wider">
+                    Atividade Sugerida
+                  </span>
+                </div>
                 <p className="text-lg md:text-xl font-serif text-foreground">Primeira Vitória em Amigurumi</p>
                 <p className="text-sm text-muted-foreground">
-                  Etapa: Dia {progress.currentDay}
+                  Dia {progress.currentDay}
                   {currentDayData?.title ? ` — ${currentDayData.title}` : ""}
                 </p>
-                {currentDayData?.estimatedTime ? (
-                  <p className="text-xs text-muted-foreground">Tempo estimado: {currentDayData.estimatedTime}</p>
-                ) : null}
+                
+                {activeStepTitle && (
+                  <p className="text-xs font-medium text-primary/80 italic">
+                    Próximo passo: {activeStepTitle}
+                  </p>
+                )}
 
                 {/* Linha fina de progresso da etapa */}
                 <div className="pt-3">
@@ -135,7 +157,7 @@ export default function AppHome() {
 
               <div className="md:self-center">
                 <Link to={`/app/dia/${progress.currentDay}`}>
-                  <Button variant="primary" size="default" className="w-full md:w-auto">
+                  <Button variant="primary" size="default" className="w-full md:w-auto shadow-cta">
                     {completedCount === 0 ? "Começar" : `Continuar do Dia ${progress.currentDay}`}
                   </Button>
                 </Link>
