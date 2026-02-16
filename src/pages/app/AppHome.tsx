@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/shared/Button";
 import { journeyDays } from "@/content/journey";
 import { useJourneyProgress } from "@/hooks/useJourneyProgress";
@@ -14,6 +14,7 @@ import { AppSupportSection } from "@/components/app/AppSupportSection";
 import { AppFooterMinimal } from "@/components/app/AppFooterMinimal";
 import { AppMaterialsTechniquesSection } from "@/components/app/AppMaterialsTechniquesSection";
 import { JourneyMiniProgress } from "@/components/app/JourneyMiniProgress";
+import { useDayContentProgress } from "@/hooks/useDayContentProgress";
 
 // Placeholder para as novas imagens que serão enviadas
 const placeholderImg = "/placeholder.svg";
@@ -36,6 +37,7 @@ export default function AppHome() {
   const { progress, isDayUnlocked, isDayCompleted, getStepChecked } = useJourneyProgress();
   const { profile } = useAppProfile();
   const introProgress = useIntroProgress();
+  const dayContentProgress = useDayContentProgress();
   const location = useLocation();
 
   const totalDays = journeyDays.length;
@@ -48,6 +50,18 @@ export default function AppHome() {
   );
 
   const stageImage = dayStageImages[progress.currentDay] ?? placeholderImg;
+
+  // Encontrar o tópico atual (primeiro passo não concluído)
+  const currentTopic = useMemo(() => {
+    if (!currentDayData) return null;
+    const allSteps = [
+      ...currentDayData.guided.preparacao,
+      ...currentDayData.guided.voltas,
+      ...currentDayData.guided.verificacao,
+      ...currentDayData.guided.objetivoFinal,
+    ];
+    return allSteps.find(step => !getStepChecked(progress.currentDay, step.id))?.text || "Concluir dia";
+  }, [currentDayData, getStepChecked, progress.currentDay]);
 
   const stagePercent = useMemo(() => {
     const day = progress.currentDay;
@@ -76,7 +90,7 @@ export default function AppHome() {
 
   return (
     <AppShell>
-      <main className="container-main py-8 space-y-6">
+      <main className="container-main py-8 space-y-8">
         {/* Mini-bloco de entrada - Mais compacto */}
         <Card className="app-stitch">
           <CardContent className="p-3 space-y-2">
@@ -90,35 +104,60 @@ export default function AppHome() {
           </CardContent>
         </Card>
 
-        {/* Bloco principal (estilo imagem) */}
-        <Card className="app-stitch">
-          <CardContent className="p-7 md:p-8 space-y-4">
-            <div className="flex flex-col md:flex-row md:items-center gap-5">
-              <div className="shrink-0">
-                <div className="h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden ring-2 ring-accent/30 bg-muted">
-                  <img
-                    src={stageImage}
-                    alt={`Imagem da etapa do Dia ${progress.currentDay}`}
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                  />
+        {/* Bloco principal de destaque - Maior e mais proeminente */}
+        <Card className="app-stitch border-2 border-accent/20 shadow-elevada overflow-hidden">
+          <CardContent className="p-0">
+            <div className="flex flex-col md:flex-row">
+              {/* Área da Imagem - Maior no desktop */}
+              <div className="md:w-1/3 bg-muted relative min-h-[200px] md:min-h-full">
+                <img
+                  src={stageImage}
+                  alt={`Imagem da etapa do Dia ${progress.currentDay}`}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent md:hidden" />
+                <div className="absolute bottom-4 left-4 md:hidden">
+                  <span className="bg-accent text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                    Dia {progress.currentDay}
+                  </span>
                 </div>
               </div>
 
-              <div className="min-w-0 flex-1 space-y-1">
-                <p className="text-lg md:text-xl font-serif text-foreground">Primeira Vitória em Amigurumi</p>
-                <p className="text-sm text-muted-foreground">
-                  Etapa: Dia {progress.currentDay}
-                  {currentDayData?.title ? ` — ${currentDayData.title}` : ""}
-                </p>
-                {currentDayData?.estimatedTime ? (
-                  <p className="text-xs text-muted-foreground">Tempo estimado: {currentDayData.estimatedTime}</p>
-                ) : null}
+              {/* Área de Conteúdo */}
+              <div className="flex-1 p-6 md:p-10 space-y-6 flex flex-col justify-center">
+                <div className="space-y-2">
+                  <div className="hidden md:block">
+                    <span className="text-accent text-xs font-bold uppercase tracking-widest">
+                      Etapa Atual • Dia {progress.currentDay}
+                    </span>
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-serif text-foreground leading-tight">
+                    Primeira Vitória em Amigurumi
+                  </h2>
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <span className="text-sm font-medium">Tópico:</span>
+                    <span className="text-sm italic truncate max-w-[250px] md:max-w-none">
+                      {currentTopic}
+                    </span>
+                  </div>
+                </div>
 
-                {/* Linha fina de progresso da etapa */}
-                <div className="pt-3">
+                <div className="flex flex-wrap items-center gap-4 text-xs md:text-sm text-muted-foreground">
+                  {currentDayData?.estimatedTime && (
+                    <div className="flex items-center gap-1.5 bg-secondary/20 px-3 py-1.5 rounded-full">
+                      <span>⏱️ Tempo estimado: {currentDayData.estimatedTime}</span>
+                    </div>
+                  )}
+                  <div className="flex items-center gap-1.5 bg-primary/10 px-3 py-1.5 rounded-full text-primary font-medium">
+                    <span>{stagePercent}% da etapa concluída</span>
+                  </div>
+                </div>
+
+                {/* Linha de progresso minimalista e fina */}
+                <div className="space-y-2">
                   <div
-                    className="h-0.5 w-full rounded-full overflow-hidden bg-secondary/30"
+                    className="h-1 w-full rounded-full overflow-hidden bg-secondary/20"
                     role="progressbar"
                     aria-label="Progresso desta etapa"
                     aria-valuemin={0}
@@ -126,19 +165,19 @@ export default function AppHome() {
                     aria-valuenow={stagePercent}
                   >
                     <div 
-                      className="h-full rounded-full bg-accent transition-[width] duration-500 ease-out" 
+                      className="h-full rounded-full bg-accent transition-[width] duration-700 ease-in-out" 
                       style={{ width: `${stagePercent}%` }} 
                     />
                   </div>
                 </div>
-              </div>
 
-              <div className="md:self-center">
-                <Link to={`/app/dia/${progress.currentDay}`}>
-                  <Button variant="primary" size="default" className="w-full md:w-auto">
-                    {completedCount === 0 ? "Começar" : `Continuar do Dia ${progress.currentDay}`}
-                  </Button>
-                </Link>
+                <div className="pt-2">
+                  <Link to={`/app/dia/${progress.currentDay}`}>
+                    <Button variant="primary" size="lg" className="w-full md:w-auto shadow-cta hover:shadow-cta-hover">
+                      {completedCount === 0 ? "Começar Jornada" : `Continuar do Dia ${progress.currentDay}`}
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </CardContent>
