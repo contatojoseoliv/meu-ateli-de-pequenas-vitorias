@@ -15,22 +15,17 @@ import { AppFooterMinimal } from "@/components/app/AppFooterMinimal";
 import { AppMaterialsTechniquesSection } from "@/components/app/AppMaterialsTechniquesSection";
 import { JourneyMiniProgress } from "@/components/app/JourneyMiniProgress";
 
-import heroAmigurumi from "@/assets/hero-amigurumi.png";
-import bulletsCraftingScene from "@/assets/bullets-crafting-scene.jpg";
-import leadVisual from "@/assets/lead-visual.png";
-import mapa7Dias from "@/assets/mapa-7-dias-referencia.png";
-import metodoTitulo from "@/assets/metodo-titulo-ref.png";
-import provaCiencia from "@/assets/prova-ciencia.png";
-import seloPrimeiraVitoria from "@/assets/selo-primeira-vitoria.png";
+// Placeholder para as novas imagens que serão enviadas
+const placeholderImg = "/placeholder.svg";
 
 const dayStageImages: Record<number, string> = {
-  1: heroAmigurumi,
-  2: bulletsCraftingScene,
-  3: leadVisual,
-  4: mapa7Dias,
-  5: metodoTitulo,
-  6: provaCiencia,
-  7: seloPrimeiraVitoria,
+  1: placeholderImg,
+  2: placeholderImg,
+  3: placeholderImg,
+  4: placeholderImg,
+  5: placeholderImg,
+  6: placeholderImg,
+  7: placeholderImg,
 };
 
 function clamp(n: number, min = 0, max = 100) {
@@ -52,7 +47,7 @@ export default function AppHome() {
     [progress.currentDay],
   );
 
-  const stageImage = dayStageImages[progress.currentDay] ?? heroAmigurumi;
+  const stageImage = dayStageImages[progress.currentDay] ?? placeholderImg;
 
   const stagePercent = useMemo(() => {
     const day = progress.currentDay;
@@ -100,7 +95,7 @@ export default function AppHome() {
           <CardContent className="p-7 md:p-8 space-y-4">
             <div className="flex flex-col md:flex-row md:items-center gap-5">
               <div className="shrink-0">
-                <div className="h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden ring-2 ring-accent/30">
+                <div className="h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden ring-2 ring-accent/30 bg-muted">
                   <img
                     src={stageImage}
                     alt={`Imagem da etapa do Dia ${progress.currentDay}`}
@@ -111,7 +106,7 @@ export default function AppHome() {
               </div>
 
               <div className="min-w-0 flex-1 space-y-1">
-                <p className="text-base font-semibold text-foreground">Primeira Vitória em Amigurumi</p>
+                <p className="text-lg md:text-xl font-serif text-foreground">Primeira Vitória em Amigurumi</p>
                 <p className="text-sm text-muted-foreground">
                   Etapa: Dia {progress.currentDay}
                   {currentDayData?.title ? ` — ${currentDayData.title}` : ""}
@@ -120,22 +115,20 @@ export default function AppHome() {
                   <p className="text-xs text-muted-foreground">Tempo estimado: {currentDayData.estimatedTime}</p>
                 ) : null}
 
-                {/* Linha pequena de progresso da etapa */}
-                <div className="pt-3 space-y-1">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-muted-foreground">Progresso desta etapa</span>
-                    <span className="font-medium text-foreground">{stagePercent}%</span>
-                  </div>
-
+                {/* Linha fina de progresso da etapa */}
+                <div className="pt-3">
                   <div
-                    className="h-2 w-full rounded-full overflow-hidden bg-secondary"
+                    className="h-0.5 w-full rounded-full overflow-hidden bg-secondary/30"
                     role="progressbar"
                     aria-label="Progresso desta etapa"
                     aria-valuemin={0}
                     aria-valuemax={100}
                     aria-valuenow={stagePercent}
                   >
-                    <div className="h-full rounded-full bg-accent transition-[width]" style={{ width: `${stagePercent}%` }} />
+                    <div 
+                      className="h-full rounded-full bg-accent transition-[width] duration-500 ease-out" 
+                      style={{ width: `${stagePercent}%` }} 
+                    />
                   </div>
                 </div>
               </div>
