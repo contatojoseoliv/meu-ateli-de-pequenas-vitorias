@@ -106,13 +106,13 @@ export default function AppHome() {
               </div>
 
               <div className="min-w-0 flex-1 space-y-2">
-                <p className="text-xl md:text-2xl font-serif text-foreground">Primeira Vitória em Amigurumi</p>
-                <p className="text-base text-muted-foreground">
+                <p className="text-2xl md:text-3xl font-serif text-foreground">Primeira Vitória em Amigurumi</p>
+                <p className="text-lg text-muted-foreground">
                   Etapa: Dia {progress.currentDay}
                   {currentDayData?.title ? ` — ${currentDayData.title}` : ""}
                 </p>
                 {currentDayData?.estimatedTime ? (
-                  <p className="text-sm text-muted-foreground">Tempo estimado: {currentDayData.estimatedTime}</p>
+                  <p className="text-base text-muted-foreground">Tempo estimado: {currentDayData.estimatedTime}</p>
                 ) : null}
 
                 {/* Linha fina de progresso da etapa */}
