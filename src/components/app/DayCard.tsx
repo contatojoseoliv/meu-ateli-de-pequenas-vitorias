@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 type DayCardProps = {
   day: number;
   title: string;
-  tag: string;
   estimatedTime: string;
   unlocked: boolean;
   completed: boolean;
@@ -18,7 +17,6 @@ type DayCardProps = {
 export function DayCard({
   day,
   title,
-  tag,
   estimatedTime,
   unlocked,
   completed,
@@ -46,7 +44,7 @@ export function DayCard({
     >
       <Card
         className={cn(
-          "app-stitch app-daycard overflow-hidden",
+          "app-stitch app-daycard app-daycard--seal overflow-hidden",
           dayVariantClass,
           completed && "app-daycard--done",
           stateClass,
@@ -62,34 +60,31 @@ export function DayCard({
 
             <div className="shrink-0">
               {completed ? (
-                <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-foreground">
+                <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-2 py-1 text-xs font-medium text-foreground">
                   <Sparkles className="h-3.5 w-3.5" />
-                  {tag}
+                  Primeira vitória
                 </span>
               ) : !unlocked ? (
-                <Lock className="h-4 w-4 text-muted-foreground" />
-              ) : (
-                <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-foreground">
-                  {tag}
+                <span className="inline-flex items-center justify-center rounded-full border border-border bg-background/60 p-2">
+                  <Lock className="h-4 w-4 text-muted-foreground" />
                 </span>
+              ) : (
+                <span className="text-xs text-muted-foreground">{estimatedTime}</span>
               )}
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
-            {unlocked ? (
-              <Link
-                to={href}
-                className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
-                aria-label={`Abrir o Dia ${day}`}
-              >
-                Abrir <ArrowRight className="h-4 w-4" />
-              </Link>
-            ) : (
-              <p className="text-xs text-muted-foreground">Bloqueado</p>
-            )}
-            <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/60">{tag}</span>
-          </div>
+          {unlocked ? (
+            <Link
+              to={href}
+              className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+              aria-label={`Abrir o Dia ${day}`}
+            >
+              Abrir <ArrowRight className="h-4 w-4" />
+            </Link>
+          ) : (
+            <p className="text-xs text-muted-foreground">Desbloqueie concluindo o dia anterior</p>
+          )}
         </CardContent>
       </Card>
     </motion.div>

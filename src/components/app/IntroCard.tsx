@@ -66,7 +66,7 @@ export function IntroCard({ cardIndex, unlocked, completed, className }: IntroCa
                 <Lock className="h-4 w-4 text-muted-foreground" />
               </div>
             </div>
-            <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground/60">{data.badge}</span>
+            <span className="text-xs text-muted-foreground">Conclua a etapa anterior</span>
           </CardContent>
         </Card>
       </div>
@@ -83,7 +83,8 @@ export function IntroCard({ cardIndex, unlocked, completed, className }: IntroCa
     >
       <Card className={cn(
         "app-stitch app-daycard overflow-hidden hover-lift h-full",
-        completed ? "app-daycard--done" : `app-daycard--intro ${data.tintClass}`
+        completed ? "app-daycard--done" : `app-daycard--intro ${data.tintClass}`,
+        completed && "app-daycard--seal",
       )}>
         <CardContent className="p-4 space-y-3">
           <div className="flex items-start justify-between gap-3">
@@ -97,25 +98,21 @@ export function IntroCard({ cardIndex, unlocked, completed, className }: IntroCa
                   <Check className="h-4 w-4 text-primary" />
                 </div>
               ) : (
-                <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-foreground">
+                <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2 py-1 text-xs font-medium text-foreground">
+                  <Sparkles className="h-3.5 w-3.5" />
                   {data.badge}
                 </span>
               )}
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
-            <Link
-              to={href}
-              className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
-              aria-label={`Abrir: ${data.title}`}
-            >
-              {completed ? "Rever" : "Abrir"} <ArrowRight className="h-4 w-4" />
-            </Link>
-            {!completed && (
-              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/60">{data.badge}</span>
-            )}
-          </div>
+          <Link
+            to={href}
+            className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+            aria-label={`Abrir: ${data.title}`}
+          >
+            {completed ? "Rever" : "Abrir"} <ArrowRight className="h-4 w-4" />
+          </Link>
         </CardContent>
       </Card>
     </motion.div>
