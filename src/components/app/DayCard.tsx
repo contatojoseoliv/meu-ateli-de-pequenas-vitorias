@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Lock, Sparkles, ArrowRight } from "lucide-react";
+import { Lock, ArrowRight, Check } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
@@ -25,8 +25,6 @@ export function DayCard({
   href,
   isCurrent,
 }: DayCardProps) {
-  const rotationClass = day % 2 === 0 ? "md:rotate-[-0.35deg]" : "md:rotate-[0.35deg]";
-
   const stateClass = completed
     ? "bg-primary/10"
     : isCurrent
@@ -39,21 +37,21 @@ export function DayCard({
 
   return (
     <motion.div
-      whileHover={unlocked ? { y: -3, rotate: day % 2 === 0 ? -0.2 : 0.2 } : undefined}
+      whileHover={unlocked ? { y: -3 } : undefined}
       whileTap={unlocked ? { scale: 0.99 } : undefined}
       transition={{ duration: 0.22 }}
-      className={cn(rotationClass, !unlocked && "opacity-65")}
+      className={cn("h-full", !unlocked && "opacity-65")}
     >
       <Card
         className={cn(
-          "app-stitch app-daycard overflow-hidden",
+          "app-stitch app-daycard overflow-hidden h-full",
           dayVariantClass,
           completed && "app-daycard--done",
           stateClass,
           unlocked ? "hover-lift" : "cursor-not-allowed",
         )}
       >
-        <CardContent className="p-4 space-y-3">
+        <CardContent className="p-4 flex flex-col h-full justify-between space-y-3">
           <div className="flex items-start justify-between gap-3">
             <div className="space-y-1">
               <p className="text-sm font-medium text-foreground">Dia {day}</p>
@@ -63,20 +61,15 @@ export function DayCard({
             <div className="shrink-0">
               {completed ? (
                 <div className="h-6 w-6 rounded-full bg-primary/15 flex items-center justify-center">
-                  <Sparkles className="h-4 w-4 text-primary" />
+                  <Check className="h-4 w-4 text-primary" />
                 </div>
-              ) : !unlocked ? (
+              ) : !unlocked && (
                 <Lock className="h-4 w-4 text-muted-foreground" />
-              ) : (
-                <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-foreground">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  {tag}
-                </span>
               )}
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between pt-1">
             {unlocked ? (
               <Link
                 to={href}
@@ -88,7 +81,6 @@ export function DayCard({
             ) : (
               <p className="text-xs text-muted-foreground">Bloqueado</p>
             )}
-            <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/60">{tag}</span>
           </div>
         </CardContent>
       </Card>
