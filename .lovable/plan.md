@@ -1,31 +1,69 @@
 
 
-# Refazer a Barra de Progresso com Marcadores em "V" de Croche
+# Melhorar o Card de Progresso (Card 1)
 
-## O que muda
+## Resumo das mudancas
 
-A barra de progresso atual usa circulos com imagens pequenas que nao ficam bem. Vamos substituir por **7 marcadores em formato "V"** que imitam o ponto de croche, alinhados sobre a linha de progresso, mais o selo final.
+O card 1 ("Mini-bloco de entrada") sera mais compacto e visualmente refinado, com o novo selo de Primeira Vitoria, texto atualizado e melhorias de interatividade.
 
-## Design Visual
+---
 
-- Cada marcador sera um **SVG em forma de "V"** estilizado como ponto de croche (duas linhas diagonais que se encontram embaixo, com pequena curva)
-- Cores:
-  - Dia concluido: cor accent (ocre dourado) com tracos firmes
-  - Dia atual: cor accent com leve destaque/anel
-  - Dia bloqueado: cinza claro, opacidade reduzida
-- A linha de progresso horizontal continua igual (trilha cinza + preenchimento accent)
-- O 8o nó (selo final "Primeira Vitoria") permanece como esta, com a imagem circular
-- Texto abaixo mantido: "Conclua todos os dias para liberar o selo de Primeira Vitoria."
+## 1. Salvar o novo asset do selo
 
-## Detalhes Tecnicos
+Copiar a imagem enviada para `src/assets/selo-primeira-vitoria-novo.png` e usá-la como selo final na barra de progresso.
 
-**Arquivo**: `src/components/app/JourneyMiniProgress.tsx`
+## 2. Reduzir altura do Card 1
 
-1. Criar um componente SVG `CrochetStitchV` inline que desenha um "V" estilizado (tipo ponto baixo de croche) -- duas linhas diagonais com pontas arredondadas
-2. Substituir os `<div>` circulares + `<img>` dos 7 dias por esse SVG
-3. Tamanho dos marcadores: ~28x24px, centralizados sobre a linha
-4. Remover o import de `seloIcon` (nao sera mais usado)
-5. Manter o nó final com `finalSeal` (selo circular da Primeira Vitoria)
-6. Ajustar o grid para alinhar os V's corretamente sobre a linha de progresso
+- Diminuir padding do `CardHeader` e `CardContent` (de `p-4` para `p-3`)
+- Reduzir o tamanho dos marcadores V de `h-14 w-14` para `h-8 w-8`
+- Reduzir o selo final de `h-14 w-14` para `h-10 w-10`
+- Remover `space-y-2` extra, deixando o card mais "flat"
 
-O resultado sera uma barra de progresso com 7 "Vzinhos" de croche espaçados uniformemente, seguidos do selo circular no final -- visual limpo, artesanal e tematico.
+## 3. Atualizar o selo final
+
+- Trocar o import de `selo-primeira-vitoria-circular.png` pelo novo asset enviado
+- Manter a logica de desbloqueio (grayscale quando bloqueado, colorido quando concluido)
+
+## 4. Atualizar os textos
+
+Titulo do progresso:
+```
+Meu Progresso para o Primeiro Amigurumi - {percent}% concluido
+```
+
+Texto inferior:
+```
+Conclua todos os dias para liberar o selo de Primeira Vitoria.
+```
+
+O titulo substituira a linha separada de "Meu progresso" + porcentagem, consolidando tudo em uma unica linha mais descritiva.
+
+## 5. Melhorias visuais e interativas
+
+- **Tooltip nos marcadores V**: ao passar o mouse (hover) em cada V, exibir um tooltip com "Dia X" (usando o componente Tooltip ja existente no projeto)
+- **Transicao suave de progresso**: adicionar `duration-500 ease-out` na animacao da barra de preenchimento
+- **Micro-animacao no selo**: quando `finalUnlocked`, aplicar uma leve animacao de pulso (CSS `animate-pulse` sutil) para chamar atencao
+- **Linha de progresso mais fina**: reduzir de `h-1` para `h-0.5` para visual mais delicado/minimalista
+- **Saudacao simplificada**: mover o titulo do CardHeader para uma unica linha dentro do CardContent, eliminando o CardHeader separado para reduzir altura
+
+## Detalhes tecnicos
+
+**Arquivos modificados:**
+- `src/assets/selo-primeira-vitoria-novo.png` (novo asset)
+- `src/components/app/JourneyMiniProgress.tsx` (marcadores menores, novo selo, tooltips, animacoes)
+- `src/pages/app/AppHome.tsx` (card 1 mais compacto, texto consolidado)
+
+**Estrutura do Card 1 apos mudancas:**
+
+```text
++-----------------------------------------------+
+| Bem-vinda ao Meu Atelie, {nome}!              |
+| Meu Progresso para o Primeiro Amigurumi - 57% |
+|                                                |
+| V---V---V---V---V---V---V---[SELO]             |
+|                                                |
+| Conclua todos os dias para liberar o selo...   |
++-----------------------------------------------+
+```
+
+Cada V tera tooltip no hover. O selo tera borda dourada e pulso quando desbloqueado. A linha sera fina e elegante.
