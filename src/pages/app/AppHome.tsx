@@ -86,9 +86,10 @@ export default function AppHome() {
         <Card className="app-stitch">
           <CardContent className="p-3 space-y-1.5">
             <p className="text-sm font-medium text-foreground">Bem-vinda ao Meu Ateliê, {profile.displayName}!</p>
-            <p className="text-xs text-muted-foreground">
-              Meu Progresso para o Primeiro Amigurumi — <span className="font-semibold text-foreground">{percent}%</span> concluído
-            </p>
+            <div className="flex items-center justify-between text-xs text-muted-foreground">
+              <span>Meu Progresso para o Primeiro Amigurumi</span>
+              <span className="font-semibold text-foreground">{percent}% concluído</span>
+            </div>
 
             <JourneyMiniProgress currentDay={progress.currentDay} completedDays={progress.completedDays} percent={percent} />
           </CardContent>
