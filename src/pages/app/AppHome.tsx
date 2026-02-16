@@ -84,11 +84,11 @@ export default function AppHome() {
       <main className="container-main py-8 space-y-6">
         {/* Mini-bloco de entrada */}
         <Card className="app-stitch">
-          <CardContent className="p-3 space-y-1.5">
-            <p className="text-sm font-medium text-foreground">Bem-vinda ao Meu Ateliê, {profile.displayName}!</p>
-            <div className="flex items-center justify-between text-xs text-muted-foreground">
+          <CardContent className="p-4 space-y-3">
+            <p className="text-base md:text-lg font-bold text-foreground">Bem-vinda ao Meu Ateliê, {profile.displayName}!</p>
+            <div className="flex items-center justify-between text-sm md:text-base text-muted-foreground">
               <span>Meu Progresso para o Primeiro Amigurumi</span>
-              <span className="font-semibold text-foreground">{percent}% concluído</span>
+              <span className="font-bold text-foreground">{percent}% concluído</span>
             </div>
 
             <JourneyMiniProgress currentDay={progress.currentDay} completedDays={progress.completedDays} percent={percent} />
