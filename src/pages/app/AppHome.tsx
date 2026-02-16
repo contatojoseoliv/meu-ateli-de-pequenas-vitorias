@@ -145,7 +145,12 @@ export default function AppHome() {
         </Card>
 
         <section className="space-y-3">
-          <h2 className="text-xl font-bold text-foreground">Meus Dias de Criação</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-bold text-foreground">Meus Dias de Criação</h2>
+            <span className="text-sm font-medium text-muted-foreground">
+              {completedCount}/{totalDays} dias concluídos
+            </span>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {INTRO_CARDS.map((_, idx) => (
               <IntroCard
