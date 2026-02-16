@@ -93,7 +93,7 @@ export default function AppHome() {
           </CardContent>
         </Card>
 
-        {/* Bloco principal (estilo imagem) - Agora com o mesmo tamanho do Card 1 */}
+        {/* Bloco principal (estilo imagem) - Revertido para o original */}
         <Card className="app-stitch">
           <CardContent className="p-2 md:p-3 space-y-2">
             <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
