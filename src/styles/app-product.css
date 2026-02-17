@@ -125,23 +125,24 @@
   position: relative;
   overflow: hidden;
 
-  /* Variáveis (definidas pelas variantes abaixo) */
-  --daycard-tint: var(--secondary);
-  --daycard-tint-2: var(--primary);
+  /* Variáveis padronizadas para Rosa Argila e Ocre */
+  --daycard-tint: var(--rosa-argila);
+  --daycard-tint-2: var(--ocre-dourado);
 
-  /* Papel tingido + manchas suaves */
+  /* Fundo Rosa Argila com manchas suaves em Ocre */
   background:
-    radial-gradient(520px 220px at 18% 12%, hsl(var(--daycard-tint) / 0.35), transparent 75%),
-    radial-gradient(420px 260px at 82% 18%, hsl(var(--daycard-tint-2) / 0.25), transparent 70%),
-    linear-gradient(180deg, hsl(var(--card)), hsl(var(--card)));
+    radial-gradient(520px 220px at 18% 12%, hsl(var(--daycard-tint) / 0.25), transparent 75%),
+    radial-gradient(420px 260px at 82% 18%, hsl(var(--daycard-tint-2) / 0.20), transparent 70%),
+    linear-gradient(180deg, hsl(var(--rosa-argila) / 0.12), hsl(var(--rosa-argila) / 0.12)),
+    hsl(var(--card));
 
-  /* Moldura “colada” (sem afetar outros cards) */
+  /* Moldura “colada” */
   box-shadow:
     0 12px 26px -20px hsl(var(--foreground) / 0.35),
-    inset 0 0 0 1px hsl(var(--foreground) / 0.06);
+    inset 0 0 0 1px hsl(var(--rosa-argila) / 0.2);
 }
 
-/* Grão/texura bem leve (não interfere no conteúdo) */
+/* Grão/texura bem leve */
 .app-daycard::before {
   content: "";
   position: absolute;
@@ -149,28 +150,17 @@
   pointer-events: none;
   opacity: 0.75;
   background:
-    radial-gradient(circle at 18% 22%, hsl(var(--foreground) / 0.03) 0 1px, transparent 2px) 0 0 / 26px 26px,
-    radial-gradient(circle at 72% 44%, hsl(var(--foreground) / 0.02) 0 1px, transparent 2px) 0 0 / 34px 34px;
+    radial-gradient(circle at 18% 22%, hsl(var(--ocre-dourado) / 0.05) 0 1px, transparent 2px) 0 0 / 26px 26px,
+    radial-gradient(circle at 72% 44%, hsl(var(--ocre-dourado) / 0.04) 0 1px, transparent 2px) 0 0 / 34px 34px;
   mix-blend-mode: multiply;
 }
 
-/* Variantes por dia - Cores mais visíveis */
-.app-daycard--mint {
-  --daycard-tint: var(--verde-eucalipto);
-  --daycard-tint-2: var(--rosa-argila);
-  background-color: hsl(var(--verde-eucalipto) / 0.08);
-}
-
-.app-daycard--clay {
-  --daycard-tint: var(--rosa-argila);
-  --daycard-tint-2: var(--verde-eucalipto);
-  background-color: hsl(var(--rosa-argila) / 0.08);
-}
-
+/* Variantes agora seguem o padrão Rosa/Ocre com sutis diferenças de intensidade */
+.app-daycard--mint,
+.app-daycard--clay,
 .app-daycard--gold {
-  --daycard-tint: var(--ocre-dourado);
-  --daycard-tint-2: var(--rosa-argila);
-  background-color: hsl(var(--ocre-dourado) / 0.08);
+  --daycard-tint: var(--rosa-argila);
+  --daycard-tint-2: var(--ocre-dourado);
 }
 
 /* Bloqueado: cinza neutro */
@@ -185,8 +175,8 @@
 
 /* Intro: uma variação própria */
 .app-daycard--intro {
-  --daycard-tint: var(--secondary);
-  --daycard-tint-2: var(--secondary);
+  --daycard-tint: var(--rosa-argila);
+  --daycard-tint-2: var(--ocre-dourado);
 }
 
 /* Selo no canto (decorativo) */
@@ -202,10 +192,10 @@
 
   background:
     radial-gradient(circle at 30% 28%, hsl(var(--background) / 0.9), hsl(var(--background) / 0.55) 55%, transparent 56%),
-    radial-gradient(circle at 52% 55%, hsl(var(--daycard-tint) / 0.25), transparent 60%),
+    radial-gradient(circle at 52% 55%, hsl(var(--ocre-dourado) / 0.25), transparent 60%),
     linear-gradient(180deg, hsl(var(--card)), hsl(var(--card)));
 
-  border: 1px solid hsl(var(--border));
+  border: 1px solid hsl(var(--rosa-argila) / 0.3);
   box-shadow:
     0 10px 18px -16px hsl(var(--foreground) / 0.45),
     inset 0 0 0 1px hsl(var(--foreground) / 0.06);
@@ -215,7 +205,7 @@
 .app-daycard--done.app-daycard--seal::after {
   background:
     radial-gradient(circle at 30% 28%, hsl(var(--background) / 0.92), hsl(var(--background) / 0.55) 55%, transparent 56%),
-    radial-gradient(circle at 48% 58%, hsl(var(--primary) / 0.28), transparent 62%),
+    radial-gradient(circle at 48% 58%, hsl(var(--ocre-dourado) / 0.28), transparent 62%),
     linear-gradient(180deg, hsl(var(--card)), hsl(var(--card)));
 }
 
