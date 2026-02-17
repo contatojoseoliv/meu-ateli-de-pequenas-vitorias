@@ -20,7 +20,7 @@ export function AppFooterMinimal() {
 
   return (
     <footer className="mt-8 bg-verde-eucalipto text-white py-6 w-full">
-      <div className="w-full px-4">
+      <div className="w-full px-6 md:px-10">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           {/* Marca */}
           <div className="text-center md:text-left">

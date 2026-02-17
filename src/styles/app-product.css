@@ -23,10 +23,11 @@
   mix-blend-mode: multiply;
 }
 
-/* Cartão/placa com “costura” — use como className extra no Card */
+/* Cartão/placa com “costura” e contorno verde */
 .app-stitch {
   position: relative;
   background: hsl(var(--card));
+  border: 1px solid hsl(var(--verde-eucalipto) / 0.3); /* Contorno verde suave */
   box-shadow: 0 10px 28px -18px hsl(var(--foreground) / 0.25);
 }
 
