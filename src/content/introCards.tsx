@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Check, ImageIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
   Table,
@@ -8,7 +8,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ImageIcon } from "lucide-react";
 
 /* ── Helpers ── */
 
@@ -44,6 +43,11 @@ export type IntroCardData = {
   tintClass: string;
   topics: Topic[];
 };
+
+// Estilos comuns para tabelas artesanais
+const tableHeaderClass = "bg-verde-eucalipto/10 text-verde-eucalipto font-bold uppercase text-[10px] tracking-wider";
+const tableRowClass = "hover:bg-verde-eucalipto/5 transition-colors border-b border-verde-eucalipto/10";
+const tableCellClass = "py-3 text-grafite-suave";
 
 /* ── Card content ── */
 
@@ -462,37 +466,39 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Agora vamos conhecer as 4 técnicas que constroem quase todo o amigurumi.</p>
             <p>Essas são as únicas que você precisa saber agora:</p>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Sigla</TableHead>
-                  <TableHead>Significa</TableHead>
-                  <TableHead>O que acontece</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow>
-                  <TableCell className="font-medium">MR</TableCell>
-                  <TableCell>Anel mágico</TableCell>
-                  <TableCell>Começa fazendo um círculo onde os primeiros pontos são feitos, sem deixar buraco</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">pb</TableCell>
-                  <TableCell>Ponto baixo</TableCell>
-                  <TableCell>O ponto principal do coelho: introduz a agulha no ponto, puxa o fio e fecha tudo de uma vez</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">aum</TableCell>
-                  <TableCell>Aumento</TableCell>
-                  <TableCell>Faz dois pontos baixos no mesmo ponto de base, aumentando a quantidade de pontos</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">dim</TableCell>
-                  <TableCell>Diminuição</TableCell>
-                  <TableCell>Une dois pontos de base em um único ponto baixo, diminuindo a quantidade de pontos</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
+            <div className="rounded-xl border border-verde-eucalipto/20 overflow-hidden shadow-sm">
+              <Table>
+                <TableHeader>
+                  <TableRow className={tableHeaderClass}>
+                    <TableHead className="text-verde-eucalipto">Sigla</TableHead>
+                    <TableHead className="text-verde-eucalipto">Significa</TableHead>
+                    <TableHead className="text-verde-eucalipto">O que acontece</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow className={tableRowClass}>
+                    <TableCell className={`${tableCellClass} font-bold`}>MR</TableCell>
+                    <TableCell className={tableCellClass}>Anel mágico</TableCell>
+                    <TableCell className={tableCellClass}>Começa fazendo um círculo onde os primeiros pontos são feitos, sem deixar buraco</TableCell>
+                  </TableRow>
+                  <TableRow className={tableRowClass}>
+                    <TableCell className={`${tableCellClass} font-bold`}>pb</TableCell>
+                    <TableCell className={tableCellClass}>Ponto baixo</TableCell>
+                    <TableCell className={tableCellClass}>O ponto principal do coelho: introduz a agulha no ponto, puxa o fio e fecha tudo de uma vez</TableCell>
+                  </TableRow>
+                  <TableRow className={tableRowClass}>
+                    <TableCell className={`${tableCellClass} font-bold`}>aum</TableCell>
+                    <TableCell className={tableCellClass}>Aumento</TableCell>
+                    <TableCell className={tableCellClass}>Faz dois pontos baixos no mesmo ponto de base, aumentando a quantidade de pontos</TableCell>
+                  </TableRow>
+                  <TableRow className={tableRowClass}>
+                    <TableCell className={`${tableCellClass} font-bold`}>dim</TableCell>
+                    <TableCell className={tableCellClass}>Diminuição</TableCell>
+                    <TableCell className={tableCellClass}>Une dois pontos de base em um único ponto baixo, diminuindo a quantidade de pontos</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
             <p>Você vai aprender cada uma enquanto usa.</p>
           </div>
         ),

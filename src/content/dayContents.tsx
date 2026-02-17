@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Check, AlertCircle, HelpCircle } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
   Table,
@@ -12,6 +12,11 @@ import { ImagePlaceholder } from "@/content/introCards";
 import type { IntroCardData } from "@/content/introCards";
 
 const tints = ["app-daycard--mint", "app-daycard--clay", "app-daycard--gold"];
+
+// Estilos comuns para tabelas artesanais
+const tableHeaderClass = "bg-verde-eucalipto/10 text-verde-eucalipto font-bold uppercase text-[10px] tracking-wider";
+const tableRowClass = "hover:bg-verde-eucalipto/5 transition-colors border-b border-verde-eucalipto/10";
+const tableCellClass = "py-3 text-grafite-suave";
 
 export const DAY_CONTENTS: IntroCardData[] = [
   /* ═══════════════════════════════════════════
@@ -192,33 +197,38 @@ export const DAY_CONTENTS: IntroCardData[] = [
 
             <Separator className="my-4" />
 
-            <h3 className="font-bold">⚠ Se algo estiver diferente</h3>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Situação</TableHead>
-                  <TableHead>Motivo</TableHead>
-                  <TableHead>Solução</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow>
-                  <TableCell>Buraco no meio</TableCell>
-                  <TableCell>fio do anel não foi puxado</TableCell>
-                  <TableCell>puxar a ponta com cuidado</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Peça dobrando</TableCell>
-                  <TableCell>ponto apertado</TableCell>
-                  <TableCell>relaxar a mão</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Ondulada</TableCell>
-                  <TableCell>ponto frouxo</TableCell>
-                  <TableCell>segurar o fio com mais firmeza</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
+            <h3 className="font-bold flex items-center gap-2">
+              <HelpCircle className="h-5 w-5 text-rosa-argila" />
+              Se algo estiver diferente
+            </h3>
+            <div className="rounded-xl border border-verde-eucalipto/20 overflow-hidden shadow-sm">
+              <Table>
+                <TableHeader>
+                  <TableRow className={tableHeaderClass}>
+                    <TableHead className="text-verde-eucalipto">Situação</TableHead>
+                    <TableHead className="text-verde-eucalipto">Motivo</TableHead>
+                    <TableHead className="text-verde-eucalipto">Solução</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow className={tableRowClass}>
+                    <TableCell className={tableCellClass}>Buraco no meio</TableCell>
+                    <TableCell className={tableCellClass}>fio do anel não foi puxado</TableCell>
+                    <TableCell className={tableCellClass}>puxar a ponta com cuidado</TableCell>
+                  </TableRow>
+                  <TableRow className={tableRowClass}>
+                    <TableCell className={tableCellClass}>Peça dobrando</TableCell>
+                    <TableCell className={tableCellClass}>ponto apertado</TableCell>
+                    <TableCell className={tableCellClass}>relaxar a mão</TableCell>
+                  </TableRow>
+                  <TableRow className={tableRowClass}>
+                    <TableCell className={tableCellClass}>Ondulada</TableCell>
+                    <TableCell className={tableCellClass}>ponto frouxo</TableCell>
+                    <TableCell className={tableCellClass}>segurar o fio com mais firmeza</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
           </div>
         ),
       },
@@ -335,22 +345,24 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Ao redor da peça inteira.</p>
             <ImagePlaceholder caption="Peça vista de cima mostrando alternância: um ponto sozinho, depois dois juntos." />
 
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Conjunto</TableHead>
-                  <TableHead>O que fazer</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {[1, 2, 3, 4, 5, 6].map((n) => (
-                  <TableRow key={n}>
-                    <TableCell>{n}º</TableCell>
-                    <TableCell>1 pb, 1 aum</TableCell>
+            <div className="rounded-xl border border-verde-eucalipto/20 overflow-hidden shadow-sm">
+              <Table>
+                <TableHeader>
+                  <TableRow className={tableHeaderClass}>
+                    <TableHead className="text-verde-eucalipto">Conjunto</TableHead>
+                    <TableHead className="text-verde-eucalipto">O que fazer</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {[1, 2, 3, 4, 5, 6].map((n) => (
+                    <TableRow key={n} className={tableRowClass}>
+                      <TableCell className={tableCellClass}>{n}º</TableCell>
+                      <TableCell className={tableCellClass}>1 pb, 1 aum</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
 
             <h3 className="font-bold">🔎 Conferência da Volta 3</h3>
             <p>No final, conte os pontos da borda.</p>
@@ -390,22 +402,24 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Faça isso 6 vezes.</p>
             <ImagePlaceholder caption='Vista superior da peça mostrando grupos: dois pontos normais, um ponto "duplo".' />
 
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Conjunto</TableHead>
-                  <TableHead>O que fazer</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {[1, 2, 3, 4, 5, 6].map((n) => (
-                  <TableRow key={n}>
-                    <TableCell>{n}º</TableCell>
-                    <TableCell>2 pb, 1 aum</TableCell>
+            <div className="rounded-xl border border-verde-eucalipto/20 overflow-hidden shadow-sm">
+              <Table>
+                <TableHeader>
+                  <TableRow className={tableHeaderClass}>
+                    <TableHead className="text-verde-eucalipto">Conjunto</TableHead>
+                    <TableHead className="text-verde-eucalipto">O que fazer</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {[1, 2, 3, 4, 5, 6].map((n) => (
+                    <TableRow key={n} className={tableRowClass}>
+                      <TableCell className={tableCellClass}>{n}º</TableCell>
+                      <TableCell className={tableCellClass}>2 pb, 1 aum</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
 
             <h3 className="font-bold">🔎 Conferência da Volta 4</h3>
             <p>Conte os pontos.</p>
@@ -429,32 +443,34 @@ export const DAY_CONTENTS: IntroCardData[] = [
         emoji: "❗",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Situação</TableHead>
-                  <TableHead>Motivo</TableHead>
-                  <TableHead>Solução</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow>
-                  <TableCell>Continua plano</TableCell>
-                  <TableCell>pontos frouxos</TableCell>
-                  <TableCell>segure o fio com mais firmeza</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Está fechando rápido</TableCell>
-                  <TableCell>pontos apertados</TableCell>
-                  <TableCell>relaxe a mão</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Ondulado</TableCell>
-                  <TableCell>aumentou demais</TableCell>
-                  <TableCell>conte os pontos</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
+            <div className="rounded-xl border border-verde-eucalipto/20 overflow-hidden shadow-sm">
+              <Table>
+                <TableHeader>
+                  <TableRow className={tableHeaderClass}>
+                    <TableHead className="text-verde-eucalipto">Situação</TableHead>
+                    <TableHead className="text-verde-eucalipto">Motivo</TableHead>
+                    <TableHead className="text-verde-eucalipto">Solução</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow className={tableRowClass}>
+                    <TableCell className={tableCellClass}>Continua plano</TableCell>
+                    <TableCell className={tableCellClass}>pontos frouxos</TableCell>
+                    <TableCell className={tableCellClass}>segure o fio com mais firmeza</TableCell>
+                  </TableRow>
+                  <TableRow className={tableRowClass}>
+                    <TableCell className={tableCellClass}>Está fechando rápido</TableCell>
+                    <TableCell className={tableCellClass}>pontos apertados</TableCell>
+                    <TableCell className={tableCellClass}>relaxe a mão</TableCell>
+                  </TableRow>
+                  <TableRow className={tableRowClass}>
+                    <TableCell className={tableCellClass}>Ondulado</TableCell>
+                    <TableCell className={tableCellClass}>aumentou demais</TableCell>
+                    <TableCell className={tableCellClass}>conte os pontos</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
           </div>
         ),
       },
@@ -510,7 +526,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p className="font-bold">Peça: Corpo do coelho</p>
-            <p>Você terminou o Dia 2 com 24 pontos.</p>
+            <p>Você terminou o Dia 2 with 24 pontos.</p>
             <p>Agora faça:</p>
             <p className="font-bold">Voltas 5 a 9:</p>
             <p className="pl-4">24 pb → (24)</p>
@@ -599,32 +615,34 @@ export const DAY_CONTENTS: IntroCardData[] = [
         emoji: "❗",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Situação</TableHead>
-                  <TableHead>Motivo</TableHead>
-                  <TableHead>Solução</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow>
-                  <TableCell>Está fechando</TableCell>
-                  <TableCell>você diminuiu sem querer</TableCell>
-                  <TableCell>verifique se fez só pb</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Está abrindo muito</TableCell>
-                  <TableCell>pontos frouxos</TableCell>
-                  <TableCell>segure o fio mais firme</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Está torto</TableCell>
-                  <TableCell>tensão desigual</TableCell>
-                  <TableCell>normal, melhora com prática</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
+            <div className="rounded-xl border border-verde-eucalipto/20 overflow-hidden shadow-sm">
+              <Table>
+                <TableHeader>
+                  <TableRow className={tableHeaderClass}>
+                    <TableHead className="text-verde-eucalipto">Situação</TableHead>
+                    <TableHead className="text-verde-eucalipto">Motivo</TableHead>
+                    <TableHead className="text-verde-eucalipto">Solução</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow className={tableRowClass}>
+                    <TableCell className={tableCellClass}>Está fechando</TableCell>
+                    <TableCell className={tableCellClass}>você diminuiu sem querer</TableCell>
+                    <TableCell className={tableCellClass}>verifique se fez só pb</TableCell>
+                  </TableRow>
+                  <TableRow className={tableRowClass}>
+                    <TableCell className={tableCellClass}>Está abrindo muito</TableCell>
+                    <TableCell className={tableCellClass}>pontos frouxos</TableCell>
+                    <TableCell className={tableCellClass}>segure o fio mais firme</TableCell>
+                  </TableRow>
+                  <TableRow className={tableRowClass}>
+                    <TableCell className={tableCellClass}>Está torto</TableCell>
+                    <TableCell className={tableCellClass}>tensão desigual</TableCell>
+                    <TableCell className={tableCellClass}>normal, melhora com prática</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
           </div>
         ),
       },
