@@ -59,7 +59,7 @@ export function IntroCard({ cardIndex, unlocked, completed, className }: IntroCa
           <CardContent className="p-4 flex flex-col h-full justify-between space-y-3">
             <div className="flex items-start justify-between gap-3">
               <div className="space-y-1 min-w-0">
-                <p className="text-sm font-medium text-muted-foreground">{data.emoji} {data.title}</p>
+                <p className="text-sm font-medium text-muted-foreground">{data.title}</p>
                 <p className="text-sm text-muted-foreground/60 line-clamp-2">{data.description}</p>
               </div>
               <div className="shrink-0">
@@ -90,7 +90,7 @@ export function IntroCard({ cardIndex, unlocked, completed, className }: IntroCa
         <CardContent className="p-4 flex flex-col h-full justify-between space-y-3">
           <div className="flex items-start justify-between gap-3">
             <div className="space-y-1 min-w-0">
-              <p className="text-sm font-medium text-foreground">{data.emoji} {data.title}</p>
+              <p className="text-sm font-medium text-foreground">{data.title}</p>
               <p className="text-sm text-muted-foreground line-clamp-2">{data.description}</p>
             </div>
             <div className="shrink-0">
