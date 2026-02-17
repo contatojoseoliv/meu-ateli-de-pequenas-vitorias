@@ -124,89 +124,37 @@
 .app-daycard {
   position: relative;
   overflow: hidden;
-
-  /* Variáveis padronizadas para Rosa Argila e Ocre */
-  --daycard-tint: var(--rosa-argila);
-  --daycard-tint-2: var(--ocre-dourado);
-
-  /* Fundo Rosa Argila com manchas suaves em Ocre */
-  background:
-    radial-gradient(520px 220px at 18% 12%, hsl(var(--daycard-tint) / 0.25), transparent 75%),
-    radial-gradient(420px 260px at 82% 18%, hsl(var(--daycard-tint-2) / 0.20), transparent 70%),
-    linear-gradient(180deg, hsl(var(--rosa-argila) / 0.12), hsl(var(--rosa-argila) / 0.12)),
-    hsl(var(--card));
-
-  /* Moldura “colada” */
-  box-shadow:
-    0 12px 26px -20px hsl(var(--foreground) / 0.35),
-    inset 0 0 0 1px hsl(var(--rosa-argila) / 0.2);
+  background: hsl(var(--card)); /* Fundo sólido igual ao card/página */
+  border: 2px solid hsl(var(--ocre-dourado)); /* Borda sólida em Ocre */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Grão/texura bem leve */
+/* Removemos o pseudo-elemento de textura/grão */
 .app-daycard::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.75;
-  background:
-    radial-gradient(circle at 18% 22%, hsl(var(--ocre-dourado) / 0.05) 0 1px, transparent 2px) 0 0 / 26px 26px,
-    radial-gradient(circle at 72% 44%, hsl(var(--ocre-dourado) / 0.04) 0 1px, transparent 2px) 0 0 / 34px 34px;
-  mix-blend-mode: multiply;
+  display: none;
 }
 
-/* Variantes agora seguem o padrão Rosa/Ocre com sutis diferenças de intensidade */
+/* Variantes simplificadas - mantendo a borda Ocre como padrão */
 .app-daycard--mint,
 .app-daycard--clay,
-.app-daycard--gold {
-  --daycard-tint: var(--rosa-argila);
-  --daycard-tint-2: var(--ocre-dourado);
-}
-
-/* Bloqueado: cinza neutro */
-.app-daycard--locked {
-  --daycard-tint: var(--muted);
-  --daycard-tint-2: var(--muted);
-  background:
-    radial-gradient(520px 220px at 18% 12%, hsl(var(--muted) / 0.55), transparent 62%),
-    radial-gradient(420px 260px at 82% 18%, hsl(var(--foreground) / 0.03), transparent 60%),
-    linear-gradient(180deg, hsl(var(--card)), hsl(var(--card)));
-}
-
-/* Intro: uma variação própria */
+.app-daycard--gold,
 .app-daycard--intro {
-  --daycard-tint: var(--rosa-argila);
-  --daycard-tint-2: var(--ocre-dourado);
+  background: hsl(var(--card));
+  border-color: hsl(var(--ocre-dourado));
 }
 
-/* Selo no canto (decorativo) */
-.app-daycard--seal::after {
-  content: "";
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  pointer-events: none;
-
-  background:
-    radial-gradient(circle at 30% 28%, hsl(var(--background) / 0.9), hsl(var(--background) / 0.55) 55%, transparent 56%),
-    radial-gradient(circle at 52% 55%, hsl(var(--ocre-dourado) / 0.25), transparent 60%),
-    linear-gradient(180deg, hsl(var(--card)), hsl(var(--card)));
-
-  border: 1px solid hsl(var(--rosa-argila) / 0.3);
-  box-shadow:
-    0 10px 18px -16px hsl(var(--foreground) / 0.45),
-    inset 0 0 0 1px hsl(var(--foreground) / 0.06);
+/* Bloqueado: fundo cinza e borda discreta */
+.app-daycard--locked {
+  background: hsl(var(--muted) / 0.5);
+  border-color: hsl(var(--border));
+  opacity: 0.6;
 }
 
-/* Concluído: selo um pouco mais “preenchido” */
-.app-daycard--done.app-daycard--seal::after {
-  background:
-    radial-gradient(circle at 30% 28%, hsl(var(--background) / 0.92), hsl(var(--background) / 0.55) 55%, transparent 56%),
-    radial-gradient(circle at 48% 58%, hsl(var(--ocre-dourado) / 0.28), transparent 62%),
-    linear-gradient(180deg, hsl(var(--card)), hsl(var(--card)));
+/* Concluído: fundo levemente esverdeado para indicar sucesso, mas mantendo a borda */
+.app-daycard--done {
+  background: hsl(var(--verde-eucalipto) / 0.05);
+  border-color: hsl(var(--verde-eucalipto) / 0.4);
 }
 
 /* Callout de dica (verde suave) */
@@ -234,7 +182,7 @@
   pointer-events: none;
 }
 
-/* Dark mode tweaks (mais contraste e menos “embaçado”) */
+/* Dark mode tweaks */
 .dark .app-paper::before {
   opacity: 0.55;
   mix-blend-mode: normal;
