@@ -164,7 +164,7 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Antes de começarmos, você precisará de alguns materiais simples.</p>
-            <p>Para este projeto, vamos usar apenas o necessário. A simplicidade faz parte da experiência.</p>
+            <p>Para este projeto, vamos usar apenas o necessário. A simplicidade faz parte da experiênca.</p>
             <p>Talvez os nomes sejam novos para você e está tudo bem.</p>
             <p>Aqui você vai entender:</p>
             <ul className="list-disc list-inside space-y-1 pl-1">
@@ -191,12 +191,6 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
               <p className="text-sm font-medium">Peça na loja:</p>
               <p className="text-sm mt-1">🗣️ "Fio de algodão para amigurumi, para usar com agulha 2.0 ou 2.5 mm"</p>
             </StoreTip>
-            <p>✔ Por que esse fio é o ideal para ESTE projeto?</p>
-            <ul className="list-disc list-inside space-y-1 pl-1">
-              <li>Ele é firme → o coelho mantém a forma</li>
-              <li>Não estica demais → os pontos não abrem</li>
-              <li>Ajuda o amigurumi a ficar bem definido</li>
-            </ul>
             <p className="font-bold">🎨 Cor</p>
             <p>Cores claras são melhores no começo:</p>
             <ul className="list-disc list-inside space-y-1 pl-1">
