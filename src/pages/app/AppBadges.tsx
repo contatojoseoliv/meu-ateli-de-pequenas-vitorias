@@ -22,29 +22,29 @@ export default function AppBadges() {
           <CardHeader>
             <CardTitle className="text-lg">Sua coleção</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between gap-3">
-              <p className="text-sm text-muted-foreground">Dias concluídos</p>
-              <p className="text-sm font-medium text-foreground">{completed}/7</p>
-            </div>
-
-            <div className="flex flex-col items-center gap-3 py-4">
-              <img
-                src={seloPrimeiraVitoria}
-                alt="Selo Primeira Vitória"
-                className={`h-32 w-32 object-contain ${primeiraVitoria ? "" : "grayscale opacity-40"}`}
-              />
-              <p className="text-sm font-medium text-foreground">
-                Primeira Vitória
-              </p>
-              {!primeiraVitoria && (
-                <p className="text-xs text-muted-foreground text-center">
-                  Conclua todos os dias para liberar o selo de Primeira Vitória.
-                </p>
-              )}
-            </div>
-
-            <p className="text-xs text-muted-foreground">Em breve: mais selos, animações e histórico.</p>
+          <CardContent className="flex flex-col items-center gap-4 py-8">
+            <img
+              src={seloPrimeiraVitoria}
+              alt="Selo Primeira Vitória"
+              className={`h-56 w-56 md:h-72 md:w-72 object-contain transition-all duration-300 ${primeiraVitoria ? "drop-shadow-lg" : "grayscale opacity-40"}`}
+            />
+            <h2 className="text-xl md:text-2xl font-bold text-foreground text-center">
+              Primeira Vitória
+            </h2>
+            <p className="text-sm text-muted-foreground text-center max-w-xs">
+              {primeiraVitoria
+                ? "Parabéns! Você conquistou o selo de Primeira Vitória! 🎉"
+                : `Conclua todos os 7 dias para liberar o selo. (${completed}/7)`}
+            </p>
+            {primeiraVitoria && (
+              <a
+                href={seloPrimeiraVitoria}
+                download="selo-primeira-vitoria.png"
+                className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-5 py-2 text-sm font-medium text-primary hover:bg-primary/20 transition-colors"
+              >
+                Baixar Selo
+              </a>
+            )}
           </CardContent>
         </Card>
       </main>
