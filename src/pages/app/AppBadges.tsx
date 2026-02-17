@@ -1,7 +1,6 @@
 import { AppShell } from "@/components/app/AppShell";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useJourneyProgress } from "@/hooks/useJourneyProgress";
-import { Check } from "lucide-react";
 
 import seloPrimeiraVitoria from "@/assets/selo-primeira-vitoria-circular.png";
 
@@ -30,18 +29,11 @@ export default function AppBadges() {
             </div>
 
             <div className="flex flex-col items-center gap-3 py-4">
-              <div className="relative">
-                <img
-                  src={seloPrimeiraVitoria}
-                  alt="Selo Primeira Vitória"
-                  className={`h-32 w-32 object-contain transition-all duration-500 ${primeiraVitoria ? 'grayscale-0 opacity-100' : 'grayscale opacity-30'}`}
-                />
-                {primeiraVitoria && (
-                  <div className="absolute -top-2 -right-2 bg-accent text-white p-1.5 rounded-full shadow-lg animate-bounce">
-                    <Check className="h-4 w-4" />
-                  </div>
-                )}
-              </div>
+              
+
+
+
+
               <p className="text-sm font-medium text-foreground">
                 Primeira Vitória
               </p>

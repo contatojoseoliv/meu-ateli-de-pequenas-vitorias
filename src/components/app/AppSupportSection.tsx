@@ -8,10 +8,12 @@ export function AppSupportSection() {
   const { profile } = useAppProfile();
 
   return <section className="space-y-3" aria-labelledby="app-support-title">
+      
+
       <Card className="app-stitch">
         <CardHeader className="pb-3">
           <CardTitle className="text-lg">Olá {profile.displayName}👋. Como podemos ajudar?</CardTitle>
-        </Header>
+        </CardHeader>
         <CardContent className="space-y-3">
           <p className="text-sm text-muted-foreground">
             Fale com a gente pelo canal que for mais confortável.
