@@ -22,10 +22,10 @@ export default function AppSupport() {
             <a href="mailto:suporte@seusite.com">
               <Button variant="ghost" size="default">Enviar e-mail</Button>
             </a>
-            <p className="text-xs text-muted-foreground">(Placeholders) Depois você pode trocar para o número/e-mail oficial.</p>
+            
           </CardContent>
         </Card>
       </main>
-    </AppShell>
-  );
+    </AppShell>);
+
 }
