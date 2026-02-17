@@ -15,6 +15,7 @@ import AppDay from "./pages/app/AppDay";
 import AppProfile from "./pages/app/AppProfile";
 import AppSupport from "./pages/app/AppSupport";
 import AppBadges from "./pages/app/AppBadges";
+import AppMateriaisTecnicas from "./pages/app/AppMateriaisTecnicas";
 import { Loader2 } from "lucide-react";
 
 // Lazy load admin pages
@@ -50,6 +51,7 @@ const App = () => (
             <Route path="/app/perfil" element={<AppProfile />} />
             <Route path="/app/suporte" element={<AppSupport />} />
             <Route path="/app/selos" element={<AppBadges />} />
+            <Route path="/app/materiais-tecnicas" element={<AppMateriaisTecnicas />} />
 
             {/* Admin Routes */}
             <Route

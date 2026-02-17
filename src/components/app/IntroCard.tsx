@@ -55,7 +55,7 @@ export function IntroCard({ cardIndex, unlocked, completed, className }: IntroCa
   if (!unlocked) {
     return (
       <div className={cn("h-full", className)}>
-        <Card className="app-stitch app-daycard app-daycard--locked overflow-hidden h-full opacity-60">
+        <Card className="app-stitch app-daycard app-daycard--locked overflow-hidden h-full min-h-[140px] opacity-60">
           <CardContent className="p-4 flex flex-col h-full justify-between space-y-3">
             <div className="flex items-start justify-between gap-3">
               <div className="space-y-1 min-w-0">
@@ -84,7 +84,7 @@ export function IntroCard({ cardIndex, unlocked, completed, className }: IntroCa
       className={cn("h-full", className)}
     >
       <Card className={cn(
-        "app-stitch app-daycard overflow-hidden hover-lift h-full",
+        "app-stitch app-daycard overflow-hidden hover-lift h-full min-h-[140px]",
         completed ? "app-daycard--done" : `app-daycard--intro ${data.tintClass}`
       )}>
         <CardContent className="p-4 flex flex-col h-full justify-between space-y-3">

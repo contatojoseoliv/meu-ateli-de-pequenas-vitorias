@@ -24,7 +24,7 @@ export function AppMaterialsTechniquesSection({ currentDay }: Props) {
             <p className="text-sm text-muted-foreground">
               Acesse materiais e recursos essenciais para o seu Amigurumi.
             </p>
-            <Button variant="secondary" size="sm" onClick={() => navigate(`/app/dia/${currentDay}?tab=materiais`)}>
+            <Button variant="secondary" size="sm" onClick={() => navigate('/app/materiais-tecnicas')}>
               Materiais
             </Button>
           </CardContent>
@@ -39,7 +39,7 @@ export function AppMaterialsTechniquesSection({ currentDay }: Props) {
             <p className="text-sm text-muted-foreground">
               Aprenda e consulte métodos e processos para executar suas atividades.
             </p>
-            <Button variant="secondary" size="sm" onClick={() => navigate(`/app/dia/${currentDay}?tab=tecnicas`)}>
+            <Button variant="secondary" size="sm" onClick={() => navigate('/app/materiais-tecnicas')}>
               Técnicas
             </Button>
           </CardContent>

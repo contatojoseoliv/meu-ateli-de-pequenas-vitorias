@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 type DayCardProps = {
   day: number;
   title: string;
-  tag: string;
+  tag?: string;
   estimatedTime: string;
   unlocked: boolean;
   completed: boolean;
@@ -44,7 +44,7 @@ export function DayCard({
     >
       <Card
         className={cn(
-          "app-stitch app-daycard overflow-hidden h-full",
+          "app-stitch app-daycard overflow-hidden h-full min-h-[140px]",
           dayVariantClass,
           completed && "app-daycard--done",
           stateClass,
