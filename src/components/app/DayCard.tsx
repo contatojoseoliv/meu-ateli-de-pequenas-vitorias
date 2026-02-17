@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { Lock, ArrowRight, Check } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { StitchIcon } from "./CrochetIcons";
 
 type DayCardProps = {
   day: number;
@@ -55,10 +54,7 @@ export function DayCard({
         <CardContent className="p-4 flex flex-col h-full justify-between space-y-3">
           <div className="flex items-start justify-between gap-3">
             <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <StitchIcon className={cn("w-4 h-4", unlocked ? "text-primary" : "text-muted-foreground/40")} />
-                <p className="text-sm font-medium text-foreground">Dia {day}</p>
-              </div>
+              <p className="text-sm font-medium text-foreground">Dia {day}</p>
               <p className="text-sm text-muted-foreground line-clamp-2">{title}</p>
             </div>
 
