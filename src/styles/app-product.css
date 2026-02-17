@@ -120,20 +120,32 @@
   box-shadow: 0 8px 18px -14px hsl(var(--foreground) / 0.25);
 }
 
-/* Cards artesanais (conforme imagem: fundo branco, borda verde) */
+/* Cards artesanais (visual mesclado/gradiente restaurado) */
 .app-daycard {
   position: relative;
   overflow: hidden;
-  background: hsl(var(--card));
-  border: 1px solid hsl(var(--verde-eucalipto) / 0.3);
+  background:
+    radial-gradient(520px 220px at 18% 12%, hsl(var(--rosa-argila) / 0.25), transparent 75%),
+    radial-gradient(420px 260px at 82% 18%, hsl(var(--ocre-dourado) / 0.20), transparent 70%),
+    linear-gradient(180deg, hsl(var(--rosa-argila) / 0.12), hsl(var(--rosa-argila) / 0.12)),
+    hsl(var(--card));
+  border: 1px solid hsl(var(--verde-eucalipto) / 0.2);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-/* Destaque Ocre para o dia atual */
+/* Destaque Ocre FORTE para o dia atual */
 .app-daycard--current {
-  border: 2px solid hsl(var(--ocre-dourado));
-  box-shadow: 0 8px 20px -12px hsl(var(--ocre-dourado) / 0.4);
+  border: 3px solid hsl(var(--ocre-dourado));
+  background:
+    radial-gradient(520px 220px at 18% 12%, hsl(var(--ocre-dourado) / 0.15), transparent 75%),
+    linear-gradient(180deg, hsl(var(--ocre-dourado) / 0.08), hsl(var(--ocre-dourado) / 0.08)),
+    hsl(var(--card));
+  box-shadow: 
+    0 12px 32px -12px hsl(var(--ocre-dourado) / 0.5),
+    inset 0 0 0 1px hsl(var(--ocre-dourado) / 0.2);
+  transform: scale(1.02);
+  z-index: 10;
 }
 
 /* Bloqueado: fundo cinza e borda discreta */
@@ -146,6 +158,10 @@
 /* Concluído: borda verde mais sólida */
 .app-daycard--done {
   border-color: hsl(var(--verde-eucalipto) / 0.5);
+  background:
+    radial-gradient(520px 220px at 18% 12%, hsl(var(--verde-eucalipto) / 0.15), transparent 75%),
+    linear-gradient(180deg, hsl(var(--verde-eucalipto) / 0.05), hsl(var(--verde-eucalipto) / 0.05)),
+    hsl(var(--card));
 }
 
 /* Callout de dica (verde suave) */
