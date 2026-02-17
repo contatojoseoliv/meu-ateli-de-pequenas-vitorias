@@ -34,7 +34,7 @@ export function DayCard({
     >
       <Card
         className={cn(
-          "app-daycard overflow-hidden h-full min-h-[140px]",
+          "app-daycard app-daycard--mesclado overflow-hidden h-full min-h-[140px]",
           completed && "app-daycard--done",
           !unlocked && "app-daycard--locked",
           isCurrent && "app-daycard--current",

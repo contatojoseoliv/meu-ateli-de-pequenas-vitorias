@@ -120,7 +120,7 @@
   box-shadow: 0 8px 18px -14px hsl(var(--foreground) / 0.25);
 }
 
-/* Cards artesanais (conforme imagem: fundo branco, borda verde) */
+/* Card Padrão (usado dentro das etapas): Fundo branco, borda verde */
 .app-daycard {
   position: relative;
   overflow: hidden;
@@ -130,22 +130,51 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-/* Destaque Ocre para o dia atual */
+/* VISUAL MESCLADO (Exclusivo para a Home) */
+.app-daycard--mesclado {
+  --daycard-tint: var(--rosa-argila);
+  --daycard-tint-2: var(--ocre-dourado);
+
+  background:
+    radial-gradient(520px 220px at 18% 12%, hsl(var(--daycard-tint) / 0.25), transparent 75%),
+    radial-gradient(420px 260px at 82% 18%, hsl(var(--daycard-tint-2) / 0.20), transparent 70%),
+    linear-gradient(180deg, hsl(var(--rosa-argila) / 0.12), hsl(var(--rosa-argila) / 0.12)),
+    hsl(var(--card));
+
+  box-shadow:
+    0 12px 26px -20px hsl(var(--foreground) / 0.35),
+    inset 0 0 0 1px hsl(var(--rosa-argila) / 0.2);
+}
+
+/* Textura para o visual mesclado */
+.app-daycard--mesclado::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.75;
+  background:
+    radial-gradient(circle at 18% 22%, hsl(var(--ocre-dourado) / 0.05) 0 1px, transparent 2px) 0 0 / 26px 26px,
+    radial-gradient(circle at 72% 44%, hsl(var(--ocre-dourado) / 0.04) 0 1px, transparent 2px) 0 0 / 34px 34px;
+  mix-blend-mode: multiply;
+}
+
+/* Destaque Ocre para o dia atual (Home) */
 .app-daycard--current {
-  border: 2px solid hsl(var(--ocre-dourado));
-  box-shadow: 0 8px 20px -12px hsl(var(--ocre-dourado) / 0.4);
+  border: 2px solid hsl(var(--ocre-dourado)) !important;
+  box-shadow: 0 8px 20px -12px hsl(var(--ocre-dourado) / 0.4) !important;
 }
 
 /* Bloqueado: fundo cinza e borda discreta */
 .app-daycard--locked {
-  background: hsl(var(--muted) / 0.5);
-  border-color: hsl(var(--border));
+  background: hsl(var(--muted) / 0.5) !important;
+  border-color: hsl(var(--border)) !important;
   opacity: 0.6;
 }
 
 /* Concluído: borda verde mais sólida */
 .app-daycard--done {
-  border-color: hsl(var(--verde-eucalipto) / 0.5);
+  border-color: hsl(var(--verde-eucalipto) / 0.5) !important;
 }
 
 /* Callout de dica (verde suave) */
