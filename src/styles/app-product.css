@@ -120,28 +120,20 @@
   box-shadow: 0 8px 18px -14px hsl(var(--foreground) / 0.25);
 }
 
-/* Cards artesanais (apenas para a grade “Meus Dias de Criação”) */
+/* Cards artesanais (conforme imagem: fundo branco, borda verde) */
 .app-daycard {
   position: relative;
   overflow: hidden;
-  background: hsl(var(--card)); /* Fundo sólido igual ao card/página */
-  border: 2px solid hsl(var(--ocre-dourado)); /* Borda sólida em Ocre */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Removemos o pseudo-elemento de textura/grão */
-.app-daycard::before {
-  display: none;
-}
-
-/* Variantes simplificadas - mantendo a borda Ocre como padrão */
-.app-daycard--mint,
-.app-daycard--clay,
-.app-daycard--gold,
-.app-daycard--intro {
   background: hsl(var(--card));
-  border-color: hsl(var(--ocre-dourado));
+  border: 1px solid hsl(var(--verde-eucalipto) / 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+/* Destaque Ocre para o dia atual */
+.app-daycard--current {
+  border: 2px solid hsl(var(--ocre-dourado));
+  box-shadow: 0 8px 20px -12px hsl(var(--ocre-dourado) / 0.4);
 }
 
 /* Bloqueado: fundo cinza e borda discreta */
@@ -151,10 +143,9 @@
   opacity: 0.6;
 }
 
-/* Concluído: fundo levemente esverdeado para indicar sucesso, mas mantendo a borda */
+/* Concluído: borda verde mais sólida */
 .app-daycard--done {
-  background: hsl(var(--verde-eucalipto) / 0.05);
-  border-color: hsl(var(--verde-eucalipto) / 0.4);
+  border-color: hsl(var(--verde-eucalipto) / 0.5);
 }
 
 /* Callout de dica (verde suave) */
