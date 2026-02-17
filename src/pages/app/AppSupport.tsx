@@ -15,7 +15,7 @@ export default function AppSupport() {
           <CardHeader>
             <CardTitle className="text-lg">Canais de contato</CardTitle>
           </CardHeader>
-          <CardContent className="flex flex-col gap-3">
+          <CardContent className="flex flex-row flex-wrap gap-3">
             <a href="https://wa.me/55SEUNUMERO" target="_blank" rel="noreferrer">
               <Button variant="secondary" size="default">Falar no WhatsApp</Button>
             </a>
