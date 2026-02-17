@@ -86,7 +86,7 @@ export default function IntroPageLayout({ cardIndex, card, shellTitle, progress,
     return (
       <AppShell title={shellTitle}>
         <main className="container-main py-8 space-y-6">
-          <Card className="bg-white border-2 border-verde-eucalipto shadow-sm">
+          <Card className="bg-white border border-verde-eucalipto/15 shadow-sm">
             <CardContent className="p-8 text-center space-y-3">
               <p className="text-muted-foreground">Conclua a etapa anterior para desbloquear.</p>
               <Link to="/app">
@@ -216,7 +216,7 @@ export default function IntroPageLayout({ cardIndex, card, shellTitle, progress,
                   ref={(el) => { topicRefs.current[topic.id] = el; }}
                   style={{ scrollMarginTop: 90 }}
                 >
-                  <Card className="bg-white border-2 border-verde-eucalipto shadow-sm overflow-hidden relative">
+                  <Card className="bg-white border border-verde-eucalipto/15 shadow-sm overflow-hidden relative">
                     <CardContent className="p-5 md:p-6 space-y-4">
                       <div className="flex items-center gap-2">
                         {isRead && (
