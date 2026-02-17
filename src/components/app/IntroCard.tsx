@@ -4,38 +4,8 @@ import { ArrowRight, Lock, Check } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-
-export type IntroCardData = {
-  title: string;
-  description: string;
-  emoji: string;
-  badge: string;
-  tintClass: string;
-};
-
-export const INTRO_CARDS: IntroCardData[] = [
-  {
-    title: "Comece por aqui",
-    description: "Seu primeiro amigurumi, um dia de cada vez.",
-    emoji: "🌱",
-    badge: "Introdução",
-    tintClass: "app-daycard--mint",
-  },
-  {
-    title: "Materiais",
-    description: "Só o essencial para começar seu coelhinho.",
-    emoji: "🧺",
-    badge: "Materiais",
-    tintClass: "app-daycard--clay",
-  },
-  {
-    title: "Fundamentos",
-    description: "Sem complicação — o básico para dar os primeiros pontos.",
-    emoji: "🧵",
-    badge: "Técnicas",
-    tintClass: "app-daycard--gold",
-  },
-];
+import { INTRO_CARDS as INTRO_CARDS_DATA } from "@/content/introCards";
+import { YarnBallIcon, CrochetHookIcon, StitchIcon } from "./CrochetIcons";
 
 type IntroCardProps = {
   cardIndex: number;
@@ -45,11 +15,21 @@ type IntroCardProps = {
 };
 
 export function IntroCard({ cardIndex, unlocked, completed, className }: IntroCardProps) {
-  const data = INTRO_CARDS[cardIndex];
+  const data = INTRO_CARDS_DATA[cardIndex];
   if (!data) return null;
 
   const routes = ["/app/comecar", "/app/materiais", "/app/fundamentos"];
   const href = routes[cardIndex] ?? "/app/comecar";
+
+  const renderIcon = () => {
+    const iconClass = "w-5 h-5 text-primary";
+    switch (data.iconName) {
+      case "yarn": return <YarnBallIcon className={iconClass} />;
+      case "hook": return <CrochetHookIcon className={iconClass} />;
+      case "stitch": return <StitchIcon className={iconClass} />;
+      default: return <span className="text-lg">{data.emoji}</span>;
+    }
+  };
 
   // Locked
   if (!unlocked) {
@@ -59,7 +39,10 @@ export function IntroCard({ cardIndex, unlocked, completed, className }: IntroCa
           <CardContent className="p-4 flex flex-col h-full justify-between space-y-3">
             <div className="flex items-start justify-between gap-3">
               <div className="space-y-1 min-w-0">
-                <p className="text-sm font-medium text-muted-foreground">{data.emoji} {data.title}</p>
+                <div className="flex items-center gap-2">
+                  <div className="opacity-40">{renderIcon()}</div>
+                  <p className="text-sm font-medium text-muted-foreground">{data.title}</p>
+                </div>
                 <p className="text-sm text-muted-foreground/60 line-clamp-2">{data.description}</p>
               </div>
               <div className="shrink-0">
@@ -90,7 +73,10 @@ export function IntroCard({ cardIndex, unlocked, completed, className }: IntroCa
         <CardContent className="p-4 flex flex-col h-full justify-between space-y-3">
           <div className="flex items-start justify-between gap-3">
             <div className="space-y-1 min-w-0">
-              <p className="text-sm font-medium text-foreground">{data.emoji} {data.title}</p>
+              <div className="flex items-center gap-2">
+                {renderIcon()}
+                <p className="text-sm font-medium text-foreground">{data.title}</p>
+              </div>
               <p className="text-sm text-muted-foreground line-clamp-2">{data.description}</p>
             </div>
             <div className="shrink-0">

@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Check, ImageIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
   Table,
@@ -8,7 +8,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ImageIcon } from "lucide-react";
 
 /* ── Helpers ── */
 
@@ -40,7 +39,10 @@ export type Topic = {
 
 export type IntroCardData = {
   title: string;
+  description: string;
   emoji: string;
+  iconName: "yarn" | "hook" | "stitch";
+  badge: string;
   tintClass: string;
   topics: Topic[];
 };
@@ -48,10 +50,12 @@ export type IntroCardData = {
 /* ── Card content ── */
 
 export const INTRO_CARD_CONTENTS: IntroCardData[] = [
-  /* ═══ Card 0: Comece Por Aqui ═══ */
   {
-    title: "Seu primeiro amigurumi, um dia de cada vez",
-    emoji: "💛",
+    title: "Comece por aqui",
+    description: "Seu primeiro amigurumi, um dia de cada vez.",
+    emoji: "🌱",
+    iconName: "yarn",
+    badge: "Introdução",
     tintClass: "app-daycard--mint",
     topics: [
       {
@@ -146,11 +150,12 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
       },
     ],
   },
-
-  /* ═══ Card 1: Materiais ═══ */
   {
-    title: "Materiais (só o essencial)",
+    title: "Materiais",
+    description: "Só o essencial para começar seu coelhinho.",
     emoji: "🧺",
+    iconName: "hook",
+    badge: "Materiais",
     tintClass: "app-daycard--clay",
     topics: [
       {
@@ -351,11 +356,12 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
       },
     ],
   },
-
-  /* ═══ Card 2: Fundamentos ═══ */
   {
-    title: "Técnicas sem complicação",
+    title: "Fundamentos",
+    description: "Sem complicação — o básico para dar os primeiros pontos.",
     emoji: "🧵",
+    iconName: "stitch",
+    badge: "Técnicas",
     tintClass: "app-daycard--gold",
     topics: [
       {
@@ -590,3 +596,12 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
     ],
   },
 ];
+
+export const INTRO_CARDS = INTRO_CARD_CONTENTS.map(c => ({
+  title: c.title,
+  description: c.description,
+  emoji: c.emoji,
+  iconName: c.iconName,
+  badge: c.badge,
+  tintClass: c.tintClass
+}));
