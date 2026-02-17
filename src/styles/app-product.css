@@ -131,9 +131,8 @@
 
   /* Papel tingido + manchas suaves */
   background:
-    radial-gradient(520px 220px at 18% 12%, hsl(var(--daycard-tint) / 0.22), transparent 62%),
-    radial-gradient(420px 260px at 82% 18%, hsl(var(--daycard-tint-2) / 0.16), transparent 60%),
-    radial-gradient(680px 320px at 40% 110%, hsl(var(--foreground) / 0.035), transparent 62%),
+    radial-gradient(520px 220px at 18% 12%, hsl(var(--daycard-tint) / 0.35), transparent 75%),
+    radial-gradient(420px 260px at 82% 18%, hsl(var(--daycard-tint-2) / 0.25), transparent 70%),
     linear-gradient(180deg, hsl(var(--card)), hsl(var(--card)));
 
   /* Moldura “colada” (sem afetar outros cards) */
@@ -155,24 +154,26 @@
   mix-blend-mode: multiply;
 }
 
-/* Variantes por dia */
+/* Variantes por dia - Cores mais visíveis */
 .app-daycard--mint {
-  --daycard-tint: var(--primary);
-  --daycard-tint-2: var(--secondary);
+  --daycard-tint: var(--verde-eucalipto);
+  --daycard-tint-2: var(--rosa-argila);
+  background-color: hsl(var(--verde-eucalipto) / 0.08);
 }
 
 .app-daycard--clay {
-  --daycard-tint: var(--secondary);
-  --daycard-tint-2: var(--primary);
+  --daycard-tint: var(--rosa-argila);
+  --daycard-tint-2: var(--verde-eucalipto);
+  background-color: hsl(var(--rosa-argila) / 0.08);
 }
 
-/* “Gold” bem sutil para respeitar o ocre (sem virar bloco dourado) */
 .app-daycard--gold {
-  --daycard-tint: var(--accent);
-  --daycard-tint-2: var(--secondary);
+  --daycard-tint: var(--ocre-dourado);
+  --daycard-tint-2: var(--rosa-argila);
+  background-color: hsl(var(--ocre-dourado) / 0.08);
 }
 
-/* Bloqueado: cinza neutro (sem variação por dia) */
+/* Bloqueado: cinza neutro */
 .app-daycard--locked {
   --daycard-tint: var(--muted);
   --daycard-tint-2: var(--muted);
@@ -182,7 +183,7 @@
     linear-gradient(180deg, hsl(var(--card)), hsl(var(--card)));
 }
 
-/* Intro: uma variação própria (puxando para o “papel” do app) */
+/* Intro: uma variação própria */
 .app-daycard--intro {
   --daycard-tint: var(--secondary);
   --daycard-tint-2: var(--secondary);
