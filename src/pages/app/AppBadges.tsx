@@ -28,26 +28,26 @@ export default function AppBadges() {
               <p className="text-sm font-medium text-foreground">{completed}/7</p>
             </div>
 
-            <div className="flex flex-col items-center justify-center gap-3 py-6">
-              <img
-                src={seloPrimeiraVitoria}
-                alt="Selo Primeira Vitória"
-                className={`h-44 w-44 object-contain ${primeiraVitoria ? "" : "grayscale opacity-40"}`}
-              />
-              <p className="text-base font-semibold text-foreground text-center">
+            <div className="flex flex-col items-center gap-3 py-4">
+              
+
+
+
+
+              <p className="text-sm font-medium text-foreground">
                 Primeira Vitória
               </p>
-              {!primeiraVitoria && (
-                <p className="text-xs text-muted-foreground text-center">
+              {!primeiraVitoria &&
+              <p className="text-xs text-muted-foreground text-center">
                   Conclua todos os dias para liberar o selo de Primeira Vitória.
                 </p>
-              )}
+              }
             </div>
 
             <p className="text-xs text-muted-foreground">Em breve: mais selos, animações e histórico.</p>
           </CardContent>
         </Card>
       </main>
-    </AppShell>
-  );
+    </AppShell>);
+
 }
