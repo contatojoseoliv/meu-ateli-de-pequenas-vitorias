@@ -188,13 +188,6 @@
   --daycard-tint-2: var(--secondary);
 }
 
-/* Estilo para os cards de conteúdo (tópicos) dentro das lições */
-.app-daycard:not(.app-daycard--intro):not(.app-daycard--locked) {
-  background: hsl(var(--background));
-  border: 1px solid hsl(var(--primary) / 0.2);
-  box-shadow: 0 4px 12px -4px hsl(var(--foreground) / 0.1);
-}
-
 /* Selo no canto (decorativo) */
 .app-daycard--seal::after {
   content: "";
