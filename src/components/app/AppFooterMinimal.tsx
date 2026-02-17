@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { Facebook, Heart, Instagram, Mail, Youtube } from "lucide-react";
 
@@ -17,8 +19,8 @@ export function AppFooterMinimal() {
   ];
 
   return (
-    <footer className="mt-8 bg-verde-eucalipto text-white py-6">
-      <div className="px-4 sm:px-6 lg:px-8">
+    <footer className="mt-8 bg-verde-eucalipto text-white py-6 w-full">
+      <div className="w-full px-4">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           {/* Marca */}
           <div className="text-center md:text-left">

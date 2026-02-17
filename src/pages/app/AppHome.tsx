@@ -1,7 +1,9 @@
+"use client";
+
 import { useEffect, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/shared/Button";
 import { journeyDays } from "@/content/journey";
 import { useJourneyProgress } from "@/hooks/useJourneyProgress";
@@ -10,9 +12,7 @@ import { AppShell } from "@/components/app/AppShell";
 import { DayCard } from "@/components/app/DayCard";
 import { IntroCard, INTRO_CARDS } from "@/components/app/IntroCard";
 import { useIntroProgress } from "@/hooks/useIntroProgress";
-import { AppSupportSection } from "@/components/app/AppSupportSection";
 import { AppFooterMinimal } from "@/components/app/AppFooterMinimal";
-import { AppMaterialsTechniquesSection } from "@/components/app/AppMaterialsTechniquesSection";
 import { JourneyMiniProgress } from "@/components/app/JourneyMiniProgress";
 
 // Placeholder para as novas imagens que serão enviadas
@@ -171,6 +171,7 @@ export default function AppHome() {
                   key={d.day}
                   day={d.day}
                   title={d.title}
+                  tag={d.tag}
                   estimatedTime={d.estimatedTime}
                   unlocked={unlocked}
                   completed={completed}
@@ -180,13 +181,6 @@ export default function AppHome() {
               );
             })}
           </div>
-        </section>
-
-        <AppMaterialsTechniquesSection currentDay={progress.currentDay} />
-
-        <section className="space-y-3">
-          <h2 className="text-xl font-bold text-foreground">Meu Suporte</h2>
-          <AppSupportSection />
         </section>
 
         <AppFooterMinimal />

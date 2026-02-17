@@ -1,4 +1,6 @@
-import { Award, BookOpen, Headset, Home, Menu, User } from "lucide-react";
+"use client";
+
+import { Award, Headset, Home, Menu, User } from "lucide-react";
 import { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -33,7 +35,6 @@ export function AppUserMenu() {
     () => [
       { label: "Página inicial", to: "/app", icon: Home },
       { label: "Perfil", to: "/app/perfil", icon: User },
-      { label: "Materiais e Técnicas", to: "/app#materiais-tecnicas", icon: BookOpen },
       { label: "Suporte / Fale Conosco", to: "/app/suporte", icon: Headset },
       { label: "Selos & Conquistas", to: "/app/selos", icon: Award },
     ],
@@ -74,4 +75,3 @@ export function AppUserMenu() {
     </DropdownMenu>
   );
 }
-
