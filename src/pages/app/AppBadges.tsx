@@ -32,7 +32,7 @@ export default function AppBadges() {
               <img
                 src={seloPrimeiraVitoria}
                 alt="Selo Primeira Vitória"
-                className={`h-52 w-52 object-contain mx-auto ${primeiraVitoria ? "" : "grayscale opacity-40"}`}
+                className={`h-32 w-32 object-contain ${primeiraVitoria ? "" : "grayscale opacity-40"}`}
               />
               <p className="text-sm font-medium text-foreground">
                 Primeira Vitória
