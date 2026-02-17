@@ -24,13 +24,13 @@ export const DAY_CONTENTS: IntroCardData[] = [
      ═══════════════════════════════════════════ */
   {
     title: "Seu primeiro ponto e o anel mágico",
-    emoji: "🧶",
+    emoji: "📆",
     tintClass: tints[0],
     topics: [
       {
         id: "d1-prep",
         title: "Preparação",
-        emoji: "✨",
+        emoji: "🌬️",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Respire fundo.</p>
@@ -49,7 +49,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
       {
         id: "d1-receita",
         title: "Primeira Parte da Receita",
-        emoji: "📝",
+        emoji: "📌",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p className="font-bold">Peça: Base do corpo</p>
@@ -235,7 +235,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
       {
         id: "d1-missao",
         title: "Missão do Dia 1",
-        emoji: "🎯",
+        emoji: "💛",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <ul className="space-y-1 pl-1">
@@ -260,13 +260,13 @@ export const DAY_CONTENTS: IntroCardData[] = [
      ═══════════════════════════════════════════ */
   {
     title: "Fazendo o corpinho crescer",
-    emoji: "🐰",
+    emoji: "📆",
     tintClass: tints[1],
     topics: [
       {
         id: "d2-prep",
         title: "Preparação",
-        emoji: "✨",
+        emoji: "🌬️",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Hoje seu coelhinho começa a ganhar forma 🐰</p>
@@ -279,7 +279,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
       {
         id: "d2-receita",
         title: "Receita do dia",
-        emoji: "📝",
+        emoji: "📌",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p className="font-bold">Peça: Base do corpo</p>
@@ -316,7 +316,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
         emoji: "🔄",
         content: (
           <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
-            <p>Você terminou o Dia 1 with 12 pontos.</p>
+            <p>Você terminou o Dia 1 com 12 pontos.</p>
             <p>Coloque o marcador no primeiro ponto da volta.</p>
             <p>Agora vamos trabalhar alternando:</p>
             <p>👉 1 ponto sozinho</p>
@@ -440,7 +440,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
       {
         id: "d2-problemas",
         title: "Se algo parecer estranho",
-        emoji: "💡",
+        emoji: "❗",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <div className="rounded-xl border border-verde-eucalipto/20 overflow-hidden shadow-sm">
@@ -477,7 +477,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
       {
         id: "d2-missao",
         title: "Missão do Dia 2",
-        emoji: "🎯",
+        emoji: "💛",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <ul className="space-y-1 pl-1">
@@ -503,26 +503,26 @@ export const DAY_CONTENTS: IntroCardData[] = [
      ═══════════════════════════════════════════ */
   {
     title: "Subindo as paredes (sem aumentar)",
-    emoji: "🥣",
+    emoji: "📆",
     tintClass: tints[2],
     topics: [
       {
         id: "d3-prep",
         title: "Preparação",
-        emoji: "✨",
+        emoji: "🌬️",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Hoje você não vai fazer nada "novo".</p>
             <p>E é exatamente isso que faz a mágica acontecer.</p>
             <p>Você só vai repetir ponto baixo.</p>
-            <p>But isso transforma o disco em um corpinho.</p>
+            <p>Mas isso transforma o disco em um corpinho.</p>
           </div>
         ),
       },
       {
         id: "d3-receita",
         title: "Receita do dia",
-        emoji: "📝",
+        emoji: "📌",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p className="font-bold">Peça: Corpo do coelho</p>
@@ -612,7 +612,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
       {
         id: "d3-problemas",
         title: "Problemas comuns",
-        emoji: "💡",
+        emoji: "❗",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <div className="rounded-xl border border-verde-eucalipto/20 overflow-hidden shadow-sm">
@@ -649,7 +649,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
       {
         id: "d3-missao",
         title: "Missão do Dia 3",
-        emoji: "🎯",
+        emoji: "💛",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <ul className="space-y-1 pl-1">
@@ -674,13 +674,13 @@ export const DAY_CONTENTS: IntroCardData[] = [
      ═══════════════════════════════════════════ */
   {
     title: "Fechando o corpinho do coelho",
-    emoji: "🧶",
+    emoji: "📆",
     tintClass: tints[0],
     topics: [
       {
         id: "d4-prep",
         title: "Preparação",
-        emoji: "✨",
+        emoji: "🌬️",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Até ontem sua peça parecia um copinho.</p>
@@ -693,7 +693,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
       {
         id: "d4-receita",
         title: "Receita do dia",
-        emoji: "📝",
+        emoji: "📌",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Volta 10: (2 pb, 1 dim) × 6 → 18 pontos</p>
@@ -798,7 +798,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
       {
         id: "d4-enchimento",
         title: "Pare aqui para encher + Volta 12",
-        emoji: "☁️",
+        emoji: "🧸",
         content: (
           <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <h3 className="font-bold">🧸 PARE AQUI PARA ENCHER</h3>
@@ -822,7 +822,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
       {
         id: "d4-missao",
         title: "Sua peça agora",
-        emoji: "🎯",
+        emoji: "💛",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <ul className="space-y-1 pl-1">
@@ -847,13 +847,13 @@ export const DAY_CONTENTS: IntroCardData[] = [
      ═══════════════════════════════════════════ */
   {
     title: "Fechamento total do corpo",
-    emoji: "🧶",
+    emoji: "📆",
     tintClass: tints[1],
     topics: [
       {
         id: "d5-prep",
         title: "Preparação",
-        emoji: "✨",
+        emoji: "🌬️",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Ontem você:</p>
@@ -872,7 +872,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
       {
         id: "d5-receita",
         title: "Receita",
-        emoji: "📝",
+        emoji: "📌",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Volta 13: (1 pb, 1 dim) × 6 → 9 pontos</p>
@@ -1011,13 +1011,13 @@ export const DAY_CONTENTS: IntroCardData[] = [
      ═══════════════════════════════════════════ */
   {
     title: "Orelhas, bracinhos e perninhas",
-    emoji: "👂",
+    emoji: "📆",
     tintClass: tints[2],
     topics: [
       {
         id: "d6-prep",
         title: "Preparação",
-        emoji: "✨",
+        emoji: "🌬️",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Hoje é o dia do:</p>
@@ -1142,13 +1142,13 @@ export const DAY_CONTENTS: IntroCardData[] = [
      ═══════════════════════════════════════════ */
   {
     title: "Montagem, rostinho e chaveiro",
-    emoji: "🐰",
+    emoji: "📆",
     tintClass: tints[0],
     topics: [
       {
         id: "d7-prep",
         title: "Preparação",
-        emoji: "✨",
+        emoji: "🌬️",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Hoje sua peça deixa de ser "partes" e vira um personagem.</p>
@@ -1281,7 +1281,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
       {
         id: "d7-missao",
         title: "Missão final",
-        emoji: "🎯",
+        emoji: "💛",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Olhe pra ele.</p>

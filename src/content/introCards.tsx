@@ -55,13 +55,13 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
   /* ═══ Card 0: Comece Por Aqui ═══ */
   {
     title: "Seu primeiro amigurumi, um dia de cada vez",
-    emoji: "🌱",
+    emoji: "💛",
     tintClass: "app-daycard--mint",
     topics: [
       {
         id: "bem-vinda",
         title: "Seja Muito Bem-vinda!",
-        emoji: "✨",
+        emoji: "🤗",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Este não é um curso comum de crochê.</p>
@@ -111,7 +111,7 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
       {
         id: "sem-jeito-certo",
         title: 'Não existe "jeito certo"',
-        emoji: "🎨",
+        emoji: "💛",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Você vai errar pontos.</p>
@@ -126,7 +126,7 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
       {
         id: "como-funciona",
         title: "Como funciona a jornada",
-        emoji: "📅",
+        emoji: "📆",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Cada dia terá:</p>
@@ -160,7 +160,7 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
       {
         id: "mat-intro",
         title: "Antes de começar",
-        emoji: "✨",
+        emoji: "🧺",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Antes de começarmos, você precisará de alguns materiais simples.</p>
@@ -331,7 +331,7 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
       {
         id: "mat-resumo",
         title: "Resumo simples",
-        emoji: "📝",
+        emoji: "💛",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Com isso você já consegue fazer seu coelho:</p>
@@ -359,7 +359,7 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
       {
         id: "fund-intro",
         title: "Antes de começar",
-        emoji: "✨",
+        emoji: "🧵",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Antes de começar o coelhinho, você só precisa entender algumas coisas simples. Você não precisa entender tudo sobre crochê agora. Só o suficiente para conseguir dar os primeiros pontos.</p>
@@ -575,7 +575,7 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
       {
         id: "fund-lembrar",
         title: "O que você precisa lembrar",
-        emoji: "✨",
+        emoji: "💛",
         content: (
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Você não precisa decorar.</p>
