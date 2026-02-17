@@ -430,7 +430,7 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
           <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Cada ponto é como um "V" pequenininho.</p>
             <p>Quando a receita disser (12), significa:</p>
-            <p>👉 aquela volta deve ter 12 pontos no total.</p>
+            <p className="font-bold text-verde-eucalipto">aquela volta deve ter 12 pontos no total.</p>
             <p>Contar ajuda a peça ficar do tamanho certo.</p>
             <p>Não precisa contar toda hora — só no final da volta.</p>
             <ImagePlaceholder caption='Close mostrando vários "Vzinhos" alinhados.' />
