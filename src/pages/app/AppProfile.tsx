@@ -94,20 +94,14 @@ export default function AppProfile() {
               </div>
             </div>
 
-            <div className="flex gap-3 pt-4">
-              <Button 
-                variant="secondary" 
-                className="flex-1" 
-                onClick={() => navigate("/app")}
-              >
-                Cancelar
-              </Button>
+            <div className="flex justify-center pt-4">
               <Button 
                 variant="primary" 
-                className="flex-1" 
+                size="sm" 
                 onClick={handleSave}
+                className="min-w-[140px]"
               >
-                <Check size={18} className="mr-2" /> Salvar
+                <Check size={16} className="mr-2" /> Salvar
               </Button>
             </div>
           </CardContent>
