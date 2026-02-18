@@ -11,6 +11,7 @@ import { useAppProfile } from "@/hooks/useAppProfile";
 import { AppShell } from "@/components/app/AppShell";
 import { DayCard } from "@/components/app/DayCard";
 import { IntroCard, INTRO_CARDS } from "@/components/app/IntroCard";
+import { INTRO_CARD_CONTENTS } from "@/content/introCards";
 import { useIntroProgress } from "@/hooks/useIntroProgress";
 import { AppFooterMinimal } from "@/components/app/AppFooterMinimal";
 import { JourneyMiniProgress } from "@/components/app/JourneyMiniProgress";
@@ -64,6 +65,20 @@ export default function AppHome() {
   const stageImage = dayStageImages[progress.currentDay] ?? placeholderImg;
 
   const stagePercent = useMemo(() => {
+    // If still in intro stages, calculate intro topic progress
+    if (!allIntroCompleted) {
+      // Find current intro card index
+      let currentIntroIdx = 0;
+      for (let i = 0; i < INTRO_CARDS.length; i++) {
+        if (!introProgress.isCardCompleted(i)) { currentIntroIdx = i; break; }
+      }
+      const card = INTRO_CARD_CONTENTS[currentIntroIdx];
+      if (!card) return 0;
+      const stepIds = card.topics.map((t) => t.id);
+      const readCount = stepIds.filter((id) => introProgress.getStepRead(currentIntroIdx, id)).length;
+      return clamp(Math.round((readCount / stepIds.length) * 100));
+    }
+
     const day = progress.currentDay;
     if (isDayCompleted(day)) return 100;
 
@@ -76,7 +91,7 @@ export default function AppHome() {
 
     const checked = steps.reduce((acc, step) => acc + (getStepChecked(day, step.id) ? 1 : 0), 0);
     return clamp(Math.round((checked / total) * 100));
-  }, [currentDayData?.guided, getStepChecked, isDayCompleted, progress.currentDay]);
+  }, [allIntroCompleted, introProgress, currentDayData?.guided, getStepChecked, isDayCompleted, progress.currentDay]);
 
   useEffect(() => {
     if (!location.hash) return;

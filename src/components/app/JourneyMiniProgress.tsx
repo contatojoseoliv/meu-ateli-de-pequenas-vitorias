@@ -76,7 +76,7 @@ export function JourneyMiniProgress({ currentDay, completedDays, percent, classN
                     className={cn(
                       "h-10 w-10 md:h-14 md:w-14 rounded-full border-2 bg-card shadow-md overflow-hidden transition-all duration-300",
                       finalUnlocked
-                        ? "border-accent/60 ring-2 ring-accent/30 animate-[pulse_3s_ease-in-out_infinite]"
+                        ? "border-accent/60 ring-2 ring-accent/30"
                         : "border-border opacity-60 grayscale",
                     )}
                     aria-label={finalUnlocked ? "Conquista final desbloqueada" : "Conquista final"}
