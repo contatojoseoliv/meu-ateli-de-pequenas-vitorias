@@ -319,8 +319,8 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Você terminou o Dia 1 com 12 pontos.</p>
             <p>Coloque o marcador no primeiro ponto da volta.</p>
             <p>Agora vamos trabalhar alternando:</p>
-            <p>1 ponto sozinho</p>
-            <p>1 aumento</p>
+            <p>👉 1 ponto sozinho</p>
+            <p>👉 1 aumento</p>
 
             <h3 className="font-bold">✋ Passo 1 — Fazer 1 ponto baixo</h3>
             <p>Entre no primeiro ponto.</p>
@@ -526,7 +526,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
     content:
     <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p className="font-bold">Peça: Corpo do coelho</p>
-            <p>Você terminou o Dia 2 with 24 pontos.</p>
+            <p>Você terminou o Dia 2 com 24 pontos.</p>
             <p>Agora faça:</p>
             <p className="font-bold">Voltas 5 a 9:</p>
             <p className="pl-4">24 pb → (24)</p>
