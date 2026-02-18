@@ -526,7 +526,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
     content:
     <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p className="font-bold">Peça: Corpo do coelho</p>
-            <p>Você terminou o Dia 2 com 24 pontos.</p>
+            <p>Você terminou o Dia 2 with 24 pontos.</p>
             <p>Agora faça:</p>
             <p className="font-bold">Voltas 5 a 9:</p>
             <p className="pl-4">24 pb → (24)</p>
@@ -985,7 +985,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
     content:
     <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Você tem:</p>
-            <p>🐰 Corpinho completo</p>
+            <p>Corpinho do Coelho completo</p>
             <ul className="space-y-1 pl-1">
               {["redondo", "firme", "fechado"].map((item) =>
         <li key={item} className="flex items-center gap-2">
