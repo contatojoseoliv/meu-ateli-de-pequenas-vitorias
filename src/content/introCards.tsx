@@ -446,7 +446,7 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             <p>O amigurumi é feito em forma de espiral.</p>
             <p>Você começa no centro e vai girando ao redor, como um caracol 🐌</p>
             <p>Cada volta completa é chamada de:</p>
-            <p className="font-medium">carreira ou volta</p>
+            <p className="font-bold text-verde-eucalipto ">Carreira ou Volta</p>
             <p>Você não vira o trabalho. Só continua girando.</p>
             <ImagePlaceholder caption="Pequeno círculo de crochê mostrando formato espiral." />
           </div>
