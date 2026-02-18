@@ -6,8 +6,8 @@ import {
   TableCell,
   TableHead,
   TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+  TableRow } from
+"@/components/ui/table";
 import { ImagePlaceholder } from "@/content/introCards";
 import type { IntroCardData } from "@/content/introCards";
 
@@ -19,23 +19,23 @@ const tableRowClass = "hover:bg-verde-eucalipto/5 transition-colors border-b bor
 const tableCellClass = "py-3 text-grafite-suave";
 
 export const DAY_CONTENTS: IntroCardData[] = [
-  /* ═══════════════════════════════════════════
-     DIA 1 — Seu primeiro ponto e o anel mágico
-     ═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   DIA 1 — Seu primeiro ponto e o anel mágico
+   ═══════════════════════════════════════════ */
+{
+  title: "Seu primeiro ponto e o anel mágico",
+  emoji: "📆",
+  tintClass: tints[0],
+  topics: [
   {
-    title: "Seu primeiro ponto e o anel mágico",
-    emoji: "📆",
-    tintClass: tints[0],
-    topics: [
-      {
-        id: "d1-prep",
-        title: "Preparação",
-        emoji: "🌬️",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+    id: "d1-prep",
+    title: "Preparação",
+    emoji: "🌬️",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Respire fundo.</p>
             <p>Se a mão travar, se o fio embolar, se não ficar bonito…</p>
-            <p>👉 isso é o normal.</p>
+            <p>Isso é o normal.</p>
             <p>Ninguém faz perfeito no primeiro dia.</p>
             <p>Seu objetivo hoje NÃO é ficar lindo. É aprender o movimento.</p>
             <Separator className="my-4" />
@@ -44,14 +44,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>➖ Como fazer o ponto principal do amigurumi (ponto baixo)</p>
             <p>Só isso. E isso já é enorme.</p>
           </div>
-        ),
-      },
-      {
-        id: "d1-receita",
-        title: "Primeira Parte da Receita",
-        emoji: "📌",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d1-receita",
+    title: "Primeira Parte da Receita",
+    emoji: "📌",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p className="font-bold">Peça: Base do corpo</p>
             <p>Volta 1:</p>
             <p className="pl-4">MR com 6 pb → (6)</p>
@@ -60,14 +60,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <Separator className="my-4" />
             <p>Esta é a primeira parte da receita; nos próximos passos vamos explicar a execução — pode avançar.</p>
           </div>
-        ),
-      },
-      {
-        id: "d1-volta1",
-        title: "Volta 1 — O Anel Mágico (MR) com 6 pb",
-        emoji: "🌀",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d1-volta1",
+    title: "Volta 1 — O Anel Mágico (MR) com 6 pb",
+    emoji: "🌀",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <p>É assim que quase todo amigurumi começa. Ele cria um círculo fechado, sem buraco no meio.</p>
             <p>Vamos devagar.</p>
 
@@ -95,7 +95,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <h3 className="font-bold">🔁 Passo 4 — Fazer pontos dentro do anel</h3>
             <p>Agora você vai fazer 6 pontos baixos DENTRO do círculo.</p>
             <p>Não no fio solto.</p>
-            <p>👉 Dentro do círculo que está no seu dedo.</p>
+            <p>Dentro do círculo que está no seu dedo.</p>
             <p>Vamos lembrar o ponto baixo:</p>
             <ol className="list-decimal pl-5 space-y-1">
               <li>Entra com a agulha no círculo</li>
@@ -116,14 +116,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Se não fechar totalmente, é normal. Ajuste puxando com cuidado.</p>
             <ImagePlaceholder caption="Antes e depois de puxar o fio e fechar o círculo." />
           </div>
-        ),
-      },
-      {
-        id: "d1-entendendo",
-        title: "Entendendo o que você fez",
-        emoji: "🔍",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d1-entendendo",
+    title: "Entendendo o que você fez",
+    emoji: "🔍",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Olhe para sua peça.</p>
             <p>Você deve ver um pequeno círculo com 6 "Vzinhos" na borda.</p>
             <p>Cada "V" = 1 ponto.</p>
@@ -135,17 +135,17 @@ export const DAY_CONTENTS: IntroCardData[] = [
             </ul>
             <p>Errar aqui é comum. Pode refazer sem culpa 💛</p>
           </div>
-        ),
-      },
-      {
-        id: "d1-volta2",
-        title: "Volta 2 — A Primeira Volta de Verdade",
-        emoji: "🔄",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d1-volta2",
+    title: "Volta 2 — A Primeira Volta de Verdade",
+    emoji: "🔄",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Agora vamos começar a crescer o círculo.</p>
             <p>Hoje você só vai fazer aumentos.</p>
-            <p>👉 Em cada ponto, você fará 2 pontos baixos.</p>
+            <p>Em cada ponto, você fará 2 pontos baixos.</p>
             <p>Você tem 6 pontos. Vai terminar com 12.</p>
 
             <h3 className="font-bold">🧵 Como fazer</h3>
@@ -158,23 +158,23 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Você deve ter: 12</p>
             <ImagePlaceholder caption="Círculo maior mostrando 12 pontos." />
           </div>
-        ),
-      },
-      {
-        id: "d1-verificacao",
-        title: "Verificação",
-        emoji: "👀",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d1-verificacao",
+    title: "Verificação",
+    emoji: "👀",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <h3 className="font-bold">😰 "Minha peça está estranha"</h3>
             <p>Normal se:</p>
             <ul className="space-y-1 pl-1">
-              {["Está torto", "Está meio ondulado", "Os pontos parecem apertados", 'Parece um "chapéuzinho"'].map((item) => (
-                <li key={item} className="flex items-center gap-2">
+              {["Está torto", "Está meio ondulado", "Os pontos parecem apertados", 'Parece um "chapéuzinho"'].map((item) =>
+        <li key={item} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-primary flex-shrink-0" />
                   <span>{item}</span>
                 </li>
-              ))}
+        )}
             </ul>
             <p>Isso tudo melhora com prática.</p>
             <p>O que importa é que você:</p>
@@ -187,12 +187,12 @@ export const DAY_CONTENTS: IntroCardData[] = [
 
             <h3 className="font-bold">👀 Como sua peça deve parecer agora</h3>
             <ul className="space-y-1 pl-1">
-              {["Pequeno círculo", "Centro fechado", "Bordas arredondadas", "Não parece plano como um pano, nem fechado como uma bolinha ainda"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
+              {["Pequeno círculo", "Centro fechado", "Bordas arredondadas", "Não parece plano como um pano, nem fechado como uma bolinha ainda"].map((item) =>
+        <li key={item} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-primary flex-shrink-0" />
                   <span>{item}</span>
                 </li>
-              ))}
+        )}
             </ul>
 
             <Separator className="my-4" />
@@ -230,58 +230,58 @@ export const DAY_CONTENTS: IntroCardData[] = [
               </Table>
             </div>
           </div>
-        ),
-      },
-      {
-        id: "d1-missao",
-        title: "Missão do Dia 1",
-        emoji: "💛",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d1-missao",
+    title: "Missão do Dia 1",
+    emoji: "💛",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <ul className="space-y-1 pl-1">
-              {["Fazer o anel mágico", "Colocar 6 pontos dentro", "Fechar o anel", "Fazer 1 volta de aumentos (12 pontos)"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
+              {["Fazer o anel mágico", "Colocar 6 pontos dentro", "Fechar o anel", "Fazer 1 volta de aumentos (12 pontos)"].map((item) =>
+        <li key={item} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-primary flex-shrink-0" />
                   <span>{item}</span>
                 </li>
-              ))}
+        )}
             </ul>
             <p>Se conseguiu isso, você já começou de verdade.</p>
             <Separator className="my-4" />
             <p className="text-center">📆 Amanhã: vamos continuar crescendo a base do corpinho do coelhinho 🐰</p>
           </div>
-        ),
-      },
-    ],
-  },
 
-  /* ═══════════════════════════════════════════
-     DIA 2 — Fazendo o corpinho crescer
-     ═══════════════════════════════════════════ */
+  }]
+
+},
+
+/* ═══════════════════════════════════════════
+   DIA 2 — Fazendo o corpinho crescer
+   ═══════════════════════════════════════════ */
+{
+  title: "Fazendo o corpinho crescer",
+  emoji: "📆",
+  tintClass: tints[1],
+  topics: [
   {
-    title: "Fazendo o corpinho crescer",
-    emoji: "📆",
-    tintClass: tints[1],
-    topics: [
-      {
-        id: "d2-prep",
-        title: "Preparação",
-        emoji: "🌬️",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+    id: "d2-prep",
+    title: "Preparação",
+    emoji: "🌬️",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Hoje seu coelhinho começa a ganhar forma 🐰</p>
             <p>Até agora você tem um pequeno círculo.</p>
             <p>Hoje ele deixa de ser um círculo e começa a virar um "potinho".</p>
             <p>Isso acontece porque vamos continuar aumentando… mas com mais espaço entre os aumentos.</p>
           </div>
-        ),
-      },
-      {
-        id: "d2-receita",
-        title: "Receita do dia",
-        emoji: "📌",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d2-receita",
+    title: "Receita do dia",
+    emoji: "📌",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p className="font-bold">Peça: Base do corpo</p>
             <p>Volta 3:</p>
             <p className="pl-4">(1 pb, 1 aum) × 6 → 18 pontos</p>
@@ -290,14 +290,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <Separator className="my-4" />
             <p>Agora vamos fazer isso devagar e detalhado.</p>
           </div>
-        ),
-      },
-      {
-        id: "d2-leitura",
-        title: "O que significa essa receita?",
-        emoji: "🧠",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d2-leitura",
+    title: "O que significa essa receita?",
+    emoji: "🧠",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Vamos pegar a Volta 3, somente de exemplo:</p>
             <p className="pl-4 font-medium">(1 pb, 1 aum) × 6 → (18)</p>
             <p>Significa:</p>
@@ -308,14 +308,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Você vai repetir esse bloquinho 6 vezes.</p>
             <p>Ao final você terá 18 pontos.</p>
           </div>
-        ),
-      },
-      {
-        id: "d2-volta3",
-        title: "Volta 3 — Crescendo com controle (18 pontos)",
-        emoji: "🔄",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d2-volta3",
+    title: "Volta 3 — Crescendo com controle (18 pontos)",
+    emoji: "🔄",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <p>Você terminou o Dia 1 com 12 pontos.</p>
             <p>Coloque o marcador no primeiro ponto da volta.</p>
             <p>Agora vamos trabalhar alternando:</p>
@@ -354,12 +354,12 @@ export const DAY_CONTENTS: IntroCardData[] = [
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {[1, 2, 3, 4, 5, 6].map((n) => (
-                    <TableRow key={n} className={tableRowClass}>
+                  {[1, 2, 3, 4, 5, 6].map((n) =>
+            <TableRow key={n} className={tableRowClass}>
                       <TableCell className={tableCellClass}>{n}º</TableCell>
                       <TableCell className={tableCellClass}>1 pb, 1 aum</TableCell>
                     </TableRow>
-                  ))}
+            )}
                 </TableBody>
               </Table>
             </div>
@@ -371,14 +371,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Se tiver mais → fez aumento onde não devia.</p>
             <ImagePlaceholder caption="Círculo um pouco maior, começando a curvar." />
           </div>
-        ),
-      },
-      {
-        id: "d2-volta4",
-        title: "Volta 4 — A base ficando maior (24 pontos)",
-        emoji: "🔄",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d2-volta4",
+    title: "Volta 4 — A base ficando maior (24 pontos)",
+    emoji: "🔄",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <p>Agora os aumentos ficam mais espaçados.</p>
             <p>Em vez de 1 ponto sozinho, agora serão 2 pontos sozinhos antes do aumento.</p>
 
@@ -411,12 +411,12 @@ export const DAY_CONTENTS: IntroCardData[] = [
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {[1, 2, 3, 4, 5, 6].map((n) => (
-                    <TableRow key={n} className={tableRowClass}>
+                  {[1, 2, 3, 4, 5, 6].map((n) =>
+            <TableRow key={n} className={tableRowClass}>
                       <TableCell className={tableCellClass}>{n}º</TableCell>
                       <TableCell className={tableCellClass}>2 pb, 1 aum</TableCell>
                     </TableRow>
-                  ))}
+            )}
                 </TableBody>
               </Table>
             </div>
@@ -426,23 +426,23 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Agora devem ser: 24 pontos</p>
             <p>Sua peça deve estar:</p>
             <ul className="space-y-1 pl-1">
-              {["maior", "começando a subir nas laterais", "parecendo um pratinho fundo"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
+              {["maior", "começando a subir nas laterais", "parecendo um pratinho fundo"].map((item) =>
+        <li key={item} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-primary flex-shrink-0" />
                   <span>{item}</span>
                 </li>
-              ))}
+        )}
             </ul>
             <ImagePlaceholder caption="Base com curvinha suave formando o fundo do corpo." />
           </div>
-        ),
-      },
-      {
-        id: "d2-problemas",
-        title: "Se algo parecer estranho",
-        emoji: "❗",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d2-problemas",
+    title: "Se algo parecer estranho",
+    emoji: "❗",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <div className="rounded-xl border border-verde-eucalipto/20 overflow-hidden shadow-sm">
               <Table>
                 <TableHeader>
@@ -472,59 +472,59 @@ export const DAY_CONTENTS: IntroCardData[] = [
               </Table>
             </div>
           </div>
-        ),
-      },
-      {
-        id: "d2-missao",
-        title: "Missão do Dia 2",
-        emoji: "💛",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d2-missao",
+    title: "Missão do Dia 2",
+    emoji: "💛",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <ul className="space-y-1 pl-1">
-              {["Fazer a Volta 3 → 18 pontos", "Fazer a Volta 4 → 24 pontos"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
+              {["Fazer a Volta 3 → 18 pontos", "Fazer a Volta 4 → 24 pontos"].map((item) =>
+        <li key={item} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-primary flex-shrink-0" />
                   <span>{item}</span>
                 </li>
-              ))}
+        )}
             </ul>
             <p>Agora seu coelhinho deixou de ser um círculo.</p>
             <p>Ele está começando a virar um corpinho.</p>
             <Separator className="my-4" />
             <p className="text-center">📆 Amanhã: vamos subir as laterais sem aumentar — é quando a peça vira uma "panelinha" 🐰✨</p>
           </div>
-        ),
-      },
-    ],
-  },
 
-  /* ═══════════════════════════════════════════
-     DIA 3 — Subindo as paredes (sem aumentar)
-     ═══════════════════════════════════════════ */
+  }]
+
+},
+
+/* ═══════════════════════════════════════════
+   DIA 3 — Subindo as paredes (sem aumentar)
+   ═══════════════════════════════════════════ */
+{
+  title: "Subindo as paredes (sem aumentar)",
+  emoji: "📆",
+  tintClass: tints[2],
+  topics: [
   {
-    title: "Subindo as paredes (sem aumentar)",
-    emoji: "📆",
-    tintClass: tints[2],
-    topics: [
-      {
-        id: "d3-prep",
-        title: "Preparação",
-        emoji: "🌬️",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+    id: "d3-prep",
+    title: "Preparação",
+    emoji: "🌬️",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Hoje você não vai fazer nada "novo".</p>
             <p>E é exatamente isso que faz a mágica acontecer.</p>
             <p>Você só vai repetir ponto baixo.</p>
             <p>Mas isso transforma o disco em um corpinho.</p>
           </div>
-        ),
-      },
-      {
-        id: "d3-receita",
-        title: "Receita do dia",
-        emoji: "📌",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d3-receita",
+    title: "Receita do dia",
+    emoji: "📌",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p className="font-bold">Peça: Corpo do coelho</p>
             <p>Você terminou o Dia 2 with 24 pontos.</p>
             <p>Agora faça:</p>
@@ -534,26 +534,26 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Você vai fazer 5 voltas seguidas, todas iguais,</p>
             <p>sem aumentar e sem diminuir.</p>
           </div>
-        ),
-      },
-      {
-        id: "d3-explicacao",
-        title: "O que isso faz com a peça?",
-        emoji: "🧠",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d3-explicacao",
+    title: "O que isso faz com a peça?",
+    emoji: "🧠",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Ontem você aumentava → ela crescia para os lados.</p>
             <p>Hoje você não aumenta → ela cresce para cima.</p>
             <p>É assim que criamos a lateral do corpo.</p>
           </div>
-        ),
-      },
-      {
-        id: "d3-voltas",
-        title: "Voltas 5 a 9 — Repetição",
-        emoji: "🔄",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d3-voltas",
+    title: "Voltas 5 a 9 — Repetição",
+    emoji: "🔄",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <h3 className="font-bold">🧵 Como fazer</h3>
             <p>Entre no primeiro ponto da volta.</p>
             <p>Faça 1 ponto baixo.</p>
@@ -578,14 +578,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Se estiver ficando plano → você aumentou sem querer.</p>
             <p>Se estiver fechando → você diminuiu sem perceber.</p>
           </div>
-        ),
-      },
-      {
-        id: "d3-dicas",
-        title: "Dica importante e relaxamento",
-        emoji: "😌",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d3-dicas",
+    title: "Dica importante e relaxamento",
+    emoji: "😌",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <h3 className="font-bold">✋ Dica importante</h3>
             <p>Não puxe o fio com força.</p>
             <p>Se apertar demais:</p>
@@ -607,14 +607,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Fecha o ponto.</p>
             <p>Sem pressa.</p>
           </div>
-        ),
-      },
-      {
-        id: "d3-problemas",
-        title: "Problemas comuns",
-        emoji: "❗",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d3-problemas",
+    title: "Problemas comuns",
+    emoji: "❗",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <div className="rounded-xl border border-verde-eucalipto/20 overflow-hidden shadow-sm">
               <Table>
                 <TableHeader>
@@ -644,70 +644,70 @@ export const DAY_CONTENTS: IntroCardData[] = [
               </Table>
             </div>
           </div>
-        ),
-      },
-      {
-        id: "d3-missao",
-        title: "Missão do Dia 3",
-        emoji: "💛",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d3-missao",
+    title: "Missão do Dia 3",
+    emoji: "💛",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <ul className="space-y-1 pl-1">
-              {["Fazer as voltas 5 a 9", "Manter 24 pontos em todas"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
+              {["Fazer as voltas 5 a 9", "Manter 24 pontos em todas"].map((item) =>
+        <li key={item} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-primary flex-shrink-0" />
                   <span>{item}</span>
                 </li>
-              ))}
+        )}
             </ul>
             <p>Seu coelho já tem um corpo.</p>
             <Separator className="my-4" />
             <p className="text-center">📆 Amanhã: vamos começar a fechar a parte de cima e ele vai deixar de ser um copinho para virar uma bolinha 🐰✨</p>
           </div>
-        ),
-      },
-    ],
-  },
 
-  /* ═══════════════════════════════════════════
-     DIA 4 — Fechando o corpinho do coelho
-     ═══════════════════════════════════════════ */
+  }]
+
+},
+
+/* ═══════════════════════════════════════════
+   DIA 4 — Fechando o corpinho do coelho
+   ═══════════════════════════════════════════ */
+{
+  title: "Fechando o corpinho do coelho",
+  emoji: "📆",
+  tintClass: tints[0],
+  topics: [
   {
-    title: "Fechando o corpinho do coelho",
-    emoji: "📆",
-    tintClass: tints[0],
-    topics: [
-      {
-        id: "d4-prep",
-        title: "Preparação",
-        emoji: "🌬️",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+    id: "d4-prep",
+    title: "Preparação",
+    emoji: "🌬️",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Até ontem sua peça parecia um copinho.</p>
             <p>Hoje ela vira uma bolinha 🐰</p>
             <p>Aqui aprendemos a diminuição (dim).</p>
             <p>Hoje você aprende a técnica nova: diminuição (dim).</p>
           </div>
-        ),
-      },
-      {
-        id: "d4-receita",
-        title: "Receita do dia",
-        emoji: "📌",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d4-receita",
+    title: "Receita do dia",
+    emoji: "📌",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Volta 10: (2 pb, 1 dim) × 6 → 18 pontos</p>
             <p>Volta 11: (1 pb, 1 dim) × 6 → 12 pontos</p>
             <p>Volta 12: 12 pb → 12 pontos</p>
           </div>
-        ),
-      },
-      {
-        id: "d4-dim",
-        title: "Como fazer a diminuição (dim)",
-        emoji: "➖",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d4-dim",
+    title: "Como fazer a diminuição (dim)",
+    emoji: "➖",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <p>Você vai usar isso nas voltas 10 e 11.</p>
 
             <h3 className="font-bold">✋ Passo 1 — Entrar no primeiro ponto</h3>
@@ -728,14 +728,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
 
             <p>Se entendeu até aqui, avance para a execução guiada</p>
           </div>
-        ),
-      },
-      {
-        id: "d4-volta10",
-        title: "Volta 10 — (2 pb, 1 dim) × 6 → 18 pontos",
-        emoji: "🔄",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d4-volta10",
+    title: "Volta 10 — (2 pb, 1 dim) × 6 → 18 pontos",
+    emoji: "🔄",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <p>Agora vamos fechar o corpo aos poucos.</p>
 
             <h3 className="font-bold">✋ Passo 1 — Fazer 1 ponto baixo</h3>
@@ -763,14 +763,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>A abertura começa a diminuir.</p>
             <ImagePlaceholder caption="Topo da peça começando a fechar." />
           </div>
-        ),
-      },
-      {
-        id: "d4-volta11",
-        title: "Volta 11 — (1 pb, 1 dim) × 6 → 12 pontos",
-        emoji: "🔄",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d4-volta11",
+    title: "Volta 11 — (1 pb, 1 dim) × 6 → 12 pontos",
+    emoji: "🔄",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <p>Agora fecha mais rápido.</p>
 
             <h3 className="font-bold">✋ Passo 1 — Fazer 1 ponto baixo</h3>
@@ -793,14 +793,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>O buraco do topo fica pequeno.</p>
             <ImagePlaceholder caption="Topo quase fechado." />
           </div>
-        ),
-      },
-      {
-        id: "d4-enchimento",
-        title: "Pare aqui para encher + Volta 12",
-        emoji: "🧸",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d4-enchimento",
+    title: "Pare aqui para encher + Volta 12",
+    emoji: "🧸",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <h3 className="font-bold">🧸 PARE AQUI PARA ENCHER</h3>
             <p>Antes da próxima volta, coloque enchimento.</p>
             <p>Coloque aos poucos.</p>
@@ -817,78 +817,78 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Nenhuma diminuição.</p>
             <ImagePlaceholder caption="Peça já parecendo bolinha." />
           </div>
-        ),
-      },
-      {
-        id: "d4-missao",
-        title: "Sua peça agora",
-        emoji: "💛",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d4-missao",
+    title: "Sua peça agora",
+    emoji: "💛",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <ul className="space-y-1 pl-1">
-              {["redonda", "firme", "quase fechada em cima"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
+              {["redonda", "firme", "quase fechada em cima"].map((item) =>
+        <li key={item} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-primary flex-shrink-0" />
                   <span>{item}</span>
                 </li>
-              ))}
+        )}
             </ul>
             <p>Seu coelho já tem corpo 🐰✨</p>
             <Separator className="my-4" />
             <p className="text-center">📆 Amanhã a gente fecha totalmente e começa as orelhas.</p>
           </div>
-        ),
-      },
-    ],
-  },
 
-  /* ═══════════════════════════════════════════
-     DIA 5 — Fechamento total do corpo
-     ═══════════════════════════════════════════ */
+  }]
+
+},
+
+/* ═══════════════════════════════════════════
+   DIA 5 — Fechamento total do corpo
+   ═══════════════════════════════════════════ */
+{
+  title: "Fechamento total do corpo",
+  emoji: "📆",
+  tintClass: tints[1],
+  topics: [
   {
-    title: "Fechamento total do corpo",
-    emoji: "📆",
-    tintClass: tints[1],
-    topics: [
-      {
-        id: "d5-prep",
-        title: "Preparação",
-        emoji: "🌬️",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+    id: "d5-prep",
+    title: "Preparação",
+    emoji: "🌬️",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Ontem você:</p>
             <ul className="space-y-1 pl-1">
-              {["diminuiu", "modelou o formato", "colocou enchimento"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
+              {["diminuiu", "modelou o formato", "colocou enchimento"].map((item) =>
+        <li key={item} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-primary flex-shrink-0" />
                   <span>{item}</span>
                 </li>
-              ))}
+        )}
             </ul>
             <p>Hoje vamos fechar completamente.</p>
           </div>
-        ),
-      },
-      {
-        id: "d5-receita",
-        title: "Receita",
-        emoji: "📌",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d5-receita",
+    title: "Receita",
+    emoji: "📌",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Volta 13: (1 pb, 1 dim) × 6 → 9 pontos</p>
             <p>Volta 14: 9 pb → 9 pontos</p>
             <p>Volta 15: (1 pb, 1 dim) × 3 → 6 pontos</p>
             <p>Volta 16–18: 6 pb → 6 pontos</p>
             <p>Depois: arrematar e fechar.</p>
           </div>
-        ),
-      },
-      {
-        id: "d5-volta13",
-        title: "Volta 13 — (1 pb, 1 dim) × 6 → 9 pontos",
-        emoji: "🔄",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d5-volta13",
+    title: "Volta 13 — (1 pb, 1 dim) × 6 → 9 pontos",
+    emoji: "🔄",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <p>Agora a abertura já é pequena.</p>
             <h3 className="font-bold">✋ Passo 1 — Faça 1 ponto baixo</h3>
             <p>Normal.</p>
@@ -901,14 +901,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>O topo já parece um buraquinho.</p>
             <ImagePlaceholder caption="Abertura bem pequena." />
           </div>
-        ),
-      },
-      {
-        id: "d5-volta14-15",
-        title: "Voltas 14 e 15",
-        emoji: "🔄",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d5-volta14-15",
+    title: "Voltas 14 e 15",
+    emoji: "🔄",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <h3 className="font-bold">🔄 Volta 14 — 9 pb</h3>
             <p>Só estabilizar.</p>
             <p>Faça 1 ponto baixo em cada ponto.</p>
@@ -924,27 +924,27 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Resultado: 6 pontos</p>
             <ImagePlaceholder caption="Buraquinho minúsculo no topo." />
           </div>
-        ),
-      },
-      {
-        id: "d5-volta16-18",
-        title: "Voltas 16, 17 e 18 — 6 pb",
-        emoji: "🔄",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d5-volta16-18",
+    title: "Voltas 16, 17 e 18 — 6 pb",
+    emoji: "🔄",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Você só vai dar voltinhas pequenas para reforçar.</p>
             <p>Faça 1 ponto baixo em cada ponto (6 no total) por 3 voltas.</p>
             <p>Isso ajuda o topo a ficar mais bonito e firme.</p>
             <ImagePlaceholder caption="Peça já parecendo uma bolinha completa." />
           </div>
-        ),
-      },
-      {
-        id: "d5-arremate",
-        title: "Arremate",
-        emoji: "✂️",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d5-arremate",
+    title: "Arremate",
+    emoji: "✂️",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <p>Agora vamos finalizar.</p>
             <h3 className="font-bold">✋ Passo 1 — Corte o fio</h3>
             <p>Deixe um pedaço de uns 15 cm.</p>
@@ -954,14 +954,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Isso trava o trabalho.</p>
             <ImagePlaceholder caption="Laçada sendo puxada para fora." />
           </div>
-        ),
-      },
-      {
-        id: "d5-fechamento",
-        title: "Fechando o buraco",
-        emoji: "🪡",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d5-fechamento",
+    title: "Fechando o buraco",
+    emoji: "🪡",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <p>Use a agulha de tapeçaria.</p>
             <h3 className="font-bold">✋ Passo 1</h3>
             <p>Passe a agulha por dentro de cada um dos 6 pontos da borda.</p>
@@ -976,23 +976,23 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>O fio some dentro.</p>
             <ImagePlaceholder caption="Fio sendo escondido dentro do amigurumi." />
           </div>
-        ),
-      },
-      {
-        id: "d5-missao",
-        title: "Resultado do dia",
-        emoji: "🎉",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d5-missao",
+    title: "Resultado do dia",
+    emoji: "🎉",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Você tem:</p>
             <p>🐰 Corpinho completo</p>
             <ul className="space-y-1 pl-1">
-              {["redondo", "firme", "fechado"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
+              {["redondo", "firme", "fechado"].map((item) =>
+        <li key={item} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-primary flex-shrink-0" />
                   <span>{item}</span>
                 </li>
-              ))}
+        )}
             </ul>
             <p>A parte "difícil" do amigurumi já foi. Sério.</p>
             <Separator className="my-4" />
@@ -1001,37 +1001,37 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>👐 braços</p>
             <p>🦵 pernas</p>
           </div>
-        ),
-      },
-    ],
-  },
 
-  /* ═══════════════════════════════════════════
-     DIA 6 — Orelhas, bracinhos e perninhas
-     ═══════════════════════════════════════════ */
+  }]
+
+},
+
+/* ═══════════════════════════════════════════
+   DIA 6 — Orelhas, bracinhos e perninhas
+   ═══════════════════════════════════════════ */
+{
+  title: "Orelhas, bracinhos e perninhas",
+  emoji: "📆",
+  tintClass: tints[2],
+  topics: [
   {
-    title: "Orelhas, bracinhos e perninhas",
-    emoji: "📆",
-    tintClass: tints[2],
-    topics: [
-      {
-        id: "d6-prep",
-        title: "Preparação",
-        emoji: "🌬️",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+    id: "d6-prep",
+    title: "Preparação",
+    emoji: "🌬️",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Hoje é o dia do:</p>
             <p>"AAAAA agora virou um coelho mesmo" 🐰</p>
             <p>São peças pequenas → perfeitas pra iniciante ganhar confiança.</p>
           </div>
-        ),
-      },
-      {
-        id: "d6-orelhas",
-        title: "Orelhas (faça 2)",
-        emoji: "👂",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d6-orelhas",
+    title: "Orelhas (faça 2)",
+    emoji: "👂",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <p>Peça fina, não leva enchimento.</p>
 
             <h3 className="font-bold">🔄 Volta 1 — MR com 5 pb</h3>
@@ -1059,23 +1059,23 @@ export const DAY_CONTENTS: IntroCardData[] = [
 
             <h3 className="font-bold">✋ Finalização da orelha</h3>
             <ul className="space-y-1 pl-1">
-              {["Não encher", "Achatar com os dedos", "Deixar fio longo"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
+              {["Não encher", "Achatar com os dedos", "Deixar fio longo"].map((item) =>
+        <li key={item} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-primary flex-shrink-0" />
                   <span>{item}</span>
                 </li>
-              ))}
+        )}
             </ul>
             <ImagePlaceholder caption="Orelha achatada." />
           </div>
-        ),
-      },
-      {
-        id: "d6-bracinhos",
-        title: "Bracinhos (2x)",
-        emoji: "🐾",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d6-bracinhos",
+    title: "Bracinhos (2x)",
+    emoji: "🐾",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <h3 className="font-bold">Volta 1 — MR com 5 pb</h3>
             <ImagePlaceholder caption="Anel mágico com 5 pontos." />
 
@@ -1083,23 +1083,23 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Só subir 3 carreiras.</p>
             <p>Peça minúscula tipo "rolinho".</p>
             <ul className="space-y-1 pl-1">
-              {["Pode não colocar enchimento", "Achate", "Feche com alguns pontos"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
+              {["Pode não colocar enchimento", "Achate", "Feche com alguns pontos"].map((item) =>
+        <li key={item} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-primary flex-shrink-0" />
                   <span>{item}</span>
                 </li>
-              ))}
+        )}
             </ul>
             <ImagePlaceholder caption="Bracinho pequeno." />
           </div>
-        ),
-      },
-      {
-        id: "d6-perninhas",
-        title: "Perninhas (2x)",
-        emoji: "🦶",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d6-perninhas",
+    title: "Perninhas (2x)",
+    emoji: "🦶",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <h3 className="font-bold">Volta 1 — MR com 6 pb</h3>
             <ImagePlaceholder caption="Anel mágico com 6 pontos." />
 
@@ -1109,22 +1109,22 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <ImagePlaceholder caption="Perninha arredondada." />
             <p>Deixe fio longo.</p>
           </div>
-        ),
-      },
-      {
-        id: "d6-missao",
-        title: "Missão do Dia 6",
-        emoji: "🎯",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d6-missao",
+    title: "Missão do Dia 6",
+    emoji: "🎯",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Você agora tem:</p>
             <ul className="space-y-1 pl-1">
-              {["1 corpo", "2 orelhas", "2 braços", "2 pernas"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
+              {["1 corpo", "2 orelhas", "2 braços", "2 pernas"].map((item) =>
+        <li key={item} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-primary flex-shrink-0" />
                   <span>{item}</span>
                 </li>
-              ))}
+        )}
             </ul>
             <p>Separados na mesa.</p>
             <p>É literalmente um kit de coelho desmontado 🥹</p>
@@ -1132,44 +1132,44 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p className="text-center">📆 Amanhã (Dia 7):</p>
             <p className="text-center">✨ montagem ✨ costura ✨ rostinho ✨ argola de chaveiro ✨ toque final de fofura</p>
           </div>
-        ),
-      },
-    ],
-  },
 
-  /* ═══════════════════════════════════════════
-     DIA 7 — Montagem, rostinho e chaveiro
-     ═══════════════════════════════════════════ */
+  }]
+
+},
+
+/* ═══════════════════════════════════════════
+   DIA 7 — Montagem, rostinho e chaveiro
+   ═══════════════════════════════════════════ */
+{
+  title: "Montagem, rostinho e chaveiro",
+  emoji: "📆",
+  tintClass: tints[0],
+  topics: [
   {
-    title: "Montagem, rostinho e chaveiro",
-    emoji: "📆",
-    tintClass: tints[0],
-    topics: [
-      {
-        id: "d7-prep",
-        title: "Preparação",
-        emoji: "🌬️",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+    id: "d7-prep",
+    title: "Preparação",
+    emoji: "🌬️",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Hoje sua peça deixa de ser "partes" e vira um personagem.</p>
             <p>Respira fundo. Você já fez a parte difícil.</p>
           </div>
-        ),
-      },
-      {
-        id: "d7-orelhas",
-        title: "Costurando as orelhas",
-        emoji: "🧵",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d7-orelhas",
+    title: "Costurando as orelhas",
+    emoji: "🧵",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <p>Pegue:</p>
             <ul className="space-y-1 pl-1">
-              {["Cabeça + corpo", "2 orelhas", "Agulha de tapeçaria"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
+              {["Cabeça + corpo", "2 orelhas", "Agulha de tapeçaria"].map((item) =>
+        <li key={item} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-primary flex-shrink-0" />
                   <span>{item}</span>
                 </li>
-              ))}
+        )}
             </ul>
 
             <h3 className="font-bold">📍 Onde colocar?</h3>
@@ -1190,14 +1190,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>5️⃣ Arremate escondendo o fio dentro da cabeça</p>
             <p>Repita do outro lado.</p>
           </div>
-        ),
-      },
-      {
-        id: "d7-bracinhos",
-        title: "Bracinhos",
-        emoji: "🐾",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d7-bracinhos",
+    title: "Bracinhos",
+    emoji: "🐾",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <p>📍 Posição: lateral do corpo, logo abaixo da cabeça.</p>
             <p>1️⃣ Achate levemente o bracinho</p>
             <ImagePlaceholder caption="Bracinho sendo achatado." />
@@ -1207,14 +1207,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Isso deixa o braço soltinho na frente.</p>
             <ImagePlaceholder caption="Costura do bracinho." />
           </div>
-        ),
-      },
-      {
-        id: "d7-perninhas",
-        title: "Perninhas",
-        emoji: "🦶",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d7-perninhas",
+    title: "Perninhas",
+    emoji: "🦶",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <p>📍 Parte da frente inferior do corpo.</p>
             <p>Ele vai parecer sentado.</p>
             <p>1️⃣ Posicione as duas primeiro (sem costurar)</p>
@@ -1223,14 +1223,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>2️⃣ Costure por baixo, bem firme</p>
             <ImagePlaceholder caption="Costura das perninhas." />
           </div>
-        ),
-      },
-      {
-        id: "d7-rostinho",
-        title: "Rostinho (opcional, mas MUITO fofo)",
-        emoji: "🐰",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d7-rostinho",
+    title: "Rostinho (opcional, mas MUITO fofo)",
+    emoji: "🐰",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <p>Use linha rosa ou preta.</p>
 
             <h3 className="font-bold">👃 Nariz em "V"</h3>
@@ -1244,14 +1244,14 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Dois pontinhos curtos abaixo do nariz.</p>
             <ImagePlaceholder caption="Bordado da boquinha." />
           </div>
-        ),
-      },
-      {
-        id: "d7-chaveiro",
-        title: "Argola de chaveiro",
-        emoji: "🔑",
-        content: (
-          <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d7-chaveiro",
+    title: "Argola de chaveiro",
+    emoji: "🔑",
+    content:
+    <div className="space-y-4 text-sm md:text-base text-foreground leading-relaxed">
             <p>Duas opções:</p>
 
             <h3 className="font-bold">Opção 1 (mais fácil)</h3>
@@ -1264,47 +1264,47 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Prenda a argola</p>
             <ImagePlaceholder caption="Corrente costurada no topo." />
           </div>
-        ),
-      },
-      {
-        id: "d7-toque-final",
-        title: "Toque final secreto",
-        emoji: "✨",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d7-toque-final",
+    title: "Toque final secreto",
+    emoji: "✨",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Se puxar um fio ao redor da base da cabeça e apertar levemente…</p>
             <p>Ele cria um "pescocinho" 🥹</p>
             <ImagePlaceholder caption="Pescocinho sendo criado." />
           </div>
-        ),
-      },
-      {
-        id: "d7-missao",
-        title: "Missão final",
-        emoji: "💛",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d7-missao",
+    title: "Missão final",
+    emoji: "💛",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Olhe pra ele.</p>
             <p>Você:</p>
             <ul className="space-y-1 pl-1">
-              {["aprendeu do zero", "fez pontos que nunca tinha feito", "construiu algo com as mãos", "terminou um projeto"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
+              {["aprendeu do zero", "fez pontos que nunca tinha feito", "construiu algo com as mãos", "terminou um projeto"].map((item) =>
+        <li key={item} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-primary flex-shrink-0" />
                   <span>{item}</span>
                 </li>
-              ))}
+        )}
             </ul>
             <p>Esse coelhinho é a sua primeira vitória em amigurumi.</p>
             <p>E é só o começo 🧶✨</p>
           </div>
-        ),
-      },
-      {
-        id: "d7-conclusao",
-        title: "O significado da Primeira Vitória",
-        emoji: "🏆",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "d7-conclusao",
+    title: "O significado da Primeira Vitória",
+    emoji: "🏆",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Esse mini coelho não é apenas um projeto concluído —</p>
             <p>ele é a prova de que você começou, persistiu e criou algo com as próprias mãos.</p>
             <p>Ele simboliza:</p>
@@ -1315,8 +1315,7 @@ export const DAY_CONTENTS: IntroCardData[] = [
             </ul>
             <p>Guardar ou presentear esse coelho é lembrar que toda grande jornada no amigurumi começa com uma pequena vitória.</p>
           </div>
-        ),
-      },
-    ],
-  },
-];
+
+  }]
+
+}];
