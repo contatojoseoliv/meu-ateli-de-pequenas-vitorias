@@ -152,10 +152,10 @@ export default function AppHome() {
                   </p>
                 )}
 
-                {/* Linha de progresso da etapa */}
+                {/* Linha fina de progresso da etapa */}
                 <div className="pt-3">
                   <div
-                    className="h-2 w-full rounded-full overflow-hidden bg-secondary"
+                    className="h-0.5 w-full rounded-full overflow-hidden bg-secondary/30"
                     role="progressbar"
                     aria-label="Progresso desta etapa"
                     aria-valuemin={0}
