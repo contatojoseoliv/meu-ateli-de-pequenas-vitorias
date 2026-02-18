@@ -319,8 +319,8 @@ export const DAY_CONTENTS: IntroCardData[] = [
             <p>Você terminou o Dia 1 com 12 pontos.</p>
             <p>Coloque o marcador no primeiro ponto da volta.</p>
             <p>Agora vamos trabalhar alternando:</p>
-            <p>👉 1 ponto sozinho</p>
-            <p>👉 1 aumento</p>
+            <p>1 ponto sozinho</p>
+            <p>1 aumento</p>
 
             <h3 className="font-bold">✋ Passo 1 — Fazer 1 ponto baixo</h3>
             <p>Entre no primeiro ponto.</p>
