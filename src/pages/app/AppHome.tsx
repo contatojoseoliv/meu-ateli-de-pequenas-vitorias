@@ -38,9 +38,23 @@ export default function AppHome() {
   const introProgress = useIntroProgress();
   const location = useLocation();
 
-  const totalDays = journeyDays.length;
-  const completedCount = progress.completedDays.length;
-  const percent = totalDays > 0 ? Math.round((completedCount / totalDays) * 100) : 0;
+  const totalStages = INTRO_CARDS.length + journeyDays.length; // 3 intro + 7 days = 10
+  const introCompletedCount = INTRO_CARDS.filter((_, idx) => introProgress.isCardCompleted(idx)).length;
+  const allIntroCompleted = introCompletedCount === INTRO_CARDS.length;
+  const completedCount = introCompletedCount + progress.completedDays.length;
+  const percent = totalStages > 0 ? Math.round((completedCount / totalStages) * 100) : 0;
+
+  const introRoutes = [
+    { href: "/app/comecar", label: "Introdução" },
+    { href: "/app/materiais", label: "Materiais" },
+    { href: "/app/fundamentos", label: "Fundamentos" },
+  ];
+  const nextIntroRoute = useMemo(() => {
+    for (let i = 0; i < INTRO_CARDS.length; i++) {
+      if (!introProgress.isCardCompleted(i)) return introRoutes[i];
+    }
+    return introRoutes[0];
+  }, [introProgress]);
 
   const currentDayData = useMemo(
     () => journeyDays.find((d) => d.day === progress.currentDay),
@@ -107,13 +121,21 @@ export default function AppHome() {
 
               <div className="min-w-0 flex-1 space-y-1">
                 <p className="text-lg md:text-xl font-serif text-foreground">Primeira Vitória em Amigurumi</p>
-                <p className="text-sm text-muted-foreground">
-                  Etapa: Dia {progress.currentDay}
-                  {currentDayData?.title ? ` — ${currentDayData.title}` : ""}
-                </p>
-                {currentDayData?.estimatedTime ? (
-                  <p className="text-xs text-muted-foreground">Tempo estimado: {currentDayData.estimatedTime}</p>
-                ) : null}
+                {allIntroCompleted ? (
+                  <>
+                    <p className="text-sm text-muted-foreground">
+                      Etapa: Dia {progress.currentDay}
+                      {currentDayData?.title ? ` — ${currentDayData.title}` : ""}
+                    </p>
+                    {currentDayData?.estimatedTime ? (
+                      <p className="text-xs text-muted-foreground">Tempo estimado: {currentDayData.estimatedTime}</p>
+                    ) : null}
+                  </>
+                ) : (
+                  <p className="text-sm text-muted-foreground">
+                    Etapa: {nextIntroRoute.label}
+                  </p>
+                )}
 
                 {/* Linha fina de progresso da etapa */}
                 <div className="pt-3">
@@ -134,9 +156,9 @@ export default function AppHome() {
               </div>
 
               <div className="md:self-center">
-                <Link to={`/app/dia/${progress.currentDay}`}>
+                <Link to={allIntroCompleted ? `/app/dia/${progress.currentDay}` : nextIntroRoute.href}>
                   <Button variant="primary" size="default" className="w-full md:w-auto">
-                    {completedCount === 0 ? "Começar" : `Continuar do Dia ${progress.currentDay}`}
+                    {completedCount === 0 ? "Começar" : allIntroCompleted ? `Continuar do Dia ${progress.currentDay}` : `Continuar: ${nextIntroRoute.label}`}
                   </Button>
                 </Link>
               </div>
@@ -148,7 +170,7 @@ export default function AppHome() {
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold text-foreground">Meus Dias de Criação</h2>
             <span className="text-sm font-medium text-muted-foreground">
-              {completedCount}/{totalDays} dias concluídos
+              {completedCount}/{totalStages} etapas concluídas
             </span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
@@ -162,7 +184,7 @@ export default function AppHome() {
             ))}
 
             {journeyDays.map((d) => {
-              const unlocked = isDayUnlocked(d.day);
+              const unlocked = allIntroCompleted && isDayUnlocked(d.day);
               const completed = isDayCompleted(d.day);
               const isCurrent = unlocked && !completed && progress.currentDay === d.day;
 
