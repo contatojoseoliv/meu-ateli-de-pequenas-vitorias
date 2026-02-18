@@ -6,26 +6,26 @@ import {
   TableCell,
   TableHead,
   TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+  TableRow } from
+"@/components/ui/table";
 
 /* ── Helpers ── */
 
-export function ImagePlaceholder({ caption }: { caption: string }) {
+export function ImagePlaceholder({ caption }: {caption: string;}) {
   return (
     <div className="app-photo-frame rounded-lg border border-border p-6 flex flex-col items-center justify-center gap-2 text-muted-foreground my-4">
       <ImageIcon className="h-8 w-8" />
       <p className="text-xs text-center leading-relaxed">{caption}</p>
-    </div>
-  );
+    </div>);
+
 }
 
-export function StoreTip({ children }: { children: React.ReactNode }) {
+export function StoreTip({ children }: {children: React.ReactNode;}) {
   return (
     <div className="app-tip rounded-lg border border-border p-4 my-3">
       {children}
-    </div>
-  );
+    </div>);
+
 }
 
 /* ── Types ── */
@@ -52,18 +52,18 @@ const tableCellClass = "py-3 text-grafite-suave";
 /* ── Card content ── */
 
 export const INTRO_CARD_CONTENTS: IntroCardData[] = [
-  /* ═══ Card 0: Comece Por Aqui ═══ */
+/* ═══ Card 0: Comece Por Aqui ═══ */
+{
+  title: "Seu primeiro amigurumi, um dia de cada vez",
+  emoji: "💛",
+  tintClass: "app-daycard--mint",
+  topics: [
   {
-    title: "Seu primeiro amigurumi, um dia de cada vez",
-    emoji: "💛",
-    tintClass: "app-daycard--mint",
-    topics: [
-      {
-        id: "bem-vinda",
-        title: "Seja Muito Bem-vinda!",
-        emoji: "🤗",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+    id: "bem-vinda",
+    title: "Seja Muito Bem-vinda!",
+    emoji: "🤗",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Este não é um curso comum de crochê.</p>
             <p>Este é um projeto guiado de 7 dias, onde você aprende fazendo, em partes pequenas, simples e possíveis.</p>
             <p>Você não precisa ter experiência, nem "levar jeito".</p>
@@ -71,14 +71,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             <p>A cada dia você vai avançar um pedacinho do seu amigurumi, até que, no final da semana, ele estará pronto, feito pelas suas próprias mãos.</p>
             <p>Sem pressa. Sem cobrança. Sem perfeição.</p>
           </div>
-        ),
-      },
-      {
-        id: "oque-criar",
-        title: "O que vamos criar",
-        emoji: "🐰",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "oque-criar",
+    title: "O que vamos criar",
+    emoji: "🐰",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Ao longo desses 7 dias, você vai produzir:</p>
             <p>✨ Um mini coelho amigurumi</p>
             <p>✨ Em formato de chaveiro</p>
@@ -87,14 +87,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             <p>Pensamos em algo que representasse o começo da sua jornada criativa: um símbolo de curiosidade, superação e delicadeza.</p>
             <ImagePlaceholder caption="Imagem ilustrativa do coelho." />
           </div>
-        ),
-      },
-      {
-        id: "mais-que-croche",
-        title: "Mais do que crochê",
-        emoji: "🧠",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "mais-que-croche",
+    title: "Mais do que crochê",
+    emoji: "🧠",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Este projeto também é um exercício de desacelerar.</p>
             <p>Enquanto suas mãos se movem:</p>
             <ul className="list-disc list-inside space-y-1 pl-1">
@@ -106,14 +106,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             <p>Aqui, o importante não é só o coelhinho.</p>
             <p>É o momento que você cria para você mesma.</p>
           </div>
-        ),
-      },
-      {
-        id: "sem-jeito-certo",
-        title: 'Não existe "jeito certo"',
-        emoji: "💛",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "sem-jeito-certo",
+    title: 'Não existe "jeito certo"',
+    emoji: "💛",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Você vai errar pontos.</p>
             <p>Vai desmanchar partes.</p>
             <p>Vai achar que não está bonito.</p>
@@ -121,14 +121,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             <p>Cada erro é só um passo aprendendo.</p>
             <p>Nada aqui precisa ser perfeito, só precisa ser seu.</p>
           </div>
-        ),
-      },
-      {
-        id: "como-funciona",
-        title: "Como funciona a jornada",
-        emoji: "📆",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "como-funciona",
+    title: "Como funciona a jornada",
+    emoji: "📆",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Cada dia terá:</p>
             <ul className="list-disc list-inside space-y-1 pl-1">
               <li>Um objetivo simples</li>
@@ -146,23 +146,23 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
               <p>Seu coelhinho já está a caminho. 🐰✨</p>
             </div>
           </div>
-        ),
-      },
-    ],
-  },
 
-  /* ═══ Card 1: Materiais ═══ */
+  }]
+
+},
+
+/* ═══ Card 1: Materiais ═══ */
+{
+  title: "Materiais (só o essencial)",
+  emoji: "🧺",
+  tintClass: "app-daycard--clay",
+  topics: [
   {
-    title: "Materiais (só o essencial)",
+    id: "mat-intro",
+    title: "Antes de começar",
     emoji: "🧺",
-    tintClass: "app-daycard--clay",
-    topics: [
-      {
-        id: "mat-intro",
-        title: "Antes de começar",
-        emoji: "🧺",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Antes de começarmos, você precisará de alguns materiais simples.</p>
             <p>Para este projeto, vamos usar apenas o necessário. A simplicidade faz parte da experiênca.</p>
             <p>Talvez os nomes sejam novos para você e está tudo bem.</p>
@@ -177,14 +177,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             <p>Respire. Nada aqui é complicado.</p>
             <p className="font-medium">Lista de Materiais em PDF (LINK)</p>
           </div>
-        ),
-      },
-      {
-        id: "mat-fio",
-        title: 'Fio — o "corpo" do seu coelho',
-        emoji: "🧶",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "mat-fio",
+    title: 'Fio — o "corpo" do seu coelho',
+    emoji: "🧶",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>O fio é o material principal, como se fosse o "tecido" do coelho.</p>
             <p>Ele vai formar cada ponto.</p>
             <StoreTip>
@@ -209,14 +209,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             </ul>
             <ImagePlaceholder caption="Novelo de fio claro, espessura média, em fundo neutro." />
           </div>
-        ),
-      },
-      {
-        id: "mat-agulha",
-        title: "Agulha de crochê (a ferramenta principal)",
-        emoji: "🪡",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "mat-agulha",
+    title: "Agulha de crochê (a ferramenta principal)",
+    emoji: "🪡",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Para esse mini coelho, o tamanho da agulha é importante.</p>
             <p>Você vai pedir:</p>
             <StoreTip>
@@ -239,14 +239,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             </ul>
             <ImagePlaceholder caption="Close do número da agulha marcado no cabo." />
           </div>
-        ),
-      },
-      {
-        id: "mat-enchimento",
-        title: "Enchimento (o que deixa o coelho fofinho)",
-        emoji: "☁️",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "mat-enchimento",
+    title: "Enchimento (o que deixa o coelho fofinho)",
+    emoji: "☁️",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>É o material que vai dentro do coelhinho.</p>
             <p>Você pode pedir:</p>
             <StoreTip>
@@ -256,14 +256,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             <p>Não precisa de muito — um saquinho pequeno já serve.</p>
             <ImagePlaceholder caption="Mão segurando um pequeno tufo de enchimento." />
           </div>
-        ),
-      },
-      {
-        id: "mat-olhos",
-        title: "Olhos",
-        emoji: "👀",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "mat-olhos",
+    title: "Olhos",
+    emoji: "👀",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Para o tamanho de chaveiro, o ideal é:</p>
             <p>Peça:</p>
             <StoreTip>
@@ -273,14 +273,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             <p>Se não tiver, você pode bordar com linha preta depois.</p>
             <ImagePlaceholder caption="Olhos de segurança pequenos ao lado de uma moeda." />
           </div>
-        ),
-      },
-      {
-        id: "mat-marcador",
-        title: "Marcador de ponto",
-        emoji: "🧷",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "mat-marcador",
+    title: "Marcador de ponto",
+    emoji: "🧷",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Ajuda você a saber onde começa cada volta.</p>
             <p>Peça:</p>
             <StoreTip>
@@ -294,14 +294,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             </ul>
             <ImagePlaceholder caption="Marcador preso em um ponto do crochê." />
           </div>
-        ),
-      },
-      {
-        id: "mat-tapecaria",
-        title: "Agulha de tapeçaria",
-        emoji: "🧵",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "mat-tapecaria",
+    title: "Agulha de tapeçaria",
+    emoji: "🧵",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>É uma agulha de ponta arredondada usada para costurar as partes e esconder fios.</p>
             <p>Peça:</p>
             <StoreTip>
@@ -310,14 +310,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             <p>Ela é mais grossa que agulha de costura comum.</p>
             <ImagePlaceholder caption="Comparação entre agulha de tapeçaria e agulha comum." />
           </div>
-        ),
-      },
-      {
-        id: "mat-argola",
-        title: "Argola de chaveiro (opcional, mas recomendada)",
-        emoji: "🔑",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "mat-argola",
+    title: "Argola de chaveiro (opcional, mas recomendada)",
+    emoji: "🔑",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Para transformar seu coelho em chaveiro.</p>
             <p>Você encontra como:</p>
             <ul className="list-disc list-inside space-y-1 pl-1">
@@ -326,53 +326,53 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             </ul>
             <ImagePlaceholder caption="Argola de chaveiro metálica simples." />
           </div>
-        ),
-      },
-      {
-        id: "mat-resumo",
-        title: "Resumo simples",
-        emoji: "💛",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "mat-resumo",
+    title: "Resumo simples",
+    emoji: "💛",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Com isso você já consegue fazer seu coelho:</p>
             <ul className="space-y-1.5 pl-1">
-              {["fio de algodão", "agulha 2.0–2.5 mm", "enchimento", "olhos", "agulha de tapeçaria", "marcador (ou improviso)"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
+              {["fio de algodão", "agulha 2.0–2.5 mm", "enchimento", "olhos", "agulha de tapeçaria", "marcador (ou improviso)"].map((item) =>
+        <li key={item} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-primary flex-shrink-0" />
                   <span>{item}</span>
                 </li>
-              ))}
+        )}
             </ul>
             <p>Nada além disso é necessário.</p>
           </div>
-        ),
-      },
-    ],
-  },
 
-  /* ═══ Card 2: Fundamentos ═══ */
+  }]
+
+},
+
+/* ═══ Card 2: Fundamentos ═══ */
+{
+  title: "Técnicas sem complicação",
+  emoji: "🧵",
+  tintClass: "app-daycard--gold",
+  topics: [
   {
-    title: "Técnicas sem complicação",
+    id: "fund-intro",
+    title: "Antes de começar",
     emoji: "🧵",
-    tintClass: "app-daycard--gold",
-    topics: [
-      {
-        id: "fund-intro",
-        title: "Antes de começar",
-        emoji: "🧵",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Antes de começar o coelhinho, você só precisa entender algumas coisas simples. Você não precisa entender tudo sobre crochê agora. Só o suficiente para conseguir dar os primeiros pontos.</p>
             <p>Vamos por partes, bem devagar.</p>
           </div>
-        ),
-      },
-      {
-        id: "fund-agulha",
-        title: "Como segurar a agulha",
-        emoji: "✋",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "fund-agulha",
+    title: "Como segurar a agulha",
+    emoji: "✋",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Não existe uma única forma certa.</p>
             <p>O importante é que sua mão fique confortável.</p>
             <p>Segure a agulha como se fosse:</p>
@@ -381,14 +381,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             <p>Se sua mão cansar, pare um pouco. Isso é normal no começo.</p>
             <ImagePlaceholder caption="Close na mão segurando a agulha como lápis." />
           </div>
-        ),
-      },
-      {
-        id: "fund-fio",
-        title: "Como segurar o fio",
-        emoji: "🧶",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "fund-fio",
+    title: "Como segurar o fio",
+    emoji: "🧶",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>O fio não precisa ficar apertado demais.</p>
             <p>Passe o fio:</p>
             <ul className="list-disc list-inside space-y-1 pl-1">
@@ -401,14 +401,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             <p>O ponto ideal é firme, mas confortável.</p>
             <ImagePlaceholder caption="Fio passando pelo dedo indicador da mão." />
           </div>
-        ),
-      },
-      {
-        id: "fund-ponto",
-        title: "O que é um ponto?",
-        emoji: "🔄",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "fund-ponto",
+    title: "O que é um ponto?",
+    emoji: "🔄",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Cada vez que você:</p>
             <ol className="list-decimal pl-5 space-y-1">
               <li>Entra com a agulha no trabalho</li>
@@ -420,29 +420,29 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             <p>É isso que você vai repetir muitas vezes.</p>
             <ImagePlaceholder caption='Close mostrando o formato de "V" dos pontos.' />
           </div>
-        ),
-      },
-      {
-        id: "fund-contar",
-        title: 'O que é "contar pontos"',
-        emoji: "🔢",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "fund-contar",
+    title: 'O que é "contar pontos"',
+    emoji: "🔢",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Cada ponto é como um "V" pequenininho.</p>
             <p>Quando a receita disser (12), significa:</p>
-            <p className="font-bold text-verde-eucalipto">aquela volta deve ter 12 pontos no total.</p>
+            <p className="font-bold text-verde-eucalipto">Aquela volta deve ter 12 pontos no total.</p>
             <p>Contar ajuda a peça ficar do tamanho certo.</p>
             <p>Não precisa contar toda hora — só no final da volta.</p>
             <ImagePlaceholder caption='Close mostrando vários "Vzinhos" alinhados.' />
           </div>
-        ),
-      },
-      {
-        id: "fund-voltas",
-        title: 'O que são "voltas" ou "carreiras"',
-        emoji: "🔄",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "fund-voltas",
+    title: 'O que são "voltas" ou "carreiras"',
+    emoji: "🔄",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>O amigurumi é feito em forma de espiral.</p>
             <p>Você começa no centro e vai girando ao redor, como um caracol 🐌</p>
             <p>Cada volta completa é chamada de:</p>
@@ -450,14 +450,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             <p>Você não vira o trabalho. Só continua girando.</p>
             <ImagePlaceholder caption="Pequeno círculo de crochê mostrando formato espiral." />
           </div>
-        ),
-      },
-      {
-        id: "fund-tecnicas",
-        title: "Técnicas que vamos usar no coelho",
-        emoji: "🧩",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "fund-tecnicas",
+    title: "Técnicas que vamos usar no coelho",
+    emoji: "🧩",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Agora vamos conhecer as 4 técnicas que constroem quase todo o amigurumi.</p>
             <p>Essas são as únicas que você precisa saber agora:</p>
             <div className="rounded-xl border border-verde-eucalipto/20 overflow-hidden shadow-sm">
@@ -495,14 +495,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             </div>
             <p>Você vai aprender cada uma enquanto usa.</p>
           </div>
-        ),
-      },
-      {
-        id: "fund-mr",
-        title: "MR — Anel mágico (onde tudo começa)",
-        emoji: "🌀",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "fund-mr",
+    title: "MR — Anel mágico (onde tudo começa)",
+    emoji: "🌀",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>É um jeito de começar fazendo um círculo bem fechadinho.</p>
             <p>Você vai:</p>
             <ol className="list-decimal pl-5 space-y-1">
@@ -515,14 +515,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             <p>Parece difícil, mas você fará devagar no Dia 1.</p>
             <ImagePlaceholder caption="Sequência mostrando o fio enrolado no dedo formando o círculo." />
           </div>
-        ),
-      },
-      {
-        id: "fund-pb",
-        title: "pb — Ponto baixo (o ponto principal)",
-        emoji: "➖",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "fund-pb",
+    title: "pb — Ponto baixo (o ponto principal)",
+    emoji: "➖",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Quase todo o coelho é feito com ele.</p>
             <p className="font-bold">Passo a passo do ponto baixo:</p>
             <ol className="list-decimal pl-5 space-y-1">
@@ -535,14 +535,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             <p>Pronto. Você fez 1 ponto baixo.</p>
             <ImagePlaceholder caption="Sequência mostrando 2 laçadas na agulha antes de fechar o ponto." />
           </div>
-        ),
-      },
-      {
-        id: "fund-aum",
-        title: "aum — Aumento",
-        emoji: "➕",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "fund-aum",
+    title: "aum — Aumento",
+    emoji: "➕",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>É quando você faz 2 pontos no mesmo lugar.</p>
             <p>Isso faz a peça crescer e ficar redonda.</p>
             <p>Você faz:</p>
@@ -551,14 +551,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
               <li>sem sair do lugar, faz outro no mesmo ponto</li>
             </ul>
           </div>
-        ),
-      },
-      {
-        id: "fund-dim",
-        title: "dim — Diminuição",
-        emoji: "➖",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "fund-dim",
+    title: "dim — Diminuição",
+    emoji: "➖",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>É quando você transforma 2 pontos em 1.</p>
             <p>Isso faz a peça fechar, como quando formamos a cabeça.</p>
             <p>Você vai:</p>
@@ -570,14 +570,14 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             </ul>
             <p>Vamos ver isso na prática mais pra frente.</p>
           </div>
-        ),
-      },
-      {
-        id: "fund-lembrar",
-        title: "O que você precisa lembrar",
-        emoji: "💛",
-        content: (
-          <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
+
+  },
+  {
+    id: "fund-lembrar",
+    title: "O que você precisa lembrar",
+    emoji: "💛",
+    content:
+    <div className="space-y-3 text-sm md:text-base text-foreground leading-relaxed">
             <p>Você não precisa decorar.</p>
             <p>Você só precisa tentar.</p>
             <p>O crochê é movimento repetido.</p>
@@ -585,8 +585,7 @@ export const INTRO_CARD_CONTENTS: IntroCardData[] = [
             <Separator className="my-4" />
             <p>Agora que você já sabe o básico, podemos começar de verdade.</p>
           </div>
-        ),
-      },
-    ],
-  },
-];
+
+  }]
+
+}];
