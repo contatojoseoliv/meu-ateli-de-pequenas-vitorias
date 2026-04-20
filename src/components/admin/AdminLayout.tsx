@@ -6,7 +6,8 @@ import {
   BarChart3, 
   LogOut,
   Menu,
-  X
+  X,
+  Film
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -22,6 +23,7 @@ const navItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/leads', label: 'Leads', icon: Users },
   { href: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
+  { href: '/admin/videos', label: 'Vídeos das aulas', icon: Film },
 ];
 
 export function AdminLayout({ children }: AdminLayoutProps) {
