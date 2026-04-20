@@ -1,26 +1,22 @@
-import { useParams, useNavigate, Link } from "react-router-dom";
-import IntroPageLayout from "@/components/app/IntroPageLayout";
-import { DAY_CONTENTS } from "@/content/dayContents";
-import { useDayContentProgress } from "@/hooks/useDayContentProgress";
+import { useParams, Link } from "react-router-dom";
+import { Sparkles } from "lucide-react";
+
+import { VideoLessonLayout } from "@/components/app/VideoLessonLayout";
 import { useJourneyProgress } from "@/hooks/useJourneyProgress";
 import { Button } from "@/components/shared/Button";
 import { toast } from "@/components/ui/sonner";
-import { Sparkles } from "lucide-react";
 import { AppShell } from "@/components/app/AppShell";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { journeyDays } from "@/content/journey";
 
 export default function AppDay() {
   const { day } = useParams();
-  const navigate = useNavigate();
   const dayNumber = Number(day);
-  const dayIndex = dayNumber - 1;
-
-  const progress = useDayContentProgress();
   const journey = useJourneyProgress();
 
-  const card = DAY_CONTENTS[dayIndex];
+  const dayData = journeyDays.find((d) => d.day === dayNumber);
 
-  if (!card || !Number.isFinite(dayNumber) || dayNumber < 1 || dayNumber > 7) {
+  if (!dayData || !Number.isFinite(dayNumber) || dayNumber < 1 || dayNumber > 7) {
     return (
       <AppShell title="Dia">
         <main className="container-main py-10">
@@ -39,6 +35,11 @@ export default function AppDay() {
     );
   }
 
+  const stageKey = `day-${dayNumber}`;
+  const unlocked = journey.isDayUnlocked(dayNumber);
+  const completed = journey.isDayCompleted(dayNumber);
+  const nextDay = dayNumber < 7 ? dayNumber + 1 : null;
+
   const handleComplete = () => {
     journey.completeDay(dayNumber);
     toast("Vitória do dia!", {
@@ -46,8 +47,6 @@ export default function AppDay() {
       icon: <Sparkles className="h-4 w-4" />,
     });
   };
-
-  const nextDay = dayNumber < 7 ? dayNumber + 1 : null;
 
   const completionActions = (
     <>
@@ -63,11 +62,13 @@ export default function AppDay() {
   );
 
   return (
-    <IntroPageLayout
-      cardIndex={dayIndex}
-      card={card}
+    <VideoLessonLayout
+      stageKey={stageKey}
       shellTitle={`Dia ${dayNumber}`}
-      progress={progress}
+      title={`Dia ${dayNumber} — ${dayData.title}`}
+      emoji="📆"
+      unlocked={unlocked}
+      completed={completed}
       onComplete={handleComplete}
       completionActions={completionActions}
     />

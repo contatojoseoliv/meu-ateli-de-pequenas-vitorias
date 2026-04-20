@@ -24,6 +24,7 @@ const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminLeads = lazy(() => import("./pages/admin/AdminLeads"));
 const AdminAnalytics = lazy(() => import("./pages/admin/AdminAnalytics"));
+const AdminVideos = lazy(() => import("./pages/admin/AdminVideos"));
 
 const queryClient = new QueryClient();
 
@@ -83,6 +84,14 @@ const App = () => (
               element={
                 <Suspense fallback={<AdminLoader />}>
                   <AdminAnalytics />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/admin/videos"
+              element={
+                <Suspense fallback={<AdminLoader />}>
+                  <AdminVideos />
                 </Suspense>
               }
             />

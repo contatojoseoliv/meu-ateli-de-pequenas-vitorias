@@ -13,6 +13,7 @@ import { DayCard } from "@/components/app/DayCard";
 import { IntroCard, INTRO_CARDS } from "@/components/app/IntroCard";
 import { INTRO_CARD_CONTENTS } from "@/content/introCards";
 import { useIntroProgress } from "@/hooks/useIntroProgress";
+import { getWatchedPercent } from "@/components/app/VideoPlayer";
 import { AppFooterMinimal } from "@/components/app/AppFooterMinimal";
 import { JourneyMiniProgress } from "@/components/app/JourneyMiniProgress";
 
@@ -34,7 +35,7 @@ function clamp(n: number, min = 0, max = 100) {
 }
 
 export default function AppHome() {
-  const { progress, isDayUnlocked, isDayCompleted, getStepChecked } = useJourneyProgress();
+  const { progress, isDayUnlocked, isDayCompleted } = useJourneyProgress();
   const { profile } = useAppProfile();
   const introProgress = useIntroProgress();
   const location = useLocation();
@@ -65,33 +66,19 @@ export default function AppHome() {
   const stageImage = dayStageImages[progress.currentDay] ?? placeholderImg;
 
   const stagePercent = useMemo(() => {
-    // If still in intro stages, calculate intro topic progress
+    // If still in intro stages, reflect the next pending intro stage's video progress
     if (!allIntroCompleted) {
-      // Find current intro card index
       let currentIntroIdx = 0;
       for (let i = 0; i < INTRO_CARDS.length; i++) {
         if (!introProgress.isCardCompleted(i)) { currentIntroIdx = i; break; }
       }
-      const card = INTRO_CARD_CONTENTS[currentIntroIdx];
-      if (!card) return 0;
-      const stepIds = card.topics.map((t) => t.id);
-      const readCount = stepIds.filter((id) => introProgress.getStepRead(currentIntroIdx, id)).length;
-      return clamp(Math.round((readCount / stepIds.length) * 100));
+      return clamp(getWatchedPercent(`intro-${currentIntroIdx}`));
     }
 
     const day = progress.currentDay;
     if (isDayCompleted(day)) return 100;
-
-    const guided = currentDayData?.guided;
-    if (!guided) return 0;
-
-    const steps = Object.values(guided).flat();
-    const total = steps.length;
-    if (total === 0) return 0;
-
-    const checked = steps.reduce((acc, step) => acc + (getStepChecked(day, step.id) ? 1 : 0), 0);
-    return clamp(Math.round((checked / total) * 100));
-  }, [allIntroCompleted, introProgress, currentDayData?.guided, getStepChecked, isDayCompleted, progress.currentDay]);
+    return clamp(getWatchedPercent(`day-${day}`));
+  }, [allIntroCompleted, introProgress, isDayCompleted, progress.currentDay]);
 
   useEffect(() => {
     if (!location.hash) return;

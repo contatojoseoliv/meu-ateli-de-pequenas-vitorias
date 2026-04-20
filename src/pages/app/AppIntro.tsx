@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
-import IntroPageLayout from "@/components/app/IntroPageLayout";
-import { INTRO_CARD_CONTENTS } from "@/content/introCards";
+import { VideoLessonLayout } from "@/components/app/VideoLessonLayout";
 import { useIntroProgress } from "@/hooks/useIntroProgress";
 import { Button } from "@/components/shared/Button";
+import { INTRO_CARDS } from "@/components/app/IntroCard";
+
+const CARD_INDEX = 0;
+const STAGE_KEY = "intro-0";
 
 export default function AppIntro() {
   const progress = useIntroProgress();
+  const card = INTRO_CARDS[CARD_INDEX];
 
   const completionActions = (
     <>
@@ -19,11 +23,14 @@ export default function AppIntro() {
   );
 
   return (
-    <IntroPageLayout
-      cardIndex={0}
-      card={INTRO_CARD_CONTENTS[0]}
+    <VideoLessonLayout
+      stageKey={STAGE_KEY}
       shellTitle="Comece por aqui"
-      progress={progress}
+      title={card.title}
+      emoji={card.emoji}
+      unlocked={progress.isCardUnlocked(CARD_INDEX)}
+      completed={progress.isCardCompleted(CARD_INDEX)}
+      onComplete={() => progress.completeCard(CARD_INDEX)}
       completionActions={completionActions}
     />
   );
