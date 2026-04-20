@@ -1,80 +1,73 @@
 
+## Plano: migrar as 10 etapas para interface de vídeo
 
-# Ajustes no Front-End: Cards, Materiais, Suporte e Selos
+### Decisões confirmadas
+- **Hospedagem**: upload direto no Lovable Cloud Storage (Supabase Storage)
+- **Conclusão**: manual, botão "Concluir etapa" só habilita após 90% assistido
+- **Vídeo único** por etapa (sem capítulos)
+- **Auxiliar**: apenas resumo/descrição abaixo do player
 
-## 1. Corrigir erro de build (TypeScript)
+### 1. Backend (Lovable Cloud Storage)
+- Criar bucket público `lesson-videos` via migração SQL.
+- Políticas RLS:
+  - `select` público (vídeos visíveis para alunas autenticadas ou não — mantém simples).
+  - `insert/update/delete` apenas para usuários com role `admin` (usar `has_role` já existente no projeto).
+- Criar tabela `lesson_videos` (`stage_key text primary key, video_path text, poster_path text, summary text, updated_at`) para mapear cada uma das 10 etapas a um arquivo do bucket. RLS: select público, mutations só admin.
+- `stage_key` segue convenção: `intro-0`, `intro-1`, `intro-2`, `day-1`...`day-7`.
 
-O `DayCard` exige a prop `tag` mas o `AppHome` nao a passa. Vamos tornar `tag` opcional no `DayCardProps` (ja que nao e usada visualmente no componente) ou passar `d.tag` no render. Solucao: passar `tag={d.tag}` na chamada do `DayCard` em `AppHome.tsx`.
+### 2. Componentes novos
+- `src/components/app/VideoPlayer.tsx` — wrapper sobre `<video>` HTML5:
+  - aspect-ratio 16:9 (`AspectRatio` do shadcn)
+  - controles nativos + poster
+  - evento `onTimeUpdate` calcula `% assistido = currentTime / duration`
+  - persiste posição em `localStorage` (`pv_video_pos_{stageKey}`) e retoma ao montar
+  - expõe callback `onProgress(percent)` e `onReady`
+- `src/components/app/VideoLessonLayout.tsx` — substitui `IntroPageLayout` para etapas com vídeo:
+  - AppShell + header com título da etapa
+  - Player no topo (sticky no mobile)
+  - Barra "X% assistido" abaixo do player (cor de fundo + cor primária preenchida)
+  - Resumo/descrição em card abaixo
+  - Botão **"Concluir etapa ✓"** desabilitado até `watchedPercent >= 90`; tooltip informa quanto falta
+  - Após concluir: render `completionActions` (mesmo padrão atual)
+  - Suporte a "etapa bloqueada" idêntico ao layout atual
 
----
+### 3. Hook novo
+- `src/hooks/useLessonVideo.ts` — busca `lesson_videos` por `stage_key` no Supabase, devolve `{ videoUrl, posterUrl, summary, loading }` usando `supabase.storage.from('lesson-videos').getPublicUrl(path)`.
 
-## 2. Padronizar cards em "Meus Dias de Criacao"
+### 4. Atualizar páginas das 10 etapas
+- `AppIntro.tsx`, `AppMateriais.tsx`, `AppFundamentos.tsx`, `AppDay.tsx`: trocar `IntroPageLayout` por `VideoLessonLayout`, passando `stageKey` correspondente.
+- Manter `useIntroProgress` / `useDayContentProgress` / `useJourneyProgress` — mas agora `completeCard`/`completeDay` é disparado pelo botão manual após 90%.
+- Remover dependência de `topics`/`stepIds` para o cálculo de progresso da etapa nessas páginas.
 
-**Problema**: Os 3 IntroCards e os 7 DayCards podem ter alturas diferentes dependendo do conteudo.
+### 5. Ajustar Home (`AppHome.tsx`)
+- `stagePercent` da etapa atual passa a refletir `watchedPercent` salvo no `localStorage` (`pv_video_pct_{stageKey}`) em vez de tópicos lidos. Fallback 0 se sem dado.
+- Lógica de desbloqueio sequencial e contagem de 10 etapas permanece intacta.
 
-**Solucao**:
-- Adicionar `min-h-[140px]` nos dois componentes (`IntroCard` e `DayCard`) para forcar uma altura minima consistente
-- Ambos ja usam `h-full` nos wrappers e `flex flex-col justify-between` no conteudo, entao so precisamos do `min-h` para garantir uniformidade
-- O grid atual (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3`) ja e responsivo e sera mantido
+### 6. Admin (mínimo viável para subir vídeos)
+- Nova página `src/pages/admin/AdminVideos.tsx` listando as 10 etapas com:
+  - input file (vídeo .mp4) + input file (poster .jpg/png opcional) + textarea resumo
+  - upload via `supabase.storage.from('lesson-videos').upload(...)` e upsert em `lesson_videos`
+  - prévia do vídeo atual
+- Adicionar item "Vídeos das aulas" no `AdminLayout` sidebar e rota em `App.tsx` protegida por `useAdminAuth`.
 
-**Arquivos**: `src/components/app/DayCard.tsx`, `src/components/app/IntroCard.tsx`
+### 7. Limpeza
+- Manter `IntroPageLayout` e hooks antigos (não remover) — ainda usados internamente para `getStepRead`/`markStepRead` caso queira reverter; mas as 4 páginas de etapa não chamam mais.
+- Adicionar `pv_video_pos_*` e `pv_video_pct_*` ao reset do perfil se houver função de "resetar progresso".
 
----
+### 8. Estados de borda
+- Etapa sem vídeo cadastrado: mostrar placeholder "Em breve — aguarde a publicação desta aula" e desabilitar conclusão.
+- Vídeo grande: usar streaming nativo do Storage (HTTP range requests já suportado).
+- Limite Storage: avisar admin no painel se arquivo > 50MB (sugerir compressão), mas não bloquear.
 
-## 3. Criar pagina "Materiais e Tecnicas"
+### Arquivos a criar
+- `supabase/migrations/<ts>_lesson_videos.sql`
+- `src/components/app/VideoPlayer.tsx`
+- `src/components/app/VideoLessonLayout.tsx`
+- `src/hooks/useLessonVideo.ts`
+- `src/pages/admin/AdminVideos.tsx`
 
-**Nova rota**: `/app/materiais-tecnicas`
-
-Criar uma pagina dedicada com cards que direcionam para os conteudos dos dias, organizada em duas secoes:
-
-- **Materiais**: card para cada dia mostrando os materiais daquele dia, com link para `/app/dia/{day}?tab=materiais`
-- **Tecnicas**: card para cada dia mostrando as tecnicas daquele dia, com link para `/app/dia/{day}?tab=tecnicas`
-
-Os dados virao de `journeyDays[].tabs.materials` e `journeyDays[].tabs.techniquesAndResources`.
-
-Alem disso, atualizar os botoes da secao `AppMaterialsTechniquesSection` na Home para navegar para esta nova pagina em vez de um dia especifico.
-
-**Arquivos**:
-- `src/pages/app/AppMateriaisTecnicas.tsx` (novo)
-- `src/App.tsx` (nova rota)
-- `src/components/app/AppMaterialsTechniquesSection.tsx` (atualizar links)
-
----
-
-## 4. Botoes de Suporte lado a lado
-
-**Problema**: Os botoes de WhatsApp e Email ja estao configurados com `flex-col sm:flex-row` no `AppSupportSection`, mas na pagina `AppSupport` estao empilhados verticalmente.
-
-**Solucao**: Atualizar `AppSupport.tsx` para usar layout `flex-row` com `flex-wrap` para responsividade, igual ao `AppSupportSection`.
-
-**Arquivo**: `src/pages/app/AppSupport.tsx`
-
----
-
-## 5. Substituir selo na pagina de Selos
-
-**Acao**: Salvar a imagem enviada (frente do selo "Primeira Vitoria em Amigurumi") como novo asset e usa-la na pagina de selos.
-
-- Copiar imagem para `src/assets/selo-primeira-vitoria-circular.png` (substituir o existente)
-- O componente `AppBadges` ja importa esse asset, entao a substituicao sera automatica
-- Manter tamanho `h-24 w-24` com `object-contain` para boa resolucao e proporcao
-- Aumentar para `h-32 w-32` para dar mais destaque ao selo
-
-**Arquivo**: `src/pages/app/AppBadges.tsx`, asset `src/assets/selo-primeira-vitoria-circular.png`
-
----
-
-## Resumo de arquivos
-
-| Arquivo | Acao |
-|---|---|
-| `src/components/app/DayCard.tsx` | Adicionar `min-h-[140px]` no Card |
-| `src/components/app/IntroCard.tsx` | Adicionar `min-h-[140px]` no Card |
-| `src/pages/app/AppHome.tsx` | Passar `tag={d.tag}` no DayCard |
-| `src/pages/app/AppMateriaisTecnicas.tsx` | Nova pagina de Materiais e Tecnicas |
-| `src/App.tsx` | Adicionar rota `/app/materiais-tecnicas` |
-| `src/components/app/AppMaterialsTechniquesSection.tsx` | Atualizar navegacao para nova pagina |
-| `src/pages/app/AppSupport.tsx` | Botoes lado a lado com responsividade |
-| `src/pages/app/AppBadges.tsx` | Aumentar selo para `h-32 w-32` |
-| `src/assets/selo-primeira-vitoria-circular.png` | Substituir pela nova imagem |
-
+### Arquivos a editar
+- `src/pages/app/AppIntro.tsx`, `AppMateriais.tsx`, `AppFundamentos.tsx`, `AppDay.tsx`
+- `src/pages/app/AppHome.tsx` (cálculo de `stagePercent`)
+- `src/components/admin/AdminLayout.tsx` (item de menu)
+- `src/App.tsx` (rota admin)
