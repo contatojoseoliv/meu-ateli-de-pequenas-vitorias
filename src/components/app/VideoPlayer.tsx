@@ -231,7 +231,7 @@ export function VideoPlayer({ stageKey, videoUrl, posterUrl, onProgress, onReady
   };
 
   // Double-tap mobile
-  const handleVideoTap = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleVideoTap = (e: React.MouseEvent<HTMLVideoElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const side: "L" | "R" = x < rect.width / 2 ? "L" : "R";
