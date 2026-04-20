@@ -1,73 +1,131 @@
 
-## Plano: migrar as 10 etapas para interface de vídeo
+## Exemplo visual da nova experiência de aula
 
-### Decisões confirmadas
-- **Hospedagem**: upload direto no Lovable Cloud Storage (Supabase Storage)
-- **Conclusão**: manual, botão "Concluir etapa" só habilita após 90% assistido
-- **Vídeo único** por etapa (sem capítulos)
-- **Auxiliar**: apenas resumo/descrição abaixo do player
+### Desktop (≥1024px)
 
-### 1. Backend (Lovable Cloud Storage)
-- Criar bucket público `lesson-videos` via migração SQL.
-- Políticas RLS:
-  - `select` público (vídeos visíveis para alunas autenticadas ou não — mantém simples).
-  - `insert/update/delete` apenas para usuários com role `admin` (usar `has_role` já existente no projeto).
-- Criar tabela `lesson_videos` (`stage_key text primary key, video_path text, poster_path text, summary text, updated_at`) para mapear cada uma das 10 etapas a um arquivo do bucket. RLS: select público, mutations só admin.
-- `stage_key` segue convenção: `intro-0`, `intro-1`, `intro-2`, `day-1`...`day-7`.
+```text
+┌────────────────────────────────────────────────────────────────────────┐
+│  ☰  Ateliê das Pontinhos                              [👤 Maria  ▾]   │  ← AppShell
+├────────────────────────────────────────────────────────────────────────┤
+│                                                                        │
+│  Jornada › Dia 1 · Primeiros pontos              ⏱ 12:48   Etapa 4/10 │  ← topbar contextual
+│  ●─●─●─◉─○─○─○─○─○─○                                                  │  ← JourneyMiniProgress (etapa atual destacada)
+│                                                                        │
+│  ┌──────────────────────────────────────────────────────────────────┐ │
+│  │░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│ │
+│  │░░░░░░░░░░░░░░░░░  ▶  Assistir aula  ░░░░░░░░░░░░░░░░░░░░░░░░░░░│ │  ← player com poster +
+│  │░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│ │     CTA central antes do play
+│  │░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│ │
+│  │ ▶ ━━━━━━━━●─────────────  04:32 / 12:48      1x  ⊡ PiP  ⛶      │ │  ← controles custom
+│  └──────────────────────────────────────────────────────────────────┘ │     (skin app-stitch)
+│   ▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░  35% assistido                        │
+│   "Faltam ~5 minutinhos pra você liberar a conclusão 🧶"              │  ← feedback humano
+│                                                                        │
+│  ┌──────────────────────────────────────────────────────────────────┐ │
+│  │  📖 Sobre esta aula                                              │ │
+│  │  ─────────────────                                               │ │  ← card resumo
+│  │  Hoje você dá os primeiros pontos do amigurumi. Vamos juntas    │ │     (Playfair + prose)
+│  │  no ritmo certo, sem pressa, sentindo a lã nas mãos.            │ │
+│  └──────────────────────────────────────────────────────────────────┘ │
+│                                                                        │
+│        [ ✓ Concluir etapa ]   [ Próxima aula › ]                      │  ← CTA duplo
+│                                                                        │
+│  ← Aula anterior: Fundamentos                  Próxima: Dia 2 →       │  ← navegação prev/next
+└────────────────────────────────────────────────────────────────────────┘
+```
 
-### 2. Componentes novos
-- `src/components/app/VideoPlayer.tsx` — wrapper sobre `<video>` HTML5:
-  - aspect-ratio 16:9 (`AspectRatio` do shadcn)
-  - controles nativos + poster
-  - evento `onTimeUpdate` calcula `% assistido = currentTime / duration`
-  - persiste posição em `localStorage` (`pv_video_pos_{stageKey}`) e retoma ao montar
-  - expõe callback `onProgress(percent)` e `onReady`
-- `src/components/app/VideoLessonLayout.tsx` — substitui `IntroPageLayout` para etapas com vídeo:
-  - AppShell + header com título da etapa
-  - Player no topo (sticky no mobile)
-  - Barra "X% assistido" abaixo do player (cor de fundo + cor primária preenchida)
-  - Resumo/descrição em card abaixo
-  - Botão **"Concluir etapa ✓"** desabilitado até `watchedPercent >= 90`; tooltip informa quanto falta
-  - Após concluir: render `completionActions` (mesmo padrão atual)
-  - Suporte a "etapa bloqueada" idêntico ao layout atual
+### Mobile (<768px)
 
-### 3. Hook novo
-- `src/hooks/useLessonVideo.ts` — busca `lesson_videos` por `stage_key` no Supabase, devolve `{ videoUrl, posterUrl, summary, loading }` usando `supabase.storage.from('lesson-videos').getPublicUrl(path)`.
+```text
+┌──────────────────────────────┐
+│ ☰  Dia 1            👤      │
+├──────────────────────────────┤
+│ ●─●─●─◉─○─○─○─○─○─○  4/10   │
+├──────────────────────────────┤
+│ ┌──────────────────────────┐ │
+│ │░░░░  ▶ ░░░░░░░░░░░░░░░░░│ │  ← player sticky
+│ │░░░░░░░░░░░░░░░░░░░░░░░░░│ │     ao rolar encolhe →
+│ └──────────────────────────┘ │
+│ ▓▓▓▓▓░░░░░  35% assistido   │
+│                              │
+│ Sobre esta aula              │
+│ Hoje você dá os primeiros... │
+│                              │
+│           (rolagem)          │
+│                              │
+├──────────────────────────────┤
+│ [ ✓ Concluir ]  [ Próxima › ]│  ← CTA fixo no rodapé
+└──────────────────────────────┘
+```
 
-### 4. Atualizar páginas das 10 etapas
-- `AppIntro.tsx`, `AppMateriais.tsx`, `AppFundamentos.tsx`, `AppDay.tsx`: trocar `IntroPageLayout` por `VideoLessonLayout`, passando `stageKey` correspondente.
-- Manter `useIntroProgress` / `useDayContentProgress` / `useJourneyProgress` — mas agora `completeCard`/`completeDay` é disparado pelo botão manual após 90%.
-- Remover dependência de `topics`/`stepIds` para o cálculo de progresso da etapa nessas páginas.
+### Estado: concluído (celebração)
 
-### 5. Ajustar Home (`AppHome.tsx`)
-- `stagePercent` da etapa atual passa a refletir `watchedPercent` salvo no `localStorage` (`pv_video_pct_{stageKey}`) em vez de tópicos lidos. Fallback 0 se sem dado.
-- Lógica de desbloqueio sequencial e contagem de 10 etapas permanece intacta.
+```text
+   ┌──────────────────────────────────┐
+   │      🎉   ✨   🧶   ✨   🎉      │  ← confete sutil (canvas-confetti)
+   │                                  │
+   │         ⭐ selo miniatura         │
+   │                                  │
+   │   Mais um pontinho na sua jornada│  ← Playfair, acolhedor
+   │                                  │
+   │  [ Próxima aula › ]  [ Início ]  │
+   └──────────────────────────────────┘
+```
 
-### 6. Admin (mínimo viável para subir vídeos)
-- Nova página `src/pages/admin/AdminVideos.tsx` listando as 10 etapas com:
-  - input file (vídeo .mp4) + input file (poster .jpg/png opcional) + textarea resumo
-  - upload via `supabase.storage.from('lesson-videos').upload(...)` e upsert em `lesson_videos`
-  - prévia do vídeo atual
-- Adicionar item "Vídeos das aulas" no `AdminLayout` sidebar e rota em `App.tsx` protegida por `useAdminAuth`.
+### Estado: em breve
 
-### 7. Limpeza
-- Manter `IntroPageLayout` e hooks antigos (não remover) — ainda usados internamente para `getStepRead`/`markStepRead` caso queira reverter; mas as 4 páginas de etapa não chamam mais.
-- Adicionar `pv_video_pos_*` e `pv_video_pct_*` ao reset do perfil se houver função de "resetar progresso".
+```text
+   ┌──────────────────────────────────┐
+   │       🧶 (ilustração linha)       │
+   │                                  │
+   │   Esta aula está sendo preparada │
+   │   com carinho. Volte em breve 💛 │
+   │                                  │
+   │      [ Avisar quando publicar ]  │
+   └──────────────────────────────────┘
+```
 
-### 8. Estados de borda
-- Etapa sem vídeo cadastrado: mostrar placeholder "Em breve — aguarde a publicação desta aula" e desabilitar conclusão.
-- Vídeo grande: usar streaming nativo do Storage (HTTP range requests já suportado).
-- Limite Storage: avisar admin no painel se arquivo > 50MB (sugerir compressão), mas não bloquear.
+### Estado: bloqueado
 
-### Arquivos a criar
-- `supabase/migrations/<ts>_lesson_videos.sql`
-- `src/components/app/VideoPlayer.tsx`
-- `src/components/app/VideoLessonLayout.tsx`
-- `src/hooks/useLessonVideo.ts`
-- `src/pages/admin/AdminVideos.tsx`
+```text
+   ┌──────────────────────────────────┐
+   │              🔒                  │
+   │                                  │
+   │   Conclua "Fundamentos" para     │
+   │   abrir esta aula                │
+   │                                  │
+   │      [ Ir para Fundamentos → ]   │
+   └──────────────────────────────────┘
+```
 
-### Arquivos a editar
-- `src/pages/app/AppIntro.tsx`, `AppMateriais.tsx`, `AppFundamentos.tsx`, `AppDay.tsx`
-- `src/pages/app/AppHome.tsx` (cálculo de `stagePercent`)
-- `src/components/admin/AdminLayout.tsx` (item de menu)
-- `src/App.tsx` (rota admin)
+## Plano de implementação (resumido)
+
+**Componentes a criar**
+- `VideoPlayer.tsx` (refatorar) — skin custom, atalhos, PiP, velocidade, retomar visível, double-tap mobile
+- `LessonStickyMobileCTA.tsx` — barra fixa de ação no rodapé mobile
+- `LessonCompletionCelebration.tsx` — card de recompensa + confete
+- `LessonEmptyState.tsx` — variantes "em breve" e "bloqueado"
+- `LessonContextHeader.tsx` — breadcrumb + chip "Etapa X/10" + duração + `JourneyMiniProgress`
+
+**Componentes a editar**
+- `VideoLessonLayout.tsx` — orquestra header contextual, player sticky, CTA mobile, estados ricos, celebração
+
+**Hooks a criar**
+- `useLessonNavigation.ts` — devolve `{ prev, next, currentIndex, total }` para qualquer `stageKey`
+- `useKeyboardShortcuts.ts` — atalhos do player (Space, ←/→, ↑/↓, F, M)
+
+**Estilos**
+- adicionar utilitários em `app-product.css` para sticky-on-scroll do player no mobile
+
+**Dependência nova**
+- `canvas-confetti` (~6kb) — celebração ao concluir
+
+**Acessibilidade**
+- ARIA labels nos controles
+- `prefers-reduced-motion` desativa confete e animações grandes
+- Foco visível em todos interativos
+
+**Fora de escopo**
+- Sincronizar progresso com Supabase (segue em localStorage)
+- Anotações e materiais por aula (decisão anterior: só resumo)
+- Capítulos navegáveis (decisão anterior: vídeo único)
