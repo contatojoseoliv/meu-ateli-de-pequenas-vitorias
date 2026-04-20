@@ -195,7 +195,7 @@ function StageRow({
               onChange={(e) => setVideo(e.target.files?.[0] ?? null)}
             />
             {sizeWarn && (
-              <p className="text-xs text-amber-600">
+              <p className="text-xs text-destructive">
                 Arquivo &gt; {SIZE_WARN_MB}MB — considere comprimir (ex.: handbrake) para melhor reprodução.
               </p>
             )}
