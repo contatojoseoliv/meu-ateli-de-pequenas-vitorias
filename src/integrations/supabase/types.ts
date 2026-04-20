@@ -146,6 +146,30 @@ export type Database = {
         }
         Relationships: []
       }
+      lesson_videos: {
+        Row: {
+          poster_path: string | null
+          stage_key: string
+          summary: string | null
+          updated_at: string
+          video_path: string | null
+        }
+        Insert: {
+          poster_path?: string | null
+          stage_key: string
+          summary?: string | null
+          updated_at?: string
+          video_path?: string | null
+        }
+        Update: {
+          poster_path?: string | null
+          stage_key?: string
+          summary?: string | null
+          updated_at?: string
+          video_path?: string | null
+        }
+        Relationships: []
+      }
       page_analytics: {
         Row: {
           event_type: string
