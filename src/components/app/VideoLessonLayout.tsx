@@ -5,7 +5,6 @@ import { Check, Loader2, BookOpen, ChevronLeft, ChevronRight, Sparkles, ChevronD
 import { AppShell } from "@/components/app/AppShell";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/shared/Button";
-import { Button as UIButton } from "@/components/ui/button";
 import { VideoPlayer, getWatchedPercent } from "@/components/app/VideoPlayer";
 import { useLessonVideo } from "@/hooks/useLessonVideo";
 import { useLessonNavigation } from "@/hooks/useLessonNavigation";
