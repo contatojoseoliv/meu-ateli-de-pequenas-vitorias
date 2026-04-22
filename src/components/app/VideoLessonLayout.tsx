@@ -115,25 +115,23 @@ export function VideoLessonLayout({
           <LessonEmptyState kind="coming-soon" />
         )}
 
-        {/* Bloco compacto abaixo do vídeo */}
+        {/* Bloco compacto abaixo do vídeo — respeita largura do player */}
         {videoUrl && (
-          <section className="space-y-3">
-            <h1 className="font-serif text-xl md:text-2xl text-foreground leading-tight flex items-center gap-2">
+          <section
+            className="space-y-3 mx-auto w-full"
+            style={{ maxWidth: "calc((100svh - 220px) * 16 / 9)" }}
+          >
+            <h1 className="font-serif text-lg md:text-xl text-foreground leading-tight flex items-center gap-1.5">
               {completed && (
-                <img
-                  src={sealIcon}
-                  alt=""
-                  aria-hidden
-                  className="h-6 w-6 md:h-7 md:w-7 object-contain flex-shrink-0"
-                />
+                <ChevronRight className="h-4 w-4 md:h-5 md:w-5 text-primary flex-shrink-0" aria-hidden />
               )}
               {title}
             </h1>
 
             {/* Watched bar — linha única */}
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <div
-                className="h-1.5 w-full rounded-full bg-secondary/30 overflow-hidden"
+                className="h-1 w-full rounded-full bg-secondary/30 overflow-hidden"
                 role="progressbar"
                 aria-label="Progresso do vídeo"
                 aria-valuemin={0}
@@ -145,7 +143,7 @@ export function VideoLessonLayout({
                   style={{ width: `${watched}%` }}
                 />
               </div>
-              <p className="text-xs text-muted-foreground tabular-nums">
+              <p className="text-[11px] text-muted-foreground tabular-nums">
                 <span className="font-medium text-foreground">{watched}%</span>
                 {completed
                   ? " · etapa concluída"
@@ -155,10 +153,18 @@ export function VideoLessonLayout({
               </p>
             </div>
 
-            {/* Estado concluído: celebração inline + ações */}
+            {/* Estado concluído: ícone + frase + ações */}
             {completed ? (
               showCelebration && (
-                <LessonCompletionCelebration variant="inline" actions={completionActions} />
+                <div className="flex flex-col items-center gap-1.5 pt-1 animate-fade-in">
+                  <img
+                    src={sealIcon}
+                    alt=""
+                    aria-hidden
+                    className="h-7 w-7 md:h-8 md:w-8 object-contain"
+                  />
+                  <LessonCompletionCelebration variant="inline" actions={completionActions} />
+                </div>
               )
             ) : (
               /* Estado assistindo: botões compactos (desktop) */
