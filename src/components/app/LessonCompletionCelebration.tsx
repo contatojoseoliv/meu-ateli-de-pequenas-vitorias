@@ -16,7 +16,7 @@ const PHRASES = [
   "Olha você indo, com calma e carinho 🌿",
 ];
 
-export function LessonCompletionCelebration({ message, actions }: Props) {
+export function LessonCompletionCelebration({ message, actions, variant = "card" }: Props) {
   const fired = useRef(false);
 
   useEffect(() => {
