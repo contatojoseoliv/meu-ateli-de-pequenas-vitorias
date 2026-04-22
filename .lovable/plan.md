@@ -1,131 +1,63 @@
 
-## Exemplo visual da nova experiência de aula
+## Mudanças: limpar títulos e compactar bloco abaixo do vídeo
 
-### Desktop (≥1024px)
+### 1. Remover emojis dos títulos das aulas
 
+Hoje o título renderiza como `🌱 Comece por aqui`, `🧺 Materiais`, `🧵 Fundamentos` e `📆 Dia 1 — …`. Vou remover esses emojis do título principal exibido em `VideoLessonLayout`.
+
+**Como:**
+- Em `src/components/app/VideoLessonLayout.tsx`, trocar `cleanTitle = ${emoji} ${title}` por apenas `title`. A prop `emoji` continua existindo (usada nos cards da home), mas deixa de aparecer no H1 da página de aula.
+- Resultado nas 4 páginas:
+  - `/app/comecar` → "Comece por aqui"
+  - `/app/materiais` → "Materiais"
+  - `/app/fundamentos` → "Fundamentos"
+  - `/app/dia/1` → "Dia 1 — Primeiros pontos" (sem 📆)
+
+### 2. Compactar o bloco abaixo do vídeo (título + progresso + ações + celebração)
+
+Hoje a seção tem espaçamento generoso (`space-y-4`, título 2xl/3xl, barra de 2px, botões `size="default"`, e o card de celebração ocupa muito espaço quando concluído). Vou enxugar tudo num bloco discreto e elegante.
+
+#### Como vai ficar
+
+**Estado: assistindo (não concluído)**
 ```text
-┌────────────────────────────────────────────────────────────────────────┐
-│  ☰  Ateliê das Pontinhos                              [👤 Maria  ▾]   │  ← AppShell
-├────────────────────────────────────────────────────────────────────────┤
-│                                                                        │
-│  Jornada › Dia 1 · Primeiros pontos              ⏱ 12:48   Etapa 4/10 │  ← topbar contextual
-│  ●─●─●─◉─○─○─○─○─○─○                                                  │  ← JourneyMiniProgress (etapa atual destacada)
-│                                                                        │
-│  ┌──────────────────────────────────────────────────────────────────┐ │
-│  │░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│ │
-│  │░░░░░░░░░░░░░░░░░  ▶  Assistir aula  ░░░░░░░░░░░░░░░░░░░░░░░░░░░│ │  ← player com poster +
-│  │░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│ │     CTA central antes do play
-│  │░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│ │
-│  │ ▶ ━━━━━━━━●─────────────  04:32 / 12:48      1x  ⊡ PiP  ⛶      │ │  ← controles custom
-│  └──────────────────────────────────────────────────────────────────┘ │     (skin app-stitch)
-│   ▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░  35% assistido                        │
-│   "Faltam ~5 minutinhos pra você liberar a conclusão 🧶"              │  ← feedback humano
-│                                                                        │
-│  ┌──────────────────────────────────────────────────────────────────┐ │
-│  │  📖 Sobre esta aula                                              │ │
-│  │  ─────────────────                                               │ │  ← card resumo
-│  │  Hoje você dá os primeiros pontos do amigurumi. Vamos juntas    │ │     (Playfair + prose)
-│  │  no ritmo certo, sem pressa, sentindo a lã nas mãos.            │ │
-│  └──────────────────────────────────────────────────────────────────┘ │
-│                                                                        │
-│        [ ✓ Concluir etapa ]   [ Próxima aula › ]                      │  ← CTA duplo
-│                                                                        │
-│  ← Aula anterior: Fundamentos                  Próxima: Dia 2 →       │  ← navegação prev/next
-└────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────┐
+│            [        vídeo        ]                       │
+└──────────────────────────────────────────────────────────┘
+  Comece por aqui                                          ← título menor (xl/2xl)
+  ▓▓▓▓▓▓▓░░░░░░░░░░░░░░  62%  · faltam 28% pra concluir   ← linha única, tipografia sutil
+  [ Concluir etapa ]   [ Próxima aula → ]                  ← botões size="sm"
 ```
 
-### Mobile (<768px)
-
+**Estado: concluído (celebração integrada e mínima)**
 ```text
-┌──────────────────────────────┐
-│ ☰  Dia 1            👤      │
-├──────────────────────────────┤
-│ ●─●─●─◉─○─○─○─○─○─○  4/10   │
-├──────────────────────────────┤
-│ ┌──────────────────────────┐ │
-│ │░░░░  ▶ ░░░░░░░░░░░░░░░░░│ │  ← player sticky
-│ │░░░░░░░░░░░░░░░░░░░░░░░░░│ │     ao rolar encolhe →
-│ └──────────────────────────┘ │
-│ ▓▓▓▓▓░░░░░  35% assistido   │
-│                              │
-│ Sobre esta aula              │
-│ Hoje você dá os primeiros... │
-│                              │
-│           (rolagem)          │
-│                              │
-├──────────────────────────────┤
-│ [ ✓ Concluir ]  [ Próxima › ]│  ← CTA fixo no rodapé
-└──────────────────────────────┘
+┌──────────────────────────────────────────────────────────┐
+│            [        vídeo        ]                       │
+└──────────────────────────────────────────────────────────┘
+  ✓ Comece por aqui                                        ← check inline pequeno
+  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  100%  · etapa concluída            ← linha única
+  ✨ Mais um pontinho na sua jornada 🧶                     ← uma linha, sem card pesado
+  [ ← Voltar ao início ]   [ Próxima: Materiais → ]        ← botões size="sm"
 ```
 
-### Estado: concluído (celebração)
+#### Mudanças técnicas
 
-```text
-   ┌──────────────────────────────────┐
-   │      🎉   ✨   🧶   ✨   🎉      │  ← confete sutil (canvas-confetti)
-   │                                  │
-   │         ⭐ selo miniatura         │
-   │                                  │
-   │   Mais um pontinho na sua jornada│  ← Playfair, acolhedor
-   │                                  │
-   │  [ Próxima aula › ]  [ Início ]  │
-   └──────────────────────────────────┘
-```
+**`src/components/app/VideoLessonLayout.tsx`**
+- Reduzir espaçamentos da `<section>`: `space-y-4` → `space-y-3`.
+- Título: `text-2xl md:text-3xl` → `text-xl md:text-2xl`; remover o "balão" do check (`h-7 w-7 rounded-full bg-primary/15`) e usar apenas um ícone `Check` inline pequeno antes do texto quando concluído.
+- Barra de progresso: condensar para **uma linha única** — `62% · faltam 28% pra concluir` (ou `100% · etapa concluída`) acima de uma barra mais fina (`h-1.5`).
+- Botões desktop: `size="default"` → `size="sm"`, remover ícones decorativos extras (manter só seta na "Próxima").
+- Quando `completed`, no lugar dos botões "Concluir/Próxima" renderizar o `LessonCompletionCelebration` em **variant `inline`** + os `completionActions` no mesmo size `sm`.
 
-### Estado: em breve
+**`src/components/app/LessonCompletionCelebration.tsx`**
+- Adicionar prop `variant?: "inline" | "card"` (default `card` mantém retrocompat para qualquer outro uso).
+- `variant="inline"`: renderiza apenas uma linha discreta com ícone `Sparkles` pequeno + frase em texto base (sem Playfair gigante, sem selo, sem card/ring). Os `actions` aparecem logo abaixo, alinhados à esquerda.
+- Confete continua disparando uma vez, sem mudança.
 
-```text
-   ┌──────────────────────────────────┐
-   │       🧶 (ilustração linha)       │
-   │                                  │
-   │   Esta aula está sendo preparada │
-   │   com carinho. Volte em breve 💛 │
-   │                                  │
-   │      [ Avisar quando publicar ]  │
-   └──────────────────────────────────┘
-```
+**`src/components/app/LessonStickyMobileCTA.tsx`**
+- Quando `completed === true`, esconder a barra fixa (já que as ações de "voltar/próxima" estarão no bloco compacto integrado).
 
-### Estado: bloqueado
-
-```text
-   ┌──────────────────────────────────┐
-   │              🔒                  │
-   │                                  │
-   │   Conclua "Fundamentos" para     │
-   │   abrir esta aula                │
-   │                                  │
-   │      [ Ir para Fundamentos → ]   │
-   └──────────────────────────────────┘
-```
-
-## Plano de implementação (resumido)
-
-**Componentes a criar**
-- `VideoPlayer.tsx` (refatorar) — skin custom, atalhos, PiP, velocidade, retomar visível, double-tap mobile
-- `LessonStickyMobileCTA.tsx` — barra fixa de ação no rodapé mobile
-- `LessonCompletionCelebration.tsx` — card de recompensa + confete
-- `LessonEmptyState.tsx` — variantes "em breve" e "bloqueado"
-- `LessonContextHeader.tsx` — breadcrumb + chip "Etapa X/10" + duração + `JourneyMiniProgress`
-
-**Componentes a editar**
-- `VideoLessonLayout.tsx` — orquestra header contextual, player sticky, CTA mobile, estados ricos, celebração
-
-**Hooks a criar**
-- `useLessonNavigation.ts` — devolve `{ prev, next, currentIndex, total }` para qualquer `stageKey`
-- `useKeyboardShortcuts.ts` — atalhos do player (Space, ←/→, ↑/↓, F, M)
-
-**Estilos**
-- adicionar utilitários em `app-product.css` para sticky-on-scroll do player no mobile
-
-**Dependência nova**
-- `canvas-confetti` (~6kb) — celebração ao concluir
-
-**Acessibilidade**
-- ARIA labels nos controles
-- `prefers-reduced-motion` desativa confete e animações grandes
-- Foco visível em todos interativos
-
-**Fora de escopo**
-- Sincronizar progresso com Supabase (segue em localStorage)
-- Anotações e materiais por aula (decisão anterior: só resumo)
-- Capítulos navegáveis (decisão anterior: vídeo único)
+### Fora de escopo
+- Emojis nos cards da home (`IntroCard`, `DayCard`) — permanecem como estão.
+- Texto das frases de celebração e textos dos botões de cada página.
+- Seção de descrição colapsável e comentários (sem alteração).
