@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Check, Loader2, BookOpen, ChevronLeft, ChevronRight, Sparkles, ChevronDown, ArrowRight } from "lucide-react";
+import { Check, Loader2, BookOpen, ChevronLeft, ChevronDown, ArrowRight } from "lucide-react";
 
 import { AppShell } from "@/components/app/AppShell";
 import { Card, CardContent } from "@/components/ui/card";
@@ -86,7 +86,6 @@ export function VideoLessonLayout({
   }
 
   const showCelebration = completed && (celebrate || justCompletedRef.current === false);
-  const cleanTitle = `${emoji ? `${emoji} ` : ""}${title}`;
 
   return (
     <AppShell title={shellTitle}>
@@ -115,37 +114,18 @@ export function VideoLessonLayout({
           <LessonEmptyState kind="coming-soon" />
         )}
 
-        {/* Bloco abaixo do vídeo: título + assistido + ações */}
+        {/* Bloco compacto abaixo do vídeo */}
         {videoUrl && (
-          <section className="space-y-4">
-            <div className="flex items-start gap-3">
-              {completed && (
-                <div className="h-7 w-7 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0 mt-1">
-                  <Check className="h-4 w-4 text-primary" />
-                </div>
-              )}
-              <h1 className="font-serif text-2xl md:text-3xl text-foreground leading-tight">
-                {cleanTitle}
-              </h1>
-            </div>
+          <section className="space-y-3">
+            <h1 className="font-serif text-xl md:text-2xl text-foreground leading-tight flex items-center gap-2">
+              {completed && <Check className="h-4 w-4 md:h-5 md:w-5 text-primary flex-shrink-0" aria-hidden />}
+              {title}
+            </h1>
 
-            {/* Watched bar */}
+            {/* Watched bar — linha única */}
             <div className="space-y-1.5">
-              <div className="flex items-center justify-between text-xs md:text-sm">
-                <span className="font-medium text-foreground tabular-nums">{watched}% assistido</span>
-                {!completed && (
-                  <span
-                    className={cn(
-                      "text-xs transition-colors",
-                      canComplete ? "text-primary font-bold" : "text-muted-foreground"
-                    )}
-                  >
-                    {canComplete ? "✓ pode concluir agora" : `faltam ${remaining}% para liberar a conclusão`}
-                  </span>
-                )}
-              </div>
               <div
-                className="h-2 w-full rounded-full bg-secondary/30 overflow-hidden"
+                className="h-1.5 w-full rounded-full bg-secondary/30 overflow-hidden"
                 role="progressbar"
                 aria-label="Progresso do vídeo"
                 aria-valuemin={0}
@@ -157,41 +137,53 @@ export function VideoLessonLayout({
                   style={{ width: `${watched}%` }}
                 />
               </div>
+              <p className="text-xs text-muted-foreground tabular-nums">
+                <span className="font-medium text-foreground">{watched}%</span>
+                {completed
+                  ? " · etapa concluída"
+                  : canComplete
+                    ? " · pode concluir agora"
+                    : ` · faltam ${remaining}% pra concluir`}
+              </p>
             </div>
 
-            {/* Botões de ação (desktop) */}
-            <div className="hidden md:flex flex-wrap items-center gap-3 pt-1">
-              {!completed && (
+            {/* Estado concluído: celebração inline + ações */}
+            {completed ? (
+              showCelebration && (
+                <LessonCompletionCelebration variant="inline" actions={completionActions} />
+              )
+            ) : (
+              /* Estado assistindo: botões compactos (desktop) */
+              <div className="hidden md:flex flex-wrap items-center gap-2 pt-1">
                 <Button
                   variant="primary"
-                  size="default"
+                  size="sm"
                   onClick={handleComplete}
                   disabled={!canComplete}
                   aria-disabled={!canComplete}
                   className={cn("transition-all", canComplete && "animate-fade-in")}
                 >
-                  <Sparkles className="h-4 w-4" />
                   Concluir etapa
                 </Button>
-              )}
-              {nav.next && (
-                <Link to={nav.next.href}>
-                  <Button variant={completed ? "primary" : "secondary"} size="default">
-                    Próxima aula
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
-              )}
-              {nav.prev && (
-                <Link
-                  to={nav.prev.href}
-                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors ml-auto"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                  {nav.prev.shortLabel}
-                </Link>
-              )}
-            </div>
+                {nav.next && (
+                  <Link to={nav.next.href}>
+                    <Button variant="secondary" size="sm">
+                      Próxima aula
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                )}
+                {nav.prev && (
+                  <Link
+                    to={nav.prev.href}
+                    className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors ml-auto"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                    {nav.prev.shortLabel}
+                  </Link>
+                )}
+              </div>
+            )}
           </section>
         )}
 
@@ -232,8 +224,6 @@ export function VideoLessonLayout({
         {/* Comentários */}
         <LessonComments stageKey={stageKey} />
 
-        {/* Celebração */}
-        {showCelebration && <LessonCompletionCelebration actions={completionActions} />}
       </main>
 
       {/* Sticky CTA mobile */}

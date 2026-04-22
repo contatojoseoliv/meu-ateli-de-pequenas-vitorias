@@ -21,8 +21,8 @@ export function LessonStickyMobileCTA({
   nextHref,
   nextLabel,
 }: Props) {
-  // Se completou e não tem próximo, esconde
-  if (completed && !nextHref) return null;
+  // Quando concluída, as ações ficam no bloco integrado abaixo do vídeo
+  if (completed) return null;
 
   return (
     <div

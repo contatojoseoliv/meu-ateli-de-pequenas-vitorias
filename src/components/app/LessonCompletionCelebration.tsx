@@ -1,10 +1,12 @@
 import { useEffect, useRef } from "react";
+import { Sparkles } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import seal from "@/assets/selo-primeira-vitoria-novo.png";
 
 type Props = {
   message?: string;
   actions?: React.ReactNode;
+  variant?: "inline" | "card";
 };
 
 const PHRASES = [
@@ -14,7 +16,7 @@ const PHRASES = [
   "Olha você indo, com calma e carinho 🌿",
 ];
 
-export function LessonCompletionCelebration({ message, actions }: Props) {
+export function LessonCompletionCelebration({ message, actions, variant = "card" }: Props) {
   const fired = useRef(false);
 
   useEffect(() => {
@@ -70,6 +72,22 @@ export function LessonCompletionCelebration({ message, actions }: Props) {
   }, []);
 
   const phrase = message ?? PHRASES[Math.floor(Math.random() * PHRASES.length)];
+
+  if (variant === "inline") {
+    return (
+      <div className="space-y-3 animate-fade-in">
+        <p className="flex items-center gap-2 text-sm md:text-base text-foreground">
+          <Sparkles className="h-4 w-4 text-primary flex-shrink-0" aria-hidden />
+          <span>{phrase}</span>
+        </p>
+        {actions && (
+          <div className="flex flex-wrap gap-2">
+            {actions}
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <Card className="app-stitch animate-scale-in">
