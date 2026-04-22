@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { Sparkles } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import seal from "@/assets/selo-primeira-vitoria-novo.png";
@@ -44,7 +43,10 @@ export function LessonCompletionCelebration({ message, actions, variant = "card"
             className="h-full w-full object-contain"
           />
         </div>
-        <h3 className="font-serif text-xl md:text-2xl text-foreground">{phrase}</h3>
+        <h3 className="font-serif text-xl md:text-2xl text-foreground flex items-center justify-center gap-2">
+          <Sparkles className="h-4 w-4 text-primary" aria-hidden />
+          {phrase}
+        </h3>
         <p className="text-sm text-muted-foreground">Etapa concluída — siga no seu ritmo, sem pressa.</p>
         {actions && (
           <div className="flex flex-wrap gap-3 justify-center pt-2">
