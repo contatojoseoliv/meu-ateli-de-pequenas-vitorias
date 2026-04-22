@@ -15,7 +15,7 @@ import { LessonEmptyState } from "@/components/app/LessonEmptyState";
 import { LessonComments } from "@/components/app/LessonComments";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
-import sealIcon from "@/assets/selo-primeira-vitoria-novo.png";
+import sealIcon from "@/assets/selo-primeira-vitoria-circular.png";
 
 const COMPLETION_THRESHOLD = 90;
 
@@ -161,7 +161,7 @@ export function VideoLessonLayout({
                     src={sealIcon}
                     alt=""
                     aria-hidden
-                    className="h-7 w-7 md:h-8 md:w-8 object-contain"
+                    className="h-5 w-5 md:h-6 md:w-6 object-contain"
                   />
                   <LessonCompletionCelebration variant="inline" actions={completionActions} />
                 </div>
@@ -203,6 +203,7 @@ export function VideoLessonLayout({
 
         {/* Descrição colapsável */}
         {summary && (
+          <div className="mx-auto w-full" style={{ maxWidth: "calc((100svh - 220px) * 16 / 9)" }}>
           <Card className="app-stitch overflow-hidden">
             <Collapsible open={descOpen} onOpenChange={setDescOpen}>
               <CollapsibleTrigger asChild>
@@ -233,10 +234,13 @@ export function VideoLessonLayout({
               </CollapsibleContent>
             </Collapsible>
           </Card>
+          </div>
         )}
 
         {/* Comentários */}
-        <LessonComments stageKey={stageKey} />
+        <div className="mx-auto w-full" style={{ maxWidth: "calc((100svh - 220px) * 16 / 9)" }}>
+          <LessonComments stageKey={stageKey} />
+        </div>
 
       </main>
 

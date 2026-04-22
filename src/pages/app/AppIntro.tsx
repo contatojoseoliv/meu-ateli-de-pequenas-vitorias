@@ -14,10 +14,10 @@ export default function AppIntro() {
   const completionActions = (
     <>
       <Link to="/app">
-        <Button variant="primary" size="default">Voltar para o início</Button>
+        <Button variant="primary" size="sm">Voltar para o início</Button>
       </Link>
       <Link to="/app/materiais">
-        <Button variant="secondary" size="default">Próximo: Materiais →</Button>
+        <Button variant="secondary" size="sm">Próximo: Materiais →</Button>
       </Link>
     </>
   );

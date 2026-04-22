@@ -20,12 +20,12 @@ export function LessonCompletionCelebration({ message, actions, variant = "card"
 
   if (variant === "inline") {
     return (
-      <div className="space-y-3 animate-fade-in">
-        <p className="text-sm md:text-base text-foreground text-center">
+      <div className="space-y-2 animate-fade-in w-full">
+        <p className="text-xs md:text-sm text-foreground text-center">
           {phrase}
         </p>
         {actions && (
-          <div className="flex flex-wrap gap-2 justify-between items-center">
+          <div className="flex items-center justify-between gap-3 w-full">
             {actions}
           </div>
         )}
