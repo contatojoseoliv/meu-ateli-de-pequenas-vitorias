@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Check, Loader2, BookOpen, ChevronLeft, ChevronDown, ArrowRight } from "lucide-react";
+import { Loader2, BookOpen, ChevronLeft, ChevronDown, ArrowRight } from "lucide-react";
 
 import { AppShell } from "@/components/app/AppShell";
 import { Card, CardContent } from "@/components/ui/card";
@@ -15,6 +15,7 @@ import { LessonEmptyState } from "@/components/app/LessonEmptyState";
 import { LessonComments } from "@/components/app/LessonComments";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
+import sealIcon from "@/assets/selo-primeira-vitoria-novo.png";
 
 const COMPLETION_THRESHOLD = 90;
 
@@ -118,7 +119,14 @@ export function VideoLessonLayout({
         {videoUrl && (
           <section className="space-y-3">
             <h1 className="font-serif text-xl md:text-2xl text-foreground leading-tight flex items-center gap-2">
-              {completed && <Check className="h-4 w-4 md:h-5 md:w-5 text-primary flex-shrink-0" aria-hidden />}
+              {completed && (
+                <img
+                  src={sealIcon}
+                  alt=""
+                  aria-hidden
+                  className="h-6 w-6 md:h-7 md:w-7 object-contain flex-shrink-0"
+                />
+              )}
               {title}
             </h1>
 
