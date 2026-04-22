@@ -1,10 +1,12 @@
 import { useEffect, useRef } from "react";
+import { Sparkles } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import seal from "@/assets/selo-primeira-vitoria-novo.png";
 
 type Props = {
   message?: string;
   actions?: React.ReactNode;
+  variant?: "inline" | "card";
 };
 
 const PHRASES = [
