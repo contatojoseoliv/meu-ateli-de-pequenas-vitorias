@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { Sparkles } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import seal from "@/assets/selo-primeira-vitoria-novo.png";
@@ -17,71 +16,16 @@ const PHRASES = [
 ];
 
 export function LessonCompletionCelebration({ message, actions, variant = "card" }: Props) {
-  const fired = useRef(false);
-
-  useEffect(() => {
-    if (fired.current) return;
-    fired.current = true;
-
-    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
-
-    let cancelled = false;
-    // Lazy-load canvas-confetti só ao concluir
-    import("canvas-confetti")
-      .then((mod) => {
-        if (cancelled) return;
-        const confetti = mod.default;
-        const colors = ["#D4A574", "#E8A598", "#9CAF88", "#F5E6D3"];
-        confetti({
-          particleCount: 70,
-          spread: 75,
-          origin: { y: 0.35 },
-          colors,
-          scalar: 0.9,
-          ticks: 180,
-        });
-        setTimeout(() => {
-          if (!cancelled) {
-            confetti({
-              particleCount: 40,
-              angle: 60,
-              spread: 55,
-              origin: { x: 0, y: 0.5 },
-              colors,
-              scalar: 0.8,
-            });
-            confetti({
-              particleCount: 40,
-              angle: 120,
-              spread: 55,
-              origin: { x: 1, y: 0.5 },
-              colors,
-              scalar: 0.8,
-            });
-          }
-        }, 220);
-      })
-      .catch(() => {
-        /* silencioso */
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
   const phrase = message ?? PHRASES[Math.floor(Math.random() * PHRASES.length)];
 
   if (variant === "inline") {
     return (
       <div className="space-y-3 animate-fade-in">
-        <p className="flex items-center gap-2 text-sm md:text-base text-foreground">
-          <Sparkles className="h-4 w-4 text-primary flex-shrink-0" aria-hidden />
-          <span>{phrase}</span>
+        <p className="text-sm md:text-base text-foreground text-center">
+          {phrase}
         </p>
         {actions && (
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 justify-between items-center">
             {actions}
           </div>
         )}
@@ -99,7 +43,10 @@ export function LessonCompletionCelebration({ message, actions, variant = "card"
             className="h-full w-full object-contain"
           />
         </div>
-        <h3 className="font-serif text-xl md:text-2xl text-foreground">{phrase}</h3>
+        <h3 className="font-serif text-xl md:text-2xl text-foreground flex items-center justify-center gap-2">
+          <Sparkles className="h-4 w-4 text-primary" aria-hidden />
+          {phrase}
+        </h3>
         <p className="text-sm text-muted-foreground">Etapa concluída — siga no seu ritmo, sem pressa.</p>
         {actions && (
           <div className="flex flex-wrap gap-3 justify-center pt-2">
