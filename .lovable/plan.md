@@ -1,63 +1,52 @@
 
-## Mudanças: limpar títulos e compactar bloco abaixo do vídeo
+## Ajustes finais no bloco de aula
 
-### 1. Remover emojis dos títulos das aulas
+### 1. Largura: descrição e comentários alinham com o vídeo
 
-Hoje o título renderiza como `🌱 Comece por aqui`, `🧺 Materiais`, `🧵 Fundamentos` e `📆 Dia 1 — …`. Vou remover esses emojis do título principal exibido em `VideoLessonLayout`.
+Hoje o `Card` da descrição "Sobre esta aula" e o `LessonComments` ocupam toda a largura do `container-main`, ficando bem mais largos que o player. Vou aplicar a mesma restrição que já existe no bloco título/progresso.
 
-**Como:**
-- Em `src/components/app/VideoLessonLayout.tsx`, trocar `cleanTitle = ${emoji} ${title}` por apenas `title`. A prop `emoji` continua existindo (usada nos cards da home), mas deixa de aparecer no H1 da página de aula.
-- Resultado nas 4 páginas:
-  - `/app/comecar` → "Comece por aqui"
-  - `/app/materiais` → "Materiais"
-  - `/app/fundamentos` → "Fundamentos"
-  - `/app/dia/1` → "Dia 1 — Primeiros pontos" (sem 📆)
+**Em `src/components/app/VideoLessonLayout.tsx`:**
+- Envolver o `Card` da descrição **e** o `<LessonComments />` num wrapper com:
+  ```tsx
+  <div className="mx-auto w-full" style={{ maxWidth: "calc((100svh - 220px) * 16 / 9)" }}>
+  ```
+- Resultado: vídeo, título/progresso, descrição e comentários ficam todos com a mesma largura máxima, centralizados.
 
-### 2. Compactar o bloco abaixo do vídeo (título + progresso + ações + celebração)
+### 2. Celebração compacta com botões nas extremidades
 
-Hoje a seção tem espaçamento generoso (`space-y-4`, título 2xl/3xl, barra de 2px, botões `size="default"`, e o card de celebração ocupa muito espaço quando concluído). Vou enxugar tudo num bloco discreto e elegante.
+Hoje, no estado concluído, o ícone aparece grande (`h-7 w-7 md:h-8 md:w-8`), a frase está em `text-sm md:text-base` centralizada, e os `completionActions` usam `Button size="default"` (que no `shared/Button` é `px-8 py-4 text-base` — grande demais para esta hierarquia).
 
-#### Como vai ficar
+**Em `src/components/app/LessonCompletionCelebration.tsx` (variant `inline`):**
+- Trocar a área de actions de `flex flex-wrap gap-2 justify-between` para um grid `flex items-center justify-between gap-3 w-full` — sem wrap, garantindo que **um botão fique à esquerda e outro à direita** mesmo em telas estreitas (como já fazemos no estado "assistindo").
+- Manter a frase centralizada acima dos botões, em `text-xs md:text-sm` (mais discreta que hoje).
 
-**Estado: assistindo (não concluído)**
+**Em `src/components/app/VideoLessonLayout.tsx`:**
+- Trocar o ícone usado no estado concluído de `selo-primeira-vitoria-novo.png` para **`selo-primeira-vitoria-circular.png`** (a florzinha dourada circular usada na página de badges — é a imagem que o usuário pediu).
+- Diminuir o tamanho do ícone para `h-5 w-5 md:h-6 md:w-6` (bem pequeno, acima da frase).
+
+**Em `src/pages/app/AppIntro.tsx`, `src/pages/app/AppMateriais.tsx`, `src/pages/app/AppFundamentos.tsx`, `src/pages/app/AppDay.tsx`:**
+- Trocar `<Button … size="default">` por `<Button … size="sm">` nos `completionActions`, para que os botões da celebração tenham a **mesma hierarquia visual** dos botões "Concluir etapa / Próxima aula" do estado assistindo (`size="sm"`).
+
+### Como vai ficar
+
 ```text
-┌──────────────────────────────────────────────────────────┐
-│            [        vídeo        ]                       │
-└──────────────────────────────────────────────────────────┘
-  Comece por aqui                                          ← título menor (xl/2xl)
-  ▓▓▓▓▓▓▓░░░░░░░░░░░░░░  62%  · faltam 28% pra concluir   ← linha única, tipografia sutil
-  [ Concluir etapa ]   [ Próxima aula → ]                  ← botões size="sm"
+[       vídeo enquadrado       ]
+
+› Comece por aqui                              ← título com chevron à esquerda
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ 100% · etapa concluída
+
+              🌼                              ← florzinha pequena, centralizada
+   Mais um pontinho na sua jornada 🧶         ← frase pequena, centralizada
+[ ← Voltar ao início ]      [ Próxima: Materiais → ]   ← sm, extremidades
+
+┌─────── Sobre esta aula  ▾ ───────┐         ← agora respeita largura do vídeo
+└──────────────────────────────────┘
+
+┌─────────── Comentários ──────────┐         ← idem
+└──────────────────────────────────┘
 ```
-
-**Estado: concluído (celebração integrada e mínima)**
-```text
-┌──────────────────────────────────────────────────────────┐
-│            [        vídeo        ]                       │
-└──────────────────────────────────────────────────────────┘
-  ✓ Comece por aqui                                        ← check inline pequeno
-  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  100%  · etapa concluída            ← linha única
-  ✨ Mais um pontinho na sua jornada 🧶                     ← uma linha, sem card pesado
-  [ ← Voltar ao início ]   [ Próxima: Materiais → ]        ← botões size="sm"
-```
-
-#### Mudanças técnicas
-
-**`src/components/app/VideoLessonLayout.tsx`**
-- Reduzir espaçamentos da `<section>`: `space-y-4` → `space-y-3`.
-- Título: `text-2xl md:text-3xl` → `text-xl md:text-2xl`; remover o "balão" do check (`h-7 w-7 rounded-full bg-primary/15`) e usar apenas um ícone `Check` inline pequeno antes do texto quando concluído.
-- Barra de progresso: condensar para **uma linha única** — `62% · faltam 28% pra concluir` (ou `100% · etapa concluída`) acima de uma barra mais fina (`h-1.5`).
-- Botões desktop: `size="default"` → `size="sm"`, remover ícones decorativos extras (manter só seta na "Próxima").
-- Quando `completed`, no lugar dos botões "Concluir/Próxima" renderizar o `LessonCompletionCelebration` em **variant `inline`** + os `completionActions` no mesmo size `sm`.
-
-**`src/components/app/LessonCompletionCelebration.tsx`**
-- Adicionar prop `variant?: "inline" | "card"` (default `card` mantém retrocompat para qualquer outro uso).
-- `variant="inline"`: renderiza apenas uma linha discreta com ícone `Sparkles` pequeno + frase em texto base (sem Playfair gigante, sem selo, sem card/ring). Os `actions` aparecem logo abaixo, alinhados à esquerda.
-- Confete continua disparando uma vez, sem mudança.
-
-**`src/components/app/LessonStickyMobileCTA.tsx`**
-- Quando `completed === true`, esconder a barra fixa (já que as ações de "voltar/próxima" estarão no bloco compacto integrado).
 
 ### Fora de escopo
-- Emojis nos cards da home (`IntroCard`, `DayCard`) — permanecem como estão.
-- Texto das frases de celebração e textos dos botões de cada página.
-- Seção de descrição colapsável e comentários (sem alteração).
+- Texto das frases de celebração e dos botões.
+- Layout do vídeo, do header contextual, ou do CTA fixo mobile (já ajustados).
+- Cards e ícones em outras páginas (home, badges) — sem alteração.
