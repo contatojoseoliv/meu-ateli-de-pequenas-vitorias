@@ -224,8 +224,6 @@ export function VideoLessonLayout({
         {/* Comentários */}
         <LessonComments stageKey={stageKey} />
 
-        {/* Celebração */}
-        {showCelebration && <LessonCompletionCelebration actions={completionActions} />}
       </main>
 
       {/* Sticky CTA mobile */}
