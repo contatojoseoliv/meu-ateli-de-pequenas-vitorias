@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Check, Loader2, BookOpen, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import { Check, Loader2, BookOpen, ChevronLeft, ChevronRight, Sparkles, ChevronDown, ArrowRight } from "lucide-react";
 
 import { AppShell } from "@/components/app/AppShell";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,6 +12,8 @@ import { LessonContextHeader } from "@/components/app/LessonContextHeader";
 import { LessonStickyMobileCTA } from "@/components/app/LessonStickyMobileCTA";
 import { LessonCompletionCelebration } from "@/components/app/LessonCompletionCelebration";
 import { LessonEmptyState } from "@/components/app/LessonEmptyState";
+import { LessonComments } from "@/components/app/LessonComments";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 
 const COMPLETION_THRESHOLD = 90;
@@ -27,13 +29,6 @@ type Props = {
   completionActions?: React.ReactNode;
 };
 
-function formatDuration(s: number): string {
-  if (!Number.isFinite(s) || s <= 0) return "";
-  const m = Math.floor(s / 60);
-  const sec = Math.floor(s % 60);
-  return `${m}:${sec.toString().padStart(2, "0")}`;
-}
-
 export function VideoLessonLayout({
   stageKey,
   shellTitle,
@@ -47,15 +42,17 @@ export function VideoLessonLayout({
   const { videoUrl, posterUrl, summary, loading } = useLessonVideo(stageKey);
   const nav = useLessonNavigation(stageKey);
   const [watched, setWatched] = useState<number>(() => getWatchedPercent(stageKey));
-  const [duration, setDuration] = useState<number>(0);
+  const [, setDuration] = useState<number>(0);
   const playerWrapperRef = useRef<HTMLDivElement>(null);
   const justCompletedRef = useRef<boolean>(false);
   const [celebrate, setCelebrate] = useState<boolean>(false);
+  const [descOpen, setDescOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setWatched(getWatchedPercent(stageKey));
     justCompletedRef.current = false;
     setCelebrate(false);
+    setDescOpen(false);
   }, [stageKey]);
 
   const handleProgress = useCallback((pct: number) => setWatched(pct), []);
@@ -63,21 +60,17 @@ export function VideoLessonLayout({
 
   const canComplete = watched >= COMPLETION_THRESHOLD;
   const remaining = Math.max(0, COMPLETION_THRESHOLD - watched);
-  const minutesLeft = duration ? Math.max(1, Math.round((duration * remaining) / 100 / 60)) : null;
 
   const handleComplete = useCallback(() => {
     onComplete();
     justCompletedRef.current = true;
     setCelebrate(true);
-    // scroll suave para celebração
     window.setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }, 60);
   }, [onComplete]);
 
-  // ────────────────────────────────────────────────────────
-  // Estado: bloqueado
-  // ────────────────────────────────────────────────────────
+  // Bloqueado
   if (!unlocked) {
     return (
       <AppShell title={shellTitle}>
@@ -98,27 +91,10 @@ export function VideoLessonLayout({
   return (
     <AppShell title={shellTitle}>
       <main className="container-main py-5 md:py-8 space-y-5 md:space-y-6 pb-28 md:pb-10">
-        {/* Header contextual */}
-        <LessonContextHeader
-          crumb={cleanTitle}
-          position={nav.position}
-          total={nav.total}
-          durationLabel={duration ? formatDuration(duration) : null}
-        />
+        {/* Header contextual: só "Jornada" e contador de etapas */}
+        <LessonContextHeader position={nav.position} total={nav.total} />
 
-        {/* Título */}
-        <div className="flex items-center gap-3">
-          {completed && (
-            <div className="h-7 w-7 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0">
-              <Check className="h-4 w-4 text-primary" />
-            </div>
-          )}
-          <h1 className="font-serif text-2xl md:text-3xl text-foreground leading-tight">
-            {cleanTitle}
-          </h1>
-        </div>
-
-        {/* Player + barra */}
+        {/* Player */}
         {loading ? (
           <Card className="app-stitch">
             <CardContent className="p-12 flex items-center justify-center">
@@ -126,31 +102,45 @@ export function VideoLessonLayout({
             </CardContent>
           </Card>
         ) : videoUrl ? (
-          <>
-            <div ref={playerWrapperRef}>
-              <VideoPlayer
-                stageKey={stageKey}
-                videoUrl={videoUrl}
-                posterUrl={posterUrl}
-                onProgress={handleProgress}
-                onDuration={handleDuration}
-              />
+          <div ref={playerWrapperRef}>
+            <VideoPlayer
+              stageKey={stageKey}
+              videoUrl={videoUrl}
+              posterUrl={posterUrl}
+              onProgress={handleProgress}
+              onDuration={handleDuration}
+            />
+          </div>
+        ) : (
+          <LessonEmptyState kind="coming-soon" />
+        )}
+
+        {/* Bloco abaixo do vídeo: título + assistido + ações */}
+        {videoUrl && (
+          <section className="space-y-4">
+            <div className="flex items-start gap-3">
+              {completed && (
+                <div className="h-7 w-7 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0 mt-1">
+                  <Check className="h-4 w-4 text-primary" />
+                </div>
+              )}
+              <h1 className="font-serif text-2xl md:text-3xl text-foreground leading-tight">
+                {cleanTitle}
+              </h1>
             </div>
 
-            {/* Watched progress bar enriquecida */}
+            {/* Watched bar */}
             <div className="space-y-1.5">
               <div className="flex items-center justify-between text-xs md:text-sm">
                 <span className="font-medium text-foreground tabular-nums">{watched}% assistido</span>
                 {!completed && (
-                  <span className={cn(
-                    "text-xs transition-colors",
-                    canComplete ? "text-primary font-bold" : "text-muted-foreground"
-                  )}>
-                    {canComplete
-                      ? "✓ pode concluir agora"
-                      : minutesLeft
-                        ? `faltam ~${minutesLeft} min para liberar a conclusão 🧶`
-                        : `faltam ${remaining}% para liberar a conclusão`}
+                  <span
+                    className={cn(
+                      "text-xs transition-colors",
+                      canComplete ? "text-primary font-bold" : "text-muted-foreground"
+                    )}
+                  >
+                    {canComplete ? "✓ pode concluir agora" : `faltam ${remaining}% para liberar a conclusão`}
                   </span>
                 )}
               </div>
@@ -168,83 +158,82 @@ export function VideoLessonLayout({
                 />
               </div>
             </div>
-          </>
-        ) : (
-          <LessonEmptyState kind="coming-soon" />
+
+            {/* Botões de ação (desktop) */}
+            <div className="hidden md:flex flex-wrap items-center gap-3 pt-1">
+              {!completed && (
+                <Button
+                  variant="primary"
+                  size="default"
+                  onClick={handleComplete}
+                  disabled={!canComplete}
+                  aria-disabled={!canComplete}
+                  className={cn("transition-all", canComplete && "animate-fade-in")}
+                >
+                  <Sparkles className="h-4 w-4" />
+                  Concluir etapa
+                </Button>
+              )}
+              {nav.next && (
+                <Link to={nav.next.href}>
+                  <Button variant={completed ? "primary" : "secondary"} size="default">
+                    Próxima aula
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              )}
+              {nav.prev && (
+                <Link
+                  to={nav.prev.href}
+                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors ml-auto"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                  {nav.prev.shortLabel}
+                </Link>
+              )}
+            </div>
+          </section>
         )}
 
-        {/* Resumo */}
+        {/* Descrição colapsável */}
         {summary && (
-          <Card className="app-stitch">
-            <CardContent className="p-5 md:p-6 space-y-3">
-              <div className="flex items-center gap-2 pb-2 border-b border-border/60">
-                <BookOpen className="h-4 w-4 text-primary" aria-hidden />
-                <h2 className="font-serif text-lg md:text-xl text-foreground">Sobre esta aula</h2>
-              </div>
-              <p className="text-sm md:text-base text-foreground/90 leading-relaxed whitespace-pre-line">
-                {summary}
-              </p>
-            </CardContent>
+          <Card className="app-stitch overflow-hidden">
+            <Collapsible open={descOpen} onOpenChange={setDescOpen}>
+              <CollapsibleTrigger asChild>
+                <button
+                  className="w-full p-5 md:p-6 flex items-center justify-between gap-3 hover:bg-secondary/10 transition-colors text-left"
+                  aria-label={descOpen ? "Fechar descrição" : "Abrir descrição"}
+                >
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="h-4 w-4 text-primary" aria-hidden />
+                    <h2 className="font-serif text-lg md:text-xl text-foreground">Sobre esta aula</h2>
+                  </div>
+                  <ChevronDown
+                    className={cn(
+                      "h-5 w-5 text-muted-foreground transition-transform duration-300",
+                      descOpen && "rotate-180"
+                    )}
+                  />
+                </button>
+              </CollapsibleTrigger>
+              <CollapsibleContent className="data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
+                <div className="px-5 md:px-6 pb-5 md:pb-6 pt-0">
+                  <div className="border-t border-border/60 pt-4">
+                    <p className="text-sm md:text-base text-foreground/90 leading-relaxed whitespace-pre-line">
+                      {summary}
+                    </p>
+                  </div>
+                </div>
+              </CollapsibleContent>
+            </Collapsible>
           </Card>
         )}
 
-        {/* Concluir (desktop) — escondido no mobile (substituído pelo sticky) */}
-        {videoUrl && !completed && (
-          <div className="hidden md:flex pt-2 flex-col items-center gap-2">
-            <Button
-              variant="primary"
-              size="default"
-              onClick={handleComplete}
-              disabled={!canComplete}
-              aria-disabled={!canComplete}
-              className={cn("transition-all", canComplete && "animate-fade-in")}
-            >
-              <Sparkles className="h-4 w-4" />
-              Concluir etapa
-            </Button>
-            {!canComplete && (
-              <p className="text-xs text-muted-foreground">
-                Faltam {remaining}% para liberar a conclusão
-              </p>
-            )}
-          </div>
-        )}
+        {/* Comentários */}
+        <LessonComments stageKey={stageKey} />
 
         {/* Celebração */}
-        {showCelebration && (
-          <LessonCompletionCelebration actions={completionActions} />
-        )}
-
-        {/* Navegação prev/next desktop */}
-        <nav
-          className="hidden md:flex items-center justify-between pt-4 mt-4 border-t border-border/60 text-sm"
-          aria-label="Navegação entre aulas"
-        >
-          {nav.prev ? (
-            <Link
-              to={nav.prev.href}
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group"
-            >
-              <ChevronLeft className="h-4 w-4 group-hover:-translate-x-0.5 transition-transform" />
-              <span>
-                <span className="block text-[10px] uppercase tracking-wider opacity-70">Aula anterior</span>
-                <span className="block font-medium">{nav.prev.shortLabel}</span>
-              </span>
-            </Link>
-          ) : <span />}
-          {nav.next ? (
-            <Link
-              to={nav.next.href}
-              className="inline-flex items-center gap-2 text-right text-muted-foreground hover:text-foreground transition-colors group"
-            >
-              <span>
-                <span className="block text-[10px] uppercase tracking-wider opacity-70">Próxima aula</span>
-                <span className="block font-medium">{nav.next.shortLabel}</span>
-              </span>
-              <ChevronRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-          ) : <span />}
-        </nav>
+        {showCelebration && <LessonCompletionCelebration actions={completionActions} />}
       </main>
 
       {/* Sticky CTA mobile */}
