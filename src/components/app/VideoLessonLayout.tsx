@@ -153,16 +153,10 @@ export function VideoLessonLayout({
               </p>
             </div>
 
-            {/* Estado concluído: ícone + frase + ações */}
+            {/* Estado concluído: frase + ações */}
             {completed ? (
               showCelebration && (
-                <div className="flex flex-col items-center gap-1.5 pt-1 animate-fade-in">
-                  <img
-                    src={sealIcon}
-                    alt=""
-                    aria-hidden
-                    className="h-5 w-5 md:h-6 md:w-6 object-contain"
-                  />
+                <div className="pt-1 animate-fade-in">
                   <LessonCompletionCelebration variant="inline" actions={completionActions} />
                 </div>
               )
