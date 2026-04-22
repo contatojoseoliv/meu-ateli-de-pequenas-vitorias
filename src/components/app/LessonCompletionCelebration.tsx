@@ -73,6 +73,22 @@ export function LessonCompletionCelebration({ message, actions, variant = "card"
 
   const phrase = message ?? PHRASES[Math.floor(Math.random() * PHRASES.length)];
 
+  if (variant === "inline") {
+    return (
+      <div className="space-y-3 animate-fade-in">
+        <p className="flex items-center gap-2 text-sm md:text-base text-foreground">
+          <Sparkles className="h-4 w-4 text-primary flex-shrink-0" aria-hidden />
+          <span>{phrase}</span>
+        </p>
+        {actions && (
+          <div className="flex flex-wrap gap-2">
+            {actions}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <Card className="app-stitch animate-scale-in">
       <CardContent className="p-6 md:p-8 text-center space-y-4">
