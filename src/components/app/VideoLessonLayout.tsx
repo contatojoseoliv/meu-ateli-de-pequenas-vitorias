@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Check, Loader2, BookOpen, ChevronLeft, ChevronRight, Sparkles, ChevronDown, ArrowRight } from "lucide-react";
+import { Check, Loader2, BookOpen, ChevronLeft, ChevronDown, ArrowRight } from "lucide-react";
 
 import { AppShell } from "@/components/app/AppShell";
 import { Card, CardContent } from "@/components/ui/card";
