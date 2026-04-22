@@ -51,11 +51,11 @@ export default function AppDay() {
   const completionActions = (
     <>
       <Link to="/app">
-        <Button variant="primary" size="default">Voltar para o início</Button>
+        <Button variant="primary" size="sm">Voltar para o início</Button>
       </Link>
       {nextDay && (
         <Link to={`/app/dia/${nextDay}`}>
-          <Button variant="secondary" size="default">Próximo dia →</Button>
+          <Button variant="secondary" size="sm">Próximo dia →</Button>
         </Link>
       )}
     </>

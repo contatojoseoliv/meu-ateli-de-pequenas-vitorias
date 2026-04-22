@@ -14,10 +14,10 @@ export default function AppFundamentos() {
   const completionActions = (
     <>
       <Link to="/app">
-        <Button variant="primary" size="default">Voltar para o início</Button>
+        <Button variant="primary" size="sm">Voltar para o início</Button>
       </Link>
       <Link to="/app/dia/1">
-        <Button variant="secondary" size="default">Começar Dia 1 →</Button>
+        <Button variant="secondary" size="sm">Começar Dia 1 →</Button>
       </Link>
     </>
   );

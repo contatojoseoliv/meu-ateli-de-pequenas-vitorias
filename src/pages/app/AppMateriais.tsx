@@ -14,10 +14,10 @@ export default function AppMateriais() {
   const completionActions = (
     <>
       <Link to="/app">
-        <Button variant="primary" size="default">Voltar para o início</Button>
+        <Button variant="primary" size="sm">Voltar para o início</Button>
       </Link>
       <Link to="/app/fundamentos">
-        <Button variant="secondary" size="default">Próximo: Fundamentos →</Button>
+        <Button variant="secondary" size="sm">Próximo: Fundamentos →</Button>
       </Link>
     </>
   );
