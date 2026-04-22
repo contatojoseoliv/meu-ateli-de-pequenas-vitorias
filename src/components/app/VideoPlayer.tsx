@@ -254,13 +254,14 @@ export function VideoPlayer({ stageKey, videoUrl, posterUrl, onProgress, onReady
   return (
     <div
       ref={containerRef}
-      className="relative rounded-lg overflow-hidden bg-black ring-1 ring-border group app-stitch"
+      className="relative rounded-lg overflow-hidden bg-black ring-1 ring-border group app-stitch mx-auto w-full"
+      style={{ maxHeight: "calc(100svh - 220px)", aspectRatio: "16 / 9", maxWidth: "calc((100svh - 220px) * 16 / 9)" }}
       onMouseMove={bumpControls}
       onMouseLeave={() => {
         if (videoRef.current && !videoRef.current.paused) setShowControls(false);
       }}
     >
-      <AspectRatio ratio={16 / 9}>
+      <div className="relative w-full h-full">
         <video
           ref={videoRef}
           src={videoUrl}
@@ -414,7 +415,7 @@ export function VideoPlayer({ stageKey, videoUrl, posterUrl, onProgress, onReady
             </div>
           </div>
         )}
-      </AspectRatio>
+      </div>
     </div>
   );
 }
